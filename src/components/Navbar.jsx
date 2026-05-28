@@ -27,11 +27,13 @@ const Navbar = () => {
         <div className="logo mono-text">
           <Link to="/">Adithyan P.</Link>
         </div>
-        <div className="nav-links mono-text" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+        <div className="nav-links mono-text">
           <a href="/#about">About</a>
           <a href="/#experience">Experience</a>
           <a href="/#projects">Projects</a>
           <a href="/#skills">Skills</a>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
             {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
           </button>

@@ -17,7 +17,14 @@
 }
 
 .project-header h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.project-links {
+  flex-shrink: 0;
 }
 
 .project-desc {
