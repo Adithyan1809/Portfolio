@@ -1,3 +1,25 @@
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section .bg-grid {
+  position: absolute;
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  background-image: linear-gradient(to right, var(--color-grid-strong) 1px, transparent 1px), linear-gradient(to bottom, var(--color-grid-strong) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: -1;
+  pointer-events: none;
+  transform-origin: center center;
+  transform: perspective(1000px) rotateX(50deg) translateY(-100px);
+  mask-image: radial-gradient(ellipse at center, black 10%, transparent 60%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 60%);
+  animation: scroll-grid 6.6s linear infinite;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

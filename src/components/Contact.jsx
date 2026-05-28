@@ -6,6 +6,7 @@ import './Contact.css';
 const Contact = () => {
   return (
     <section id="contact" className="contact-section section-padding border-bottom">
+      <div className="bg-grid"></div>
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Get In Touch</h2>
         

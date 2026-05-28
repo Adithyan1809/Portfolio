@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import profileImage from '../assets/profile.png';
+import Constellation from './Constellation';
 import './Hero.css';
 
 const Hero = () => {
@@ -23,7 +24,7 @@ const Hero = () => {
 
   return (
     <section className="hero" id="home">
-      <div className="bg-grid"></div>
+      <Constellation />
       <div className="container hero-container">
         
         <div className="hero-content">
