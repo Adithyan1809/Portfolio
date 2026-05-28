@@ -33,10 +33,11 @@ const NeuralCore = ({ isDark }) => {
             envMapIntensity={1}
             clearcoat={1}
             clearcoatRoughness={0.1}
-            metalness={0.8}
-            roughness={0.2}
+            metalness={0.1}
+            roughness={0.5}
             distort={0.4}
             speed={2}
+            emissive={isDark ? '#222222' : '#000000'}
           />
         </Sphere>
 
