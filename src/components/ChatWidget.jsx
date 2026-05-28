@@ -96,7 +96,7 @@ const ChatWidget = () => {
 
   return (
     <div className="chat-widget-container">
-      <div className={\`chat-window \${isOpen ? 'open' : ''}\`}>
+      <div className={`chat-window ${isOpen ? 'open' : ''}`}>
         <div className="chat-header">
           <Bot size={20} />
           <span>AI Assistant</span>
@@ -110,7 +110,7 @@ const ChatWidget = () => {
         
         <div className="chat-messages">
           {messages.map((msg, idx) => (
-            <div key={idx} className={\`chat-message \${msg.role === 'assistant' ? 'bot' : 'user'}\`}>
+            <div key={idx} className={`chat-message ${msg.role === 'assistant' ? 'bot' : 'user'}`}>
               <p>{msg.content}</p>
             </div>
           ))}
