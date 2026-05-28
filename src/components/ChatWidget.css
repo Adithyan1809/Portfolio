@@ -1,7 +1,7 @@
 /* ========== WIDGET CONTAINER ========== */
 .chat-widget-container {
   position: fixed;
-  bottom: 8rem; /* Sits comfortably above the 60px airplane button + 2rem gap */
+  bottom: 6rem; /* Sits just above the airplane scroll-to-top button */
   right: 1.5rem;
   z-index: 1000;
   display: flex;
