@@ -1,5 +1,6 @@
 import React from 'react';
-import { Mail, MapPin, Linkedin, Send } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react';
+import { FaLinkedin } from 'react-icons/fa';
 import './Contact.css';
 
 const Contact = () => {
@@ -28,7 +29,7 @@ const Contact = () => {
 
               <a href="https://linkedin.com/in/adithyan-prakash" target="_blank" rel="noopener noreferrer" className="contact-method-card">
                 <div className="contact-icon-wrapper">
-                  <Linkedin size={24} />
+                  <FaLinkedin size={24} />
                 </div>
                 <div className="contact-method-details">
                   <span className="mono-text">LINKEDIN</span>
