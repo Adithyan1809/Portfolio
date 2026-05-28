@@ -46,11 +46,11 @@ const FeaturedProjects = () => {
       <div style={{
         position: 'absolute',
         top: 0, left: 0, right: 0, bottom: 0,
-        background: `radial-gradient(circle 600px at ${mousePos.x}px ${mousePos.y}px, var(--color-grid-strong), transparent)`,
+        background: `radial-gradient(circle 500px at ${mousePos.x}px ${mousePos.y}px, var(--color-text), transparent 80%)`,
         opacity: 0.15,
         zIndex: -1,
         pointerEvents: 'none',
-        transition: 'background 0.15s ease'
+        transition: 'background 0.1s ease'
       }} />
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Featured Projects</h2>

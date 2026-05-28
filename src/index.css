@@ -191,9 +191,9 @@ p {
 .glass-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(100px);
   z-index: 0;
-  opacity: 0.25;
+  opacity: 0.4;
   animation: float-orb 15s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -203,7 +203,7 @@ p {
   height: 40vw;
   max-width: 500px;
   max-height: 500px;
-  background: var(--color-grid-strong);
+  background: var(--color-text);
   top: -10%;
   left: -10%;
 }
@@ -213,7 +213,7 @@ p {
   height: 30vw;
   max-width: 400px;
   max-height: 400px;
-  background: var(--color-text-muted);
+  background: var(--color-text);
   bottom: -10%;
   right: -10%;
   animation-delay: -5s;

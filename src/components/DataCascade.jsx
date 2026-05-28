@@ -19,12 +19,12 @@ const DataCascade = () => {
       top: 0, left: 0, right: 0, bottom: 0,
       overflow: 'hidden',
       zIndex: -1,
-      opacity: 0.05,
+      opacity: 0.3,
       pointerEvents: 'none',
       display: 'flex',
       justifyContent: 'space-evenly',
       fontFamily: 'var(--font-mono)',
-      fontSize: '12px',
+      fontSize: '14px',
       color: 'var(--color-text)'
     }}>
       {columns.map((col, i) => (
