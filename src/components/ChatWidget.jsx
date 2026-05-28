@@ -52,22 +52,14 @@ const ChatWidget = () => {
         userMessage
       ];
 
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-      if (!apiKey) {
-        throw new Error("API Key not found");
-      }
-
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      // Calling our own Vercel serverless function instead of Groq directly
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: 'llama-3.1-8b-instant', // High speed, free tier Groq model
-          messages: apiMessages,
-          temperature: 0.7,
-          max_tokens: 250
+          messages: apiMessages
         })
       });
 
