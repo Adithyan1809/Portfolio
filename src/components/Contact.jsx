@@ -50,8 +50,8 @@ const Contact = () => {
 
           {/* Right Column: Form */}
           <div className="contact-form-container">
-            {/* Note: In a real deployment, change this action URL to your Formspree endpoint */}
-            <form className="contact-form" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+            {/* Formspree integration for live email sending */}
+            <form className="contact-form" action="https://formspree.io/f/xkoeyvwj" method="POST">
               <div className="form-group">
                 <label htmlFor="name" className="mono-text">NAME</label>
                 <input type="text" id="name" name="name" required placeholder="Enter your name" />
