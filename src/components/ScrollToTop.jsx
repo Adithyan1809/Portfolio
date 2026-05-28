@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { Plane } from 'lucide-react';
 import './ScrollToTop.css';
 
 const ScrollToTop = () => {
@@ -78,8 +78,8 @@ const ScrollToTop = () => {
           }}
         />
       </svg>
-      <div className={`arrow-container ${isLaunching ? 'launching' : ''}`}>
-        <ArrowUp size={20} strokeWidth={2.5} />
+      <div className={`aeroplane-container ${isLaunching ? 'launching' : ''}`}>
+        <Plane size={20} strokeWidth={2.5} />
       </div>
       <div className="tooltip mono-text">TOP</div>
     </div>

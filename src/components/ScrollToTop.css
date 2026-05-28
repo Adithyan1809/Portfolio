@@ -46,29 +46,50 @@
   transition: stroke-dashoffset 0.1s ease-out;
 }
 
-.arrow-container {
+.aeroplane-container {
   color: var(--color-text);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  /* The lucide Plane points top-right natively. Let's make it point up slightly more when resting */
+  transform: rotate(-15deg); 
 }
 
-.scroll-to-top-container:hover .arrow-container {
+.scroll-to-top-container:hover .aeroplane-container {
   color: var(--color-accent);
 }
 
-/* Launch Animation */
-@keyframes rocket-launch {
-  0% { transform: translateY(0); opacity: 1; }
-  30% { transform: translateY(15px); opacity: 0; }
-  40% { transform: translateY(30px); opacity: 0; }
-  50% { transform: translateY(-30px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+/* Aeroplane Takeoff Animation */
+@keyframes aeroplane-launch {
+  0% { 
+    transform: rotate(-15deg) translate(0, 0) scale(1); 
+    opacity: 1; 
+  }
+  15% { 
+    /* Pull back before takeoff */
+    transform: rotate(-25deg) translate(-2px, 2px) scale(0.95); 
+    opacity: 1; 
+  }
+  40% { 
+    /* Zoom out top right */
+    transform: rotate(15deg) translate(25px, -25px) scale(1.1); 
+    opacity: 0; 
+  }
+  60% { 
+    /* Reset position silently to bottom left */
+    transform: rotate(-35deg) translate(-25px, 25px) scale(0.8); 
+    opacity: 0; 
+  }
+  100% { 
+    /* Land gracefully */
+    transform: rotate(-15deg) translate(0, 0) scale(1); 
+    opacity: 1; 
+  }
 }
 
-.arrow-container.launching {
-  animation: rocket-launch 0.8s ease-in-out forwards;
+.aeroplane-container.launching {
+  animation: aeroplane-launch 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Minimalist tooltip */
