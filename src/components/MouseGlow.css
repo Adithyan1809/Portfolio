@@ -1,0 +1,19 @@
+.mouse-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0; /* Just above the background color, but below the content */
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+    var(--glow-color, rgba(255, 255, 255, 0.05)),
+    transparent 40%
+  );
+  transition: opacity 0.3s ease;
+}
+
+[data-theme='light'] .mouse-glow {
+  --glow-color: rgba(0, 0, 0, 0.04);
+}

@@ -2,12 +2,14 @@ import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
+import MouseGlow from './MouseGlow';
 import './CaseStudy.css';
 
 const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipeline, stack, challenges, metrics, links }) => {
   return (
-    <div className="case-study-page">
-      <div className="container" style={{ paddingTop: 'calc(var(--nav-height) + 3rem)', paddingBottom: '1rem' }}>
+    <div className="case-study-page" style={{ position: 'relative', zIndex: 1 }}>
+      <MouseGlow />
+      <div className="container" style={{ paddingTop: 'calc(var(--nav-height) + 3rem)', paddingBottom: '1rem', position: 'relative', zIndex: 2 }}>
         <Link to="/" className="back-link mono-text"><ArrowLeft size={16}/> Back to Portfolio</Link>
       </div>
 
