@@ -21,7 +21,6 @@
   flex: 1;
   max-width: 650px;
   min-width: 0;
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hero-image-wrapper {
@@ -29,9 +28,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
 }
 
 .brutalist-image-container {

@@ -6,7 +6,7 @@ const PageTransitionWrapper = ({ children }) => {
     <>
       <motion.div
         className="page-transition-overlay"
-        initial={{ scaleY: 1 }}
+        initial={false}
         animate={{ scaleY: 0 }}
         exit={{ scaleY: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -23,10 +23,10 @@ const PageTransitionWrapper = ({ children }) => {
         }}
       />
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, delay: 0.2 }}
+        transition={{ duration: 0.4 }}
       >
         {children}
       </motion.div>

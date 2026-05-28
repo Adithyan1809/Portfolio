@@ -248,3 +248,10 @@ p {
   pointer-events: none;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
 }
+
+/* Fix Lighthouse "Non-composited animation" warning for GitHub Calendar */
+.calendar-container rect,
+.calendar-container svg {
+  transition: none !important;
+  animation: none !important;
+}
