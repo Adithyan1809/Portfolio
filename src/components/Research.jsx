@@ -3,8 +3,7 @@ import { BookOpen } from 'lucide-react';
 
 const Research = () => {
   return (
-    <section id="research" className="section-padding border-bottom" style={{ position: 'relative' }}>
-      <div className="bg-dots"></div>
+    <section id="research" className="section-padding border-bottom">
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Research & Publications</h2>
         <div className="card" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>

@@ -39,6 +39,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
+        <div className="global-bg-dots"></div>
         <CommandPalette />
         <Navbar />
         <LiveDashboard />
