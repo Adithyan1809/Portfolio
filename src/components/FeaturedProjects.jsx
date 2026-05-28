@@ -31,7 +31,7 @@ const projects = [
 const FeaturedProjects = () => {
   return (
     <section id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="section-bg-dots"></div>
+      <BackgroundMarquee text="PROJECTS" reverse={true} />
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Featured Projects</h2>
         <div className="projects-grid">

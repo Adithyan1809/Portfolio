@@ -187,25 +187,43 @@ p {
   color: var(--color-accent);
 }
 
-/* Unified Section Background Pattern */
-.section-bg-dots {
+/* Background Marquee for Sections */
+.bg-marquee-container {
   position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background-image: radial-gradient(var(--color-grid-strong) 1.5px, transparent 1.5px);
-  background-size: 32px 32px;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  transform: translateY(-50%) rotate(-3deg);
+  overflow: hidden;
   z-index: -1;
   pointer-events: none;
-  animation: float-dots 12s linear infinite;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  user-select: none;
+  opacity: 0.15;
 }
 
-@keyframes float-dots {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(32px); }
+.bg-marquee {
+  display: flex;
+  width: max-content;
+  font-size: clamp(6rem, 12vw, 15rem);
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-text);
+  animation: marquee-scroll 25s linear infinite;
+  text-transform: uppercase;
+}
+
+.marquee-reverse .bg-marquee {
+  animation-direction: reverse;
+}
+
+.bg-marquee span {
+  padding-right: 2rem;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* Fix Lighthouse "Non-composited animation" warning for GitHub Calendar */

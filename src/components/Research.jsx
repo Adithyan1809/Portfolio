@@ -1,10 +1,11 @@
 import React from 'react';
 import { BookOpen } from 'lucide-react';
+import BackgroundMarquee from './BackgroundMarquee';
 
 const Research = () => {
   return (
     <section id="research" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="section-bg-dots"></div>
+      <BackgroundMarquee text="RESEARCH" reverse={true} />
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Research & Publications</h2>
         <div className="card" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
