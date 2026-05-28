@@ -11,6 +11,7 @@ import CommandPalette from './components/CommandPalette';
 import LiveDashboard from './components/LiveDashboard';
 import PageTransitionWrapper from './components/PageTransitionWrapper';
 import ScrollToTop from './components/ScrollToTop';
+import Constellation from './components/Constellation';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -40,6 +41,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
+        <Constellation />
         <CommandPalette />
         <Navbar />
         <LiveDashboard />
