@@ -214,7 +214,7 @@ p {
   z-index: -1;
   pointer-events: none;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-  animation: float-dots 15s linear infinite;
+  animation: float-dots 12.5s linear infinite;
 }
 
 @keyframes float-dots {
@@ -239,7 +239,7 @@ p {
   z-index: -1;
   pointer-events: none;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-  animation: slide-stripes 20s linear infinite;
+  animation: slide-stripes 16.6s linear infinite;
 }
 
 @keyframes slide-stripes {
@@ -259,7 +259,7 @@ p {
   z-index: -1;
   pointer-events: none;
   mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-  animation: scroll-ruled 12s linear infinite;
+  animation: scroll-ruled 10s linear infinite;
 }
 
 @keyframes scroll-ruled {
