@@ -19,18 +19,14 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: var(--color-bg) !important;
+  background-color: var(--color-bg);
   border-color: var(--color-border);
   box-shadow: none;
-  background: rgba(255, 255, 255, 0.03) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-[data-theme='light'] .skill-card {
-  background: rgba(255, 255, 255, 0.6) !important;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+.skill-card:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .skill-tags {

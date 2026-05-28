@@ -187,43 +187,6 @@ p {
   color: var(--color-accent);
 }
 
-/* Glassmorphism Orbs */
-.glass-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  z-index: 0;
-  opacity: 0.4;
-  animation: float-orb 15s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-.orb-1 {
-  width: 40vw;
-  height: 40vw;
-  max-width: 500px;
-  max-height: 500px;
-  background: var(--color-text);
-  top: -10%;
-  left: -10%;
-}
-
-.orb-2 {
-  width: 30vw;
-  height: 30vw;
-  max-width: 400px;
-  max-height: 400px;
-  background: var(--color-text);
-  bottom: -10%;
-  right: -10%;
-  animation-delay: -5s;
-}
-
-@keyframes float-orb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(100px, 50px) scale(1.2); }
-}
-
 /* Fix Lighthouse "Non-composited animation" warning for GitHub Calendar */
 .calendar-container rect,
 .calendar-container svg {
