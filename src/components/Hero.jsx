@@ -56,7 +56,7 @@ const Hero = () => {
 
         <div className="hero-image-wrapper">
           <div className="brutalist-image-container">
-            <img src={profileImage} alt="Adithyan Prakash" className="profile-img" />
+            <img src={profileImage} alt="Adithyan Prakash" className="profile-img" fetchpriority="high" />
             <div className="image-overlay"></div>
           </div>
         </div>

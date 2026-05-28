@@ -122,8 +122,8 @@
 }
 
 @keyframes scroll-grid {
-  0% { background-position: 0px 0px; }
-  100% { background-position: 0px 60px; }
+  0% { transform: perspective(1000px) rotateX(50deg) translateY(-100px); }
+  100% { transform: perspective(1000px) rotateX(50deg) translateY(-40px); }
 }
 
 .hero-badge {
