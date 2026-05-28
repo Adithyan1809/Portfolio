@@ -10,6 +10,7 @@ import ScrollReveal from './components/ScrollReveal';
 import CommandPalette from './components/CommandPalette';
 import LiveDashboard from './components/LiveDashboard';
 import PageTransitionWrapper from './components/PageTransitionWrapper';
+import ScrollToTop from './components/ScrollToTop';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -58,6 +59,7 @@ function App() {
           </div>
         </footer>
         </ScrollReveal>
+        <ScrollToTop />
       </div>
     </Router>
   );

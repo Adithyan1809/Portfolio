@@ -1,0 +1,124 @@
+.scroll-to-top-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* For dark mode shadow */
+[data-theme='dark'] .scroll-to-top-container {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-to-top-container.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg); /* Start at top */
+  pointer-events: none;
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.1s ease-out;
+}
+
+.arrow-container {
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top-container:hover .arrow-container {
+  color: var(--color-accent);
+}
+
+/* Launch Animation */
+@keyframes rocket-launch {
+  0% { transform: translateY(0); opacity: 1; }
+  30% { transform: translateY(15px); opacity: 0; }
+  40% { transform: translateY(30px); opacity: 0; }
+  50% { transform: translateY(-30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.arrow-container.launching {
+  animation: rocket-launch 0.8s ease-in-out forwards;
+}
+
+/* Minimalist tooltip */
+.tooltip {
+  position: absolute;
+  top: -35px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px 4px 0;
+  border-style: solid;
+  border-color: var(--color-text) transparent transparent transparent;
+}
+
+.scroll-to-top-container:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top-container {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .progress-ring {
+    width: 50px;
+    height: 50px;
+    viewBox: 0 0 50 50; /* Note: SVG viewBox might need JS adjustment for scaling, but CSS scale works */
+    transform: rotate(-90deg) scale(0.833); /* 50/60 = 0.833 */
+  }
+  
+  .tooltip {
+    display: none; /* Hide tooltip on mobile */
+  }
+}
