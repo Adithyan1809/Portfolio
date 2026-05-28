@@ -15,9 +15,6 @@ const About = () => {
             <p style={{ fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' }}>
               I have a strong interest in MLOps, distributed systems, and scalable deployments. Rather than just training models, I specialize in the practical engineering required to deploy them effectively in real-world, high-stakes environments.
             </p>
-            <p className="mono-text text-muted" style={{ fontSize: '0.85rem' }}>
-              &gt; Interactive 3D Model built with React Three Fiber
-            </p>
           </div>
           <div className="about-visual">
             <NeuralCore3D />
