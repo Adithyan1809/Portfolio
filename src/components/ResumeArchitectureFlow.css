@@ -1,0 +1,69 @@
+.react-flow-wrapper {
+  position: relative;
+}
+
+.arch-flow-node {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 200px;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--color-accent);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.arch-flow-node.secondary {
+  border-style: dashed;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+
+.arch-flow-node.highlight {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.arch-flow-node.warning {
+  background-color: #facc15;
+  color: #000;
+  border-color: #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.arch-flow-node .node-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.arch-flow-node .node-label {
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.flow-handle {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: var(--color-accent) !important;
+  border: 1px solid var(--color-bg) !important;
+}
+
+.flow-controls button {
+  background-color: var(--color-bg) !important;
+  border: 2px solid var(--color-accent) !important;
+  border-radius: 4px !important;
+  color: var(--color-accent) !important;
+  box-shadow: 2px 2px 0 var(--color-accent) !important;
+  transition: transform 0.1s, box-shadow 0.1s !important;
+  margin-bottom: 4px;
+}
+
+.flow-controls button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--color-accent) !important;
+}

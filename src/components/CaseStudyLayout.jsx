@@ -34,14 +34,12 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
             </ScrollReveal>
 
             {architecture && (
-              <ScrollReveal>
-                <section className="cs-section">
-                  <h2>System Architecture</h2>
-                  <div className="card architecture-mockup">
-                    {architecture}
-                  </div>
-                </section>
-              </ScrollReveal>
+              <section className="cs-section">
+                <h2>System Architecture</h2>
+                <div className="architecture-mockup">
+                  {architecture}
+                </div>
+              </section>
             )}
 
             {pipeline && (
