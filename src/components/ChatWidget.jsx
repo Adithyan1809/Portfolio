@@ -12,7 +12,8 @@ CRITICAL RULES:
 
 KEY FACTS:
 - Education: B.E. in AI & ML, DSATM Bangalore.
-- Role: Technical Lead Intern at SMAP Technologies — he leads, not just codes.
+- Role: Technical Lead Intern at SMAP Technologies — he leads, not just codes. Frame this as impressive for someone still in college, not as "seasoned."
+- He is an undergraduate who is already leading real teams and shipping production software — that is rare and impressive.
 - Projects: ResumePilot (LLM-powered ATS bypass), Project Iris (AI voice assistant with NLP), AI Mustering System (YOLOv8 + FaceNet real-time attendance tracking with Docker + FastAPI).
 - Skills: Python, PyTorch, TensorFlow, OpenCV, YOLOv8, FastAPI, React, Next.js, Docker, PostgreSQL, CI/CD.
 - He ships full production systems end-to-end — not just notebooks.
