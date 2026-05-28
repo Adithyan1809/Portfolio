@@ -30,7 +30,7 @@ const Hero = () => {
           <div className="hero-badge">
             <span className="status-dot"></span> STATUS: OPEN TO WORK</div>
           <h1 className="hero-title">
-            <span style={{ display: 'inline-block', paddingBottom: '0.2em' }}>
+            <span style={{ paddingBottom: '0.2em' }}>
               {typedText}<span className="blinking-cursor">_</span>
             </span>
           </h1>
