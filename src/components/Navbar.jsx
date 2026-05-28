@@ -34,6 +34,7 @@ const Navbar = () => {
           <a href="/#experience">Experience</a>
           <a href="/#projects">Projects</a>
           <a href="/#skills">Skills</a>
+          <a href="/#contact">Contact</a>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
@@ -54,6 +55,7 @@ const Navbar = () => {
           <a href="/#experience" onClick={() => setIsMenuOpen(false)}>Experience</a>
           <a href="/#projects" onClick={() => setIsMenuOpen(false)}>Projects</a>
           <a href="/#skills" onClick={() => setIsMenuOpen(false)}>Skills</a>
+          <a href="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
         </div>
       )}
     </nav>

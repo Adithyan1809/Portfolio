@@ -6,6 +6,7 @@ import Skills from '../components/Skills';
 import Experience from '../components/Experience';
 import Research from '../components/Research';
 import GitHubStats from '../components/GitHubStats';
+import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
 import Marquee from '../components/Marquee';
 
@@ -20,6 +21,7 @@ const Home = () => {
       <ScrollReveal><Experience /></ScrollReveal>
       <ScrollReveal><Research /></ScrollReveal>
       <ScrollReveal><GitHubStats /></ScrollReveal>
+      <ScrollReveal><Contact /></ScrollReveal>
     </div>
   );
 };

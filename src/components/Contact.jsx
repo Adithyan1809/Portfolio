@@ -1,0 +1,82 @@
+import React from 'react';
+import { Mail, MapPin, Linkedin, Send } from 'lucide-react';
+import './Contact.css';
+
+const Contact = () => {
+  return (
+    <section id="contact" className="contact-section section-padding border-bottom">
+      <div className="container">
+        <h2 style={{ marginBottom: '3rem' }}>Get In Touch</h2>
+        
+        <div className="contact-grid">
+          {/* Left Column: Info */}
+          <div className="contact-info">
+            <p className="contact-description">
+              I'm always looking for new opportunities and exciting projects. Whether you have a question, a proposal, or just want to say hi, my inbox is always open!
+            </p>
+            
+            <div className="contact-methods">
+              <a href="mailto:adithyan18092005@gmail.com" className="contact-method-card">
+                <div className="contact-icon-wrapper">
+                  <Mail size={24} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="mono-text">EMAIL</span>
+                  <span>adithyan18092005@gmail.com</span>
+                </div>
+              </a>
+
+              <a href="https://linkedin.com/in/adithyan-prakash" target="_blank" rel="noopener noreferrer" className="contact-method-card">
+                <div className="contact-icon-wrapper">
+                  <Linkedin size={24} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="mono-text">LINKEDIN</span>
+                  <span>adithyan-prakash</span>
+                </div>
+              </a>
+
+              <div className="contact-method-card">
+                <div className="contact-icon-wrapper">
+                  <MapPin size={24} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="mono-text">LOCATION</span>
+                  <span>Bengaluru, India</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Form */}
+          <div className="contact-form-container">
+            {/* Note: In a real deployment, change this action URL to your Formspree endpoint */}
+            <form className="contact-form" action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST">
+              <div className="form-group">
+                <label htmlFor="name" className="mono-text">NAME</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name" />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="email" className="mono-text">EMAIL</label>
+                <input type="email" id="email" name="_replyto" required placeholder="Enter your email" />
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="message" className="mono-text">MESSAGE</label>
+                <textarea id="message" name="message" required rows="5" placeholder="Write your message here..."></textarea>
+              </div>
+              
+              <button type="submit" className="submit-button">
+                <span>SEND MESSAGE</span>
+                <Send size={18} />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
