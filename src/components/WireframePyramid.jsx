@@ -7,6 +7,7 @@ const WireframePyramid = () => {
       top: 0, left: 0, right: 0, bottom: 0,
       pointerEvents: 'none',
       zIndex: -1,
+      overflow: 'hidden',
       maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
     }}>
