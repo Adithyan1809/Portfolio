@@ -12,7 +12,7 @@
   --color-accent-dim: rgba(0, 0, 0, 0.05);
   
   --color-grid: rgba(0, 0, 0, 0.04);
-  --color-grid-strong: rgba(0, 0, 0, 0.08);
+  --color-grid-strong: rgba(0, 0, 0, 0.25);
   --color-nav-bg: rgba(255, 255, 255, 0.85);
   --color-cmd-bg: rgba(255, 255, 255, 0.7);
 
@@ -35,7 +35,7 @@
   --color-accent-dim: rgba(255, 255, 255, 0.1);
 
   --color-grid: rgba(255, 255, 255, 0.04);
-  --color-grid-strong: rgba(255, 255, 255, 0.08);
+  --color-grid-strong: rgba(255, 255, 255, 0.25);
   --color-nav-bg: rgba(0, 0, 0, 0.6);
   --color-cmd-bg: rgba(0, 0, 0, 0.6);
 }
@@ -119,29 +119,33 @@ p {
 
 /* Vercel style subtle card */
 .card {
-  background-color: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  border: 2px solid var(--color-accent);
   border-radius: 8px;
   padding: 2rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 4px 4px 0 var(--color-accent);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  height: 100%;
+  transform-style: preserve-3d;
 }
 .card:hover {
   background-color: var(--color-accent);
   border-color: var(--color-accent);
-  transform: translateY(-8px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+  transform: translate(-4px, -12px);
+  box-shadow: 14px 14px 0 var(--color-text-muted);
 }
 
 .card:hover h1, .card:hover h2, .card:hover h3, .card:hover h4, .card:hover h5, .card:hover h6,
-.card:hover p, .card:hover .text-muted, .card:hover .mono-text, .card:hover a, .card:hover svg,
-.card:hover .project-tech {
+.card:hover p, .card:hover span, .card:hover a, .card:hover svg, .card:hover .mono-text, .card:hover .project-tech, .card:hover li {
   color: var(--color-bg) !important;
 }
 
 .card:hover .metric-badge, .card:hover .skill-tag, .card:hover .btn-secondary {
-  border-color: rgba(255, 255, 255, 0.4) !important;
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--color-bg) !important;
+  background-color: transparent !important;
+  color: var(--color-bg) !important;
 }
+
 
 .btn {
   display: inline-flex;

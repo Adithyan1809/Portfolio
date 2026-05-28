@@ -83,7 +83,7 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
                 <h3 style={{marginBottom: '1.5rem', fontSize: '1.25rem'}}>Key Metrics</h3>
                 <ul className="metrics-list mono-text">
                   {metrics.map(m => (
-                    <li key={m} style={{ marginBottom: '1rem', color: 'var(--color-text)' }}>- {m}</li>
+                    <li key={m} style={{ marginBottom: '1rem' }}>- {m}</li>
                   ))}
                 </ul>
               </div>

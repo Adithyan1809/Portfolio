@@ -9,26 +9,37 @@ const ResumePilotPage = () => {
       overview="AI-powered career intelligence platform utilizing a multi-stage AI pipeline for ATS optimization and hallucination-safe content generation."
       problem="Traditional resume builders lack intelligent context understanding, often leading to generic content that fails ATS parsers. We needed a system capable of deeply understanding job descriptions and candidate histories to generate highly targeted, hallucination-free resumes."
       architecture={
-        <div>
-          <h4 style={{color: 'var(--color-text)', marginBottom: '1rem'}}>Architecture Flow</h4>
-          <p>1. <strong>User Input</strong>: Next.js frontend captures resume data & Job Description.</p>
-          <p>2. <strong>Orchestration</strong>: FastAPI backend manages state and triggers async tasks.</p>
-          <p>3. <strong>AI Pipeline</strong>: 75 individual prompt engines analyze specific ATS sections.</p>
-          <p>4. <strong>Validation</strong>: Hallucination-prevention layer cross-references generated claims.</p>
-          <p>5. <strong>Output</strong>: Document generated, cached in Redis, stored in PostgreSQL.</p>
+        <div className="arch-flow">
+          <h3 style={{color: 'var(--color-accent)', marginBottom: '1rem', fontFamily: 'var(--font-display)'}}>Architecture & AI Pipeline</h3>
+          
+          <div className="arch-node">
+            User Input & Job Description (Next.js)
+          </div>
+          
+          <div style={{ fontSize: '1.5rem', color: 'var(--color-text-muted)', margin: '-0.5rem 0' }}>↓</div>
+          
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', width: '100%', maxWidth: '500px' }}>
+            <div className="arch-node" style={{flex: 1.5}}>FastAPI Orchestrator</div>
+            <div className="arch-node secondary">Redis</div>
+            <div className="arch-node secondary">PostgreSQL</div>
+          </div>
+
+          <div style={{ fontSize: '1.5rem', color: 'var(--color-text-muted)', margin: '-0.5rem 0' }}>↓</div>
+
+          <div className="arch-node highlight">
+            <div style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>75-Engine Prompt Orchestration</div>
+            <div style={{ fontSize: '0.8rem', opacity: 0.9, fontWeight: 400 }}>Semantic ATS Search • Parallel Prompting • Embedding Matching</div>
+          </div>
+
+          <div style={{ fontSize: '1.5rem', color: 'var(--color-text-muted)', margin: '-0.5rem 0' }}>↓</div>
+
+          <div className="arch-node warning">
+            <div style={{ fontSize: '1.1rem', marginBottom: '0.25rem' }}>Safety / Validation Judge Model</div>
+            <div style={{ fontSize: '0.8rem', color: 'inherit', fontWeight: 400 }}>Strict zero-hallucination factual cross-referencing</div>
+          </div>
         </div>
       }
-      pipeline={
-        <div style={{ lineHeight: '1.8' }}>
-          <p><strong>Multi-stage AI Pipeline Visualization:</strong></p>
-          <ul style={{ paddingLeft: '1.5rem', marginTop: '1rem', color: 'var(--color-text-muted)' }}>
-            <li><strong>Stage 1 (Extraction):</strong> Models extract hard skills and metrics from the base resume.</li>
-            <li><strong>Stage 2 (ATS Mapping):</strong> Semantic search maps user skills to JD keywords.</li>
-            <li><strong>Stage 3 (Generation):</strong> 75 distinct LLM engines generate targeted bullet points (Prompt Orchestration).</li>
-            <li><strong>Stage 4 (Safety):</strong> An evaluation model checks for hallucinations.</li>
-          </ul>
-        </div>
-      }
+      pipeline={null}
       stack={['Next.js', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'Celery', 'OpenAI API']}
       challenges={[
         { title: 'Preventing LLM Hallucinations', description: 'Implemented a robust multi-pass validation layer where a secondary "judge" model strictly compares generated resume bullets against the user\'s original factual input, filtering out any fabricated claims.' },

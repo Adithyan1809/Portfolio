@@ -28,7 +28,9 @@ const Hero = () => {
           <div className="hero-badge">
             <span className="status-dot"></span> STATUS: OPEN TO WORK</div>
           <h1 className="hero-title">
-            {typedText}<span className="blinking-cursor">_</span>
+            <span style={{ display: 'inline-block', paddingBottom: '0.2em' }}>
+              {typedText}<span className="blinking-cursor">_</span>
+            </span>
           </h1>
           <p className="hero-tagline">
             Building scalable AI systems, intelligent backend architectures, and production-grade real-time applications.
