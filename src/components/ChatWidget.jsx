@@ -61,7 +61,7 @@ const ChatWidget = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': \`Bearer \${apiKey}\`
+          'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
           model: 'grok-beta', // Ensure this is a valid xAI model ID (grok-beta or grok-vision-beta usually)
