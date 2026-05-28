@@ -15,7 +15,7 @@ const WireframeTorus = () => {
         position: 'absolute',
         top: '-20%',
         right: '-10%',
-        opacity: 0.1,
+        opacity: 'var(--shape-opacity-strong)',
         animation: 'spin-torus 55s linear infinite'
       }}>
         <svg width="900" height="900" viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth="0.2">

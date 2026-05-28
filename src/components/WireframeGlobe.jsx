@@ -15,7 +15,7 @@ const WireframeGlobe = () => {
         position: 'absolute',
         top: '-20%',
         right: '-10%',
-        opacity: 0.1,
+        opacity: 'var(--shape-opacity-strong)',
         animation: 'spin-globe 60s linear infinite'
       }}>
         <svg width="800" height="800" viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth="0.2">

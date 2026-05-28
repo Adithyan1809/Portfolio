@@ -29,7 +29,7 @@ const WireframeCube = () => {
         position: 'absolute',
         top: '-10%',
         left: '-10%',
-        opacity: 0.1,
+        opacity: 'var(--shape-opacity-strong)',
         animation: 'spin-cube 50s linear infinite reverse'
       }}>
         <CubeSvg width="800" height="800" strokeWidth="0.3" />
@@ -40,7 +40,7 @@ const WireframeCube = () => {
         position: 'absolute',
         top: '40%',
         right: '-5%',
-        opacity: 0.06,
+        opacity: 'var(--shape-opacity-light)',
         animation: 'spin-cube 70s linear infinite'
       }}>
         <CubeSvg width="500" height="500" strokeWidth="0.4" />
@@ -51,7 +51,7 @@ const WireframeCube = () => {
         position: 'absolute',
         bottom: '-5%',
         left: '25%',
-        opacity: 0.08,
+        opacity: 'var(--shape-opacity-med)',
         animation: 'spin-cube 35s linear infinite reverse'
       }}>
         <CubeSvg width="300" height="300" strokeWidth="0.5" />

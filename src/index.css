@@ -9,6 +9,10 @@
   --color-accent: #000000;
   --color-accent-dim: rgba(0, 0, 0, 0.05);
   
+  --shape-opacity-strong: 0.15;
+  --shape-opacity-med: 0.10;
+  --shape-opacity-light: 0.08;
+  
   --color-grid: rgba(0, 0, 0, 0.04);
   --color-grid-strong: rgba(0, 0, 0, 0.25);
   --color-nav-bg: rgba(255, 255, 255, 0.85);
@@ -31,6 +35,10 @@
   --color-text-muted: #888888;
   --color-accent: #ffffff;
   --color-accent-dim: rgba(255, 255, 255, 0.1);
+
+  --shape-opacity-strong: 0.35;
+  --shape-opacity-med: 0.25;
+  --shape-opacity-light: 0.20;
 
   --color-grid: rgba(255, 255, 255, 0.04);
   --color-grid-strong: rgba(255, 255, 255, 0.25);

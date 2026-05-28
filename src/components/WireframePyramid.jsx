@@ -28,7 +28,7 @@ const WireframePyramid = () => {
         position: 'absolute',
         bottom: '-15%',
         left: '-5%',
-        opacity: 0.1,
+        opacity: 'var(--shape-opacity-strong)',
         animation: 'spin-pyramid 45s linear infinite reverse'
       }}>
         <PyramidSvg width="700" height="700" strokeWidth="0.3" />
@@ -39,7 +39,7 @@ const WireframePyramid = () => {
         position: 'absolute',
         top: '-5%',
         right: '2%',
-        opacity: 0.07,
+        opacity: 'var(--shape-opacity-med)',
         animation: 'spin-pyramid 65s linear infinite'
       }}>
         <PyramidSvg width="450" height="450" strokeWidth="0.4" />
@@ -50,7 +50,7 @@ const WireframePyramid = () => {
         position: 'absolute',
         bottom: '15%',
         right: '30%',
-        opacity: 0.05,
+        opacity: 'var(--shape-opacity-light)',
         animation: 'spin-pyramid 35s linear infinite reverse'
       }}>
         <PyramidSvg width="250" height="250" strokeWidth="0.5" />
