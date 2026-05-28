@@ -4,23 +4,30 @@ const WireframeCube = () => {
   return (
     <div style={{
       position: 'absolute',
-      top: '-10%',
-      left: '-10%',
-      opacity: 0.1,
-      zIndex: -1,
+      top: 0, left: 0, right: 0, bottom: 0,
       pointerEvents: 'none',
-      animation: 'spin-cube 50s linear infinite reverse'
+      zIndex: -1,
+      maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
     }}>
-      <svg width="800" height="800" viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth="0.3">
-        <polygon points="30,30 70,30 70,70 30,70" />
-        <polygon points="45,15 85,15 85,55 45,55" />
-        <line x1="30" y1="30" x2="45" y2="15" />
-        <line x1="70" y1="30" x2="85" y2="15" />
-        <line x1="70" y1="70" x2="85" y2="55" />
-        <line x1="30" y1="70" x2="45" y2="55" />
-        <line x1="50" y1="22.5" x2="50" y2="62.5" />
-        <line x1="37.5" y1="42.5" x2="77.5" y2="42.5" />
-      </svg>
+      <div style={{
+        position: 'absolute',
+        top: '-10%',
+        left: '-10%',
+        opacity: 0.1,
+        animation: 'spin-cube 50s linear infinite reverse'
+      }}>
+        <svg width="800" height="800" viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth="0.3">
+          <polygon points="30,30 70,30 70,70 30,70" />
+          <polygon points="45,15 85,15 85,55 45,55" />
+          <line x1="30" y1="30" x2="45" y2="15" />
+          <line x1="70" y1="30" x2="85" y2="15" />
+          <line x1="70" y1="70" x2="85" y2="55" />
+          <line x1="30" y1="70" x2="45" y2="55" />
+          <line x1="50" y1="22.5" x2="50" y2="62.5" />
+          <line x1="37.5" y1="42.5" x2="77.5" y2="42.5" />
+        </svg>
+      </div>
       <style>{`
         @keyframes spin-cube {
           0% { transform: rotate(0deg); }
