@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import profileImage from '../assets/profile.png';
 import './Hero.css';
 
 const Hero = () => {
@@ -16,14 +17,15 @@ const Hero = () => {
       } else {
         clearInterval(typingInterval);
       }
-    }, 100); // Typing speed
+    }, 100);
     return () => clearInterval(typingInterval);
   }, []);
 
   return (
     <section className="hero" id="home">
       <div className="bg-grid"></div>
-      <div className="container">
+      <div className="container hero-container">
+        
         <div className="hero-content">
           <div className="hero-badge">
             <span className="status-dot"></span> STATUS: OPEN TO WORK</div>
@@ -51,6 +53,14 @@ const Hero = () => {
             </a>
           </div>
         </div>
+
+        <div className="hero-image-wrapper">
+          <div className="brutalist-image-container">
+            <img src={profileImage} alt="Adithyan Prakash" className="profile-img" />
+            <div className="image-overlay"></div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
