@@ -15,5 +15,5 @@
 }
 
 [data-theme='light'] .mouse-glow {
-  --glow-color: rgba(0, 0, 0, 0.04);
+  --glow-color: rgba(0, 0, 0, 0.12);
 }
