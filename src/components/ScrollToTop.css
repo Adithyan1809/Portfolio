@@ -61,37 +61,7 @@
   color: var(--color-accent);
 }
 
-/* Aeroplane Takeoff Animation - Straight Up */
-@keyframes aeroplane-launch {
-  0% { 
-    transform: rotate(-45deg) translateY(0) scale(1); 
-    opacity: 1; 
-  }
-  15% { 
-    /* Slight shake / engine start */
-    transform: rotate(-45deg) translateY(2px) scale(0.95); 
-    opacity: 1; 
-  }
-  40% { 
-    /* Zoom straight up */
-    transform: rotate(-45deg) translateY(-40px) scale(1.1); 
-    opacity: 0; 
-  }
-  60% { 
-    /* Reset position silently to bottom */
-    transform: rotate(-45deg) translateY(40px) scale(0.8); 
-    opacity: 0; 
-  }
-  100% { 
-    /* Land gracefully */
-    transform: rotate(-45deg) translateY(0) scale(1); 
-    opacity: 1; 
-  }
-}
-
-.aeroplane-container.launching {
-  animation: aeroplane-launch 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
+/* Aeroplane remains in place, wind lines provide the motion */
 
 /* Wind Lines Effect */
 .wind-lines {
