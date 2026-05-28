@@ -6,6 +6,8 @@ import './Navbar.css';
 const Navbar = () => {
   const [theme, setTheme] = useState('light');
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme');
     if (savedTheme) {
@@ -22,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
       <div className="nav-content">
         <div className="logo mono-text">
           <Link to="/">Adithyan P.</Link>
@@ -37,8 +39,23 @@ const Navbar = () => {
           <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle Theme">
             {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
           </button>
+          <button 
+            className="mobile-menu-btn mono-text" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? 'CLOSE' : 'MENU'}
+          </button>
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className="mobile-dropdown mono-text">
+          <a href="/#about" onClick={() => setIsMenuOpen(false)}>About</a>
+          <a href="/#experience" onClick={() => setIsMenuOpen(false)}>Experience</a>
+          <a href="/#projects" onClick={() => setIsMenuOpen(false)}>Projects</a>
+          <a href="/#skills" onClick={() => setIsMenuOpen(false)}>Skills</a>
+        </div>
+      )}
     </nav>
   );
 };

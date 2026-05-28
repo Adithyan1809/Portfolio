@@ -44,12 +44,6 @@
   color: var(--color-accent);
 }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* Can add a hamburger menu later if needed */
-  }
-}
-
 .theme-toggle {
   background: var(--color-bg);
   border: 2px solid var(--color-accent);
@@ -71,4 +65,66 @@
 .theme-toggle:active {
   transform: translate(2px, 2px);
   box-shadow: 0px 0px 0 var(--color-accent);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mobile-dropdown {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    top: 9.5rem; /* Push down to clear the taller mobile dashboard */
+    height: auto;
+    min-height: var(--nav-height);
+    padding: 0;
+    flex-direction: column;
+  }
+  
+  .navbar.menu-open {
+    border-radius: 1.5rem; /* Less pill-like when expanded */
+    padding-bottom: 1rem;
+  }
+
+  .nav-content {
+    height: var(--nav-height);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .navbar.menu-open .mobile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 2rem 0 2rem;
+    width: 100%;
+    border-top: 1px dashed var(--color-accent);
+  }
+
+  .mobile-dropdown a {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .mobile-dropdown a:hover {
+    color: var(--color-accent);
+  }
 }
