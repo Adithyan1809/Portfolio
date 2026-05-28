@@ -1,7 +1,7 @@
 /* ========== WIDGET CONTAINER ========== */
 .chat-widget-container {
   position: fixed;
-  bottom: 6.5rem; /* Sits above the airplane scroll-to-top button */
+  bottom: 8rem; /* Sits comfortably above the 60px airplane button + 2rem gap */
   right: 1.5rem;
   z-index: 1000;
   display: flex;
@@ -240,7 +240,7 @@
 /* ========== MOBILE FULL SCREEN ========== */
 @media (max-width: 500px) {
   .chat-widget-container {
-    bottom: 5.5rem;
+    bottom: 7rem;
     right: 1rem;
   }
 
