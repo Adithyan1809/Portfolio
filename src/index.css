@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@600;700;800&display=swap');
+
+:root {
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f9f9f9;
+  --color-bg-tertiary: #f0f0f0;
+  --color-border: #e5e5e5;
+  --color-border-hover: #d0d0d0;
+  --color-text: #111111;
+  --color-text-muted: #555555;
+  --color-accent: #000000;
+  --color-accent-dim: rgba(0, 0, 0, 0.05);
+  
+  --color-grid: rgba(0, 0, 0, 0.04);
+  --color-grid-strong: rgba(0, 0, 0, 0.08);
+  --color-nav-bg: rgba(255, 255, 255, 0.85);
+  --color-cmd-bg: rgba(255, 255, 255, 0.7);
+
+  --font-primary: 'Space Grotesk', sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --nav-height: 64px;
+}
+
+[data-theme='dark'] {
+  --color-bg: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #111111;
+  --color-border: #222222;
+  --color-border-hover: #333333;
+  --color-text: #ededed;
+  --color-text-muted: #888888;
+  --color-accent: #ffffff;
+  --color-accent-dim: rgba(255, 255, 255, 0.1);
+
+  --color-grid: rgba(255, 255, 255, 0.04);
+  --color-grid-strong: rgba(255, 255, 255, 0.08);
+  --color-nav-bg: rgba(0, 0, 0, 0.6);
+  --color-cmd-bg: rgba(0, 0, 0, 0.6);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.mono-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 4rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 3rem 0;
+  }
+}
+
+/* Linear / Vercel style borders */
+.border-top { border-top: 1px solid var(--color-border); }
+.border-bottom { border-bottom: 1px solid var(--color-border); }
+.border-left { border-left: 1px solid var(--color-border); }
+.border-right { border-right: 1px solid var(--color-border); }
+
+/* Vercel style subtle card */
+.card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover h1, .card:hover h2, .card:hover h3, .card:hover h4, .card:hover h5, .card:hover h6,
+.card:hover p, .card:hover .text-muted, .card:hover .mono-text, .card:hover a, .card:hover svg,
+.card:hover .project-tech {
+  color: var(--color-bg) !important;
+}
+
+.card:hover .metric-badge, .card:hover .skill-tag, .card:hover .btn-secondary {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--font-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 2px solid transparent;
+}
+.btn:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--color-accent);
+}
+.btn:active {
+  transform: translate(0px, 0px);
+  box-shadow: 0px 0px 0 var(--color-accent);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+}
+.btn-primary:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.btn-secondary {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.btn-secondary:hover {
+  background-color: var(--color-bg);
+  color: var(--color-accent);
+}
+
+/* Background Grid Effect */
+.bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Dot Pattern Background */
+.bg-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--color-grid-strong) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+/* Diagonal Stripes Background */
+.bg-stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    var(--color-grid) 20px,
+    var(--color-grid) 22px
+  );
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+/* Ruled Lines Background */
+.bg-ruled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+  background-size: 100% 32px;
+  z-index: -1;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}

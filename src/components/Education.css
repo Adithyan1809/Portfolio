@@ -1,0 +1,34 @@
+.edu-title {
+  grid-column: span 12;
+  margin-bottom: 2rem;
+}
+.edu-content {
+  grid-column: span 12;
+}
+.edu-item {
+  margin-bottom: 2rem;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.edu-header h4 {
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.edu-item ul {
+  padding-left: 1.5rem;
+  font-family: var(--font-secondary);
+  margin-top: 1rem;
+}
+.edu-item li {
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,67 @@
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+}
+.back-link:hover { color: var(--color-accent); }
+
+.case-study-hero {
+  padding-bottom: 4rem;
+}
+
+.case-study-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 4rem;
+}
+
+.cs-section {
+  margin-bottom: 4rem;
+}
+
+.cs-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.architecture-mockup {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  padding: 3rem;
+  text-align: left;
+  border-radius: 8px;
+  color: var(--color-text-muted);
+}
+
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.challenge-item {
+  padding: 1.5rem;
+}
+
+.tech-stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.metrics-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: calc(var(--nav-height) + 2rem);
+}
+
+@media (max-width: 900px) {
+  .case-study-grid {
+    grid-template-columns: 1fr;
+  }
+}
