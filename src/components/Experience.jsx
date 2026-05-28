@@ -27,7 +27,8 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="section-padding border-bottom">
+    <section id="experience" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="section-bg-dots"></div>
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Experience</h2>
         <div className="timeline">

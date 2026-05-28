@@ -187,20 +187,20 @@ p {
   color: var(--color-accent);
 }
 
-/* Unified Global Background Pattern */
-.global-bg-dots {
-  position: fixed;
+/* Unified Section Background Pattern */
+.section-bg-dots {
+  position: absolute;
   top: -20%;
   left: -20%;
   width: 140%;
   height: 140%;
   background-image: radial-gradient(var(--color-grid-strong) 1.5px, transparent 1.5px);
   background-size: 32px 32px;
-  z-index: -999;
+  z-index: -1;
   pointer-events: none;
-  animation: float-dots 20s linear infinite;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
+  animation: float-dots 12s linear infinite;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
 @keyframes float-dots {
