@@ -52,44 +52,94 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  /* The lucide Plane points top-right natively. Let's make it point up slightly more when resting */
-  transform: rotate(-15deg); 
+  /* The lucide Plane points top-right (45deg). Make it point straight up (-45deg) */
+  transform: rotate(-45deg); 
+  position: relative;
 }
 
 .scroll-to-top-container:hover .aeroplane-container {
   color: var(--color-accent);
 }
 
-/* Aeroplane Takeoff Animation */
+/* Aeroplane Takeoff Animation - Straight Up */
 @keyframes aeroplane-launch {
   0% { 
-    transform: rotate(-15deg) translate(0, 0) scale(1); 
+    transform: rotate(-45deg) translateY(0) scale(1); 
     opacity: 1; 
   }
   15% { 
-    /* Pull back before takeoff */
-    transform: rotate(-25deg) translate(-2px, 2px) scale(0.95); 
+    /* Slight shake / engine start */
+    transform: rotate(-45deg) translateY(2px) scale(0.95); 
     opacity: 1; 
   }
   40% { 
-    /* Zoom out top right */
-    transform: rotate(15deg) translate(25px, -25px) scale(1.1); 
+    /* Zoom straight up */
+    transform: rotate(-45deg) translateY(-40px) scale(1.1); 
     opacity: 0; 
   }
   60% { 
-    /* Reset position silently to bottom left */
-    transform: rotate(-35deg) translate(-25px, 25px) scale(0.8); 
+    /* Reset position silently to bottom */
+    transform: rotate(-45deg) translateY(40px) scale(0.8); 
     opacity: 0; 
   }
   100% { 
     /* Land gracefully */
-    transform: rotate(-15deg) translate(0, 0) scale(1); 
+    transform: rotate(-45deg) translateY(0) scale(1); 
     opacity: 1; 
   }
 }
 
 .aeroplane-container.launching {
   animation: aeroplane-launch 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Wind Lines Effect */
+.wind-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) rotate(45deg); /* Counter-rotate to point down */
+  pointer-events: none;
+  opacity: 0;
+}
+
+.aeroplane-container.launching .wind-lines {
+  opacity: 1;
+}
+
+.wind-line {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.line-1 { left: 20%; top: -20px; }
+.line-2 { left: 50%; top: -30px; }
+.line-3 { left: 80%; top: -10px; }
+
+@keyframes wind-blow {
+  0% { transform: translateY(-10px); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(40px); opacity: 0; }
+}
+
+.aeroplane-container.launching .line-1 {
+  animation: wind-blow 0.3s linear infinite;
+  animation-delay: 0.1s;
+}
+.aeroplane-container.launching .line-2 {
+  animation: wind-blow 0.25s linear infinite;
+  animation-delay: 0.2s;
+}
+.aeroplane-container.launching .line-3 {
+  animation: wind-blow 0.35s linear infinite;
+  animation-delay: 0.15s;
 }
 
 /* Minimalist tooltip */

@@ -79,6 +79,11 @@ const ScrollToTop = () => {
         />
       </svg>
       <div className={`aeroplane-container ${isLaunching ? 'launching' : ''}`}>
+        <div className="wind-lines">
+          <span className="wind-line line-1"></span>
+          <span className="wind-line line-2"></span>
+          <span className="wind-line line-3"></span>
+        </div>
         <Plane size={20} strokeWidth={2.5} />
       </div>
       <div className="tooltip mono-text">TOP</div>
