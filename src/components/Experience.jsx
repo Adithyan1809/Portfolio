@@ -1,4 +1,5 @@
 import React from 'react';
+import BackgroundMarquee from './BackgroundMarquee';
 import './Experience.css';
 
 const experiences = [

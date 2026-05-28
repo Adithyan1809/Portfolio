@@ -1,4 +1,5 @@
 import React from 'react';
+import BackgroundMarquee from './BackgroundMarquee';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';

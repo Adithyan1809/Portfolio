@@ -1,4 +1,5 @@
 import React from 'react';
+import BackgroundMarquee from './BackgroundMarquee';
 import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
 import './Skills.css';
 
