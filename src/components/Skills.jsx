@@ -37,7 +37,7 @@ const skillCategories = [
 
 const Skills = () => {
   return (
-    <section className="skills section-padding" id="skills" style={{ position: 'relative' }}>
+    <section className="skills section-padding" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="bg-dots"></div>
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Technical Arsenal</h2>

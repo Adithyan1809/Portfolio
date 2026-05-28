@@ -2,7 +2,8 @@ import React from 'react';
 
 const About = () => {
   return (
-    <section id="about" className="section-padding border-bottom">
+    <section id="about" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="bg-dots"></div>
       <div className="container">
         <div style={{ maxWidth: '800px' }}>
           <h2 style={{ marginBottom: '1.5rem' }}>About</h2>
