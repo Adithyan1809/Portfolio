@@ -9,7 +9,6 @@ import GitHubStats from '../components/GitHubStats';
 import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
 import Marquee from '../components/Marquee';
-import ThreeDShowcase from '../components/ThreeDShowcase';
 
 const Home = () => {
   return (
@@ -17,7 +16,6 @@ const Home = () => {
       <Hero />
       <Marquee />
       <ScrollReveal><About /></ScrollReveal>
-      <ScrollReveal><ThreeDShowcase /></ScrollReveal>
       <ScrollReveal><FeaturedProjects /></ScrollReveal>
       <ScrollReveal><Skills /></ScrollReveal>
       <ScrollReveal><Experience /></ScrollReveal>
