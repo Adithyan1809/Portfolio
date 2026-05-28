@@ -12,6 +12,7 @@ import LiveDashboard from './components/LiveDashboard';
 import PageTransitionWrapper from './components/PageTransitionWrapper';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -55,6 +56,7 @@ function App() {
         <ScrollReveal>
           <Footer />
         </ScrollReveal>
+        <ChatWidget />
         <ScrollToTop />
       </div>
     </Router>
