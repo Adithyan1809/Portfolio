@@ -86,7 +86,7 @@ const ScrollToTop = () => {
         </div>
         <Plane size={20} strokeWidth={2.5} />
       </div>
-      <div className="tooltip mono-text">TOP</div>
+    
     </div>
   );
 };
