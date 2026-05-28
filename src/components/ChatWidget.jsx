@@ -52,19 +52,19 @@ const ChatWidget = () => {
         userMessage
       ];
 
-      const apiKey = import.meta.env.VITE_XAI_API_KEY;
+      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
       if (!apiKey) {
         throw new Error("API Key not found");
       }
 
-      const response = await fetch('https://api.x.ai/v1/chat/completions', {
+      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: 'grok-beta', // Ensure this is a valid xAI model ID (grok-beta or grok-vision-beta usually)
+          model: 'llama-3.1-8b-instant', // High speed, free tier Groq model
           messages: apiMessages,
           temperature: 0.7,
           max_tokens: 250
