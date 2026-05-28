@@ -73,9 +73,9 @@ const Contact = () => {
                 <input type="email" id="email" name="_replyto" required placeholder="Enter your email" />
               </div>
               
-              <div className="form-group">
+              <div className="form-group message-group">
                 <label htmlFor="message" className="mono-text">MESSAGE</label>
-                <textarea id="message" name="message" required rows="5" placeholder="Write your message here..."></textarea>
+                <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
               </div>
               
               <button type="submit" className="submit-button">
