@@ -79,7 +79,7 @@ const ChatWidget = () => {
       console.error('Chat error:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "Sorry, I'm experiencing a temporary neural link failure. Please try reaching Adithyan directly via the contact section!" 
+        content: `Error: ${error.message || 'Unknown network error'}. Please check the console or ensure you are testing on Vercel.`
       }]);
     } finally {
       setIsLoading(false);
