@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+import WireframeCube from './WireframeCube';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
@@ -29,29 +30,9 @@ const projects = [
 ];
 
 const FeaturedProjects = () => {
-  const [mousePos, setMousePos] = useState({ x: 500, y: 500 });
-  const sectionRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
-  };
-
   return (
-    <section ref={sectionRef} onMouseMove={handleMouseMove} id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div style={{
-        position: 'absolute',
-        top: 0, left: 0, right: 0, bottom: 0,
-        background: `radial-gradient(circle 500px at ${mousePos.x}px ${mousePos.y}px, var(--color-text), transparent 80%)`,
-        opacity: 0.15,
-        zIndex: -1,
-        pointerEvents: 'none',
-        transition: 'background 0.1s ease'
-      }} />
+    <section id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
+      <WireframeCube />
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Featured Projects</h2>
         <div className="projects-grid">
