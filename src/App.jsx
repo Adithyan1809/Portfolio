@@ -11,6 +11,7 @@ import CommandPalette from './components/CommandPalette';
 import LiveDashboard from './components/LiveDashboard';
 import PageTransitionWrapper from './components/PageTransitionWrapper';
 import ScrollToTop from './components/ScrollToTop';
+import Footer from './components/Footer';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -47,17 +48,7 @@ function App() {
           <AnimatedRoutes />
         </main>
         <ScrollReveal>
-          <footer className="border-top section-padding">
-          <div className="container text-center">
-            <p className="mono-text" style={{marginTop: '2rem'}}>
-              <span style={{color: 'var(--color-text-muted)'}}>Press <strong>Ctrl+K</strong> or <strong>Cmd+K</strong> to open Command Palette</span>
-              <br/><br/>
-              <a href="mailto:adithyan18092005@gmail.com" style={{margin: '0 1rem', textDecoration: 'underline'}}>Email</a> | 
-              <a href="https://github.com/Adithyan1809" target="_blank" rel="noreferrer" style={{margin: '0 1rem', textDecoration: 'underline'}}>GitHub</a> | 
-              <a href="https://linkedin.com/in/adithyan-prakash" target="_blank" rel="noreferrer" style={{margin: '0 1rem', textDecoration: 'underline'}}>LinkedIn</a>
-            </p>
-          </div>
-        </footer>
+          <Footer />
         </ScrollReveal>
         <ScrollToTop />
       </div>
