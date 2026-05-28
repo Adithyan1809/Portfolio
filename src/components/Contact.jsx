@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, Phone } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
 import './Contact.css';
 
@@ -34,6 +34,16 @@ const Contact = () => {
                 <div className="contact-method-details">
                   <span className="mono-text">LINKEDIN</span>
                   <span>adithyan-prakash</span>
+                </div>
+              </a>
+
+              <a href="tel:+919738585365" className="contact-method-card">
+                <div className="contact-icon-wrapper">
+                  <Phone size={24} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="mono-text">PHONE</span>
+                  <span>+91 9738585365</span>
                 </div>
               </a>
 
