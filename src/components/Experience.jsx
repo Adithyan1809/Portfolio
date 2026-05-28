@@ -1,5 +1,5 @@
 import React from 'react';
-import BackgroundMarquee from './BackgroundMarquee';
+import WireframeGlobe from './WireframeGlobe';
 import './Experience.css';
 
 const experiences = [
@@ -29,7 +29,7 @@ const experiences = [
 const Experience = () => {
   return (
     <section id="experience" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
-      <BackgroundMarquee text="EXPERIENCE" />
+      <WireframeGlobe />
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Experience</h2>
         <div className="timeline">

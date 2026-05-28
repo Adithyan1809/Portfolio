@@ -187,43 +187,41 @@ p {
   color: var(--color-accent);
 }
 
-/* Background Marquee for Sections */
-.bg-marquee-container {
+/* Glassmorphism Orbs */
+.glass-orb {
   position: absolute;
-  top: 50%;
-  left: -10%;
-  width: 120%;
-  transform: translateY(-50%) rotate(-3deg);
-  overflow: hidden;
-  z-index: -1;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.25;
+  animation: float-orb 15s ease-in-out infinite alternate;
   pointer-events: none;
-  user-select: none;
-  opacity: 0.15;
 }
 
-.bg-marquee {
-  display: flex;
-  width: max-content;
-  font-size: clamp(6rem, 12vw, 15rem);
-  font-family: var(--font-display);
-  font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--color-text);
-  animation: marquee-scroll 25s linear infinite;
-  text-transform: uppercase;
+.orb-1 {
+  width: 40vw;
+  height: 40vw;
+  max-width: 500px;
+  max-height: 500px;
+  background: var(--color-grid-strong);
+  top: -10%;
+  left: -10%;
 }
 
-.marquee-reverse .bg-marquee {
-  animation-direction: reverse;
+.orb-2 {
+  width: 30vw;
+  height: 30vw;
+  max-width: 400px;
+  max-height: 400px;
+  background: var(--color-text-muted);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
 }
 
-.bg-marquee span {
-  padding-right: 2rem;
-}
-
-@keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes float-orb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(100px, 50px) scale(1.2); }
 }
 
 /* Fix Lighthouse "Non-composited animation" warning for GitHub Calendar */

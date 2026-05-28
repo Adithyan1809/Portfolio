@@ -1,5 +1,4 @@
 import React from 'react';
-import BackgroundMarquee from './BackgroundMarquee';
 import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
 import './Skills.css';
 
@@ -39,8 +38,9 @@ const skillCategories = [
 const Skills = () => {
   return (
     <section className="skills section-padding" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
-      <BackgroundMarquee text="SKILLS" />
-      <div className="container">
+      <div className="glass-orb orb-1"></div>
+      <div className="glass-orb orb-2"></div>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 style={{ marginBottom: '3rem' }}>Technical Arsenal</h2>
         <div className="skills-grid">
           {skillCategories.map(cat => (

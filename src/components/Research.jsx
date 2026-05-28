@@ -1,11 +1,11 @@
 import React from 'react';
 import { BookOpen } from 'lucide-react';
-import BackgroundMarquee from './BackgroundMarquee';
+import DataCascade from './DataCascade';
 
 const Research = () => {
   return (
     <section id="research" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
-      <BackgroundMarquee text="RESEARCH" reverse={true} />
+      <DataCascade />
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Research & Publications</h2>
         <div className="card" style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
