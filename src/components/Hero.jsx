@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import profileImage from '../assets/profile.png';
@@ -12,6 +13,10 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   
   const { playHover, playClick, playSuccess } = useSoundEffects();
+
+  // Profile photo parallax — moves at 40% of scroll speed (slower = behind)
+  const { scrollY } = useScroll();
+  const imageY = useTransform(scrollY, [0, 600], [0, -50]);
   
   const phrases = [
     "AI & ML Engineer.",
@@ -79,12 +84,12 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="hero-image-wrapper">
+        <motion.div className="hero-image-wrapper" style={{ y: imageY }}>
           <div className="brutalist-image-container" onMouseEnter={playHover}>
             <img src={profileImage} alt="Adithyan Prakash" className="profile-img" fetchpriority="high" />
             <div className="image-overlay"></div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -33,12 +33,35 @@ const Navbar = () => {
     }
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = (e) => {
     playTheme();
     const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('portfolio-theme', newTheme);
+
+    const applyTheme = () => {
+      setTheme(newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('portfolio-theme', newTheme);
+    };
+
+    if (!document.startViewTransition) {
+      applyTheme();
+      return;
+    }
+
+    const x = e.clientX;
+    const y = e.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(applyTheme);
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`] },
+        { duration: 500, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' }
+      );
+    });
   };
 
   const handleLinkClick = (isMobile = false) => {
@@ -70,7 +93,7 @@ const Navbar = () => {
             {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
           <button 
-            onClick={toggleTheme} 
+            onClick={(e) => toggleTheme(e)} 
             onMouseEnter={playHover}
             className="theme-toggle" 
             aria-label="Toggle Theme"

@@ -1,3 +1,10 @@
+/* View Transitions — Circle wipe for theme switching */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 :root {
   --color-bg: #ffffff;
   --color-bg-secondary: #f9f9f9;

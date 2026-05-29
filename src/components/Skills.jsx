@@ -5,6 +5,26 @@ import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Skills.css';
 
+const gridVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.96 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
+
+const tagContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.05 } }
+};
+
+const tagVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.3 } }
+};
+
 const skillCategories = [
   {
     title: 'Languages',
@@ -72,23 +92,36 @@ const Skills = () => {
         </div>
 
         <h2 style={{ marginBottom: '3rem', marginTop: '4rem' }}>Technical Arsenal</h2>
-        <div className="bento-grid">
+        <motion.div
+          className="bento-grid"
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {skillCategories.map((cat, index) => (
-            <div 
+            <motion.div
+              variants={cardVariants}
               className={`card skill-card bento-item-${index}`} 
               key={cat.title}
               onMouseEnter={playDigital}
             >
               <div className="skill-icon">{cat.icon}</div>
               <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>{cat.title}</h3>
-              <div className="skill-tags">
+              <motion.div
+                className="skill-tags"
+                variants={tagContainerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+              >
                 {cat.skills.map(skill => (
-                  <span key={skill} className="skill-tag mono-text">{skill}</span>
+                  <motion.span variants={tagVariants} key={skill} className="skill-tag mono-text">{skill}</motion.span>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
