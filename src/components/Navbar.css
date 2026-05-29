@@ -84,7 +84,7 @@
 
 @media (max-width: 768px) {
   .navbar {
-    top: 9.5rem; /* Push down to clear the taller mobile dashboard */
+    top: 11.5rem; /* Push down to clear the taller mobile dashboard */
     height: auto;
     min-height: var(--nav-height);
     padding: 0;

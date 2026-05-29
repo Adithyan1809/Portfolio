@@ -78,6 +78,10 @@
 }
 
 @media (max-width: 992px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + 12rem);
+  }
+
   .hero-container {
     flex-direction: column-reverse;
     text-align: center;
