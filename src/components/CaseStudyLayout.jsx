@@ -3,14 +3,19 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
 import MouseGlow from './MouseGlow';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './CaseStudy.css';
 
 const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipeline, stack, challenges, metrics, links, visualElement }) => {
+  const { playHover, playClick } = useSoundEffects();
+
   return (
     <div className="case-study-page" style={{ position: 'relative', zIndex: 1 }}>
       <MouseGlow />
       <div className="container" style={{ paddingTop: 'calc(var(--nav-height) + 3rem)', paddingBottom: '1rem', position: 'relative', zIndex: 2 }}>
-        <Link to="/" className="back-link mono-text"><ArrowLeft size={16}/> Back to Portfolio</Link>
+        <Link to="/" className="back-link mono-text" onMouseEnter={playHover} onClick={playClick}>
+          <ArrowLeft size={16}/> Back to Portfolio
+        </Link>
       </div>
 
       <header className="case-study-hero section-padding border-bottom">
@@ -19,8 +24,8 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
           <h1 style={{ fontSize: 'clamp(1.8rem, 8vw, 4rem)', marginBottom: '1.5rem', wordBreak: 'break-word', hyphens: 'auto' }}>{title}</h1>
           <p className="hero-tagline">{overview}</p>
           <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
-            {links?.github && <a href={links.github} className="btn btn-secondary" target="_blank" rel="noreferrer">GitHub Repo</a>}
-            {links?.demo && <a href={links.demo} className="btn btn-primary" target="_blank" rel="noreferrer">Live Demo</a>}
+            {links?.github && <a href={links.github} className="btn btn-secondary" target="_blank" rel="noreferrer" onMouseEnter={playHover} onClick={playClick}>GitHub Repo</a>}
+            {links?.demo && <a href={links.demo} className="btn btn-primary" target="_blank" rel="noreferrer" onMouseEnter={playHover} onClick={playClick}>Live Demo</a>}
           </div>
         </div>
       </header>
@@ -64,7 +69,7 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
                 <h2>Engineering Challenges Solved</h2>
                 <div className="challenges-list">
                   {challenges.map((c, i) => (
-                    <div className="challenge-item card" key={i}>
+                    <div className="challenge-item card" key={i} onMouseEnter={playHover}>
                       <h4 style={{ color: 'var(--color-accent)', marginBottom: '0.5rem', fontSize: '1.1rem' }}>{c.title}</h4>
                       <p style={{ fontSize: '0.95rem' }}>{c.description}</p>
                     </div>

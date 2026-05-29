@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeGlobe from './WireframeGlobe';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Experience.css';
 
 const timelineData = [
@@ -39,6 +40,8 @@ const timelineData = [
 ];
 
 const Experience = () => {
+  const { playHover } = useSoundEffects();
+
   return (
     <section id="experience" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeGlobe />
@@ -55,7 +58,7 @@ const Experience = () => {
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
               <div className={`timeline-dot ${item.type === 'education' ? 'dot-education' : ''}`}></div>
-              <div className="timeline-content card">
+              <div className="timeline-content card" onMouseEnter={playHover}>
                 <div className="timeline-header">
                   <div>
                     <h3 style={{ fontSize: '1.25rem', color: 'var(--color-accent)' }}>{item.role}</h3>

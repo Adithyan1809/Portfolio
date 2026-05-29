@@ -1,10 +1,12 @@
 import React from 'react';
 import { Mail, Terminal } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { playHover, playClick } = useSoundEffects();
 
   return (
     <footer className="site-footer border-top">
@@ -24,15 +26,15 @@ const Footer = () => {
           <div className="footer-links">
             <h4 className="footer-heading mono-text">Connect</h4>
             <div className="social-links">
-              <a href="mailto:adithyan18092005@gmail.com" className="social-link" aria-label="Email">
+              <a href="mailto:adithyan18092005@gmail.com" className="social-link" aria-label="Email" onMouseEnter={playHover} onClick={playClick}>
                 <Mail size={18} />
                 <span>Email</span>
               </a>
-              <a href="https://github.com/Adithyan1809" target="_blank" rel="noreferrer" className="social-link" aria-label="GitHub">
+              <a href="https://github.com/Adithyan1809" target="_blank" rel="noreferrer" className="social-link" aria-label="GitHub" onMouseEnter={playHover} onClick={playClick}>
                 <FaGithub size={18} />
                 <span>GitHub</span>
               </a>
-              <a href="https://linkedin.com/in/adithyan-prakash" target="_blank" rel="noreferrer" className="social-link" aria-label="LinkedIn">
+              <a href="https://linkedin.com/in/adithyan-prakash" target="_blank" rel="noreferrer" className="social-link" aria-label="LinkedIn" onMouseEnter={playHover} onClick={playClick}>
                 <FaLinkedin size={18} />
                 <span>LinkedIn</span>
               </a>
