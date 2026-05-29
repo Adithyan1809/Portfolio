@@ -97,6 +97,10 @@
   .hero-ctas {
     justify-content: center;
   }
+
+  .brutalist-image-container {
+    max-width: 260px;
+  }
 }
 
 @keyframes fadeUp {

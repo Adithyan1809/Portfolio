@@ -57,7 +57,7 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-primary);
@@ -65,6 +65,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  width: 100%;
+}
+
+.app-container {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 ::selection {

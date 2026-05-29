@@ -16,7 +16,7 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
       <header className="case-study-hero section-padding border-bottom">
         <div className="container">
           <div className="hero-badge mono-text" style={{marginBottom: '1.5rem'}}>{role}</div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem' }}>{title}</h1>
+          <h1 style={{ fontSize: 'clamp(1.8rem, 8vw, 4rem)', marginBottom: '1.5rem', wordBreak: 'break-word', hyphens: 'auto' }}>{title}</h1>
           <p className="hero-tagline">{overview}</p>
           <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
             {links?.github && <a href={links.github} className="btn btn-secondary" target="_blank" rel="noreferrer">GitHub Repo</a>}
