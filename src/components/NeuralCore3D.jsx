@@ -81,7 +81,7 @@ const NeuralCore3D = () => {
 
   return (
     <div className="neural-core-container">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, 0, 7.5], fov: 45 }} dpr={[1, 2]}>
         <ambientLight intensity={isDark ? 1.5 : 1} />
         <directionalLight position={[10, 10, 10]} intensity={isDark ? 2.5 : 2} />
         <directionalLight position={[-10, -10, -10]} intensity={isDark ? 1 : 0.5} />
