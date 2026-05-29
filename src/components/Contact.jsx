@@ -5,7 +5,7 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Contact.css';
 
 const Contact = () => {
-  const { playHover, playClick, playType } = useSoundEffects();
+  const { playHover, playClick, playType, playSuccess } = useSoundEffects();
 
   return (
     <section id="contact" className="contact-section section-padding border-bottom">
@@ -82,7 +82,7 @@ const Contact = () => {
                 <textarea id="message" name="message" required placeholder="Write your message here..." onFocus={playType}></textarea>
               </div>
               
-              <button type="submit" className="submit-button" onMouseEnter={playHover} onClick={playClick}>
+              <button type="submit" className="submit-button" onMouseEnter={playHover} onClick={playSuccess}>
                 <span>SEND MESSAGE</span>
                 <Send size={18} />
               </button>

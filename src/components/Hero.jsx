@@ -11,7 +11,7 @@ const Hero = () => {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const { playHover, playClick } = useSoundEffects();
+  const { playHover, playClick, playSuccess } = useSoundEffects();
   
   const phrases = [
     "AI & ML Engineer.",
@@ -68,7 +68,7 @@ const Hero = () => {
             <a href="#projects" className="btn btn-primary" onMouseEnter={playHover} onClick={playClick}>
               View Projects <ArrowRight size={16} />
             </a>
-            <a href="/resume.pdf" target="_blank" rel="noreferrer" download="Adithyan_P_AI_ML_Resume.pdf" className="btn btn-secondary" onMouseEnter={playHover} onClick={playClick}>
+            <a href="/resume.pdf" target="_blank" rel="noreferrer" download="Adithyan_P_AI_ML_Resume.pdf" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
               <FileText size={16} /> Resume
             </a>
             <a href="https://github.com/Adithyan1809" target="_blank" rel="noreferrer" className="btn btn-secondary icon-btn" aria-label="GitHub" onMouseEnter={playHover} onClick={playClick}>

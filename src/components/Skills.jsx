@@ -39,7 +39,7 @@ const skillCategories = [
 ];
 
 const Skills = () => {
-  const { playHover } = useSoundEffects();
+  const { playDigital } = useSoundEffects();
 
   return (
     <section className="skills section-padding" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -77,7 +77,7 @@ const Skills = () => {
             <div 
               className={`card skill-card bento-item-${index}`} 
               key={cat.title}
-              onMouseEnter={playHover}
+              onMouseEnter={playDigital}
             >
               <div className="skill-icon">{cat.icon}</div>
               <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>{cat.title}</h3>

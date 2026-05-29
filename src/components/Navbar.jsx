@@ -8,7 +8,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState('light');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const { playHover, playClick } = useSoundEffects();
+  const { playHover, playClick, playTheme } = useSoundEffects();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme');
@@ -19,7 +19,7 @@ const Navbar = () => {
   }, []);
 
   const toggleTheme = () => {
-    playClick();
+    playTheme();
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     document.documentElement.setAttribute('data-theme', newTheme);
