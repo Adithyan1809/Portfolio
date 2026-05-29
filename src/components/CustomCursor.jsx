@@ -1,67 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './CustomCursor.css';
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const dotX = useMotionValue(-100);
+  const dotY = useMotionValue(-100);
+
+  const springCfg = { damping: 22, stiffness: 500, mass: 0.3 };
+  const ringCfg  = { damping: 18, stiffness: 160, mass: 0.6 };
+
+  const sdX = useSpring(dotX, springCfg);
+  const sdY = useSpring(dotY, springCfg);
+  const srX = useSpring(dotX, ringCfg);
+  const srY = useSpring(dotY, ringCfg);
 
   useEffect(() => {
-    const updatePosition = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    const onMove = (e) => { dotX.set(e.clientX); dotY.set(e.clientY); };
+    window.addEventListener('mousemove', onMove);
+
+    const setClass = (add, cls) => (e) => {
+      document.querySelector('.c-dot')?.classList[add](cls);
+      document.querySelector('.c-ring')?.classList[add](cls);
     };
 
-    const handleMouseLeave = () => setHidden(true);
-    const handleMouseEnter = () => setHidden(false);
-
-    window.addEventListener('mousemove', updatePosition);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
-
-    const handleElementHover = () => setIsHovering(true);
-    const handleElementLeave = () => setIsHovering(false);
-
-    const interactiveElements = document.querySelectorAll('a, button, .clickable');
-    interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', handleElementHover);
-      el.addEventListener('mouseleave', handleElementLeave);
-    });
-
-    // Mutation observer to handle newly rendered interactive elements
-    const observer = new MutationObserver((mutations) => {
-      const newInteractiveElements = document.querySelectorAll('a, button, .clickable');
-      newInteractiveElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleElementHover);
-        el.removeEventListener('mouseleave', handleElementLeave);
-        el.addEventListener('mouseenter', handleElementHover);
-        el.addEventListener('mouseleave', handleElementLeave);
+    const attach = () => {
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', setClass('add', 'cursor-hover'));
+        el.addEventListener('mouseleave', setClass('remove', 'cursor-hover'));
       });
-    });
+      document.querySelectorAll('.btn').forEach(el => {
+        el.addEventListener('mouseenter', setClass('add', 'cursor-btn'));
+        el.addEventListener('mouseleave', setClass('remove', 'cursor-btn'));
+      });
+    };
+    attach();
+    const obs = new MutationObserver(attach);
+    obs.observe(document.body, { childList: true, subtree: true });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    const hide = () => setClass('add', 'cursor-hidden')();
+    const show = () => setClass('remove', 'cursor-hidden')();
+    document.addEventListener('mouseleave', hide);
+    document.addEventListener('mouseenter', show);
 
     return () => {
-      window.removeEventListener('mousemove', updatePosition);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      observer.disconnect();
-      interactiveElements.forEach((el) => {
-        el.removeEventListener('mouseenter', handleElementHover);
-        el.removeEventListener('mouseleave', handleElementLeave);
-      });
+      window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseleave', hide);
+      document.removeEventListener('mouseenter', show);
+      obs.disconnect();
     };
   }, []);
 
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) return null;
+
   return (
-    <div
-      className={`custom-cursor ${isHovering ? 'cursor-hover' : ''} ${hidden ? 'cursor-hidden' : ''}`}
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`
-      }}
-    >
-      <div className="cursor-block"></div>
-    </div>
+    <>
+      <motion.div className="c-dot" style={{ x: sdX, y: sdY }} />
+      <motion.div className="c-ring" style={{ x: srX, y: srY }} />
+    </>
   );
 };
 

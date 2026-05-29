@@ -1,0 +1,15 @@
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-accent);
+  z-index: 999997;
+  transform-origin: 0%;
+  box-shadow: 0 0 8px var(--color-accent);
+}
+
+[data-theme="dark"] .scroll-progress-bar {
+  box-shadow: 0 0 12px rgba(255,255,255,0.6);
+}

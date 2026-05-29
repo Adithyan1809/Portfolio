@@ -15,6 +15,8 @@ import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import SplashScreen from './components/SplashScreen';
 import SmoothScroll from './components/SmoothScroll';
+import ScrollProgress from './components/ScrollProgress';
+import CustomCursor from './components/CustomCursor';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -50,6 +52,10 @@ function App() {
     <Router>
       <SmoothScroll>
         <div className="app-container">
+          {/* Grain film overlay */}
+          <div className="grain-overlay" aria-hidden="true" />
+          <ScrollProgress />
+          <CustomCursor />
           <SplashScreen />
           <CommandPalette />
           <Navbar />

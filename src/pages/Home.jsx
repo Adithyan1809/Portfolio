@@ -9,6 +9,7 @@ import GitHubStats from '../components/GitHubStats';
 import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
 import Marquee from '../components/Marquee';
+import StatsRow from '../components/StatsRow';
 import { MacbookScroll } from '../components/MacbookScroll';
 import resumePilotImg from '../assets/resumepilot_ui.png';
 
@@ -17,6 +18,7 @@ const Home = () => {
     <div className="home-container">
       <Hero />
       <Marquee />
+      <StatsRow />
       <ScrollReveal><About /></ScrollReveal>
       <ScrollReveal><FeaturedProjects /></ScrollReveal>
       <ScrollReveal><Skills /></ScrollReveal>

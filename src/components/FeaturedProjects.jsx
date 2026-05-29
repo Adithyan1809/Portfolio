@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import WireframeCube from './WireframeCube';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -12,23 +12,95 @@ const projects = [
     title: 'ResumePilot',
     description: 'AI-powered career intelligence platform utilizing a multi-stage AI pipeline for ATS optimization and hallucination-safe content generation.',
     metrics: ['75-Engine Pipeline', 'Zero Hallucinations', 'Scalable Architecture'],
-    tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'Docker']
+    tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'Docker'],
+    github: '#',
   },
   {
     id: 'project-iris',
     title: 'Project IRIS',
     description: 'Real-time surveillance and attendance system processing 90+ live camera feeds using async RTSP/ONVIF pipelines.',
     metrics: ['90+ Camera Feeds', '20% Latency Reduction', 'Real-time Analytics'],
-    tech: ['FastAPI', 'Redis', 'ArcFace', 'FAISS']
+    tech: ['FastAPI', 'Redis', 'ArcFace', 'FAISS'],
+    github: '#',
   },
   {
     id: 'mustering-system',
     title: 'Mustering Event System',
     description: 'Real-time personnel accountability system using an edge-cloud architecture. IEEE-submitted research project.',
     metrics: ['IEEE Submitted', 'Edge-Cloud Architecture', 'High Accuracy'],
-    tech: ['YOLOv8', 'FaceNet512', 'Deep SORT']
+    tech: ['YOLOv8', 'FaceNet512', 'Deep SORT'],
+    github: '#',
   }
 ];
+
+// Spotlight card with radial gradient following cursor
+const SpotlightCard = ({ p, playHover, playClick, playPowerUp }) => {
+  const cardRef = useRef(null);
+  const [spotlight, setSpotlight] = useState({ x: '50%', y: '50%', opacity: 0 });
+
+  const handleMouseMove = (e) => {
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setSpotlight({ x: `${x}%`, y: `${y}%`, opacity: 1 });
+  };
+
+  const handleMouseLeave = () => setSpotlight(s => ({ ...s, opacity: 0 }));
+
+  return (
+    <div
+      ref={cardRef}
+      className="card project-card spotlight-card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={playHover}
+    >
+      {/* Spotlight radial gradient */}
+      <div
+        className="card-spotlight"
+        style={{
+          background: `radial-gradient(circle at ${spotlight.x} ${spotlight.y}, var(--spotlight-color) 0%, transparent 60%)`,
+          opacity: spotlight.opacity,
+        }}
+      />
+
+      <div className="project-header">
+        <h3>{p.title}</h3>
+        <div className="project-links">
+          <a
+            href={p.github}
+            aria-label={`View ${p.title} on GitHub`}
+            className="icon-btn"
+            style={{ color: 'var(--color-text-muted)' }}
+            onClick={playClick}
+          >
+            <FaGithub size={20} />
+          </a>
+        </div>
+      </div>
+      <p className="project-desc">{p.description}</p>
+
+      <div className="project-metrics">
+        {p.metrics.map(m => (
+          <span key={m} className="metric-badge mono-text">{m}</span>
+        ))}
+      </div>
+
+      <div className="project-tech">{p.tech.join(' • ')}</div>
+
+      <div style={{ marginTop: '2rem' }}>
+        <Link
+          to={`/projects/${p.id}`}
+          className="btn btn-secondary magnetic-btn"
+          style={{ width: '100%' }}
+          onClick={playPowerUp}
+        >
+          View Case Study <ArrowRight size={16} />
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 const FeaturedProjects = () => {
   const { playHover, playClick, playPowerUp } = useSoundEffects();
@@ -40,48 +112,13 @@ const FeaturedProjects = () => {
         <h2 style={{ marginBottom: '3rem' }}>Featured Projects</h2>
         <div className="projects-grid">
           {projects.map(p => (
-            <div 
-              className="card project-card" 
+            <SpotlightCard
               key={p.id}
-              onMouseEnter={playHover}
-            >
-              <div className="project-header">
-                <h3>{p.title}</h3>
-                <div className="project-links">
-                  <a 
-                    href="#" 
-                    aria-label={`View ${p.title} on GitHub`} 
-                    className="icon-btn" 
-                    style={{color: 'var(--color-text-muted)'}}
-                    onClick={playClick}
-                  >
-                    <FaGithub size={20}/>
-                  </a>
-                </div>
-              </div>
-              <p className="project-desc">{p.description}</p>
-              
-              <div className="project-metrics">
-                {p.metrics.map(m => (
-                  <span key={m} className="metric-badge mono-text">{m}</span>
-                ))}
-              </div>
-              
-              <div className="project-tech">
-                {p.tech.join(' • ')}
-              </div>
-              
-              <div style={{marginTop: '2rem'}}>
-                <Link 
-                  to={`/projects/${p.id}`} 
-                  className="btn btn-secondary" 
-                  style={{width: '100%'}}
-                  onClick={playPowerUp}
-                >
-                  View Case Study <ArrowRight size={16}/>
-                </Link>
-              </div>
-            </div>
+              p={p}
+              playHover={playHover}
+              playClick={playClick}
+              playPowerUp={playPowerUp}
+            />
           ))}
         </div>
       </div>
