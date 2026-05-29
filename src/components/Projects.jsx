@@ -1,11 +1,14 @@
 import React from 'react';
+import GlitchText from './GlitchText';
 import './Projects.css';
 
 const Projects = () => {
   return (
     <section id="projects" className="section-padding">
       <div className="container">
-        <h2 className="uppercase text-center" style={{marginBottom: '4rem'}}>Projects & Research</h2>
+        <h2 className="uppercase text-center" style={{marginBottom: '4rem'}}>
+          <GlitchText>Projects & Research</GlitchText>
+        </h2>
         
         <div className="brutalist-grid project-list">
           <div className="project-card border-right border-bottom">
