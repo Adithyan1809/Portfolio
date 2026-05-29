@@ -16,8 +16,6 @@ import ChatWidget from './components/ChatWidget';
 import SplashScreen from './components/SplashScreen';
 import SmoothScroll from './components/SmoothScroll';
 
-import HolographicWrapper from './components/HolographicWrapper';
-
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
     <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>404</h1>
@@ -56,14 +54,12 @@ function App() {
           <CommandPalette />
           <Navbar />
           <LiveDashboard />
-          <HolographicWrapper>
-            <main>
-              <AnimatedRoutes />
-            </main>
-            <ScrollReveal>
-              <Footer />
-            </ScrollReveal>
-          </HolographicWrapper>
+          <main>
+            <AnimatedRoutes />
+          </main>
+          <ScrollReveal>
+            <Footer />
+          </ScrollReveal>
           <ChatWidget />
           <ScrollToTop />
         </div>
