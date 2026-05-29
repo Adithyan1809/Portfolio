@@ -111,6 +111,60 @@ export const useSoundEffects = () => {
       gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.05);
+    } else if (type === 'laser') {
+      // Pew pew laser sound (rapid pitch drop)
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(1200, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.2);
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.2);
+    } else if (type === 'powerup') {
+      // Arpeggiated retro power-up chord
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+      osc.frequency.setValueAtTime(554, ctx.currentTime + 0.05); // C#
+      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);  // E
+      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.02);
+      gainNode.gain.setValueAtTime(0.1, ctx.currentTime + 0.15);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.3);
+    } else if (type === 'bassdrop') {
+      // Heavy sub-bass dive
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 1.0);
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.0);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 1.0);
+    } else if (type === 'alien') {
+      // FM Synthesis: Modulator oscillating the frequency of the carrier
+      const modOsc = ctx.createOscillator();
+      const modGain = ctx.createGain();
+      modOsc.type = 'sine';
+      modOsc.frequency.value = 50; // Modulation speed
+      modGain.gain.value = 500;    // Modulation depth
+      modOsc.connect(modGain);
+      modGain.connect(osc.frequency);
+      
+      osc.type = 'triangle';
+      osc.frequency.value = 400;
+      
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+      
+      modOsc.start(ctx.currentTime);
+      osc.start(ctx.currentTime);
+      modOsc.stop(ctx.currentTime + 0.6);
+      osc.stop(ctx.currentTime + 0.6);
     }
   }, []);
 
@@ -122,5 +176,9 @@ export const useSoundEffects = () => {
     playTheme: () => playSound('theme'),
     playSuccess: () => playSound('success'),
     playDigital: () => playSound('digital'),
+    playLaser: () => playSound('laser'),
+    playPowerUp: () => playSound('powerup'),
+    playBassDrop: () => playSound('bassdrop'),
+    playAlien: () => playSound('alien'),
   };
 };

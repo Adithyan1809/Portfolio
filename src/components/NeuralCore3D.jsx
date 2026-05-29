@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Icosahedron, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './NeuralCore3D.css';
 
 const NeuralCore = ({ isDark }) => {
@@ -53,6 +54,7 @@ const NeuralCore = ({ isDark }) => {
 
 const NeuralCore3D = () => {
   const [isDark, setIsDark] = useState(true); // Default true for safety
+  const { playBassDrop } = useSoundEffects();
 
   useEffect(() => {
     const checkTheme = () => {
@@ -80,7 +82,7 @@ const NeuralCore3D = () => {
   }, []);
 
   return (
-    <div className="neural-core-container">
+    <div className="neural-core-container" onMouseDown={playBassDrop}>
       <Canvas camera={{ position: [0, 0, 7.5], fov: 45 }} dpr={[1, 2]}>
         <ambientLight intensity={isDark ? 1.5 : 1} />
         <directionalLight position={[10, 10, 10]} intensity={isDark ? 2.5 : 2} />

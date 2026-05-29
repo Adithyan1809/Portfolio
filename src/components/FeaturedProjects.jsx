@@ -31,7 +31,7 @@ const projects = [
 ];
 
 const FeaturedProjects = () => {
-  const { playHover, playClick } = useSoundEffects();
+  const { playHover, playClick, playPowerUp } = useSoundEffects();
 
   return (
     <section id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -76,7 +76,7 @@ const FeaturedProjects = () => {
                   to={`/projects/${p.id}`} 
                   className="btn btn-secondary" 
                   style={{width: '100%'}}
-                  onClick={playClick}
+                  onClick={playPowerUp}
                 >
                   View Case Study <ArrowRight size={16}/>
                 </Link>

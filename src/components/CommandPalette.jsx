@@ -7,7 +7,7 @@ import './CommandPalette.css';
 const CommandPalette = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const { playHover, playClick, playType, playSwoosh } = useSoundEffects();
+  const { playHover, playType, playSwoosh, playLaser } = useSoundEffects();
 
   useEffect(() => {
     const down = (e) => {
@@ -26,7 +26,7 @@ const CommandPalette = () => {
   if (!open) return null;
 
   const handleSelect = (action) => {
-    playClick();
+    playLaser();
     action();
     setOpen(false);
   };

@@ -8,7 +8,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState('light');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const { playHover, playClick, playTheme } = useSoundEffects();
+  const { playHover, playClick, playTheme, playAlien } = useSoundEffects();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme');
@@ -35,7 +35,7 @@ const Navbar = () => {
     <nav className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
       <div className="nav-content">
         <div className="logo mono-text">
-          <Link to="/" onMouseEnter={playHover} onClick={playClick}>Adithyan P.</Link>
+          <Link to="/" onMouseEnter={playHover} onClick={playAlien}>Adithyan P.</Link>
         </div>
         <div className="nav-links mono-text">
           <a href="/#about" onMouseEnter={playHover} onClick={() => handleLinkClick()}>About</a>
