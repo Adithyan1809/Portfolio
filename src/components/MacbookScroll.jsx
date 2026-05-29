@@ -22,15 +22,17 @@ export const MacbookScroll = ({ src, title, description, link }) => {
 
   return (
     <div ref={containerRef} className="macbook-scroll-container">
-      <div className="macbook-text-container">
-        <h2 className="macbook-title">{title}</h2>
-        <p className="macbook-description">{description}</p>
-        {link && (
-          <a href={link} target="_blank" rel="noreferrer" className="btn btn-primary" style={{ marginTop: '1.5rem' }}>
-            View Live
-          </a>
-        )}
-      </div>
+      {(title || description || link) && (
+        <div className="macbook-text-container">
+          {title && <h2 className="macbook-title">{title}</h2>}
+          {description && <p className="macbook-description">{description}</p>}
+          {link && (
+            <a href={link} target="_blank" rel="noreferrer" className="btn btn-primary" style={{ marginTop: '1.5rem' }}>
+              View Live
+            </a>
+          )}
+        </div>
+      )}
 
       <motion.div
         className="macbook-model-container"

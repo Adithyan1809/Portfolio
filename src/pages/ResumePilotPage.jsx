@@ -1,10 +1,20 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import ResumeArchitectureFlow from '../components/ResumeArchitectureFlow';
+import { MacbookScroll } from '../components/MacbookScroll';
+import resumePilotImg from '../assets/resumepilot_ui.png';
 
 const ResumePilotPage = () => {
   return (
     <CaseStudyLayout
+      visualElement={
+        <MacbookScroll 
+          src={resumePilotImg}
+          title=""
+          description=""
+          link=""
+        />
+      }
       title="ResumePilot"
       role="Full Stack AI Engineer"
       overview="An advanced, AI-driven career intelligence platform that leverages a massive multi-stage language model pipeline to generate hyper-targeted, ATS-optimized resumes. Built to eliminate the generic output of standard LLMs, this system acts as a factual proxy between a candidate's history and an employer's job description."

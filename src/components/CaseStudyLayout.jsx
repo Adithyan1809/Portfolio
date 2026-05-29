@@ -5,7 +5,7 @@ import ScrollReveal from './ScrollReveal';
 import MouseGlow from './MouseGlow';
 import './CaseStudy.css';
 
-const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipeline, stack, challenges, metrics, links }) => {
+const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipeline, stack, challenges, metrics, links, visualElement }) => {
   return (
     <div className="case-study-page" style={{ position: 'relative', zIndex: 1 }}>
       <MouseGlow />
@@ -24,6 +24,12 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
           </div>
         </div>
       </header>
+
+      {visualElement && (
+        <div style={{ position: 'relative', zIndex: 1, marginTop: '-4rem' }}>
+          {visualElement}
+        </div>
+      )}
 
       <div className="container">
         <div className="case-study-grid section-padding">
