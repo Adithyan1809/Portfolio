@@ -13,6 +13,7 @@ import PageTransitionWrapper from './components/PageTransitionWrapper';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
+import SplashScreen from './components/SplashScreen';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -47,6 +48,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
+        <SplashScreen />
         <CommandPalette />
         <Navbar />
         <LiveDashboard />

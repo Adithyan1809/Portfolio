@@ -70,3 +70,12 @@
     padding-left: 2rem;
   }
 }
+
+.dot-education {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+}
+.dot-education::after {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+}

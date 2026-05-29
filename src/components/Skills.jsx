@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import WireframeTorus from './WireframeTorus';
 import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
 import './Skills.css';
@@ -41,7 +42,33 @@ const Skills = () => {
     <section className="skills section-padding" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeTorus />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <h2 style={{ marginBottom: '3rem' }}>Technical Arsenal</h2>
+        <h2 style={{ marginBottom: '2rem' }}>Core Proficiencies</h2>
+        <div className="proficiency-bars">
+          {[
+            { name: 'Python', percentage: 95 },
+            { name: 'PyTorch / TensorFlow', percentage: 85 },
+            { name: 'Computer Vision (OpenCV, YOLO)', percentage: 90 },
+            { name: 'FastAPI & Backend', percentage: 80 }
+          ].map((skill, index) => (
+            <div className="proficiency-bar-container" key={skill.name}>
+              <div className="proficiency-header">
+                <span className="mono-text">{skill.name}</span>
+                <span className="mono-text">{skill.percentage}%</span>
+              </div>
+              <div className="proficiency-track">
+                <motion.div 
+                  className="proficiency-fill"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${skill.percentage}%` }}
+                  viewport={{ once: true, amount: 0.8 }}
+                  transition={{ duration: 1.2, delay: index * 0.1, ease: "easeOut" }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h2 style={{ marginBottom: '3rem', marginTop: '4rem' }}>Technical Arsenal</h2>
         <div className="skills-grid">
           {skillCategories.map(cat => (
             <div className="card skill-card" key={cat.title}>
