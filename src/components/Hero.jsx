@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import profileImage from '../assets/profile.png';
@@ -12,20 +11,7 @@ const Hero = () => {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const heroRef = useRef(null);
   const { playHover, playClick, playSuccess } = useSoundEffects();
-
-  // Scroll-driven cinematic exit
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-15%']);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.92]);
-  const contentBlurPx = useTransform(scrollYProgress, [0, 0.7], [0, 12]);
-  const contentFilter = useMotionTemplate`blur(${contentBlurPx}px)`;
   
   const phrases = [
     "AI & ML Engineer.",
@@ -62,17 +48,9 @@ const Hero = () => {
   }, [typedText, isDeleting, phraseIndex]);
 
   return (
-    <section className="hero" id="home" ref={heroRef}>
+    <section className="hero" id="home">
       <Constellation />
-      <motion.div 
-        className="container hero-container"
-        style={{
-          y: contentY,
-          opacity: contentOpacity,
-          scale: contentScale,
-          filter: contentFilter,
-        }}
-      >
+      <div className="container hero-container">
         <div className="hero-content">
           <div className="hero-badge" onMouseEnter={playHover}>
             <span className="status-dot"></span> STATUS: OPEN TO WORK</div>
@@ -108,7 +86,7 @@ const Hero = () => {
           </div>
         </div>
 
-      </motion.div>
+      </div>
     </section>
   );
 };
