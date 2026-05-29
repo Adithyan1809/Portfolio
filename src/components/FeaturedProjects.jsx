@@ -3,7 +3,6 @@ import WireframeCube from './WireframeCube';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
-import GlitchText from './GlitchText';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './FeaturedProjects.css';
 
@@ -38,9 +37,7 @@ const FeaturedProjects = () => {
     <section id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeCube />
       <div className="container">
-        <h2 style={{ marginBottom: '3rem' }}>
-          <GlitchText>Featured Projects</GlitchText>
-        </h2>
+        <h2 style={{ marginBottom: '3rem' }}>Featured Projects</h2>
         <div className="projects-grid">
           {projects.map(p => (
             <div 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeGlobe from './WireframeGlobe';
-import GlitchText from './GlitchText';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Experience.css';
 
@@ -47,9 +46,7 @@ const Experience = () => {
     <section id="experience" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeGlobe />
       <div className="container">
-        <h2 style={{ marginBottom: '3rem' }}>
-          <GlitchText>Visual Resume</GlitchText>
-        </h2>
+        <h2 style={{ marginBottom: '3rem' }}>Visual Resume</h2>
         <div className="timeline">
           {timelineData.map((item, index) => (
             <motion.div 

@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeTorus from './WireframeTorus';
 import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
-import GlitchText from './GlitchText';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Skills.css';
 
@@ -46,9 +45,7 @@ const Skills = () => {
     <section className="skills section-padding" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeTorus />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <h2 style={{ marginBottom: '2rem' }}>
-          <GlitchText>Core Proficiencies</GlitchText>
-        </h2>
+        <h2 style={{ marginBottom: '2rem' }}>Core Proficiencies</h2>
         <div className="proficiency-bars">
           {[
             { name: 'Python', percentage: 95 },
@@ -74,9 +71,7 @@ const Skills = () => {
           ))}
         </div>
 
-        <h2 style={{ marginBottom: '3rem', marginTop: '4rem' }}>
-          <GlitchText>Technical Arsenal</GlitchText>
-        </h2>
+        <h2 style={{ marginBottom: '3rem', marginTop: '4rem' }}>Technical Arsenal</h2>
         <div className="bento-grid">
           {skillCategories.map((cat, index) => (
             <div 
