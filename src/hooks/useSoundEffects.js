@@ -10,7 +10,6 @@ export const useSoundEffects = () => {
         audioCtxRef.current = new AudioContext();
       }
     }
-    // Resume context if suspended (browser autoplay policy)
     if (audioCtxRef.current && audioCtxRef.current.state === 'suspended') {
       audioCtxRef.current.resume();
     }
@@ -21,6 +20,38 @@ export const useSoundEffects = () => {
     const ctx = audioCtxRef.current;
     if (!ctx) return;
     
+    if (type === 'swoosh') {
+      // Wind / Swoosh sound using white noise and a filter sweep
+      const bufferSize = ctx.sampleRate * 0.5; // 0.5 seconds of noise
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1; // White noise
+      }
+      
+      const noiseSource = ctx.createBufferSource();
+      noiseSource.buffer = buffer;
+      
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      // Sweep filter frequency for wind effect
+      filter.frequency.setValueAtTime(100, ctx.currentTime);
+      filter.frequency.exponentialRampToValueAtTime(3000, ctx.currentTime + 0.2);
+      filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.5);
+      
+      const gainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+      
+      noiseSource.connect(filter);
+      filter.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      
+      noiseSource.start(ctx.currentTime);
+      return;
+    }
+
     const osc = ctx.createOscillator();
     const gainNode = ctx.createGain();
     
@@ -28,34 +59,48 @@ export const useSoundEffects = () => {
     gainNode.connect(ctx.destination);
     
     if (type === 'hover') {
-      // Very subtle, high-tech glass 'tick' sound
+      // Louder, more prominent 'tick'
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(1200, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(2000, ctx.currentTime + 0.05);
-      
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.02, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
-      
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.05);
-    } else if (type === 'click') {
-      // Solid, deeper mechanical 'thock' sound
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(400, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.1);
+      osc.frequency.setValueAtTime(1000, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1800, ctx.currentTime + 0.05);
       
       gainNode.gain.setValueAtTime(0, ctx.currentTime);
       gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+      
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.08);
+    } else if (type === 'click') {
+      // Louder, punchy mechanical thock
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.1);
+      
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.01);
       gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
       
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'type') {
+      // Very short, high-tech glitch/type sound
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(2500, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(4000, ctx.currentTime + 0.03);
+      
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.005);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.04);
     }
   }, []);
 
   return {
     playHover: () => playSound('hover'),
     playClick: () => playSound('click'),
+    playSwoosh: () => playSound('swoosh'),
+    playType: () => playSound('type'),
   };
 };

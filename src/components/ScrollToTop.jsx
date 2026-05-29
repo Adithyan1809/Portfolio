@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Plane } from 'lucide-react';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './ScrollToTop.css';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLaunching, setIsLaunching] = useState(false);
+  const { playHover, playSwoosh } = useSoundEffects();
 
   // Use Framer Motion for ultra-smooth scroll tracking
   const { scrollYProgress } = useScroll();
@@ -39,6 +41,7 @@ const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
+    playSwoosh();
     setIsLaunching(true);
     
     window.scrollTo({
@@ -56,6 +59,7 @@ const ScrollToTop = () => {
     <div 
       className={`scroll-to-top-container ${isVisible ? 'visible' : ''}`}
       onClick={scrollToTop}
+      onMouseEnter={playHover}
       title="Back to top"
     >
       <svg width="60" height="60" viewBox="0 0 60 60" className="progress-ring">
