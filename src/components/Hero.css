@@ -154,8 +154,8 @@
   font-size: clamp(2rem, 8vw, 3.5rem);
   letter-spacing: -0.04em;
   line-height: 1.2;
-  /* Fixed height prevents layout shift during typing animation */
-  min-height: 2.5em;
+  /* Fixed height (3 lines) prevents layout shift during typing animation */
+  min-height: 3.6em;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
