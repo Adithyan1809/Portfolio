@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Plane } from 'lucide-react';
 import './ScrollToTop.css';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [isLaunching, setIsLaunching] = useState(false);
+
+  // Use Framer Motion for ultra-smooth scroll tracking
+  const { scrollYProgress } = useScroll();
+  
+  // Spring physics for fluid, snappy movement
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 25,
+    restDelta: 0.001
+  });
+
+  // Calculate the SVG circle properties
+  const circleRadius = 22;
+  const circumference = 2 * Math.PI * circleRadius;
+  
+  // Transform the 0-1 spring progress into the exact stroke dash offset
+  const strokeDashoffset = useTransform(smoothProgress, [0, 1], [circumference, 0]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,13 +31,6 @@ const ScrollToTop = () => {
         setIsVisible(true);
       } else {
         setIsVisible(false);
-      }
-
-      // Calculate scroll progress percentage
-      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(progress);
       }
     };
 
@@ -42,12 +52,6 @@ const ScrollToTop = () => {
     }, 1000);
   };
 
-  // The strokeDasharray is circumference of circle (2 * Math.PI * r)
-  // r = 22, circumference ≈ 138.2
-  const circleRadius = 22;
-  const circumference = 2 * Math.PI * circleRadius;
-  const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
-
   return (
     <div 
       className={`scroll-to-top-container ${isVisible ? 'visible' : ''}`}
@@ -64,7 +68,7 @@ const ScrollToTop = () => {
           cx="30"
           cy="30"
         />
-        <circle
+        <motion.circle
           className="progress-ring__circle"
           stroke="var(--color-text)"
           strokeWidth="2"

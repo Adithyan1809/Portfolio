@@ -43,7 +43,7 @@
 }
 
 .progress-ring__circle {
-  transition: stroke-dashoffset 0.1s ease-out;
+  /* Framer motion handles the fluid stroke-dashoffset transition now */
 }
 
 .aeroplane-container {
