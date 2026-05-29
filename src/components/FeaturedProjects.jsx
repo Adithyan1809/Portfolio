@@ -3,6 +3,7 @@ import WireframeCube from './WireframeCube';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './FeaturedProjects.css';
 
 const projects = [
@@ -30,6 +31,8 @@ const projects = [
 ];
 
 const FeaturedProjects = () => {
+  const { playHover, playClick } = useSoundEffects();
+
   return (
     <section id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeCube />
@@ -37,11 +40,23 @@ const FeaturedProjects = () => {
         <h2 style={{ marginBottom: '3rem' }}>Featured Projects</h2>
         <div className="projects-grid">
           {projects.map(p => (
-            <div className="card project-card" key={p.id}>
+            <div 
+              className="card project-card" 
+              key={p.id}
+              onMouseEnter={playHover}
+            >
               <div className="project-header">
                 <h3>{p.title}</h3>
                 <div className="project-links">
-                  <a href="#" aria-label={`View ${p.title} on GitHub`} className="icon-btn" style={{color: 'var(--color-text-muted)'}}><FaGithub size={20}/></a>
+                  <a 
+                    href="#" 
+                    aria-label={`View ${p.title} on GitHub`} 
+                    className="icon-btn" 
+                    style={{color: 'var(--color-text-muted)'}}
+                    onClick={playClick}
+                  >
+                    <FaGithub size={20}/>
+                  </a>
                 </div>
               </div>
               <p className="project-desc">{p.description}</p>
@@ -57,7 +72,12 @@ const FeaturedProjects = () => {
               </div>
               
               <div style={{marginTop: '2rem'}}>
-                <Link to={`/projects/${p.id}`} className="btn btn-secondary" style={{width: '100%'}}>
+                <Link 
+                  to={`/projects/${p.id}`} 
+                  className="btn btn-secondary" 
+                  style={{width: '100%'}}
+                  onClick={playClick}
+                >
                   View Case Study <ArrowRight size={16}/>
                 </Link>
               </div>

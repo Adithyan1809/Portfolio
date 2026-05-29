@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeTorus from './WireframeTorus';
 import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Skills.css';
 
 const skillCategories = [
@@ -38,6 +39,8 @@ const skillCategories = [
 ];
 
 const Skills = () => {
+  const { playHover } = useSoundEffects();
+
   return (
     <section className="skills section-padding" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeTorus />
@@ -71,7 +74,11 @@ const Skills = () => {
         <h2 style={{ marginBottom: '3rem', marginTop: '4rem' }}>Technical Arsenal</h2>
         <div className="bento-grid">
           {skillCategories.map((cat, index) => (
-            <div className={`card skill-card bento-item-${index}`} key={cat.title}>
+            <div 
+              className={`card skill-card bento-item-${index}`} 
+              key={cat.title}
+              onMouseEnter={playHover}
+            >
               <div className="skill-icon">{cat.icon}</div>
               <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>{cat.title}</h3>
               <div className="skill-tags">
