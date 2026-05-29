@@ -69,9 +69,9 @@ const Skills = () => {
         </div>
 
         <h2 style={{ marginBottom: '3rem', marginTop: '4rem' }}>Technical Arsenal</h2>
-        <div className="skills-grid">
-          {skillCategories.map(cat => (
-            <div className="card skill-card" key={cat.title}>
+        <div className="bento-grid">
+          {skillCategories.map((cat, index) => (
+            <div className={`card skill-card bento-item-${index}`} key={cat.title}>
               <div className="skill-icon">{cat.icon}</div>
               <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>{cat.title}</h3>
               <div className="skill-tags">

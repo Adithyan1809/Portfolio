@@ -9,12 +9,20 @@ import GitHubStats from '../components/GitHubStats';
 import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
 import Marquee from '../components/Marquee';
+import { MacbookScroll } from '../components/MacbookScroll';
+import resumePilotImg from '../assets/resumepilot_ui.png';
 
 const Home = () => {
   return (
     <div className="home-container">
       <Hero />
       <Marquee />
+      <MacbookScroll 
+        src={resumePilotImg}
+        title="ResumePilot"
+        description="An AI-powered ATS resume parsing and optimization engine."
+        link="https://github.com/Adithyan1809"
+      />
       <ScrollReveal><About /></ScrollReveal>
       <ScrollReveal><FeaturedProjects /></ScrollReveal>
       <ScrollReveal><Skills /></ScrollReveal>

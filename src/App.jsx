@@ -14,6 +14,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import SplashScreen from './components/SplashScreen';
+import SmoothScroll from './components/SmoothScroll';
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -47,20 +48,22 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <SplashScreen />
-        <CommandPalette />
-        <Navbar />
-        <LiveDashboard />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <ScrollReveal>
-          <Footer />
-        </ScrollReveal>
-        <ChatWidget />
-        <ScrollToTop />
-      </div>
+      <SmoothScroll>
+        <div className="app-container">
+          <SplashScreen />
+          <CommandPalette />
+          <Navbar />
+          <LiveDashboard />
+          <main>
+            <AnimatedRoutes />
+          </main>
+          <ScrollReveal>
+            <Footer />
+          </ScrollReveal>
+          <ChatWidget />
+          <ScrollToTop />
+        </div>
+      </SmoothScroll>
     </Router>
   );
 }

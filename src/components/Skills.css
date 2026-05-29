@@ -1,7 +1,37 @@
-.skills-grid {
+.bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 1.5rem;
+}
+
+.bento-item-0 { grid-column: span 2; } /* Languages */
+.bento-item-1 { grid-column: span 1; grid-row: span 2; } /* AI & ML */
+.bento-item-2 { grid-column: span 1; } /* Computer Vision */
+.bento-item-3 { grid-column: span 1; } /* Backend & APIs */
+.bento-item-4 { grid-column: span 2; } /* DevOps & MLOps */
+.bento-item-5 { grid-column: span 1; } /* Frontend */
+
+@media (max-width: 992px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-item-0 { grid-column: span 2; }
+  .bento-item-1 { grid-column: span 1; grid-row: span 1; }
+  .bento-item-2 { grid-column: span 1; }
+  .bento-item-3 { grid-column: span 1; }
+  .bento-item-4 { grid-column: span 1; }
+  .bento-item-5 { grid-column: span 2; }
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-item-0, .bento-item-1, .bento-item-2, .bento-item-3, .bento-item-4, .bento-item-5 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
 }
 
 .skill-icon {
