@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
 import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import profileImage from '../assets/profile.png';
@@ -11,7 +12,20 @@ const Hero = () => {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
+  const heroRef = useRef(null);
   const { playHover, playClick, playSuccess } = useSoundEffects();
+
+  // Scroll-driven cinematic exit
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-15%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.92]);
+  const contentBlurPx = useTransform(scrollYProgress, [0, 0.7], [0, 12]);
+  const contentFilter = useMotionTemplate`blur(${contentBlurPx}px)`;
   
   const phrases = [
     "AI & ML Engineer.",
@@ -24,7 +38,7 @@ const Hero = () => {
     let typingSpeed = isDeleting ? 40 : 80;
 
     if (!isDeleting && typedText === currentPhrase) {
-      typingSpeed = 2000; // pause before deleting
+      typingSpeed = 2000;
       const timer = setTimeout(() => setIsDeleting(true), typingSpeed);
       return () => clearTimeout(timer);
     }
@@ -48,10 +62,17 @@ const Hero = () => {
   }, [typedText, isDeleting, phraseIndex]);
 
   return (
-    <section className="hero" id="home">
+    <section className="hero" id="home" ref={heroRef}>
       <Constellation />
-      <div className="container hero-container">
-        
+      <motion.div 
+        className="container hero-container"
+        style={{
+          y: contentY,
+          opacity: contentOpacity,
+          scale: contentScale,
+          filter: contentFilter,
+        }}
+      >
         <div className="hero-content">
           <div className="hero-badge" onMouseEnter={playHover}>
             <span className="status-dot"></span> STATUS: OPEN TO WORK</div>
@@ -87,7 +108,7 @@ const Hero = () => {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };
