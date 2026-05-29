@@ -106,6 +106,7 @@ const ChatWidget = () => {
           <button
             style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}
             onClick={() => setIsOpen(false)}
+            aria-label="Close chat"
           >
             <X size={20} />
           </button>
@@ -155,14 +156,14 @@ const ChatWidget = () => {
               onChange={(e) => setInput(e.target.value)}
               disabled={isLoading}
             />
-            <button type="submit" className="chat-submit" disabled={!input.trim() || isLoading}>
+            <button type="submit" className="chat-submit" disabled={!input.trim() || isLoading} aria-label="Send message">
               <Send size={16} />
             </button>
           </form>
         </div>
       </div>
 
-      <button className="chat-toggle-btn" onClick={() => setIsOpen(!isOpen)} title="Chat with Adithyan's AI">
+      <button className="chat-toggle-btn" onClick={() => setIsOpen(!isOpen)} title="Chat with Adithyan's AI" aria-label="Toggle chat">
         {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
       </button>
     </div>
