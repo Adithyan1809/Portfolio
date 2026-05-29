@@ -7,20 +7,42 @@ import './Hero.css';
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
-  const fullText = "AI & ML Undergraduate";
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const phrases = [
+    "AI & ML Engineer.",
+    "Backend Architect.",
+    "Problem Solver."
+  ];
 
   useEffect(() => {
-    let i = 0;
-    const typingInterval = setInterval(() => {
-      if (i < fullText.length) {
-        setTypedText(fullText.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typingInterval);
-      }
-    }, 100);
-    return () => clearInterval(typingInterval);
-  }, []);
+    const currentPhrase = phrases[phraseIndex];
+    let typingSpeed = isDeleting ? 40 : 80;
+
+    if (!isDeleting && typedText === currentPhrase) {
+      typingSpeed = 2000; // pause before deleting
+      const timer = setTimeout(() => setIsDeleting(true), typingSpeed);
+      return () => clearTimeout(timer);
+    }
+    
+    if (isDeleting && typedText === '') {
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      const timer = setTimeout(() => {}, 500);
+      return () => clearTimeout(timer);
+    }
+
+    const timer = setTimeout(() => {
+      setTypedText(prev => 
+        isDeleting 
+          ? currentPhrase.substring(0, prev.length - 1) 
+          : currentPhrase.substring(0, prev.length + 1)
+      );
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [typedText, isDeleting, phraseIndex]);
 
   return (
     <section className="hero" id="home">
