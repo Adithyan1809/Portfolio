@@ -1,9 +1,14 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
+import { CCTVScroll } from '../components/CCTVScroll';
+import projectIrisImg from '../assets/project_iris_cctv.png';
 
 const ProjectIrisPage = () => {
   return (
     <CaseStudyLayout
+      visualElement={
+        <CCTVScroll src={projectIrisImg} />
+      }
       title="Project IRIS"
       role="Technical Lead Intern"
       overview="Real-time surveillance and attendance system processing 90+ live camera feeds using async RTSP/ONVIF pipelines."

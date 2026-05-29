@@ -1,0 +1,98 @@
+.parallax-scanner-container {
+  min-height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  perspective: 1200px;
+  position: relative;
+}
+
+.scanner-model {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16/10;
+  border: 2px solid #ff3366;
+  box-shadow: 0 0 30px rgba(255, 51, 102, 0.2), inset 0 0 20px rgba(255, 51, 102, 0.1);
+  background-color: #050505;
+  border-radius: 4px;
+  transform-origin: center center;
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner-viewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner-bg-image {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 120%; /* Extra height for parallax */
+  object-fit: cover;
+  opacity: 0.85;
+  filter: contrast(1.1) grayscale(0.2);
+}
+
+.scanner-overlay-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.scanner-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  color: #00ffff;
+  font-size: 0.85rem;
+  font-weight: bold;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+  z-index: 20;
+}
+
+.scanner-live {
+  color: #ff3366;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* The Sweeping Laser */
+.scanner-laser-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #00ffff;
+  z-index: 30;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+.laser-glow {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 255, 0.15) 50%, transparent 100%);
+  pointer-events: none;
+}

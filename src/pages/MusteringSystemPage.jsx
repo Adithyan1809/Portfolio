@@ -1,9 +1,14 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
+import { ParallaxScanner } from '../components/ParallaxScanner';
+import musteringImg from '../assets/mustering_system.png';
 
 const MusteringSystemPage = () => {
   return (
     <CaseStudyLayout
+      visualElement={
+        <ParallaxScanner src={musteringImg} />
+      }
       title="AI Mustering Event System"
       role="AI & Computer Vision Researcher"
       overview="Real-time personnel accountability system using an edge-cloud architecture. IEEE-submitted research project."
