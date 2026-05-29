@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeTorus from './WireframeTorus';
 import { Code2, Cpu, Eye, Server, Settings, Layout } from 'lucide-react';
-import { ExplodedServer } from './ExplodedServer';
 import './Skills.css';
 
 const skillCategories = [
@@ -44,12 +43,6 @@ const Skills = () => {
       <WireframeTorus />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 style={{ marginBottom: '2rem' }}>Core Proficiencies</h2>
-        
-        {/* The 3D Exploded Server Rack */}
-        <div style={{ marginBottom: '4rem' }}>
-          <ExplodedServer />
-        </div>
-
         <div className="proficiency-bars">
           {[
             { name: 'Python', percentage: 95 },

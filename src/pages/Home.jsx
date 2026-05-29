@@ -9,14 +9,13 @@ import GitHubStats from '../components/GitHubStats';
 import Contact from '../components/Contact';
 import ScrollReveal from '../components/ScrollReveal';
 import Marquee from '../components/Marquee';
-import { DeepDiveFlythrough } from '../components/DeepDiveFlythrough';
-import { DataPipelineScroll } from '../components/DataPipelineScroll';
+import { MacbookScroll } from '../components/MacbookScroll';
+import resumePilotImg from '../assets/resumepilot_ui.png';
 
 const Home = () => {
   return (
     <div className="home-container">
       <Hero />
-      <DeepDiveFlythrough />
       <Marquee />
       <ScrollReveal><About /></ScrollReveal>
       <ScrollReveal><FeaturedProjects /></ScrollReveal>
@@ -24,7 +23,6 @@ const Home = () => {
       <ScrollReveal><Experience /></ScrollReveal>
       <ScrollReveal><Research /></ScrollReveal>
       <ScrollReveal><GitHubStats /></ScrollReveal>
-      <DataPipelineScroll />
       <ScrollReveal><Contact /></ScrollReveal>
     </div>
   );
