@@ -1,6 +1,4 @@
-/* Hide native cursor on desktop */
-body { cursor: none; }
-a, button { cursor: none; }
+/* Custom cursor disabled — native cursor restored */
 
 .c-dot {
   position: fixed;
