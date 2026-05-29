@@ -3,7 +3,6 @@ import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import profileImage from '../assets/profile.png';
 import Constellation from './Constellation';
-import AsciiCamera from './AsciiCamera';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Hero.css';
 
@@ -86,7 +85,6 @@ const Hero = () => {
             <img src={profileImage} alt="Adithyan Prakash" className="profile-img" fetchpriority="high" />
             <div className="image-overlay"></div>
           </div>
-          <AsciiCamera />
         </div>
 
       </div>
