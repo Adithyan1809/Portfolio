@@ -1,0 +1,26 @@
+.holographic-wrapper {
+  transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+  /* Ensure it doesn't clip content */
+  z-index: 1;
+}
+
+/* Subtle pseudo-element glow that shifts opposite to the rotation to give a holographic feel */
+.holographic-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+  z-index: 9999;
+  transition: transform 0.1s ease-out;
+  mix-blend-mode: overlay;
+}
+
+[data-theme="light"] .holographic-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.03) 0%, transparent 60%);
+}
