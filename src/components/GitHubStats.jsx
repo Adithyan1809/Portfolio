@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 
 const GitHubStats = () => {
   const [theme, setTheme] = useState('light');
   const scrollRef = useRef(null);
+  const { playTwinkle } = useSoundEffects();
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -30,7 +32,7 @@ const GitHubStats = () => {
     <section id="github" className="section-padding border-bottom">
       <div className="container">
         <h2 style={{ marginBottom: '3rem' }}>Coding Activity</h2>
-        <div ref={scrollRef} className="calendar-container" style={{ 
+        <div ref={scrollRef} className="calendar-container" onMouseEnter={playTwinkle} style={{ 
           padding: '2rem', 
           border: '2px solid var(--color-accent)', 
           borderRadius: '8px',

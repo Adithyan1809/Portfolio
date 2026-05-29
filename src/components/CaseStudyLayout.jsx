@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
@@ -7,7 +7,12 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 import './CaseStudy.css';
 
 const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipeline, stack, challenges, metrics, links, visualElement }) => {
-  const { playHover, playClick } = useSoundEffects();
+  const { playHover, playClick, playReverse } = useSoundEffects();
+
+  useEffect(() => {
+    // Play the reverse entry sound when the case study page opens
+    playReverse();
+  }, [playReverse]);
 
   return (
     <div className="case-study-page" style={{ position: 'relative', zIndex: 1 }}>

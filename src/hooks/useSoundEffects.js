@@ -165,6 +165,52 @@ export const useSoundEffects = () => {
       osc.start(ctx.currentTime);
       modOsc.stop(ctx.currentTime + 0.6);
       osc.stop(ctx.currentTime + 0.6);
+    } else if (type === 'sonar') {
+      // High ping with a long echoing tail
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(2000, ctx.currentTime);
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.5);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 1.5);
+    } else if (type === 'twinkle') {
+      // Fast, high-pitched crystal twinkle
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(3000, ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(4000, ctx.currentTime + 0.1);
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.2);
+    } else if (type === 'glitchpop') {
+      // Short burst of white noise for a glitchy UI element
+      const bufferSize = ctx.sampleRate * 0.1;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) { data[i] = Math.random() * 2 - 1; }
+      const noiseSource = ctx.createBufferSource();
+      noiseSource.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'highpass';
+      filter.frequency.value = 5000;
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+      noiseSource.connect(filter);
+      filter.connect(gainNode);
+      noiseSource.start(ctx.currentTime);
+    } else if (type === 'reverse') {
+      // A sweep that pitches up and cuts off sharply
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(50, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.3);
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.25);
+      gainNode.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.3);
     }
   }, []);
 
@@ -180,5 +226,9 @@ export const useSoundEffects = () => {
     playPowerUp: () => playSound('powerup'),
     playBassDrop: () => playSound('bassdrop'),
     playAlien: () => playSound('alien'),
+    playSonar: () => playSound('sonar'),
+    playTwinkle: () => playSound('twinkle'),
+    playGlitchPop: () => playSound('glitchpop'),
+    playReverse: () => playSound('reverse'),
   };
 };

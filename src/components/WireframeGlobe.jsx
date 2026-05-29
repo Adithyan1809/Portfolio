@@ -1,22 +1,25 @@
 import React from 'react';
+import { useSoundEffects } from '../hooks/useSoundEffects';
 
 const WireframeGlobe = () => {
+  const { playSonar } = useSoundEffects();
   return (
     <div style={{
       position: 'absolute',
       top: 0, left: 0, right: 0, bottom: 0,
-      pointerEvents: 'none',
-      zIndex: -1,
+      pointerEvents: 'auto', // changed from none to auto to allow clicks
+      zIndex: 0, // brought up slightly
       overflow: 'hidden',
       maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-    }}>
+    }} onMouseDown={playSonar}>
       <div style={{
         position: 'absolute',
         top: '-20%',
         right: '-10%',
         opacity: 'var(--shape-opacity-strong)',
-        animation: 'spin-globe 60s linear infinite'
+        animation: 'spin-globe 60s linear infinite',
+        cursor: 'crosshair'
       }}>
         <svg width="800" height="800" viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth="0.2">
           <circle cx="50" cy="50" r="48" />
