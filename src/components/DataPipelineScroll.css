@@ -1,0 +1,82 @@
+.pipeline-scroll-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1rem;
+  perspective: 1200px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+.pipeline-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  z-index: 10;
+}
+
+.pipeline-header h2 {
+  font-size: 2rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.pipeline-header p {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.pipeline-model {
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16/9;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  background-color: #050505;
+  border: 1px solid var(--color-border);
+  transform-origin: center center;
+}
+
+.pipeline-board {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.pipeline-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  filter: contrast(1.2) grayscale(0.5);
+}
+
+.pipeline-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.glowing-pipe {
+  fill: none;
+  stroke: #00ffcc;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 8px #00ffcc);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.glowing-pipe.secondary {
+  stroke: #ff3366;
+  filter: drop-shadow(0 0 8px #ff3366);
+}
