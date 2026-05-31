@@ -118,6 +118,8 @@ export default function ResumeArchitectureFlow() {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
+        minZoom={0.1}
+        maxZoom={1.5}
         attributionPosition="bottom-right"
         className="brutalist-flow"
       >
