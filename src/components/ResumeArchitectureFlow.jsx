@@ -31,26 +31,26 @@ const nodeTypes = {
 
 const initialNodes = [
   // Frontend
-  { id: '1', type: 'brutalist', position: { x: 400, y: 0 }, data: { title: 'Next.js Frontend', label: 'User Input & PDF Upload', variant: 'default' } },
+  { id: '1', type: 'brutalist', position: { x: 220, y: 0 }, data: { title: 'Next.js Frontend', label: 'User Input & PDF Upload', variant: 'default' } },
   
   // Microservices & API
-  { id: '2', type: 'brutalist', position: { x: 400, y: 150 }, data: { title: 'FastAPI Orchestrator', label: 'Main API Gateway', variant: 'default' } },
-  { id: '3', type: 'brutalist', position: { x: 100, y: 150 }, data: { title: 'Celery Task Queue', label: 'Async Job Management', variant: 'secondary' } },
-  { id: '4', type: 'brutalist', position: { x: 700, y: 150 }, data: { title: 'PostgreSQL DB', label: 'User Data & State', variant: 'secondary' } },
+  { id: '2', type: 'brutalist', position: { x: 220, y: 150 }, data: { title: 'FastAPI Orchestrator', label: 'Main API Gateway', variant: 'default' } },
+  { id: '3', type: 'brutalist', position: { x: 0, y: 150 }, data: { title: 'Celery Task Queue', label: 'Async Job Management', variant: 'secondary' } },
+  { id: '4', type: 'brutalist', position: { x: 440, y: 150 }, data: { title: 'PostgreSQL DB', label: 'User Data & State', variant: 'secondary' } },
   
   // Data Processing Layer
-  { id: '5', type: 'brutalist', position: { x: 100, y: 300 }, data: { title: 'PDF Parsing Engine', label: 'PyMuPDF + OCR', variant: 'default' } },
-  { id: '6', type: 'brutalist', position: { x: 400, y: 300 }, data: { title: 'Redis Cache', label: 'Embedding & Session Cache', variant: 'secondary' } },
-  { id: '7', type: 'brutalist', position: { x: 700, y: 300 }, data: { title: 'LangChain Text Chunking', label: 'Semantic Splitting', variant: 'default' } },
+  { id: '5', type: 'brutalist', position: { x: 0, y: 300 }, data: { title: 'PDF Parsing Engine', label: 'PyMuPDF + OCR', variant: 'default' } },
+  { id: '6', type: 'brutalist', position: { x: 220, y: 300 }, data: { title: 'Redis Cache', label: 'Embedding & Session Cache', variant: 'secondary' } },
+  { id: '7', type: 'brutalist', position: { x: 440, y: 300 }, data: { title: 'LangChain Text Chunking', label: 'Semantic Splitting', variant: 'default' } },
   
   // AI Core
-  { id: '8', type: 'brutalist', position: { x: 400, y: 450 }, data: { title: 'Embedding Pipeline', label: 'OpenAI text-embedding-3', variant: 'highlight' } },
-  { id: '9', type: 'brutalist', position: { x: 100, y: 600 }, data: { title: 'pgvector Database', label: 'Cosine Similarity Search', variant: 'secondary' } },
-  { id: '10', type: 'brutalist', position: { x: 400, y: 600 }, data: { title: '75-Engine Orchestration', label: 'Parallel Micro-Prompting', variant: 'highlight' } },
+  { id: '8', type: 'brutalist', position: { x: 220, y: 450 }, data: { title: 'Embedding Pipeline', label: 'OpenAI text-embedding-3', variant: 'highlight' } },
+  { id: '9', type: 'brutalist', position: { x: 0, y: 600 }, data: { title: 'pgvector Database', label: 'Cosine Similarity Search', variant: 'secondary' } },
+  { id: '10', type: 'brutalist', position: { x: 220, y: 600 }, data: { title: '75-Engine Orchestration', label: 'Parallel Micro-Prompting', variant: 'highlight' } },
   
   // Output & Safety
-  { id: '11', type: 'brutalist', position: { x: 400, y: 750 }, data: { title: 'Safety Judge Model', label: 'Factual Cross-Referencing & Hallucination Filter', variant: 'warning' } },
-  { id: '12', type: 'brutalist', position: { x: 400, y: 900 }, data: { title: 'PDF Generator', label: 'LaTeX Compilation & Output', variant: 'default' } },
+  { id: '11', type: 'brutalist', position: { x: 220, y: 750 }, data: { title: 'Safety Judge Model', label: 'Factual Cross-Referencing & Hallucination Filter', variant: 'warning' } },
+  { id: '12', type: 'brutalist', position: { x: 220, y: 900 }, data: { title: 'PDF Generator', label: 'LaTeX Compilation & Output', variant: 'default' } },
 ];
 
 const initialEdges = [
