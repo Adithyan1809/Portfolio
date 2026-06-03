@@ -19,9 +19,9 @@ const Hero = () => {
   const imageY = useTransform(scrollY, [0, 600], [0, -50]);
   
   const phrases = [
-    "AI & ML Engineer.",
-    "Backend Architect.",
-    "Problem Solver."
+    "AI & Distributed Systems.",
+    "Machine Learning Engineer.",
+    "Architecting at Scale."
   ];
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="hero-tagline">
-            Building scalable AI systems, intelligent backend architectures, and production-grade real-time applications.
+            Bridging the gap between bleeding-edge AI research and high-stakes production. I design, build, and scale resilient architectures that process complex models in real-time.
           </p>
           
           <div className="hero-ctas">

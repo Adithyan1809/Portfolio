@@ -10,10 +10,10 @@ const About = () => {
         <div className="about-grid">
           <div className="about-content">
             <p style={{ fontSize: '1.15rem', color: 'var(--color-text)', lineHeight: '1.7', marginBottom: '1.5rem' }}>
-              I am an AI & ML undergraduate at DSATM and a Technical Lead Intern at SMAP Technologies. My work bridges the gap between research and production, focusing on architecting scalable AI systems, robust backend infrastructures, and real-time computer vision applications.
+              I am an AI & ML undergraduate at DSATM and a Technical Lead Intern at SMAP Technologies. My expertise lies at the intersection of bleeding-edge AI models and high-stakes production environments, architecting distributed systems capable of processing vast data streams in real-time.
             </p>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '2rem' }}>
-              I have a strong interest in MLOps, distributed systems, and scalable deployments. Rather than just training models, I specialize in the practical engineering required to deploy them effectively in real-world, high-stakes environments.
+              I specialize in MLOps, asynchronous microservices, and hardware-accelerated inferencing. Rather than simply training isolated models, I focus on the rigorous engineering required to seamlessly deploy, monitor, and scale intelligent infrastructure for the real world.
             </p>
           </div>
           <div className="about-visual">

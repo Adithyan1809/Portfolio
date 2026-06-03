@@ -5,19 +5,53 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Contact.css';
 
 const Contact = () => {
-  const { playHover, playClick, playType, playSuccess } = useSoundEffects();
+  const { playHover, playClick, playType, playSuccess, playError } = useSoundEffects();
+  const [status, setStatus] = React.useState('idle'); // idle, loading, success, error
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    playClick();
+    setStatus('loading');
+    
+    const formData = new FormData(e.target);
+    formData.append("access_key", "c6c692ba-c335-4807-ba3f-8253a09400fa");
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        setStatus('success');
+        playSuccess();
+        e.target.reset();
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        if (playError) playError();
+        setTimeout(() => setStatus('idle'), 5000);
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+      if (playError) playError();
+      setTimeout(() => setStatus('idle'), 5000);
+    }
+  };
 
   return (
     <section id="contact" className="contact-section section-padding border-bottom">
       <div className="bg-grid"></div>
       <div className="container">
-        <h2 style={{ marginBottom: '3rem' }}>Get In Touch</h2>
+        <h2 style={{ marginBottom: '3rem' }}>Initiate Contact</h2>
         
         <div className="contact-grid">
           {/* Left Column: Info */}
           <div className="contact-info">
             <p className="contact-description">
-              I'm always looking for new opportunities and exciting projects. Whether you have a question, a proposal, or just want to say hi, my inbox is always open!
+              Building scalable infrastructure? Need to architect an AI pipeline? Or just want to discuss distributed systems over coffee? My inbox is always open. Let's build something extraordinary.
             </p>
             
             <div className="contact-methods">
@@ -65,26 +99,35 @@ const Contact = () => {
 
           {/* Right Column: Form */}
           <div className="contact-form-container">
-            {/* Formspree integration for live email sending */}
-            <form className="contact-form" action="https://formspree.io/f/xkoeyvwj" method="POST">
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name" className="mono-text">NAME</label>
-                <input type="text" id="name" name="name" required placeholder="Enter your name" onFocus={playType} />
+                <input type="text" id="name" name="name" required placeholder="John Doe" onFocus={playType} />
               </div>
               
               <div className="form-group">
                 <label htmlFor="email" className="mono-text">EMAIL</label>
-                <input type="email" id="email" name="_replyto" required placeholder="Enter your email" onFocus={playType} />
+                <input type="email" id="email" name="email" required placeholder="john@company.com" onFocus={playType} />
               </div>
               
               <div className="form-group message-group">
                 <label htmlFor="message" className="mono-text">MESSAGE</label>
-                <textarea id="message" name="message" required placeholder="Write your message here..." onFocus={playType}></textarea>
+                <textarea id="message" name="message" required placeholder="Tell me about your project..." onFocus={playType}></textarea>
               </div>
               
-              <button type="submit" className="submit-button" onMouseEnter={playHover} onClick={playSuccess}>
-                <span>SEND MESSAGE</span>
-                <Send size={18} />
+              <button 
+                type="submit" 
+                className={`submit-button ${status}`}
+                disabled={status === 'loading' || status === 'success'}
+                onMouseEnter={playHover}
+              >
+                <span>
+                  {status === 'idle' && 'TRANSMIT MESSAGE'}
+                  {status === 'loading' && 'TRANSMITTING...'}
+                  {status === 'success' && 'MESSAGE SENT'}
+                  {status === 'error' && 'TRANSMISSION FAILED'}
+                </span>
+                {status === 'idle' && <Send size={18} />}
               </button>
             </form>
           </div>

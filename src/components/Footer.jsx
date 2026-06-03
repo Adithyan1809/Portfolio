@@ -23,16 +23,16 @@ const Footer = () => {
         <div className="container">
           <div className="footer-cta-inner">
             <div>
-              <p className="footer-cta-label mono-text">Available for hire</p>
-              <h2 className="footer-cta-heading">Let's build something<br />extraordinary.</h2>
+              <p className="footer-cta-label mono-text">Systems scaling</p>
+              <h2 className="footer-cta-heading">Ready to scale<br />your infrastructure?</h2>
             </div>
             <a
-              href="mailto:adithyan18092005@gmail.com"
+              href="#contact"
               className="btn btn-primary footer-cta-btn"
               onMouseEnter={playHover}
               onClick={playClick}
             >
-              Get In Touch <ArrowUpRight size={18} />
+              Initiate Contact <ArrowUpRight size={18} />
             </a>
           </div>
         </div>
@@ -47,7 +47,7 @@ const Footer = () => {
             <div className="footer-col footer-brand-col">
               <h3 className="footer-logo mono-text">ADITHYAN P.</h3>
               <p className="footer-tagline">
-                AI & ML Engineer. Building scalable systems that bridge research and production.
+                AI & Distributed Systems Engineer. Bridging the gap between bleeding-edge research and high-stakes production.
               </p>
               <div className="footer-location mono-text">
                 <MapPin size={14} />
