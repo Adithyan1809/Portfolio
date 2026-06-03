@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Icosahedron, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
+import { Icosahedron, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './NeuralCore3D.css';
 
@@ -91,13 +91,6 @@ const NeuralCore3D = () => {
         
         <NeuralCore isDark={isDark} />
         
-        <OrbitControls 
-          enablePan={false}
-          minDistance={3}
-          maxDistance={8}
-          autoRotate
-          autoRotateSpeed={1}
-        />
       </Canvas>
     </div>
   );

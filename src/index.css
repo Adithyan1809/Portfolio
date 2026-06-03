@@ -64,7 +64,7 @@
   box-sizing: border-box;
 }
 
-html, body {
+html, body, #root {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-primary);

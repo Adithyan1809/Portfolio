@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -41,6 +41,13 @@
   width: 100%;
   aspect-ratio: 4 / 5;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .brutalist-image-container {
+    max-width: 280px;
+    box-shadow: 8px 8px 0 var(--color-accent);
+  }
 }
 
 .brutalist-image-container:hover {

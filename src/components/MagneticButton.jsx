@@ -5,7 +5,10 @@ const MagneticButton = ({ children, className, ...props }) => {
   const ref = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
+
   const handleMouse = (e) => {
+    if (isTouchDevice) return;
     const { clientX, clientY } = e;
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
