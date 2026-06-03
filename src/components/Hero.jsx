@@ -19,7 +19,7 @@ const Hero = () => {
   const imageY = useTransform(scrollY, [0, 600], [0, -50]);
   
   const phrases = [
-    "AI & Distributed Systems.",
+    "Software Engineer.",
     "Machine Learning Intern.",
     "Building Scalable Tech."
   ];
