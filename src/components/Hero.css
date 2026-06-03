@@ -3,7 +3,6 @@
   min-height: 100dvh;
   display: flex;
   align-items: center;
-  overflow: hidden;
   perspective: 1000px;
   padding-top: calc(var(--nav-height) + 4rem);
   padding-bottom: 4rem;

@@ -1,8 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 
 export default function SmoothScroll({ children }) {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
+    // Check if the device is mobile or touch-enabled
+    const isTouch = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
+    const isSmall = typeof window !== 'undefined' && window.innerWidth <= 768;
+    
+    if (isTouch || isSmall) {
+      setIsMobile(true);
+      return; // Completely disable Lenis on mobile to prevent scroll locking
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
