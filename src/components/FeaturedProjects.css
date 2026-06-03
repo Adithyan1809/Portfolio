@@ -57,21 +57,20 @@
 }
 
 /* Base card transition overrides for flip */
-.spotlight-card.flip-container .card:hover {
-  /* Prevent default .card:hover from destroying the 3D transforms */
+.flip-face {
   background-color: var(--color-bg);
-  color: var(--color-text);
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  padding: 2rem;
   box-shadow: 4px 4px 0 var(--color-accent);
 }
 
 .flip-front {
-  z-index: 2;
-  transform: rotateY(0deg) !important; /* Safari fix & override */
+  transform: rotateY(0deg); /* Safari fix */
 }
 
 .flip-back {
-  transform: rotateY(180deg) !important;
-  z-index: 1;
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   justify-content: center;

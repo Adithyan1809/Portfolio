@@ -68,7 +68,7 @@ const SpotlightCard = ({ p, playHover, playClick, playPowerUp }) => {
       
       <div className="flip-inner">
         {/* FRONT FACE */}
-        <div className="card project-card flip-front">
+        <div className="flip-face project-card flip-front">
           <div className="project-header">
             <h3>{p.title}</h3>
             <div className="project-links">
@@ -87,7 +87,7 @@ const SpotlightCard = ({ p, playHover, playClick, playPowerUp }) => {
         </div>
 
         {/* BACK FACE */}
-        <div className="card project-card flip-back">
+        <div className="flip-face project-card flip-back">
           <h3>Key Metrics</h3>
           <div className="project-metrics" style={{ justifyContent: 'center', marginTop: '1rem' }}>
             {p.metrics.map(m => (
