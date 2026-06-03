@@ -20,8 +20,8 @@ const Hero = () => {
   
   const phrases = [
     "AI & Distributed Systems.",
-    "Machine Learning Engineer.",
-    "Architecting at Scale."
+    "Machine Learning Intern.",
+    "Building Scalable Tech."
   ];
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="hero-tagline">
-            Bridging the gap between bleeding-edge AI research and high-stakes production. I design, build, and scale resilient architectures that process complex models in real-time.
+            Bridging the gap between AI concepts and real-world implementation. I'm passionate about designing, building, and scaling resilient architectures that power complex models.
           </p>
           
           <div className="hero-ctas">

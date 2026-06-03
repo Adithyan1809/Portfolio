@@ -23,8 +23,8 @@ const Footer = () => {
         <div className="container">
           <div className="footer-cta-inner">
             <div>
-              <p className="footer-cta-label mono-text">Systems scaling</p>
-              <h2 className="footer-cta-heading">Ready to scale<br />your infrastructure?</h2>
+              <p className="footer-cta-label mono-text">Available for opportunities</p>
+              <h2 className="footer-cta-heading">Let's build the next<br />big thing together.</h2>
             </div>
             <a
               href="#contact"
@@ -47,7 +47,7 @@ const Footer = () => {
             <div className="footer-col footer-brand-col">
               <h3 className="footer-logo mono-text">ADITHYAN P.</h3>
               <p className="footer-tagline">
-                AI & Distributed Systems Engineer. Bridging the gap between bleeding-edge research and high-stakes production.
+                AI & Backend Engineer. Passionate about bringing research concepts into scalable, real-world applications.
               </p>
               <div className="footer-location mono-text">
                 <MapPin size={14} />

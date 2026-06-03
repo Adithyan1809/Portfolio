@@ -51,7 +51,7 @@ const Contact = () => {
           {/* Left Column: Info */}
           <div className="contact-info">
             <p className="contact-description">
-              Building scalable infrastructure? Need to architect an AI pipeline? Or just want to discuss distributed systems over coffee? My inbox is always open. Let's build something extraordinary.
+              I'm currently seeking new opportunities where I can contribute to challenging AI and backend engineering projects. Whether you have an open role, a project idea, or just want to chat about tech, my inbox is open!
             </p>
             
             <div className="contact-methods">
