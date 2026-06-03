@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { useSoundEffects } from '../hooks/useSoundEffects';
+import MagneticButton from './MagneticButton';
 import './FeaturedProjects.css';
 
 const projects = [
@@ -33,12 +34,13 @@ const projects = [
   }
 ];
 
-// Spotlight card with radial gradient following cursor
+// Spotlight card with radial gradient following cursor and 3D flip effect
 const SpotlightCard = ({ p, playHover, playClick, playPowerUp }) => {
   const cardRef = useRef(null);
   const [spotlight, setSpotlight] = useState({ x: '50%', y: '50%', opacity: 0 });
 
   const handleMouseMove = (e) => {
+    // Spotlight applies to the front face (or both, depending on setup)
     const rect = cardRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -50,12 +52,12 @@ const SpotlightCard = ({ p, playHover, playClick, playPowerUp }) => {
   return (
     <div
       ref={cardRef}
-      className="card project-card spotlight-card"
+      className="flip-container spotlight-card"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={playHover}
     >
-      {/* Spotlight radial gradient */}
+      {/* Spotlight radial gradient - spans the container */}
       <div
         className="card-spotlight"
         style={{
@@ -63,40 +65,50 @@ const SpotlightCard = ({ p, playHover, playClick, playPowerUp }) => {
           opacity: spotlight.opacity,
         }}
       />
-
-      <div className="project-header">
-        <h3>{p.title}</h3>
-        <div className="project-links">
-          <a
-            href={p.github}
-            aria-label={`View ${p.title} on GitHub`}
-            className="icon-btn"
-            style={{ color: 'var(--color-text-muted)' }}
-            onClick={playClick}
-          >
-            <FaGithub size={20} />
-          </a>
+      
+      <div className="flip-inner">
+        {/* FRONT FACE */}
+        <div className="card project-card flip-front">
+          <div className="project-header">
+            <h3>{p.title}</h3>
+            <div className="project-links">
+              <a
+                href={p.github}
+                aria-label={`View ${p.title} on GitHub`}
+                className="icon-btn"
+                style={{ color: 'var(--color-text-muted)' }}
+                onClick={playClick}
+              >
+                <FaGithub size={20} />
+              </a>
+            </div>
+          </div>
+          <p className="project-desc">{p.description}</p>
         </div>
-      </div>
-      <p className="project-desc">{p.description}</p>
 
-      <div className="project-metrics">
-        {p.metrics.map(m => (
-          <span key={m} className="metric-badge mono-text">{m}</span>
-        ))}
-      </div>
+        {/* BACK FACE */}
+        <div className="card project-card flip-back">
+          <h3>Key Metrics</h3>
+          <div className="project-metrics" style={{ justifyContent: 'center', marginTop: '1rem' }}>
+            {p.metrics.map(m => (
+              <span key={m} className="metric-badge mono-text">{m}</span>
+            ))}
+          </div>
 
-      <div className="project-tech">{p.tech.join(' • ')}</div>
+          <h3 style={{ marginTop: '1rem' }}>Tech Stack</h3>
+          <div className="project-tech" style={{ margin: '1rem 0 2rem 0' }}>{p.tech.join(' • ')}</div>
 
-      <div style={{ marginTop: '2rem' }}>
-        <Link
-          to={`/projects/${p.id}`}
-          className="btn btn-secondary magnetic-btn"
-          style={{ width: '100%' }}
-          onClick={playPowerUp}
-        >
-          View Case Study <ArrowRight size={16} />
-        </Link>
+          <MagneticButton style={{ width: '100%' }}>
+            <Link
+              to={`/projects/${p.id}`}
+              className="btn btn-secondary"
+              style={{ width: '100%' }}
+              onClick={playPowerUp}
+            >
+              View Case Study <ArrowRight size={16} />
+            </Link>
+          </MagneticButton>
+        </div>
       </div>
     </div>
   );
