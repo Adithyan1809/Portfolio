@@ -11,3 +11,63 @@
     gap: 3rem;
   }
 }
+
+/* LinkedIn Badge */
+.li-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  background: rgba(10, 102, 194, 0.12);
+  border: 1px solid rgba(10, 102, 194, 0.35);
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  max-width: 360px;
+}
+
+.li-badge:hover {
+  background: rgba(10, 102, 194, 0.22);
+  border-color: rgba(10, 102, 194, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10, 102, 194, 0.2);
+}
+
+.li-badge__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #0a66c2;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.li-badge__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.li-badge__name {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #fff);
+}
+
+.li-badge__title {
+  font-size: 0.78rem;
+  color: var(--color-text-muted, #aaa);
+  line-height: 1.4;
+}
+
+.li-badge__cta {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #4da3ff;
+  margin-top: 0.1rem;
+  letter-spacing: 0.02em;
+}
