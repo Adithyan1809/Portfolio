@@ -44,15 +44,19 @@ const ScrollToTop = () => {
     playSwoosh();
     setIsLaunching(true);
     
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { duration: 1.5 });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
 
     // Reset launch animation state after it completes
     setTimeout(() => {
       setIsLaunching(false);
-    }, 1000);
+    }, 1200);
   };
 
   return (

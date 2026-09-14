@@ -1,40 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 
 export default function SmoothScroll({ children }) {
-  const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
-    // Check if the device is mobile or touch-enabled
-    const isTouch = typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches;
-    const isSmall = typeof window !== 'undefined' && window.innerWidth <= 768;
-    
-    if (isTouch || isSmall) {
-      setIsMobile(true);
-      return; // Completely disable Lenis on mobile to prevent scroll locking
-    }
-
+    // Ultra-smooth momentum scrolling (Apple / Linear-style inertia glide)
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      direction: 'vertical', 
-      gestureDirection: 'vertical', 
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.15,
+      touchMultiplier: 1.8,
       infinite: false,
+      anchors: true,
     });
 
+    window.lenis = lenis;
+
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
+      window.lenis = null;
     };
   }, []);
 

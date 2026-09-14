@@ -66,9 +66,20 @@ const Navbar = () => {
     });
   };
 
-  const handleLinkClick = (isMobile = false) => {
+  const handleLinkClick = (e, targetId, isMobile = false) => {
     playClick();
     if (isMobile) setIsMenuOpen(false);
+    if (window.location.pathname === '/' && targetId) {
+      const el = document.getElementById(targetId);
+      if (el) {
+        e.preventDefault();
+        if (window.lenis) {
+          window.lenis.scrollTo(el, { offset: -70, duration: 1.5 });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
   };
 
   return (
@@ -78,11 +89,11 @@ const Navbar = () => {
           <Link to="/" onMouseEnter={playHover} onClick={playAlien}>Adithyan P.</Link>
         </div>
         <div className="nav-links mono-text">
-          <a href="/#about" onMouseEnter={playHover} onClick={() => handleLinkClick()}>About</a>
-          <a href="/#experience" onMouseEnter={playHover} onClick={() => handleLinkClick()}>Experience</a>
-          <a href="/#projects" onMouseEnter={playHover} onClick={() => handleLinkClick()}>Projects</a>
-          <a href="/#skills" onMouseEnter={playHover} onClick={() => handleLinkClick()}>Skills</a>
-          <a href="/#contact" onMouseEnter={playHover} onClick={() => handleLinkClick()}>Contact</a>
+          <a href="/#about" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'about')}>About</a>
+          <a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a>
+          <a href="/#projects" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a>
+          <a href="/#skills" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a>
+          <a href="/#contact" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button 
@@ -117,11 +128,11 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="mobile-dropdown mono-text">
-          <a href="/#about" onClick={() => handleLinkClick(true)}>About</a>
-          <a href="/#experience" onClick={() => handleLinkClick(true)}>Experience</a>
-          <a href="/#projects" onClick={() => handleLinkClick(true)}>Projects</a>
-          <a href="/#skills" onClick={() => handleLinkClick(true)}>Skills</a>
-          <a href="/#contact" onClick={() => handleLinkClick(true)}>Contact</a>
+          <a href="/#about" onClick={(e) => handleLinkClick(e, 'about', true)}>About</a>
+          <a href="/#experience" onClick={(e) => handleLinkClick(e, 'experience', true)}>Experience</a>
+          <a href="/#projects" onClick={(e) => handleLinkClick(e, 'projects', true)}>Projects</a>
+          <a href="/#skills" onClick={(e) => handleLinkClick(e, 'skills', true)}>Skills</a>
+          <a href="/#contact" onClick={(e) => handleLinkClick(e, 'contact', true)}>Contact</a>
         </div>
       )}
     </nav>

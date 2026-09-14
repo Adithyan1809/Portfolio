@@ -73,9 +73,24 @@ const Hero = () => {
           <p className="hero-tagline">
             Bridging the gap between AI concepts and real-world implementation — designing, building, and scaling resilient architectures that power complex models.
           </p>
-          
           <div className="hero-ctas">
-            <a href="#projects" className="btn btn-primary" onMouseEnter={playHover} onClick={playClick}>
+            <a 
+              href="#projects" 
+              className="btn btn-primary" 
+              onMouseEnter={playHover} 
+              onClick={(e) => {
+                playClick();
+                const el = document.getElementById('projects');
+                if (el) {
+                  e.preventDefault();
+                  if (window.lenis) {
+                    window.lenis.scrollTo(el, { offset: -70, duration: 1.5 });
+                  } else {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
+            >
               View Projects <ArrowRight size={16} />
             </a>
             <a href="/resume.pdf" target="_blank" rel="noreferrer" download="Adithyan_P_AI_ML_Resume.pdf" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
