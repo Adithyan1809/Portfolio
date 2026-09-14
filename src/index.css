@@ -469,7 +469,8 @@ p {
 }
 
 /* ─── Watermark base ─── */
-.section-watermark {
+.section-watermark,
+.section-watermark-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -487,7 +488,8 @@ p {
   z-index: 0;
 }
 
-[data-theme='dark'] .section-watermark {
+[data-theme='dark'] .section-watermark,
+[data-theme='dark'] .section-watermark-text {
   opacity: 0.022;
 }
 
