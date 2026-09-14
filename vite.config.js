@@ -24,24 +24,47 @@ function devChatApiPlugin() {
           req.on('end', async () => {
             try {
               const { messages } = JSON.parse(body);
-              const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                  model: env.GEMINI_MODEL || 'gemini-1.5-flash',
-                  messages: messages,
-                  temperature: 0.7,
-                  max_tokens: 200
-                })
-              });
+              const modelsToTry = [
+                env.GEMINI_MODEL,
+                'gemini-flash-latest',
+                'gemini-3.1-flash-lite',
+                'gemini-flash-lite-latest'
+              ].filter(Boolean);
 
-              const data = await geminiRes.json();
-              res.statusCode = geminiRes.status;
+              let lastError = null;
+              for (const model of modelsToTry) {
+                try {
+                  const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                      model,
+                      messages: messages,
+                      temperature: 0.7,
+                      max_tokens: 1000
+                    })
+                  });
+
+                  const data = await geminiRes.json();
+                  if (geminiRes.ok && data?.choices?.[0]?.message) {
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    return res.end(JSON.stringify(data));
+                  }
+
+                  const errMsg = Array.isArray(data) ? data[0]?.error?.message : data?.error?.message;
+                  lastError = { status: geminiRes.status, message: errMsg || 'Model call failed' };
+                } catch (err) {
+                  lastError = { status: 500, message: err.message };
+                }
+              }
+
+              res.statusCode = lastError?.status || 500;
               res.setHeader('Content-Type', 'application/json');
-              return res.end(JSON.stringify(data));
+              return res.end(JSON.stringify({ error: { message: lastError?.message || 'Gemini API call failed' } }));
             } catch (err) {
               res.statusCode = 500;
               res.setHeader('Content-Type', 'application/json');

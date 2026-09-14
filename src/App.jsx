@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import SmoothScroll from './components/SmoothScroll';
 import ScrollProgress from './components/ScrollProgress';
+import { Analytics } from '@vercel/analytics/react';
 
 const ResumePilotPage = lazy(() => import('./pages/ResumePilotPage'));
 const ProjectIrisPage = lazy(() => import('./pages/ProjectIrisPage'));
@@ -67,6 +68,7 @@ function App() {
           </ScrollReveal>
           <ChatWidget />
           <ScrollToTop />
+          <Analytics />
         </div>
       </SmoothScroll>
     </Router>
