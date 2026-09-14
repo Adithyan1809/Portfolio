@@ -7,10 +7,11 @@ import './NeuralCore3D.css';
 const NeuralCore = ({ isDark }) => {
   const groupRef = useRef();
 
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    groupRef.current.rotation.y = t * 0.15;
-    groupRef.current.rotation.x = t * 0.1;
+  useFrame((_, delta) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.15;
+      groupRef.current.rotation.x += delta * 0.1;
+    }
   });
 
   // Default to a highly visible bright color in dark mode, and a solid dark color in light mode
