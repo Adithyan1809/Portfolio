@@ -90,9 +90,10 @@ const Navbar = () => {
         </div>
         <div className="nav-links mono-text">
           <a href="/#about" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'about')}>About</a>
-          <a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a>
           <a href="/#projects" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a>
+          <a href="/#architecture" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'architecture')}>Architecture</a>
           <a href="/#skills" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a>
+          <a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a>
           <a href="/#contact" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -129,9 +130,10 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="mobile-dropdown mono-text">
           <a href="/#about" onClick={(e) => handleLinkClick(e, 'about', true)}>About</a>
-          <a href="/#experience" onClick={(e) => handleLinkClick(e, 'experience', true)}>Experience</a>
           <a href="/#projects" onClick={(e) => handleLinkClick(e, 'projects', true)}>Projects</a>
+          <a href="/#architecture" onClick={(e) => handleLinkClick(e, 'architecture', true)}>Architecture</a>
           <a href="/#skills" onClick={(e) => handleLinkClick(e, 'skills', true)}>Skills</a>
+          <a href="/#experience" onClick={(e) => handleLinkClick(e, 'experience', true)}>Experience</a>
           <a href="/#contact" onClick={(e) => handleLinkClick(e, 'contact', true)}>Contact</a>
         </div>
       )}

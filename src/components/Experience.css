@@ -1,6 +1,6 @@
 .timeline {
   position: relative;
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
@@ -8,74 +8,136 @@
   content: '';
   position: absolute;
   top: 0;
-  left: 15px;
+  left: 20px;
   height: 100%;
-  width: 1px;
-  background: var(--color-border);
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-border) 0%, rgba(99, 102, 241, 0.4) 50%, var(--color-border) 100%);
 }
 
 .timeline-item {
   position: relative;
-  padding-left: 3rem;
-  margin-bottom: 2rem;
+  padding-left: 3.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .timeline-item:last-child {
   margin-bottom: 0;
 }
 
-.timeline-dot {
+/* Glowing Pin Node */
+.timeline-node {
   position: absolute;
-  left: 11px;
-  top: 24px;
-  width: 9px;
-  height: 9px;
+  left: 14px;
+  top: 26px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-bg);
-}
-
-.timeline-dot::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--color-accent);
-  border-radius: 50%;
-  animation: ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes ping {
-  75%, 100% {
-    transform: scale(3.5);
-    opacity: 0;
-  }
-}
-
-.timeline-header {
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-bg), 0 0 12px rgba(99, 102, 241, 0.5);
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
-@media (max-width: 600px) {
+.timeline-node-inner {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.timeline-content {
+  padding: 1.75rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-3px);
+}
+
+.timeline-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-date {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
+.timeline-role-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.timeline-company-name {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Impact Bullets */
+.timeline-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.timeline-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.bullet-chevron {
+  color: var(--color-accent);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* Tech Stack */
+.timeline-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 680px) {
   .timeline::before {
-    left: 10px;
+    left: 12px;
   }
-  .timeline-dot {
+  .timeline-node {
     left: 6px;
   }
   .timeline-item {
-    padding-left: 2rem;
+    padding-left: 2.25rem;
   }
-}
-
-.dot-education {
-  background: transparent;
-  border: 2px solid var(--color-accent);
-}
-.dot-education::after {
-  background: transparent;
-  border: 2px solid var(--color-accent);
+  .timeline-content {
+    padding: 1.25rem;
+  }
+  .timeline-role-title {
+    font-size: 1.15rem;
+  }
 }

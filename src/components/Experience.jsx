@@ -1,41 +1,77 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeGlobe from './WireframeGlobe';
+import { Briefcase, GraduationCap, Users, Award, ChevronRight } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Experience.css';
 
 const timelineData = [
   {
     id: 1,
-    type: 'experience',
+    type: 'industry',
+    category: 'INDUSTRY',
     role: 'Technical Lead Intern',
     company: 'SMAP Technologies',
     date: 'Sep 2025 – Nov 2025',
-    description: 'Architected scalable backend using FastAPI, PostgreSQL, and Redis; built async RTSP/ONVIF pipelines with ArcFace/FaceNet + FAISS for real-time face recognition across 90+ camera feeds. Led and mentored a cross-functional AI, backend, and DevOps team.',
-  },
-  {
-    id: 4,
-    type: 'education',
-    role: 'B.E. in AI & Machine Learning',
-    company: 'DSATM, Bangalore',
-    date: '2023 – 2027',
-    description: 'Strong foundation in AI/ML algorithms, data structures, and software engineering. Active participant in technical clubs and leadership roles.',
+    stripeClass: 'stripe-emerald',
+    badgeClass: 'status-tag-emerald',
+    icon: Briefcase,
+    bullets: [
+      'Architected high-throughput async RTSP/ONVIF ingestion pipeline processing 90+ concurrent camera feeds.',
+      'Integrated ArcFace & FaceNet512 embeddings into in-memory FAISS IndexFlatIP, dropping recognition latency by 20%.',
+      'Engineered resilient FastAPI backend with Redis task queues and PostgreSQL connection pooling.',
+      'Led and mentored a cross-functional squad of 6 engineers across AI inference, backend, and Docker deployment.'
+    ],
+    tech: ['FastAPI', 'Redis', 'FAISS', 'ArcFace', 'PostgreSQL', 'Docker', 'RTSP/ONVIF']
   },
   {
     id: 2,
-    type: 'leadership',
-    role: 'Leadership Position',
-    company: 'ALMAtron',
-    date: '2024 – Present',
-    description: 'Led technical initiatives and mentored junior members in AI and machine learning concepts.',
+    type: 'education',
+    category: 'ACADEMIC',
+    role: 'B.E. in Artificial Intelligence & Machine Learning',
+    company: 'Dayananda Sagar Academy of Technology and Management (DSATM)',
+    date: '2023 – 2027',
+    stripeClass: 'stripe-indigo',
+    badgeClass: 'status-tag-indigo',
+    icon: GraduationCap,
+    bullets: [
+      'Core focus: Deep Learning, Computer Vision, Distributed Systems, Data Structures & Algorithm Design.',
+      'Authoring undergraduate research on multi-camera re-identification and edge-cloud accountability systems.',
+      'Active leadership in campus technical organizations and hackathons.'
+    ],
+    tech: ['PyTorch', 'TensorFlow', 'Computer Vision', 'Data Structures', 'Linux']
   },
   {
     id: 3,
     type: 'leadership',
-    role: 'Leadership Position',
+    category: 'LEADERSHIP',
+    role: 'Technical Lead & Core Member',
+    company: 'ALMAtron',
+    date: '2024 – Present',
+    stripeClass: 'stripe-violet',
+    badgeClass: 'status-tag-violet',
+    icon: Users,
+    bullets: [
+      'Spearheaded hands-on machine learning and software engineering workshops for junior undergraduates.',
+      'Mentored students through model development, API design, and deployment best practices.'
+    ],
+    tech: ['Mentorship', 'Python', 'Machine Learning', 'Workshop Leadership']
+  },
+  {
+    id: 4,
+    type: 'leadership',
+    category: 'MANAGEMENT',
+    role: 'Event & Technical Coordinator',
     company: 'Gaming Club',
     date: '2024 – Present',
-    description: 'Organized and managed large-scale gaming events, coordinating logistics and technical setups.',
+    stripeClass: 'stripe-cyan',
+    badgeClass: 'status-tag-cyan',
+    icon: Award,
+    bullets: [
+      'Managed end-to-end LAN networks, server setups, and logistics for 200+ participant gaming tournaments.',
+      'Handled real-time stream coordination and technical incident resolution.'
+    ],
+    tech: ['Networking', 'Server Operations', 'Event Logistics']
   }
 ];
 
@@ -45,37 +81,78 @@ const Experience = () => {
   return (
     <section id="experience" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
       <WireframeGlobe />
-      <div className="container">
-        <h2 style={{ marginBottom: '3rem' }}>Visual Resume</h2>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        
+        {/* Section Header */}
+        <div className="section-header-row" style={{ marginBottom: '3rem' }}>
+          <div>
+            <span className="section-eyebrow mono-text">CAREER &amp; LEADERSHIP</span>
+            <h2 className="section-title">Visual Resume</h2>
+          </div>
+          <p className="section-subtitle">
+            Industry leadership, academic progression, and community initiatives driving technical excellence.
+          </p>
+        </div>
+
         <div className="timeline">
-          {timelineData.map((item, index) => (
-            <motion.div 
-              className="timeline-item" 
-              key={item.id}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-            >
-              <div className={`timeline-dot ${item.type === 'education' ? 'dot-education' : ''}`}></div>
-              <div className="timeline-content card" onMouseEnter={playHover}>
-                <div className="timeline-header">
-                  <div>
-                    <h3 style={{ fontSize: '1.25rem', color: 'var(--color-accent)' }}>{item.role}</h3>
-                    <p className="mono-text" style={{ color: 'var(--color-text)', marginTop: '0.25rem' }}>
-                      {item.type === 'education' ? '🎓 ' : (item.type === 'leadership' ? '🤝 ' : '💼 ')} 
-                      {item.company}
-                    </p>
-                  </div>
-                  <div className="timeline-date mono-text text-muted">{item.date}</div>
+          {timelineData.map((item, index) => {
+            const IconComponent = item.icon;
+            return (
+              <motion.div 
+                className="timeline-item" 
+                key={item.id}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+              >
+                {/* Glowing Node Dot */}
+                <div className={`timeline-node ${item.stripeClass}`}>
+                  <span className="timeline-node-inner"></span>
                 </div>
-                <p style={{ marginTop: '1.5rem', fontSize: '1rem' }}>{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
+
+                <div 
+                  className={`timeline-content liquid-glass ${item.stripeClass}`} 
+                  onMouseEnter={playHover}
+                >
+                  <div className="timeline-card-header">
+                    <div>
+                      <div className="timeline-badge-row">
+                        <span className={`status-tag ${item.badgeClass}`}>
+                          <IconComponent size={12} className="status-icon" />
+                          {item.category}
+                        </span>
+                        <span className="timeline-date mono-text">{item.date}</span>
+                      </div>
+                      <h3 className="timeline-role-title">{item.role}</h3>
+                      <p className="timeline-company-name mono-text">
+                        {item.company}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ul className="timeline-bullet-list">
+                    {item.bullets.map((bullet, bIdx) => (
+                      <li key={bIdx} className="timeline-bullet-item">
+                        <ChevronRight size={14} className="bullet-chevron" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="timeline-tech-stack">
+                    {item.tech.map((t) => (
+                      <span key={t} className="tech-pill mono-text">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 };
+
 export default Experience;

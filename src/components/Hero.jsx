@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, FileText } from 'lucide-react';
+import { ArrowRight, FileText, Copy, Check, MapPin, Zap } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 const profileImage = '/profile.webp';
 import Constellation from './Constellation';
@@ -11,6 +11,7 @@ const Hero = () => {
   const [typedText, setTypedText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [copied, setCopied] = useState(false);
   
   const { playHover, playClick, playSuccess } = useSoundEffects();
 
@@ -23,6 +24,14 @@ const Hero = () => {
     "Machine Learning Intern.",
     "Building Scalable Tech."
   ];
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText('adithyan18092005@gmail.com');
+    setCopied(true);
+    playSuccess();
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   useEffect(() => {
     const currentPhrase = phrases[phraseIndex];
@@ -96,6 +105,17 @@ const Hero = () => {
             <a href="/resume.pdf" target="_blank" rel="noreferrer" download="Adithyan_P_AI_ML_Resume.pdf" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
               <FileText size={16} /> Resume
             </a>
+            <button 
+              type="button"
+              className="btn btn-secondary copy-email-btn"
+              onClick={handleCopyEmail}
+              onMouseEnter={playHover}
+              title="Copy Email to Clipboard"
+            >
+              {copied ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
+              <span>{copied ? 'Copied!' : 'Copy Email'}</span>
+              {copied && <span className="copied-tooltip mono-text">adithyan18092005@gmail.com</span>}
+            </button>
             <a href="https://github.com/Adithyan1809" target="_blank" rel="noreferrer" className="btn btn-secondary icon-btn" aria-label="GitHub" onMouseEnter={playHover} onClick={playClick}>
               <FaGithub size={18} />
             </a>
@@ -106,9 +126,22 @@ const Hero = () => {
         </div>
 
         <motion.div className="hero-image-wrapper" style={{ y: imageY }}>
-          <div className="brutalist-image-container" onMouseEnter={playHover}>
-            <img src={profileImage} alt="Adithyan Prakash" className="profile-img" width="380" height="475" fetchpriority="high" decoding="async" />
-            <div className="image-overlay"></div>
+          <div className="hero-photo-wrapper" onMouseEnter={playHover}>
+            <div className="hero-glass-photo-card liquid-glass">
+              <img src={profileImage} alt="Adithyan Prakash" className="profile-img" width="380" height="475" fetchpriority="high" decoding="async" />
+              <div className="image-overlay"></div>
+            </div>
+            
+            {/* Floating high-tech micro-badges */}
+            <div className="hero-floating-badge badge-top-left liquid-glass">
+              <MapPin size={12} className="badge-icon text-cyan" />
+              <span className="mono-text">Bengaluru, IN</span>
+            </div>
+
+            <div className="hero-floating-badge badge-bottom-right liquid-glass stripe-emerald">
+              <Zap size={12} className="badge-icon text-emerald" />
+              <span className="mono-text">Sub-50ms Inference</span>
+            </div>
           </div>
         </motion.div>
 

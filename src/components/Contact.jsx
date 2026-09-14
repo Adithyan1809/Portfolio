@@ -1,12 +1,22 @@
-import React from 'react';
-import { Mail, MapPin, Send, Phone } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, MapPin, Send, Phone, Copy, Check, ExternalLink } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Contact.css';
 
 const Contact = () => {
   const { playHover, playClick, playType, playSuccess, playError } = useSoundEffects();
-  const [status, setStatus] = React.useState('idle'); // idle, loading, success, error
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [copiedField, setCopiedField] = useState(null);
+
+  const handleCopy = (e, text, field) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    playSuccess();
+    setTimeout(() => setCopiedField(null), 2500);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,60 +55,107 @@ const Contact = () => {
     <section id="contact" className="contact-section section-padding border-bottom">
       <div className="bg-grid"></div>
       <div className="container">
-        <h2 style={{ marginBottom: '3rem' }}>Initiate Contact</h2>
+        
+        <div className="section-header-row" style={{ marginBottom: '3rem' }}>
+          <div>
+            <span className="section-eyebrow mono-text">GET IN TOUCH</span>
+            <h2 className="section-title">Initiate Contact</h2>
+          </div>
+          <p className="section-subtitle">
+            Open to full-time engineering opportunities, technical collaborations, and research inquiries.
+          </p>
+        </div>
         
         <div className="contact-grid">
           {/* Left Column: Info */}
           <div className="contact-info">
             <p className="contact-description">
-              I'm currently seeking new opportunities where I can contribute to challenging AI and backend engineering projects. Whether you have an open role, a project idea, or just want to chat about tech, my inbox is open!
+              I'm currently seeking high-impact roles where I can contribute to challenging AI, computer vision, and backend data engineering projects. Whether you're hiring, prototyping, or discussing distributed architectures, my inbox is open!
             </p>
             
             <div className="contact-methods">
-              <a href="mailto:adithyan18092005@gmail.com" className="contact-method-card" onMouseEnter={playHover} onClick={playClick}>
+              {/* Email Card */}
+              <div 
+                className="contact-method-card liquid-glass" 
+                onMouseEnter={playHover}
+                onClick={(e) => handleCopy(e, 'adithyan18092005@gmail.com', 'email')}
+                title="Click to copy email address"
+              >
                 <div className="contact-icon-wrapper">
-                  <Mail size={24} />
+                  <Mail size={22} />
                 </div>
                 <div className="contact-method-details">
-                  <span className="mono-text">EMAIL</span>
-                  <span>adithyan18092005@gmail.com</span>
+                  <span className="mono-text contact-label">EMAIL ADDRESS</span>
+                  <span className="contact-val">adithyan18092005@gmail.com</span>
+                </div>
+                <div className="contact-copy-badge mono-text">
+                  {copiedField === 'email' ? (
+                    <span className="copied-pill"><Check size={12} /> Copied!</span>
+                  ) : (
+                    <span className="copy-action-hint"><Copy size={13} /> Copy</span>
+                  )}
+                </div>
+              </div>
+
+              {/* LinkedIn Card */}
+              <a 
+                href="https://linkedin.com/in/adithyan-prakash" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-method-card liquid-glass" 
+                onMouseEnter={playHover} 
+                onClick={playClick}
+              >
+                <div className="contact-icon-wrapper">
+                  <FaLinkedin size={22} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="mono-text contact-label">LINKEDIN PROFILE</span>
+                  <span className="contact-val">in/adithyan-prakash</span>
+                </div>
+                <div className="contact-copy-badge mono-text">
+                  <ExternalLink size={14} className="external-icon" />
                 </div>
               </a>
 
-              <a href="https://linkedin.com/in/adithyan-prakash" target="_blank" rel="noopener noreferrer" className="contact-method-card" onMouseEnter={playHover} onClick={playClick}>
+              {/* Phone Card */}
+              <div 
+                className="contact-method-card liquid-glass" 
+                onMouseEnter={playHover}
+                onClick={(e) => handleCopy(e, '+91 9738585365', 'phone')}
+                title="Click to copy phone number"
+              >
                 <div className="contact-icon-wrapper">
-                  <FaLinkedin size={24} />
+                  <Phone size={22} />
                 </div>
                 <div className="contact-method-details">
-                  <span className="mono-text">LINKEDIN</span>
-                  <span>adithyan-prakash</span>
+                  <span className="mono-text contact-label">DIRECT PHONE</span>
+                  <span className="contact-val">+91 9738585365</span>
                 </div>
-              </a>
+                <div className="contact-copy-badge mono-text">
+                  {copiedField === 'phone' ? (
+                    <span className="copied-pill"><Check size={12} /> Copied!</span>
+                  ) : (
+                    <span className="copy-action-hint"><Copy size={13} /> Copy</span>
+                  )}
+                </div>
+              </div>
 
-              <a href="tel:+919738585365" className="contact-method-card" onMouseEnter={playHover} onClick={playClick}>
+              {/* Location Card */}
+              <div className="contact-method-card liquid-glass" onMouseEnter={playHover}>
                 <div className="contact-icon-wrapper">
-                  <Phone size={24} />
+                  <MapPin size={22} />
                 </div>
                 <div className="contact-method-details">
-                  <span className="mono-text">PHONE</span>
-                  <span>+91 9738585365</span>
-                </div>
-              </a>
-
-              <div className="contact-method-card" onMouseEnter={playHover}>
-                <div className="contact-icon-wrapper">
-                  <MapPin size={24} />
-                </div>
-                <div className="contact-method-details">
-                  <span className="mono-text">LOCATION</span>
-                  <span>Bengaluru, India</span>
+                  <span className="mono-text contact-label">LOCATION</span>
+                  <span className="contact-val">Bengaluru, Karnataka, India</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Column: Form */}
-          <div className="contact-form-container">
+          <div className="contact-form-container liquid-glass">
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name" className="mono-text">NAME</label>
