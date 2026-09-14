@@ -72,7 +72,10 @@ const CommandPalette = () => {
               </Command.Item>
             </Command.Group>
 
-            <Command.Group heading="Socials">
+            <Command.Group heading="Documents & Socials">
+              <Command.Item onSelect={() => handleSelect(() => window.open('https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing', '_blank'))} onMouseEnter={playHover}>
+                Resume (PDF)
+              </Command.Item>
               <Command.Item onSelect={() => handleSelect(() => window.open('https://github.com/Adithyan1809', '_blank'))} onMouseEnter={playHover}>
                 GitHub
               </Command.Item>

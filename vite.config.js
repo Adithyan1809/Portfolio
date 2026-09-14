@@ -26,9 +26,9 @@ function devChatApiPlugin() {
               const { messages } = JSON.parse(body);
               const modelsToTry = [
                 env.GEMINI_MODEL,
-                'gemini-flash-latest',
                 'gemini-3.1-flash-lite',
-                'gemini-flash-lite-latest'
+                'gemini-flash-lite-latest',
+                'gemini-3.6-flash'
               ].filter(Boolean);
 
               let lastError = null;
@@ -44,7 +44,7 @@ function devChatApiPlugin() {
                       model,
                       messages: messages,
                       temperature: 0.7,
-                      max_tokens: 1000
+                      max_tokens: 300
                     })
                   });
 

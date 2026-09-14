@@ -19,7 +19,7 @@ KEY FACTS:
 - Projects: ResumePilot (LLM-powered ATS bypass), Project Iris (AI voice assistant with NLP), AI Mustering System (YOLOv8 + FaceNet real-time attendance tracking with Docker + FastAPI).
 - Skills: Python, PyTorch, TensorFlow, OpenCV, YOLOv8, FastAPI, React, Next.js, Docker, PostgreSQL, CI/CD.
 - He ships full production systems end-to-end — not just notebooks.
-- For resume requests: direct them to the Contact section or LinkedIn.`;
+- For resume requests: direct them to the Resume button or provide his resume link: https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing`;
 
 const SUGGESTED_PROMPTS = [
   "Is he a good fit for an ML Engineer role?",

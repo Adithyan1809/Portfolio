@@ -102,7 +102,7 @@ const Hero = () => {
             >
               View Projects <ArrowRight size={16} />
             </a>
-            <a href="/resume.pdf" target="_blank" rel="noreferrer" download="Adithyan_P_AI_ML_Resume.pdf" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
+            <a href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
               <FileText size={16} /> Resume
             </a>
             <button 
