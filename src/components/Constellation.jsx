@@ -73,7 +73,7 @@ const Constellation = () => {
 
     const init = () => {
       particles = [];
-      const numberOfParticles = (canvas.height * canvas.width) / 12000;
+      const numberOfParticles = Math.min(Math.floor((canvas.height * canvas.width) / 18000), 35);
       
       // We will grab the accent color from CSS variables, but fallback to a grey
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -90,8 +90,10 @@ const Constellation = () => {
       }
     };
 
+    let isVisible = true;
     const animate = () => {
-      requestAnimationFrame(animate);
+      if (!isVisible) return;
+      animationFrameId = requestAnimationFrame(animate);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -107,13 +109,14 @@ const Constellation = () => {
     const connect = (lineColor) => {
       let opacityValue = 1;
       for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
-          const distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) +
-                           ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const distance = dx * dx + dy * dy;
           
-          if (distance < (canvas.width / 10) * (canvas.height / 10)) {
-            opacityValue = 1 - (distance / 20000);
-            ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.2})`;
+          if (distance < 15000) {
+            opacityValue = 1 - (distance / 15000);
+            ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.15})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
@@ -127,9 +130,9 @@ const Constellation = () => {
           const distanceToMouse = ((particles[a].x - mouse.x) * (particles[a].x - mouse.x)) +
                                   ((particles[a].y - mouse.y) * (particles[a].y - mouse.y));
           
-          if (distanceToMouse < 25000) {
-             opacityValue = 1 - (distanceToMouse / 25000);
-             ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.5})`;
+          if (distanceToMouse < 20000) {
+             opacityValue = 1 - (distanceToMouse / 20000);
+             ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.4})`;
              ctx.lineWidth = 1;
              ctx.beginPath();
              ctx.moveTo(particles[a].x, particles[a].y);
@@ -141,7 +144,19 @@ const Constellation = () => {
     };
 
     init();
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
+
+    // Pause animation when hero is off-screen to save CPU / battery
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        cancelAnimationFrame(animationFrameId);
+      }
+    }, { threshold: 0.05 });
+    io.observe(canvas);
 
     // Re-init on theme change to update colors
     const observer = new MutationObserver((mutations) => {
@@ -154,6 +169,8 @@ const Constellation = () => {
     observer.observe(document.documentElement, { attributes: true });
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
+      io.disconnect();
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseout', handleMouseOut);

@@ -1,7 +1,7 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import { CCTVScroll } from '../components/CCTVScroll';
-import projectIrisImg from '../assets/project_iris_cctv.png';
+import projectIrisImg from '../assets/project_iris_cctv.webp';
 
 const ProjectIrisPage = () => {
   return (

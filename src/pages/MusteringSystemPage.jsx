@@ -1,7 +1,7 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import { ParallaxScanner } from '../components/ParallaxScanner';
-import musteringImg from '../assets/mustering_system.png';
+import musteringImg from '../assets/mustering_system.webp';
 
 const MusteringSystemPage = () => {
   return (

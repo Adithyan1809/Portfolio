@@ -1,6 +1,7 @@
-import React from 'react';
-import NeuralCore3D from './NeuralCore3D';
+import React, { Suspense, lazy } from 'react';
 import './About.css';
+
+const NeuralCore3D = lazy(() => import('./NeuralCore3D'));
 
 const LinkedInBadge = () => (
   <div className="li-badge">
@@ -56,7 +57,9 @@ const About = () => {
             <LinkedInBadge />
           </div>
           <div className="about-visual">
-            <NeuralCore3D />
+            <Suspense fallback={<div style={{ minHeight: '320px', width: '100%' }} />}>
+              <NeuralCore3D />
+            </Suspense>
           </div>
         </div>
       </div>

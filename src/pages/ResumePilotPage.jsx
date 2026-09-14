@@ -2,7 +2,7 @@ import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import ResumeArchitectureFlow from '../components/ResumeArchitectureFlow';
 import { MacbookScroll } from '../components/MacbookScroll';
-import resumePilotImg from '../assets/resumepilot_ui.png';
+import resumePilotImg from '../assets/resumepilot_ui.webp';
 
 const ResumePilotPage = () => {
   return (

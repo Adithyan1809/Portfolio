@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import ResumePilotPage from './pages/ResumePilotPage';
-import ProjectIrisPage from './pages/ProjectIrisPage';
-import MusteringSystemPage from './pages/MusteringSystemPage';
 import ScrollReveal from './components/ScrollReveal';
 import CommandPalette from './components/CommandPalette';
 import LiveDashboard from './components/LiveDashboard';
@@ -16,6 +13,10 @@ import ChatWidget from './components/ChatWidget';
 import SplashScreen from './components/SplashScreen';
 import SmoothScroll from './components/SmoothScroll';
 import ScrollProgress from './components/ScrollProgress';
+
+const ResumePilotPage = lazy(() => import('./pages/ResumePilotPage'));
+const ProjectIrisPage = lazy(() => import('./pages/ProjectIrisPage'));
+const MusteringSystemPage = lazy(() => import('./pages/MusteringSystemPage'));
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -35,13 +36,15 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
-        <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
-        <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
-        <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
-        <Route path="*" element={<PageTransitionWrapper><NotFound /></PageTransitionWrapper>} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
+          <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
+          <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
+          <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
+          <Route path="*" element={<PageTransitionWrapper><NotFound /></PageTransitionWrapper>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };

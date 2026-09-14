@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, FileText } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import profileImage from '../assets/profile.png';
+const profileImage = '/profile.webp';
 import Constellation from './Constellation';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Hero.css';
@@ -92,7 +92,7 @@ const Hero = () => {
 
         <motion.div className="hero-image-wrapper" style={{ y: imageY }}>
           <div className="brutalist-image-container" onMouseEnter={playHover}>
-            <img src={profileImage} alt="Adithyan Prakash" className="profile-img" fetchpriority="high" />
+            <img src={profileImage} alt="Adithyan Prakash" className="profile-img" width="380" height="475" fetchpriority="high" decoding="async" />
             <div className="image-overlay"></div>
           </div>
         </motion.div>
