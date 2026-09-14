@@ -10,7 +10,7 @@ const timelineData = [
     type: 'experience',
     role: 'Technical Lead Intern',
     company: 'SMAP Technologies',
-    date: 'Sep 2025 – Jan 2026',
+    date: 'Sep 2025 – Nov 2025',
     description: 'Architected scalable backend using FastAPI, PostgreSQL, and Redis; built async RTSP/ONVIF pipelines with ArcFace/FaceNet + FAISS for real-time face recognition across 90+ camera feeds. Led and mentored a cross-functional AI, backend, and DevOps team.',
   },
   {
@@ -18,7 +18,7 @@ const timelineData = [
     type: 'education',
     role: 'B.E. in AI & Machine Learning',
     company: 'DSATM, Bangalore',
-    date: '2022 – 2026',
+    date: '2023 – 2027',
     description: 'Strong foundation in AI/ML algorithms, data structures, and software engineering. Active participant in technical clubs and leadership roles.',
   },
   {
