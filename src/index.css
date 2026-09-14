@@ -313,6 +313,12 @@ p {
   opacity: 0.055;
 }
 
+@media (max-width: 768px) {
+  .grain-overlay {
+    display: none;
+  }
+}
+
 /* ─── Magnetic Button Base ─── */
 .magnetic-btn {
   display: inline-flex;

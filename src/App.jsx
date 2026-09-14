@@ -10,7 +10,6 @@ import PageTransitionWrapper from './components/PageTransitionWrapper';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
-import SplashScreen from './components/SplashScreen';
 import SmoothScroll from './components/SmoothScroll';
 import ScrollProgress from './components/ScrollProgress';
 
@@ -57,7 +56,6 @@ function App() {
           {/* Grain film overlay */}
           <div className="grain-overlay" aria-hidden="true" />
           <ScrollProgress />
-          <SplashScreen />
           <CommandPalette />
           <Navbar />
           <LiveDashboard />
