@@ -59,12 +59,12 @@
   --color-nav-bg: rgba(0, 0, 0, 0.6);
   --color-cmd-bg: rgba(0, 0, 0, 0.6);
 
-  /* Liquid Glass & Soft Layered Shadows (Dark Mode) */
-  --glass-bg: rgba(16, 16, 20, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-highlight: rgba(255, 255, 255, 0.16);
-  --glass-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 4px 12px -2px rgba(0, 0, 0, 0.3);
-  --glass-shadow-hover: 0 20px 45px -12px rgba(0, 0, 0, 0.75), 0 8px 20px -4px rgba(0, 0, 0, 0.4);
+  /* Liquid Glass & Soft Layered Shadows (Dark Mode — Luxury Upgrade) */
+  --glass-bg: rgba(8, 8, 10, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-border-highlight: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 8px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+  --glass-shadow-hover: 0 0 0 1px rgba(255,255,255,0.08), 0 16px 60px rgba(0,0,0,0.85), 0 0 40px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 ::selection {
@@ -209,9 +209,15 @@ p {
   }
 }
 
-/* Linear / Vercel style borders */
-.border-top { border-top: 1px solid var(--color-border); }
-.border-bottom { border-bottom: 1px solid var(--color-border); }
+/* Linear / Vercel style borders — gradient fade */
+.border-top {
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent, rgba(255,255,255,0.07) 20%, rgba(255,255,255,0.07) 80%, transparent) 1;
+}
+.border-bottom {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(to right, transparent, rgba(255,255,255,0.07) 20%, rgba(255,255,255,0.07) 80%, transparent) 1;
+}
 .border-left { border-left: 1px solid var(--color-border); }
 .border-right { border-right: 1px solid var(--color-border); }
 
@@ -321,3 +327,167 @@ p {
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
+
+/* ─── Chroma Sweep (traverse.tech-inspired heading animation) ─── */
+@keyframes chroma-sweep {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.chroma-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-text) 0%,
+    #6366f1 20%,
+    #8b5cf6 35%,
+    #06b6d4 50%,
+    #10b981 65%,
+    #6366f1 80%,
+    var(--color-text) 100%
+  );
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-position: 200% center;
+  animation: chroma-sweep 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Blur-In-Up word reveal ─── */
+@keyframes blur-in-up {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.blur-word {
+  display: inline-block;
+  opacity: 0;
+  animation: blur-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Animate-Ping (heartbeat for status pill) ─── */
+@keyframes animate-ping {
+  0% { transform: scale(1); opacity: 0.9; }
+  70% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.ping-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ping-dot::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: currentColor;
+  animation: animate-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0;
+}
+
+/* ─── Border Shimmer (section entry effect) ─── */
+@keyframes border-shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+.section-shimmer-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(99, 102, 241, 0.4) 40%,
+    rgba(139, 92, 246, 0.4) 60%,
+    transparent 100%
+  );
+  background-size: 200% auto;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.section-shimmer-line.shimmer-active {
+  animation: border-shimmer 0.9s ease-out forwards;
+  opacity: 1;
+}
+
+/* ─── Decorative Vertical Rule Lines ─── */
+.section-rule-lines {
+  position: relative;
+}
+
+.section-rule-lines::before,
+.section-rule-lines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.05) 20%,
+    rgba(255,255,255,0.05) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-rule-lines::before { left: 3%; }
+.section-rule-lines::after  { right: 3%; }
+
+@media (max-width: 768px) {
+  .section-rule-lines::before,
+  .section-rule-lines::after { display: none; }
+}
+
+/* ─── Section Eyebrow — refined letter spacing ─── */
+.section-eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* ─── Watermark base ─── */
+.section-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(6rem, 18vw, 16rem);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.018;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+[data-theme='dark'] .section-watermark {
+  opacity: 0.022;
+}
+

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import { Clock, Layers, Video, Terminal } from 'lucide-react';
 import './StatsRow.css';
 
@@ -11,34 +11,31 @@ const stats = [
 ];
 
 const Counter = ({ value, suffix }) => {
-  const [count, setCount] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
+  const spring = useSpring(0, { stiffness: 80, damping: 18, restDelta: 0.5 });
+  const display = useTransform(spring, (v) => Math.round(v));
+  const [landed, setLanded] = useState(false);
 
   useEffect(() => {
     if (!inView) return;
-    let start = 0;
-    const duration = 1800;
-    const step = 16;
-    const increment = value / (duration / step);
-
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
+    spring.set(value);
+    const unsub = spring.on('change', (v) => {
+      if (Math.abs(v - value) < 1) {
+        setLanded(true);
+        unsub();
       }
-    }, step);
-
-    return () => clearInterval(timer);
-  }, [inView, value]);
+    });
+    return unsub;
+  }, [inView, value, spring]);
 
   return (
-    <span ref={ref} className="stat-number mono-text">
-      {count}{suffix}
-    </span>
+    <motion.span
+      ref={ref}
+      className={`stat-number mono-text ${landed ? 'stat-landed' : ''}`}
+    >
+      <motion.span>{display}</motion.span>{suffix}
+    </motion.span>
   );
 };
 

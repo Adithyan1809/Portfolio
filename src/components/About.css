@@ -148,3 +148,26 @@
   background: #4da3ff;
   color: #000;
 }
+
+/* ─── Watermark ─── */
+#about {
+  position: relative;
+  overflow: hidden;
+}
+#about .section-watermark-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 18vw, 15rem);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.018;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}

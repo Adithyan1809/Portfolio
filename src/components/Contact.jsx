@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, Phone, Copy, Check, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, Send, Phone, Copy, Check, ExternalLink, Clock, Globe } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
+import ChromaText from './shared/ChromaText';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Contact.css';
 
@@ -52,17 +53,20 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="contact-section section-padding border-bottom">
+    <section id="contact" className="contact-section section-padding border-bottom section-rule-lines" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Watermark */}
+      <span className="section-watermark-text" aria-hidden="true">CONNECT</span>
+
       <div className="bg-grid"></div>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         <div className="section-header-row" style={{ marginBottom: '3rem' }}>
           <div>
             <span className="section-eyebrow mono-text">GET IN TOUCH</span>
-            <h2 className="section-title">Initiate Contact</h2>
+            <ChromaText as="h2" className="section-title">Let's Build Something Real</ChromaText>
           </div>
           <p className="section-subtitle">
-            Open to full-time engineering opportunities, technical collaborations, and research inquiries.
+            Open to full-time engineering opportunities, distributed systems architecture, and production AI roles.
           </p>
         </div>
         
@@ -70,7 +74,7 @@ const Contact = () => {
           {/* Left Column: Info */}
           <div className="contact-info">
             <p className="contact-description">
-              I'm currently seeking high-impact roles where I can contribute to challenging AI, computer vision, and backend data engineering projects. Whether you're hiring, prototyping, or discussing distributed architectures, my inbox is open!
+              I'm seeking high-impact engineering roles where I can architect and ship computer vision pipelines, async backends, and reliable AI infrastructure. If you're building systems that need to scale with zero hallucinations, my inbox is open.
             </p>
             
             <div className="contact-methods">
@@ -82,10 +86,10 @@ const Contact = () => {
                 title="Click to copy email address"
               >
                 <div className="contact-icon-wrapper">
-                  <Mail size={22} />
+                  <Mail size={20} />
                 </div>
                 <div className="contact-method-details">
-                  <span className="mono-text contact-label">EMAIL ADDRESS</span>
+                  <span className="mono-text contact-label">DIRECT EMAIL</span>
                   <span className="contact-val">adithyan18092005@gmail.com</span>
                 </div>
                 <div className="contact-copy-badge mono-text">
@@ -107,11 +111,11 @@ const Contact = () => {
                 onClick={playClick}
               >
                 <div className="contact-icon-wrapper">
-                  <FaLinkedin size={22} />
+                  <FaLinkedin size={20} />
                 </div>
                 <div className="contact-method-details">
-                  <span className="mono-text contact-label">LINKEDIN PROFILE</span>
-                  <span className="contact-val">in/adithyan-prakash</span>
+                  <span className="mono-text contact-label">PROFESSIONAL NETWORK</span>
+                  <span className="contact-val">linkedin.com/in/adithyan-prakash</span>
                 </div>
                 <div className="contact-copy-badge mono-text">
                   <ExternalLink size={14} className="external-icon" />
@@ -126,10 +130,10 @@ const Contact = () => {
                 title="Click to copy phone number"
               >
                 <div className="contact-icon-wrapper">
-                  <Phone size={22} />
+                  <Phone size={20} />
                 </div>
                 <div className="contact-method-details">
-                  <span className="mono-text contact-label">DIRECT PHONE</span>
+                  <span className="mono-text contact-label">DIRECT LINE</span>
                   <span className="contact-val">+91 9738585365</span>
                 </div>
                 <div className="contact-copy-badge mono-text">
@@ -141,14 +145,27 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Location Card */}
-              <div className="contact-method-card liquid-glass" onMouseEnter={playHover}>
-                <div className="contact-icon-wrapper">
-                  <MapPin size={22} />
+              {/* Premium Location & Availability Card */}
+              <div className="contact-location-card liquid-glass" onMouseEnter={playHover}>
+                <div className="location-card-header">
+                  <div className="location-pulse-dot">
+                    <span className="ping-dot" style={{ color: '#10b981', width: 8, height: 8, borderRadius: '50%', background: '#10b981' }} />
+                  </div>
+                  <div className="location-title-group">
+                    <span className="location-city">Bengaluru, Karnataka, India</span>
+                    <span className="location-tz mono-text">IST · UTC+5:30</span>
+                  </div>
                 </div>
-                <div className="contact-method-details">
-                  <span className="mono-text contact-label">LOCATION</span>
-                  <span className="contact-val">Bengaluru, Karnataka, India</span>
+
+                <div className="location-meta-grid mono-text">
+                  <div className="location-meta-item">
+                    <Clock size={12} />
+                    <span>Active: 10:00 AM – 10:00 PM IST</span>
+                  </div>
+                  <div className="location-meta-item">
+                    <Globe size={12} />
+                    <span>Response: Under 24 Hours</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -159,17 +176,17 @@ const Contact = () => {
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name" className="mono-text">NAME</label>
-                <input type="text" id="name" name="name" required placeholder="John Doe" onFocus={playType} />
+                <input type="text" id="name" name="name" required placeholder="Jane Smith" onFocus={playType} />
               </div>
               
               <div className="form-group">
                 <label htmlFor="email" className="mono-text">EMAIL</label>
-                <input type="email" id="email" name="email" required placeholder="john@company.com" onFocus={playType} />
+                <input type="email" id="email" name="email" required placeholder="jane@company.com" onFocus={playType} />
               </div>
               
               <div className="form-group message-group">
                 <label htmlFor="message" className="mono-text">MESSAGE</label>
-                <textarea id="message" name="message" required placeholder="Tell me about your project..." onFocus={playType}></textarea>
+                <textarea id="message" name="message" required placeholder="Tell me about the engineering challenge, team, or role..." onFocus={playType}></textarea>
               </div>
               
               <button 

@@ -48,7 +48,10 @@
 }
 
 [data-theme='dark'] .hero-glass-photo-card {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 32px 80px -12px rgba(0,0,0,0.95),
+    0 0 60px -10px rgba(99,102,241,0.22),
+    0 0 0 1px rgba(255,255,255,0.09);
 }
 
 .hero-photo-wrapper:hover .hero-glass-photo-card {
@@ -239,9 +242,9 @@
 }
 
 .hero-title {
-  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-size: clamp(2.4rem, 7vw, 4rem);
   letter-spacing: -0.04em;
-  line-height: 1.2;
+  line-height: 1.15;
   /* Fixed height (3 lines) prevents layout shift during typing animation */
   min-height: 3.6em;
   overflow-wrap: break-word;
@@ -335,3 +338,55 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* ─── Volumetric Sunbeam Rays ─── */
+.hero-sunbeams {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+[data-theme='dark'] .hero-sunbeams {
+  opacity: 0.7;
+}
+
+/* ─── Spring-Morphing Status Capsule ─── */
+.hero-status-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  box-shadow: var(--capsule-glow, rgba(16,185,129,0.15)) 0 0 16px 0, var(--glass-shadow);
+  cursor: default;
+}
+
+.capsule-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.capsule-label {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+}
+
+/* Hero tagline hosts the TextRotate */
+.hero-tagline {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  color: var(--color-text-muted);
+  max-width: 650px;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  min-height: 2em;
+}
+

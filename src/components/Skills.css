@@ -193,3 +193,61 @@
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
+
+/* ─── Watermark ─── */
+.skills {
+  position: relative;
+  overflow: hidden;
+}
+.skills .section-watermark-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 18vw, 15rem);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.018;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+/* ─── Tech Pill Luxury Upgrade ─── */
+.tech-pill {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+}
+.tech-pill:hover {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  color: #a5b4fc !important;
+}
+
+/* ─── Stacking scroll cards ─── */
+.benchmarks-stacking {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.benchmark-sticky-wrapper {
+  position: sticky;
+  top: calc(var(--nav-height, 64px) + 24px);
+  z-index: 1;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .benchmark-sticky-wrapper {
+    position: relative;
+    top: auto;
+    margin-bottom: 1.5rem;
+  }
+}

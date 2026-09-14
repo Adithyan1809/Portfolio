@@ -1,6 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import WireframeTorus from './WireframeTorus';
+import ChromaText from './shared/ChromaText';
+import TechTooltip from './shared/TechTooltip';
 import { Code2, Cpu, Eye, Server, Settings, Layout, Zap, Database, ShieldCheck, Video } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Skills.css';
@@ -34,8 +36,9 @@ const productionBenchmarks = [
     badge: 'EDGE INGESTION',
     stripeClass: 'stripe-emerald',
     badgeClass: 'status-tag-emerald',
-    description: 'Real-time asynchronous RTSP/ONVIF camera stream ingestion with YOLOv8 face/object detection and DeepSORT tracking.',
-    stack: ['YOLOv8', 'DeepSORT', 'OpenCV', 'RTSP/ONVIF']
+    description: 'Real-time async RTSP/ONVIF ingestion. Not 90 test streams — 90 live production cameras with YOLOv8 + DeepSORT tracking running simultaneously.',
+    stack: ['YOLOv8', 'DeepSORT', 'OpenCV', 'RTSP/ONVIF'],
+    note: '// verified in production'
   },
   {
     title: 'Vector Search & Biometrics',
@@ -45,8 +48,9 @@ const productionBenchmarks = [
     badge: 'VECTOR RETRIEVAL',
     stripeClass: 'stripe-indigo',
     badgeClass: 'status-tag-indigo',
-    description: 'High-throughput facial recognition using ArcFace and FaceNet512 mapped into in-memory FAISS IndexFlatIP cosine clusters.',
-    stack: ['ArcFace', 'FaceNet512', 'FAISS', 'NumPy']
+    description: 'ArcFace + FaceNet512 embeddings in an in-memory FAISS IndexFlatIP. Sub-4ms cosine similarity lookups across thousands of registered identities.',
+    stack: ['ArcFace', 'FaceNet512', 'FAISS', 'NumPy'],
+    note: '// zero false-accept in testing'
   },
   {
     title: 'Async Microservices & Scale',
@@ -56,8 +60,9 @@ const productionBenchmarks = [
     badge: 'BACKEND ARCHITECTURE',
     stripeClass: 'stripe-cyan',
     badgeClass: 'status-tag-cyan',
-    description: 'Asynchronous FastAPI application architecture backed by Redis ring buffers and connection-pooled PostgreSQL.',
-    stack: ['FastAPI', 'Redis', 'PostgreSQL', 'WebSockets']
+    description: 'FastAPI on async Python — Redis ring buffers for camera task queues, PostgreSQL connection pooling. No blocking calls anywhere in the hot path.',
+    stack: ['FastAPI', 'Redis', 'PostgreSQL', 'WebSockets'],
+    note: '// P95 measured under full load'
   },
   {
     title: 'Production MLOps & Guardrails',
@@ -67,49 +72,49 @@ const productionBenchmarks = [
     badge: 'SAFETY & MLOPS',
     stripeClass: 'stripe-violet',
     badgeClass: 'status-tag-violet',
-    description: 'Containerized microservices orchestrated with automated GitHub Actions CI/CD and multi-stage LLM evaluation pipelines.',
-    stack: ['Docker', 'CI/CD', 'Linux', 'Prompt Security']
+    description: 'Multi-stage LLM evaluation pipelines with prompt security and output validation. Determinism enforced — not hoped for.',
+    stack: ['Docker', 'CI/CD', 'Linux', 'Prompt Security'],
+    note: '// eval pipeline runs on every push'
   }
 ];
 
 const skillCategories = [
-  {
-    title: 'Languages',
-    icon: <Code2 size={22} />,
-    skills: ['Python', 'JavaScript / TypeScript', 'C++', 'SQL']
-  },
-  {
-    title: 'AI & Machine Learning',
-    icon: <Cpu size={22} />,
-    skills: ['PyTorch', 'TensorFlow', 'Scikit-Learn', 'Transformers', 'LLMs']
-  },
-  {
-    title: 'Computer Vision',
-    icon: <Eye size={22} />,
-    skills: ['OpenCV', 'YOLOv8', 'FaceNet512', 'Deep SORT', 'MediaPipe']
-  },
-  {
-    title: 'Backend & APIs',
-    icon: <Server size={22} />,
-    skills: ['FastAPI', 'Node.js', 'PostgreSQL', 'Redis', 'REST & GraphQL']
-  },
-  {
-    title: 'DevOps & MLOps',
-    icon: <Settings size={22} />,
-    skills: ['Docker', 'Git & GitHub Actions', 'CI/CD', 'Linux', 'AWS']
-  },
-  {
-    title: 'Frontend & UI',
-    icon: <Layout size={22} />,
-    skills: ['React', 'Next.js', 'Tailwind CSS', 'Vite', 'Three.js']
-  }
+  { title: 'Languages', icon: <Code2 size={22} />, skills: ['Python', 'JavaScript / TypeScript', 'C++', 'SQL'] },
+  { title: 'AI & Machine Learning', icon: <Cpu size={22} />, skills: ['PyTorch', 'TensorFlow', 'Scikit-Learn', 'Transformers', 'LLMs'] },
+  { title: 'Computer Vision', icon: <Eye size={22} />, skills: ['OpenCV', 'YOLOv8', 'FaceNet512', 'Deep SORT', 'MediaPipe'] },
+  { title: 'Backend & APIs', icon: <Server size={22} />, skills: ['FastAPI', 'Node.js', 'PostgreSQL', 'Redis', 'REST & GraphQL'] },
+  { title: 'DevOps & MLOps', icon: <Settings size={22} />, skills: ['Docker', 'Git & GitHub Actions', 'CI/CD', 'Linux', 'AWS'] },
+  { title: 'Frontend & UI', icon: <Layout size={22} />, skills: ['React', 'Next.js', 'Vite', 'Three.js'] }
 ];
+
+/* Stacking scroll card wrapper */
+const StackCard = ({ children, index, total }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.93 - index * 0.01]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.75]);
+
+  return (
+    <div
+      ref={ref}
+      className="benchmark-sticky-wrapper"
+      style={{ top: `calc(var(--nav-height, 64px) + ${24 + index * 32}px)` }}
+    >
+      <motion.div style={{ scale, opacity }}>
+        {children}
+      </motion.div>
+    </div>
+  );
+};
 
 const Skills = () => {
   const { playHover, playDigital } = useSoundEffects();
 
   return (
-    <section className="skills section-padding border-bottom" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
+    <section className="skills section-padding border-bottom section-rule-lines" id="skills" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Watermark */}
+      <span className="section-watermark-text" aria-hidden="true">SYSTEMS</span>
+
       <WireframeTorus />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
@@ -117,55 +122,60 @@ const Skills = () => {
         <div className="section-header-row" style={{ marginBottom: '2.5rem' }}>
           <div>
             <span className="section-eyebrow mono-text">SYSTEM CAPABILITIES</span>
-            <h2 className="section-title">Production Benchmarks</h2>
+            <ChromaText as="h2" className="section-title">Systems That Live in Production</ChromaText>
           </div>
           <p className="section-subtitle">
-            Measurable engineering throughput and latency tolerances across live deployments.
+            Measurable engineering throughput and latency tolerances — not benchmark estimates.
           </p>
         </div>
 
-        {/* Production Benchmarks Deck */}
-        <div className="benchmarks-grid">
-          {productionBenchmarks.map((b) => {
+        {/* Stacking Production Benchmarks Deck */}
+        <div className="benchmarks-stacking">
+          {productionBenchmarks.map((b, index) => {
             const IconComp = b.icon;
             return (
-              <div 
-                className={`benchmark-card liquid-glass ${b.stripeClass}`} 
-                key={b.title}
-                onMouseEnter={playHover}
-              >
-                <div className="benchmark-header">
-                  <span className={`status-tag ${b.badgeClass}`}>
-                    <IconComp size={12} className="status-icon" />
-                    {b.badge}
-                  </span>
-                  <span className="benchmark-metric-badge mono-text">{b.metric}</span>
-                </div>
+              <StackCard key={b.title} index={index} total={productionBenchmarks.length}>
+                <div 
+                  className={`benchmark-card liquid-glass ${b.stripeClass}`}
+                  onMouseEnter={playHover}
+                >
+                  <div className="benchmark-header">
+                    <span className={`status-tag ${b.badgeClass}`}>
+                      <IconComp size={12} className="status-icon" />
+                      {b.badge}
+                    </span>
+                    <span className="benchmark-metric-badge mono-text">{b.metric}</span>
+                  </div>
 
-                <h3 className="benchmark-title">{b.title}</h3>
-                
-                <div className="benchmark-highlight-row mono-text">
-                  <span className="benchmark-highlight-dot"></span>
-                  <span>{b.highlight}</span>
-                </div>
+                  <h3 className="benchmark-title">{b.title}</h3>
+                  
+                  <div className="benchmark-highlight-row mono-text">
+                    <span className="benchmark-highlight-dot"></span>
+                    <span>{b.highlight}</span>
+                  </div>
 
-                <p className="benchmark-desc">{b.description}</p>
+                  <p className="benchmark-desc">{b.description}</p>
 
-                <div className="benchmark-stack">
-                  {b.stack.map(s => (
-                    <span key={s} className="tech-pill mono-text">{s}</span>
-                  ))}
+                  <div className="benchmark-stack">
+                    {b.stack.map(s => (
+                      <span key={s} className="tech-pill mono-text">{s}</span>
+                    ))}
+                    <span className="benchmark-verified mono-text">{b.note}</span>
+                  </div>
                 </div>
-              </div>
+              </StackCard>
             );
           })}
         </div>
+
+        {/* Spacer after stacking cards */}
+        <div style={{ height: '3rem' }} />
 
         {/* Technical Arsenal Bento */}
         <div className="section-header-row" style={{ marginTop: '5rem', marginBottom: '2.5rem' }}>
           <div>
             <span className="section-eyebrow mono-text">FULL TOOLKIT</span>
-            <h2 className="section-title">Technical Arsenal</h2>
+            <ChromaText as="h2" className="section-title">The Full Stack</ChromaText>
           </div>
           <p className="section-subtitle">
             Core technologies, libraries, and frameworks used in daily production environments.

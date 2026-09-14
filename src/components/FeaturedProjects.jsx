@@ -5,6 +5,9 @@ import { ArrowRight, Activity, Cpu, Layers } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import MagneticButton from './MagneticButton';
+import ChromaText from './shared/ChromaText';
+import HandwrittenAnnotation from './shared/HandwrittenAnnotation';
+import TechTooltip from './shared/TechTooltip';
 import './FeaturedProjects.css';
 
 const projects = [
@@ -16,8 +19,9 @@ const projects = [
     stripeClass: 'stripe-indigo',
     badgeClass: 'status-tag-indigo',
     icon: Activity,
-    description: 'AI-powered career intelligence platform utilizing a multi-stage pipeline for ATS optimization and hallucination-safe content generation.',
-    impact: '75-Engine Pipeline — Zero Hallucinations — Production Scale',
+    description: 'AI-powered career intelligence platform with a multi-stage LLM pipeline for ATS optimization. Context-aware follow-ups, not scripted loops.',
+    impact: 'Not just resume scoring — 75 specialized analysis engines with hallucination-safe guardrails on every output.',
+    impactNote: 'zero hallucinations. verified.',
     tech: ['Next.js', 'FastAPI', 'PostgreSQL', 'Docker'],
     github: 'https://github.com/Adithyan1809/resumepilot',
   },
@@ -29,8 +33,9 @@ const projects = [
     stripeClass: 'stripe-emerald',
     badgeClass: 'status-tag-emerald',
     icon: Cpu,
-    description: 'Real-time surveillance and biometric attendance system processing 90+ live camera feeds with async RTSP/ONVIF ingestion.',
-    impact: '90+ Camera Streams — Async RTSP/ONVIF — 20% Latency Drop',
+    description: 'Real-time surveillance and biometric attendance system. 90+ live cameras — not test streams. ArcFace embeddings at 24fps, no dropped frames.',
+    impact: 'Not just 90+ feeds — continuous ArcFace embeddings with sub-4ms cosine retrieval across every registered identity.',
+    impactNote: 'wild, right?',
     tech: ['FastAPI', 'Redis', 'ArcFace', 'FAISS'],
     github: 'https://github.com/Adithyan1809',
   },
@@ -42,8 +47,9 @@ const projects = [
     stripeClass: 'stripe-violet',
     badgeClass: 'status-tag-violet',
     icon: Layers,
-    description: 'Real-time personnel accountability system using an edge-cloud architecture with multi-camera re-identification.',
-    impact: 'Edge-Cloud Architecture — IEEE Submitted — Real-Time DeepSORT',
+    description: 'Real-time personnel accountability using edge-cloud architecture with multi-camera re-identification. Submitted to IEEE.',
+    impact: 'Edge-cloud coordination with DeepSORT re-id across camera zones — built for environments where missing a person costs lives.',
+    impactNote: 'IEEE-level work.',
     tech: ['YOLOv8', 'FaceNet512', 'Deep SORT'],
     github: 'https://github.com/Adithyan1809',
   }
@@ -75,13 +81,13 @@ const ProjectCard = ({ p, playHover, playClick, playPowerUp }) => {
       <div
         className="card-sheen"
         style={{
-          background: `radial-gradient(circle at ${mousePos.x} ${mousePos.y}, var(--spotlight-color) 0%, transparent 70%)`,
+          background: `radial-gradient(400px at ${mousePos.x} ${mousePos.y}, var(--spotlight-color) 0%, transparent 70%)`,
           opacity: mousePos.opacity,
         }}
       />
 
       <div className="project-card-inner">
-        {/* Top bar: Status tag + GitHub */}
+        {/* Top bar */}
         <div className="card-top-bar">
           <span className={`status-tag ${p.badgeClass}`}>
             <IconComponent size={12} className="status-icon" />
@@ -99,29 +105,36 @@ const ProjectCard = ({ p, playHover, playClick, playPowerUp }) => {
           </a>
         </div>
 
-        {/* Title and Category */}
+        {/* Title */}
         <div className="card-title-group">
           <span className="card-category-label mono-text">{p.category}</span>
           <h3 className="card-project-title">{p.title}</h3>
         </div>
 
-        {/* Description in Inter */}
+        {/* Description */}
         <p className="card-project-desc">{p.description}</p>
 
-        {/* Recruiter Impact Line with Em Dashes */}
-        <div className="card-impact-box">
+        {/* Proof-framed Impact Box */}
+        <div className="card-impact-box" style={{ position: 'relative' }}>
           <span className="impact-label mono-text">SYSTEM IMPACT</span>
           <p className="impact-text mono-text">{p.impact}</p>
+          <span className="impact-verified mono-text">// verified in production</span>
+          <HandwrittenAnnotation
+            note={p.impactNote}
+            direction="right"
+            rotation={-8}
+            color="#a78bfa"
+          />
         </div>
 
-        {/* Tech Stack Pills */}
+        {/* Tech Stack */}
         <div className="card-tech-stack">
           {p.tech.map((t) => (
             <span key={t} className="tech-pill mono-text">{t}</span>
           ))}
         </div>
 
-        {/* Case Study CTA Button */}
+        {/* CTA */}
         <div className="card-cta-row">
           <MagneticButton style={{ width: '100%' }}>
             <Link
@@ -142,16 +155,19 @@ const FeaturedProjects = () => {
   const { playHover, playClick, playPowerUp } = useSoundEffects();
 
   return (
-    <section id="projects" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
+    <section id="projects" className="section-padding border-bottom section-rule-lines" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Watermark */}
+      <span className="section-watermark-text" aria-hidden="true">CRAFT</span>
+
       <WireframeCube />
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-header-row">
           <div>
             <span className="section-eyebrow mono-text">CORE SYSTEMS &amp; RESEARCH</span>
-            <h2 className="section-title">Featured Projects</h2>
+            <ChromaText as="h2" className="section-title">What I've Actually Shipped</ChromaText>
           </div>
           <p className="section-subtitle">
-            Production ML systems, edge vision pipelines, and scalable distributed architectures built for real-world reliability.
+            Production ML systems, edge vision pipelines, and distributed architectures built for real-world reliability — not portfolios.
           </p>
         </div>
         <div className="projects-grid">

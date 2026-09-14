@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import WireframeGlobe from './WireframeGlobe';
+import ChromaText from './shared/ChromaText';
 import { Briefcase, GraduationCap, Users, Award, ChevronRight } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Experience.css';
@@ -79,7 +80,10 @@ const Experience = () => {
   const { playHover } = useSoundEffects();
 
   return (
-    <section id="experience" className="section-padding border-bottom" style={{ position: 'relative', overflow: 'hidden' }}>
+    <section id="experience" className="section-padding border-bottom section-rule-lines" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Watermark */}
+      <span className="section-watermark-text" aria-hidden="true">JOURNEY</span>
+
       <WireframeGlobe />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
@@ -87,10 +91,10 @@ const Experience = () => {
         <div className="section-header-row" style={{ marginBottom: '3rem' }}>
           <div>
             <span className="section-eyebrow mono-text">CAREER &amp; LEADERSHIP</span>
-            <h2 className="section-title">Visual Resume</h2>
+            <ChromaText as="h2" className="section-title">Where I've Worked &amp; Led</ChromaText>
           </div>
           <p className="section-subtitle">
-            Industry leadership, academic progression, and community initiatives driving technical excellence.
+            Industry leadership, academic progression, and community initiatives — in the order they happened.
           </p>
         </div>
 

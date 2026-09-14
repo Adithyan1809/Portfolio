@@ -1,11 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ArrowRight, FileText, Copy, Check, MapPin, Zap } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 const profileImage = '/profile.webp';
 import Constellation from './Constellation';
+import TextRotate from './shared/TextRotate';
+import HandwrittenAnnotation from './shared/HandwrittenAnnotation';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Hero.css';
+
+/* Spring-morphing status capsule states */
+const STATUS_STATES = [
+  { label: 'Building', dot: '#10b981', glow: 'rgba(16,185,129,0.2)' },
+  { label: 'Deploying', dot: '#f59e0b', glow: 'rgba(245,158,11,0.2)' },
+  { label: 'Thinking', dot: '#8b5cf6', glow: 'rgba(139,92,246,0.2)' },
+];
+
+const StatusCapsule = ({ playHover }) => {
+  const [stateIdx, setStateIdx] = useState(0);
+  const current = STATUS_STATES[stateIdx];
+
+  useEffect(() => {
+    const t = setInterval(() => setStateIdx(i => (i + 1) % STATUS_STATES.length), 3500);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <motion.div
+      className="hero-status-capsule liquid-glass"
+      layout
+      style={{ '--capsule-glow': current.glow }}
+      onMouseEnter={playHover}
+    >
+      <span className="capsule-dot ping-dot" style={{ color: current.dot, backgroundColor: current.dot }} />
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={stateIdx}
+          initial={{ opacity: 0, width: 0, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, width: 'auto', filter: 'blur(0px)' }}
+          exit={{ opacity: 0, filter: 'blur(4px)' }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="capsule-label mono-text"
+          style={{ display: 'inline-block', whiteSpace: 'nowrap', overflow: 'hidden' }}
+        >
+          {current.label}
+        </motion.span>
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
@@ -15,7 +58,7 @@ const Hero = () => {
   
   const { playHover, playClick, playSuccess } = useSoundEffects();
 
-  // Profile photo parallax — moves at 40% of scroll speed (slower = behind)
+  /* Profile photo parallax */
   const { scrollY } = useScroll();
   const imageY = useTransform(scrollY, [0, 600], [0, -50]);
   
@@ -63,13 +106,25 @@ const Hero = () => {
 
   return (
     <section className="hero" id="home">
+      {/* Volumetric sunbeam SVG rays */}
+      <svg className="hero-sunbeams" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="sunbeam-blur">
+            <feGaussianBlur stdDeviation="40" />
+          </filter>
+        </defs>
+        <polygon points="900,0 1200,200 1100,0" fill="rgba(99,102,241,0.18)" filter="url(#sunbeam-blur)" />
+        <polygon points="950,0 1200,400 1200,100" fill="rgba(139,92,246,0.12)" filter="url(#sunbeam-blur)" />
+        <polygon points="800,0 1200,600 1200,200" fill="rgba(6,182,212,0.07)" filter="url(#sunbeam-blur)" />
+        <polygon points="1050,0 1200,300 1200,0" fill="rgba(16,185,129,0.06)" filter="url(#sunbeam-blur)" />
+        <polygon points="700,0 1200,500 1200,350" fill="rgba(99,102,241,0.05)" filter="url(#sunbeam-blur)" />
+      </svg>
+
       <Constellation />
       <div className="container hero-container">
         <div className="hero-content">
           <div className="hero-badge-row">
-            <div className="hero-badge liquid-glass stripe-emerald" onMouseEnter={playHover}>
-              <span className="status-dot"></span> STATUS: OPEN TO WORK
-            </div>
+            <StatusCapsule playHover={playHover} />
             <div className="hero-sub-pill mono-text">
               <span>AI Systems — Distributed Pipelines — Edge Vision</span>
             </div>
@@ -80,28 +135,44 @@ const Hero = () => {
             </span>
           </h1>
           <p className="hero-tagline">
-            Bridging the gap between AI concepts and real-world implementation — designing, building, and scaling resilient architectures that power complex models.
+            <TextRotate
+              phrases={[
+                'Building Systems That Think.',
+                'Deploying Models That Scale.',
+                'Shipping Intelligence to Production.',
+              ]}
+              interval={3200}
+            />
           </p>
           <div className="hero-ctas">
-            <a 
-              href="#projects" 
-              className="btn btn-primary" 
-              onMouseEnter={playHover} 
-              onClick={(e) => {
-                playClick();
-                const el = document.getElementById('projects');
-                if (el) {
-                  e.preventDefault();
-                  if (window.lenis) {
-                    window.lenis.scrollTo(el, { offset: -70, duration: 1.5 });
-                  } else {
-                    el.scrollIntoView({ behavior: 'smooth' });
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <a 
+                href="#projects" 
+                className="btn btn-primary" 
+                onMouseEnter={playHover} 
+                onClick={(e) => {
+                  playClick();
+                  const el = document.getElementById('projects');
+                  if (el) {
+                    e.preventDefault();
+                    if (window.lenis) {
+                      window.lenis.scrollTo(el, { offset: -70, duration: 1.5 });
+                    } else {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    }
                   }
-                }
-              }}
-            >
-              View Projects <ArrowRight size={16} />
-            </a>
+                }}
+              >
+                View My Work <ArrowRight size={16} />
+              </a>
+              <HandwrittenAnnotation
+                note="start here ↓"
+                direction="down"
+                rotation={-5}
+                color="#38bdf8"
+                style={{ top: '-46px', left: '16px', right: 'auto' }}
+              />
+            </div>
             <a href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
               <FileText size={16} /> Resume
             </a>

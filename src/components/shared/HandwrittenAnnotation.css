@@ -1,0 +1,60 @@
+.handwritten-annotation {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  pointer-events: none;
+  position: absolute;
+  top: -24px;
+  right: 8px;
+  z-index: 10;
+}
+
+.annotation-note {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--annotation-color, #a78bfa);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s cubic-bezier(0.16,1,0.3,1) 0.2s;
+  white-space: nowrap;
+}
+
+.annotation-arrow {
+  width: 42px;
+  height: 42px;
+  overflow: visible;
+}
+
+.arrow-path {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  transition: stroke-dashoffset 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s;
+}
+
+.arrow-head {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.16,1,0.3,1) 1s;
+}
+
+/* Triggered state */
+.annotation-visible .annotation-note {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.annotation-visible .arrow-path {
+  stroke-dashoffset: 0;
+}
+
+.annotation-visible .arrow-head {
+  stroke-dashoffset: 0;
+}
+
+@media (max-width: 768px) {
+  .handwritten-annotation {
+    display: none;
+  }
+}

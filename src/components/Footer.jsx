@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Terminal, ArrowUpRight, MapPin, Zap } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { useSoundEffects } from '../hooks/useSoundEffects';
@@ -12,9 +12,46 @@ const navLinks = [
   { label: 'Contact', href: '/#contact' },
 ];
 
+/* Letter-stagger nav link */
+const StaggerLink = ({ label, href, onMouseEnter, onClick }) => {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <a
+      href={href}
+      className="footer-nav-link"
+      onMouseEnter={() => { setHovered(true); onMouseEnter(); }}
+      onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
+    >
+      <span className="footer-nav-arrow">→</span>{' '}
+      {label.split('').map((char, i) => (
+        <span
+          key={i}
+          className="footer-letter"
+          style={{
+            transitionDelay: hovered ? `${i * 28}ms` : `${(label.length - i) * 18}ms`,
+            transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+          }}
+        >
+          {char}
+        </span>
+      ))}
+    </a>
+  );
+};
+
+/* Heartbeat status pill */
+const HeartbeatPill = () => (
+  <div className="footer-heartbeat-pill">
+    <span className="heartbeat-dot ping-dot" style={{ color: '#22c55e', backgroundColor: '#22c55e' }} />
+    <span className="mono-text heartbeat-label">SYSTEM STATUS · ONLINE</span>
+  </div>
+);
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { playHover, playClick } = useSoundEffects();
+  const buildDate = import.meta.env.VITE_BUILD_DATE || new Date().toISOString().split('T')[0];
 
   return (
     <footer className="site-footer">
@@ -24,7 +61,7 @@ const Footer = () => {
           <div className="footer-cta-inner">
             <div>
               <p className="footer-cta-label mono-text">Available for opportunities</p>
-              <h2 className="footer-cta-heading">Let's build the next<br />big thing together.</h2>
+              <h2 className="footer-cta-heading">Let's build something<br />real together.</h2>
             </div>
             <a
               href="#contact"
@@ -53,21 +90,22 @@ const Footer = () => {
                 <MapPin size={14} />
                 <span>Bangalore, India</span>
               </div>
-              <div className="footer-status">
-                <span className="status-dot-footer" />
-                <span className="mono-text">Open to opportunities</span>
-              </div>
+              {/* Heartbeat pill replaces static dot */}
+              <HeartbeatPill />
             </div>
 
-            {/* Nav col */}
+            {/* Nav col — letter-stagger links */}
             <div className="footer-col">
               <h4 className="footer-col-heading mono-text">Navigate</h4>
               <ul className="footer-nav-list">
                 {navLinks.map(link => (
                   <li key={link.label}>
-                    <a href={link.href} className="footer-nav-link" onMouseEnter={playHover} onClick={playClick}>
-                      <span className="footer-nav-arrow">→</span> {link.label}
-                    </a>
+                    <StaggerLink
+                      label={link.label}
+                      href={link.href}
+                      onMouseEnter={playHover}
+                      onClick={playClick}
+                    />
                   </li>
                 ))}
               </ul>
@@ -112,7 +150,10 @@ const Footer = () => {
         <div className="container">
           <div className="footer-bottom-inner">
             <p className="mono-text">© {currentYear} Adithyan Prakash. All rights reserved.</p>
-            <p className="mono-text footer-love">Crafted with precision in Bangalore 🇮🇳</p>
+            <p className="mono-text footer-love">
+              Crafted with precision in Bangalore 🇮🇳
+              <span className="footer-deploy-stamp"> · LAST DEPLOYED: {buildDate} · Vercel Edge</span>
+            </p>
           </div>
         </div>
       </div>
