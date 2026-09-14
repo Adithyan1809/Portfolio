@@ -1,47 +1,100 @@
-/* Custom cursor disabled — native cursor restored */
+/* ─── Contextual Morphing Cursor ─── */
 
-.c-dot {
+.morphing-cursor-container {
   position: fixed;
-  top: -5px;
-  left: -5px;
-  width: 10px;
-  height: 10px;
-  background: var(--color-accent);
-  border-radius: 50%;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 999999;
-  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: normal;
   will-change: transform;
+  transition: opacity 0.2s ease;
 }
 
-.c-ring {
-  position: fixed;
-  top: -20px;
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--color-accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999998;
-  mix-blend-mode: difference;
-  will-change: transform;
-  transition: width 0.25s ease, height 0.25s ease, top 0.25s ease, left 0.25s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+.morphing-cursor-container.hidden {
+  opacity: 0;
 }
 
-/* Hover on links */
-.c-dot.cursor-hover { transform: scale(3); }
-.c-ring.cursor-hover { width: 60px; height: 60px; top: -30px; left: -30px; opacity: 0.5; }
+.morphing-cursor-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease;
+}
 
-/* Hover on buttons */
-.c-dot.cursor-btn { transform: scale(0.5); }
-.c-ring.cursor-btn { width: 56px; height: 56px; top: -28px; left: -28px; background: var(--color-accent); opacity: 0.15; }
+/* Default state: neat crisp 10px dot */
+.morphing-cursor-container.default .morphing-cursor-inner {
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
 
-/* Hidden when off screen */
-.c-dot.cursor-hidden, .c-ring.cursor-hidden { opacity: 0; }
+[data-theme='dark'] .morphing-cursor-container.default .morphing-cursor-inner {
+  background: #ffffff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.8), 0 0 4px rgba(99, 102, 241, 0.6);
+}
+
+/* Hover state on links & buttons: expanding focus ring */
+.morphing-cursor-container.hover .morphing-cursor-inner {
+  width: 44px;
+  height: 44px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1.5px solid rgba(99, 102, 241, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Badge state (EXPLORE, COPY, INSPECT, PLAY): luxury morphing capsule */
+.morphing-cursor-container.badge .morphing-cursor-inner {
+  padding: 0.35rem 0.85rem;
+  width: auto;
+  height: auto;
+  min-height: 28px;
+  background: rgba(8, 8, 12, 0.92);
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  color: #ededed;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(139, 92, 246, 0.25);
+  transform: scale(1.05);
+}
+
+.cursor-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #a78bfa;
+  white-space: nowrap;
+  animation: cursor-text-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cursor-text-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 @media (pointer: coarse) {
-  body { cursor: auto; }
-  a, button { cursor: auto; }
-  .c-dot, .c-ring { display: none; }
+  .morphing-cursor-container {
+    display: none !important;
+  }
 }

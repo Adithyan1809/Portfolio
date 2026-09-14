@@ -137,6 +137,7 @@ const Skills = () => {
               <StackCard key={b.title} index={index} total={productionBenchmarks.length}>
                 <div 
                   className={`benchmark-card liquid-glass ${b.stripeClass}`}
+                  data-cursor="inspect"
                   onMouseEnter={playHover}
                 >
                   <div className="benchmark-header">

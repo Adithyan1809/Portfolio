@@ -128,3 +128,42 @@
     color: var(--color-accent);
   }
 }
+
+/* ─── Navbar Audio Toggle & Equalizer Waveform ─── */
+.audio-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: auto;
+  padding: 0 0.55rem;
+}
+
+.nav-waveform {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 14px;
+}
+
+.wave-bar {
+  display: inline-block;
+  width: 2px;
+  height: 3px;
+  background: currentColor;
+  border-radius: 1px;
+  opacity: 0.35;
+  transition: height 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-waveform.active .wave-bar {
+  opacity: 0.9;
+  background-color: #10b981;
+}
+
+.nav-waveform.active .bar-1 { height: 6px; }
+.nav-waveform.active .bar-2 { height: 11px; }
+.nav-waveform.active .bar-3 { height: 8px; }
+
+.nav-waveform.rippling .bar-1 { height: 13px !important; }
+.nav-waveform.rippling .bar-2 { height: 16px !important; }
+.nav-waveform.rippling .bar-3 { height: 12px !important; }

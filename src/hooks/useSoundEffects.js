@@ -15,223 +15,149 @@ export const useSoundEffects = () => {
     }
   };
 
+  const notifyActivity = () => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('portfolio-audio-event'));
+    }
+  };
+
   const playSound = useCallback((type) => {
-    // Default to muted unless user explicitly unmuted
     const muted = localStorage.getItem('portfolio-muted');
     if (muted === null || muted === 'true') return;
     initAudio();
     const ctx = audioCtxRef.current;
     if (!ctx) return;
-    
-    if (type === 'swoosh') {
-      const bufferSize = ctx.sampleRate * 0.5;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) { data[i] = Math.random() * 2 - 1; }
-      
-      const noiseSource = ctx.createBufferSource();
-      noiseSource.buffer = buffer;
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(100, ctx.currentTime);
-      filter.frequency.exponentialRampToValueAtTime(3000, ctx.currentTime + 0.2);
-      filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.5);
-      
-      const gainNode = ctx.createGain();
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.1);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-      
-      noiseSource.connect(filter);
-      filter.connect(gainNode);
-      gainNode.connect(ctx.destination);
-      noiseSource.start(ctx.currentTime);
+    notifyActivity();
+
+    // 1. TACTILE HAPTIC CLICK (Dual-layer mechanical switch click)
+    if (type === 'click') {
+      // Layer 1: High frequency snap transient
+      const snapOsc = ctx.createOscillator();
+      const snapGain = ctx.createGain();
+      snapOsc.type = 'triangle';
+      snapOsc.frequency.setValueAtTime(1200, ctx.currentTime);
+      snapOsc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.015);
+      snapGain.gain.setValueAtTime(0.12, ctx.currentTime);
+      snapGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.018);
+      snapOsc.connect(snapGain);
+      snapGain.connect(ctx.destination);
+      snapOsc.start(ctx.currentTime);
+      snapOsc.stop(ctx.currentTime + 0.02);
+
+      // Layer 2: Warm body thud (satisfying bottom-out)
+      const thudOsc = ctx.createOscillator();
+      const thudGain = ctx.createGain();
+      thudOsc.type = 'sine';
+      thudOsc.frequency.setValueAtTime(140, ctx.currentTime);
+      thudOsc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + 0.04);
+      thudGain.gain.setValueAtTime(0.2, ctx.currentTime);
+      thudGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.045);
+      thudOsc.connect(thudGain);
+      thudGain.connect(ctx.destination);
+      thudOsc.start(ctx.currentTime);
+      thudOsc.stop(ctx.currentTime + 0.05);
       return;
     }
 
+    // 2. TACTILE MICRO-TICK HOVER (Ultra-subtle, natural glass tap)
+    if (type === 'hover') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.012);
+      gain.gain.setValueAtTime(0.025, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.015);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.016);
+      return;
+    }
+
+    // 3. MECHANICAL KEYBOARD TYPING
+    if (type === 'type') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      const pitch = Math.random() * 200 + 900;
+      osc.frequency.setValueAtTime(pitch, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(pitch * 0.4, ctx.currentTime + 0.02);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.025);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.026);
+      return;
+    }
+
+    // 4. PLEASANT SUCCESS HARMONIC CHIME (528Hz & 792Hz)
+    if (type === 'success') {
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc1.type = 'sine';
+      osc2.type = 'sine';
+      osc1.frequency.setValueAtTime(528, ctx.currentTime);
+      osc2.frequency.setValueAtTime(792, ctx.currentTime + 0.06);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+      osc1.start(ctx.currentTime);
+      osc2.start(ctx.currentTime + 0.06);
+      osc1.stop(ctx.currentTime + 0.35);
+      osc2.stop(ctx.currentTime + 0.35);
+      return;
+    }
+
+    // 5. SWOOSH / REVERSE
+    if (type === 'swoosh' || type === 'reverse') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      const startFreq = type === 'reverse' ? 200 : 800;
+      const endFreq = type === 'reverse' ? 800 : 200;
+      osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.16);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.17);
+      return;
+    }
+
+    // Default fallback
     const osc = ctx.createOscillator();
     const gainNode = ctx.createGain();
     osc.connect(gainNode);
     gainNode.connect(ctx.destination);
-    
-    if (type === 'hover') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(1000, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1800, ctx.currentTime + 0.05);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.08);
-    } else if (type === 'click') {
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(300, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.1);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.15);
-    } else if (type === 'type') {
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(2500, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(4000, ctx.currentTime + 0.03);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.005);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.04);
-    } else if (type === 'theme') {
-      // Sci-fi power up/down sweep
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(200, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.15);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.05);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.2);
-    } else if (type === 'success') {
-      // Pleasant double chime
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, ctx.currentTime);
-      osc.frequency.setValueAtTime(1200, ctx.currentTime + 0.1);
-      
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.02);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
-      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.12);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-      
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.4);
-    } else if (type === 'digital') {
-      // Rapid random beeps for data/skills
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(Math.random() * 1000 + 1000, ctx.currentTime);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.05);
-    } else if (type === 'laser') {
-      // Pew pew laser sound (rapid pitch drop)
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(1200, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.2);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.2);
-    } else if (type === 'powerup') {
-      // Arpeggiated retro power-up chord
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-      osc.frequency.setValueAtTime(554, ctx.currentTime + 0.05); // C#
-      osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);  // E
-      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.02);
-      gainNode.gain.setValueAtTime(0.1, ctx.currentTime + 0.15);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.3);
-    } else if (type === 'bassdrop') {
-      // Heavy sub-bass dive
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(150, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 1.0);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 0.1);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.0);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 1.0);
-    } else if (type === 'alien') {
-      // FM Synthesis: Modulator oscillating the frequency of the carrier
-      const modOsc = ctx.createOscillator();
-      const modGain = ctx.createGain();
-      modOsc.type = 'sine';
-      modOsc.frequency.value = 50; // Modulation speed
-      modGain.gain.value = 500;    // Modulation depth
-      modOsc.connect(modGain);
-      modGain.connect(osc.frequency);
-      
-      osc.type = 'triangle';
-      osc.frequency.value = 400;
-      
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.1);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
-      
-      modOsc.start(ctx.currentTime);
-      osc.start(ctx.currentTime);
-      modOsc.stop(ctx.currentTime + 0.6);
-      osc.stop(ctx.currentTime + 0.6);
-    } else if (type === 'sonar') {
-      // High ping with a long echoing tail
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(2000, ctx.currentTime);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.5);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 1.5);
-    } else if (type === 'twinkle') {
-      // Fast, high-pitched crystal twinkle
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(3000, ctx.currentTime);
-      osc.frequency.linearRampToValueAtTime(4000, ctx.currentTime + 0.1);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.02);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.2);
-    } else if (type === 'glitchpop') {
-      // Short burst of white noise for a glitchy UI element
-      const bufferSize = ctx.sampleRate * 0.1;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) { data[i] = Math.random() * 2 - 1; }
-      const noiseSource = ctx.createBufferSource();
-      noiseSource.buffer = buffer;
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'highpass';
-      filter.frequency.value = 5000;
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-      noiseSource.connect(filter);
-      filter.connect(gainNode);
-      noiseSource.start(ctx.currentTime);
-    } else if (type === 'reverse') {
-      // A sweep that pitches up and cuts off sharply
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(50, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.3);
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.25);
-      gainNode.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.3);
-    }
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(600, ctx.currentTime);
+    gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.05);
   }, []);
 
   return {
     playHover: () => playSound('hover'),
     playClick: () => playSound('click'),
-    playSwoosh: () => playSound('swoosh'),
     playType: () => playSound('type'),
-    playTheme: () => playSound('theme'),
     playSuccess: () => playSound('success'),
-    playDigital: () => playSound('digital'),
-    playLaser: () => playSound('laser'),
-    playPowerUp: () => playSound('powerup'),
-    playBassDrop: () => playSound('bassdrop'),
-    playAlien: () => playSound('alien'),
-    playSonar: () => playSound('sonar'),
-    playTwinkle: () => playSound('twinkle'),
-    playGlitchPop: () => playSound('glitchpop'),
+    playError: () => playSound('swoosh'),
+    playTheme: () => playSound('swoosh'),
+    playTwinkle: () => playSound('hover'),
+    playDigital: () => playSound('hover'),
+    playLaser: () => playSound('click'),
+    playPowerUp: () => playSound('success'),
+    playBassDrop: () => playSound('swoosh'),
+    playAlien: () => playSound('click'),
+    playGlitchPop: () => playSound('hover'),
     playReverse: () => playSound('reverse'),
   };
 };

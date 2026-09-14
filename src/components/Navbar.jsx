@@ -10,7 +10,18 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   
+  const [isAudioRippling, setIsAudioRippling] = useState(false);
+  
   const { playHover, playClick, playTheme, playAlien } = useSoundEffects();
+
+  useEffect(() => {
+    const handleAudioEvent = () => {
+      setIsAudioRippling(true);
+      setTimeout(() => setIsAudioRippling(false), 220);
+    };
+    window.addEventListener('portfolio-audio-event', handleAudioEvent);
+    return () => window.removeEventListener('portfolio-audio-event', handleAudioEvent);
+  }, []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme');
@@ -100,11 +111,16 @@ const Navbar = () => {
           <button 
             onClick={toggleMute} 
             onMouseEnter={playHover}
-            className="theme-toggle" 
+            className="theme-toggle audio-toggle" 
             aria-label={isMuted ? "Unmute Sounds" : "Mute Sounds"}
             title={isMuted ? "Unmute Sounds" : "Mute Sounds"}
           >
-            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+            <span className={`nav-waveform ${!isMuted ? 'active' : ''} ${isAudioRippling ? 'rippling' : ''}`} aria-hidden="true">
+              <span className="wave-bar bar-1" />
+              <span className="wave-bar bar-2" />
+              <span className="wave-bar bar-3" />
+            </span>
           </button>
           <button 
             onClick={(e) => toggleTheme(e)} 

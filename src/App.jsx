@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import SmoothScroll from './components/SmoothScroll';
 import ScrollProgress from './components/ScrollProgress';
+import CustomCursor from './components/CustomCursor';
 import { Analytics } from '@vercel/analytics/react';
 
 const ResumePilotPage = lazy(() => import('./pages/ResumePilotPage'));
@@ -56,6 +57,7 @@ function App() {
         <div className="app-container">
           {/* Grain film overlay */}
           <div className="grain-overlay" aria-hidden="true" />
+          <CustomCursor />
           <ScrollProgress />
           <CommandPalette />
           <Navbar />

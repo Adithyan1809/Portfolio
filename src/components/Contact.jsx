@@ -81,6 +81,7 @@ const Contact = () => {
               {/* Email Card */}
               <div 
                 className="contact-method-card liquid-glass" 
+                data-cursor="copy"
                 onMouseEnter={playHover}
                 onClick={(e) => handleCopy(e, 'adithyan18092005@gmail.com', 'email')}
                 title="Click to copy email address"
@@ -107,6 +108,7 @@ const Contact = () => {
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="contact-method-card liquid-glass" 
+                data-cursor="explore"
                 onMouseEnter={playHover} 
                 onClick={playClick}
               >
@@ -125,6 +127,7 @@ const Contact = () => {
               {/* Phone Card */}
               <div 
                 className="contact-method-card liquid-glass" 
+                data-cursor="copy"
                 onMouseEnter={playHover}
                 onClick={(e) => handleCopy(e, '+91 9738585365', 'phone')}
                 title="Click to copy phone number"

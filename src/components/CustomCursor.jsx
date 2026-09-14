@@ -1,64 +1,107 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './CustomCursor.css';
 
 const CustomCursor = () => {
-  const dotX = useMotionValue(-100);
-  const dotY = useMotionValue(-100);
+  const [cursorText, setCursorText] = useState('');
+  const [cursorVariant, setCursorVariant] = useState('default'); // default, hover, text, hidden
+  const [isVisible, setIsVisible] = useState(false);
 
-  const springCfg = { damping: 22, stiffness: 500, mass: 0.3 };
-  const ringCfg  = { damping: 18, stiffness: 160, mass: 0.6 };
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
 
-  const sdX = useSpring(dotX, springCfg);
-  const sdY = useSpring(dotY, springCfg);
-  const srX = useSpring(dotX, ringCfg);
-  const srY = useSpring(dotY, ringCfg);
+  // Smooth springs for cursor position
+  const springConfig = { damping: 28, stiffness: 450, mass: 0.2 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Disable on touch devices
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
-    const onMove = (e) => { dotX.set(e.clientX); dotY.set(e.clientY); };
-    window.addEventListener('mousemove', onMove);
-
-    const setClass = (add, cls) => (e) => {
-      document.querySelector('.c-dot')?.classList[add](cls);
-      document.querySelector('.c-ring')?.classList[add](cls);
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
     };
 
-    const attach = () => {
-      document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('mouseenter', setClass('add', 'cursor-hover'));
-        el.addEventListener('mouseleave', setClass('remove', 'cursor-hover'));
-      });
-      document.querySelectorAll('.btn').forEach(el => {
-        el.addEventListener('mouseenter', setClass('add', 'cursor-btn'));
-        el.addEventListener('mouseleave', setClass('remove', 'cursor-btn'));
-      });
-    };
-    attach();
-    const obs = new MutationObserver(attach);
-    obs.observe(document.body, { childList: true, subtree: true });
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
 
-    const hide = () => setClass('add', 'cursor-hidden')();
-    const show = () => setClass('remove', 'cursor-hidden')();
-    document.addEventListener('mouseleave', hide);
-    document.addEventListener('mouseenter', show);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
+
+    // Contextual hover listener using event delegation
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (!target || !(target instanceof Element)) return;
+
+      // 1. Check for data-cursor attribute
+      const cursorTarget = target.closest('[data-cursor]');
+      if (cursorTarget) {
+        const type = cursorTarget.getAttribute('data-cursor');
+        if (type === 'explore') {
+          setCursorText('EXPLORE ↗');
+          setCursorVariant('badge');
+          return;
+        }
+        if (type === 'copy') {
+          setCursorText('COPY');
+          setCursorVariant('badge');
+          return;
+        }
+        if (type === 'inspect') {
+          setCursorText('INSPECT');
+          setCursorVariant('badge');
+          return;
+        }
+        if (type === 'play') {
+          setCursorText('PLAY');
+          setCursorVariant('badge');
+          return;
+        }
+      }
+
+      // 2. Check for general interactive elements
+      const interactive = target.closest('a, button, input, textarea, .btn, .interactive-hover');
+      if (interactive) {
+        setCursorText('');
+        setCursorVariant('hover');
+        return;
+      }
+
+      // 3. Default state
+      setCursorText('');
+      setCursorVariant('default');
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
 
     return () => {
-      window.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseleave', hide);
-      document.removeEventListener('mouseenter', show);
-      obs.disconnect();
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      document.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [isVisible, mouseX, mouseY]);
 
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) return null;
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+    return null;
+  }
 
   return (
-    <>
-      <motion.div className="c-dot" style={{ x: sdX, y: sdY }} />
-      <motion.div className="c-ring" style={{ x: srX, y: srY }} />
-    </>
+    <motion.div
+      className={`morphing-cursor-container ${cursorVariant} ${!isVisible ? 'hidden' : ''}`}
+      style={{
+        x: smoothX,
+        y: smoothY,
+      }}
+    >
+      <div className="morphing-cursor-inner">
+        {cursorText && <span className="cursor-label mono-text">{cursorText}</span>}
+      </div>
+    </motion.div>
   );
 };
 

@@ -74,6 +74,7 @@ const ProjectCard = ({ p, playHover, playClick, playPowerUp }) => {
     <div
       ref={cardRef}
       className={`project-glass-card liquid-glass ${p.stripeClass}`}
+      data-cursor="explore"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={playHover}
