@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Cpu, Activity, Radio } from 'lucide-react';
+import { Clock, Cpu, Activity } from 'lucide-react';
 import './LiveDashboard.css';
 
 const LiveDashboard = () => {
@@ -67,15 +67,6 @@ const LiveDashboard = () => {
               <span className="metric-label mono-text">EDGE LATENCY</span>
               <span className="metric-value mono-text">{latency}ms</span>
             </div>
-          </div>
-        </div>
-
-        {/* Status Badge */}
-        <div className="dashboard-section status-section">
-          <div className="status-indicator stripe-emerald">
-            <Radio size={13} className="radio-pulse-icon" />
-            <div className="blinking-light"></div>
-            <span className="status-text mono-text">AI CLUSTER ACTIVE</span>
           </div>
         </div>
       </div>

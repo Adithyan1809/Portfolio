@@ -16,7 +16,9 @@ export const useSoundEffects = () => {
   };
 
   const playSound = useCallback((type) => {
-    if (localStorage.getItem('portfolio-muted') === 'true') return;
+    // Default to muted unless user explicitly unmuted
+    const muted = localStorage.getItem('portfolio-muted');
+    if (muted === null || muted === 'true') return;
     initAudio();
     const ctx = audioCtxRef.current;
     if (!ctx) return;

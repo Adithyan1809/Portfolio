@@ -7,7 +7,7 @@ import './Navbar.css';
 const Navbar = () => {
   const [theme, setTheme] = useState('light');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   
   const { playHover, playClick, playTheme, playAlien } = useSoundEffects();
 
@@ -18,7 +18,9 @@ const Navbar = () => {
       document.documentElement.setAttribute('data-theme', savedTheme);
     }
     const savedMute = localStorage.getItem('portfolio-muted');
-    if (savedMute === 'true') {
+    if (savedMute !== null) {
+      setIsMuted(savedMute === 'true');
+    } else {
       setIsMuted(true);
     }
   }, []);
