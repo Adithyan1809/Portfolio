@@ -82,7 +82,7 @@ const ChatWidget = () => {
       console.error('Chat error:', error);
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: `Error: ${error.message || 'Unknown error'}. Make sure environment variables are set on Vercel.`
+        content: `Error: ${error.message || 'Unknown error'}. Make sure GEMINI_API_KEY is configured.`
       }]);
     } finally {
       setIsLoading(false);
@@ -101,7 +101,7 @@ const ChatWidget = () => {
           <Bot size={20} />
           <div>
             <div style={{ fontSize: '0.95rem', fontWeight: 700 }}>Ask about Adithyan</div>
-            <div style={{ fontSize: '0.7rem', fontWeight: 400, opacity: 0.8 }}>Powered by Groq · Llama 3.1</div>
+            <div style={{ fontSize: '0.7rem', fontWeight: 400, opacity: 0.8 }}>Powered by Google Gemini</div>
           </div>
           <button
             style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}

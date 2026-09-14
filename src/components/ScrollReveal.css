@@ -1,4 +1,7 @@
 .reveal-container {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   opacity: 0;
   transform: translateY(40px) scale(0.97);
   filter: blur(8px);

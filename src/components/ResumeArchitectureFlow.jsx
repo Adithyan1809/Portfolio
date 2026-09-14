@@ -99,6 +99,8 @@ export default function ResumeArchitectureFlow() {
       style={{ 
         height: isFullscreen ? '100vh' : '600px', 
         width: isFullscreen ? '100vw' : '100%', 
+        maxWidth: isFullscreen ? '100vw' : '100%',
+        boxSizing: 'border-box',
         marginBottom: isFullscreen ? '0' : '2rem', 
         padding: 0, 
         overflow: 'hidden', 
@@ -118,6 +120,7 @@ export default function ResumeArchitectureFlow() {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
+        fitViewOptions={{ padding: 0.2 }}
         minZoom={0.1}
         maxZoom={1.5}
         attributionPosition="bottom-right"
