@@ -1,6 +1,7 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import { ParallaxScanner } from '../components/ParallaxScanner';
+import PipelineInspector from '../components/PipelineInspector';
 import musteringImg from '../assets/mustering_system.webp';
 
 const MusteringSystemPage = () => {
@@ -22,6 +23,7 @@ const MusteringSystemPage = () => {
           <p>4. <strong>Cloud Sync</strong>: Processed metadata (not raw video) is synced to the cloud dashboard for real-time commander overview.</p>
         </div>
       }
+      pipeline={<PipelineInspector pipelineId="mustering" />}
       stack={['Python', 'YOLOv8', 'FaceNet512', 'Deep SORT', 'OpenCV', 'PyTorch']}
       challenges={[
         { title: 'Maintaining Tracking Continuity', description: 'In crowded emergency scenarios, occlusions frequently break tracking algorithms. By integrating Deep SORT with YOLOv8, we utilized motion and appearance information to re-identify individuals after occlusion, significantly improving tracking stability.' },

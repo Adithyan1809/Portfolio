@@ -1,6 +1,7 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import ResumeArchitectureFlow from '../components/ResumeArchitectureFlow';
+import PipelineInspector from '../components/PipelineInspector';
 import { MacbookScroll } from '../components/MacbookScroll';
 import resumePilotImg from '../assets/resumepilot_ui.webp';
 
@@ -25,7 +26,7 @@ const ResumePilotPage = () => {
           <ResumeArchitectureFlow />
         </div>
       }
-      pipeline={null}
+      pipeline={<PipelineInspector pipelineId="resumepilot" />}
       stack={['Next.js', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'Celery', 'React Flow', 'OpenAI API']}
       challenges={[
         { title: 'The Hallucination Firewall', description: 'Large Language Models are prone to inventing facts to satisfy constraints. To counter this, I implemented a strict multi-pass validation layer. Before any bullet point is returned to the user, a secondary, highly constrained "Judge Model" cross-references the output against the user\'s original uploaded documents. Any fabricated metrics or unverified skills are immediately flagged and stripped.' },

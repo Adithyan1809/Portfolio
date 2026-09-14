@@ -1,6 +1,7 @@
 import React from 'react';
 import CaseStudyLayout from '../components/CaseStudyLayout';
 import { CCTVScroll } from '../components/CCTVScroll';
+import PipelineInspector from '../components/PipelineInspector';
 import projectIrisImg from '../assets/project_iris_cctv.webp';
 
 const ProjectIrisPage = () => {
@@ -23,6 +24,7 @@ const ProjectIrisPage = () => {
           <p>5. <strong>State Management</strong>: Redis caches recent detections to prevent spamming the PostgreSQL database.</p>
         </div>
       }
+      pipeline={<PipelineInspector pipelineId="iris" />}
       stack={['FastAPI', 'Python', 'Redis', 'PostgreSQL', 'ArcFace', 'FaceNet', 'FAISS', 'OpenCV', 'RTSP']}
       challenges={[
         { title: 'Real-time Processing at Scale', description: 'Processing 90+ concurrent camera feeds overwhelmed initial single-threaded implementations. I refactored the ingestion pipeline to use asynchronous I/O and implemented frame skipping/batching before GPU inference, allowing the system to scale efficiently.' },
