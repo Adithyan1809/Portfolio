@@ -119,25 +119,35 @@
   100% { transform: perspective(1000px) rotateX(50deg) translateY(-40px); }
 }
 
-.hero-badge {
-  display: inline-block;
-  padding: 0.5rem 1.25rem;
-  background-color: var(--color-bg);
-  border: 2px solid var(--color-accent);
-  border-radius: 24px;
-  color: var(--color-accent);
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin-bottom: 2.5rem;
-  box-shadow: 4px 4px 0 var(--color-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+.hero-badge-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.25rem;
 }
-.hero-badge:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 0px 0px 0 var(--color-accent);
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.15rem;
+  border-radius: 20px;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border-left: 4px solid #10b981 !important;
+}
+
+.hero-sub-pill {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
 }
 
 .status-dot {

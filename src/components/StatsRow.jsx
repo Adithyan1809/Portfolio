@@ -1,12 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { Clock, Layers, Video, Terminal } from 'lucide-react';
 import './StatsRow.css';
 
 const stats = [
-  { value: 3, suffix: '+', label: 'Years Building' },
-  { value: 10, suffix: '+', label: 'Projects Shipped' },
-  { value: 90, suffix: '+', label: 'Camera Feeds Handled' },
-  { value: 50, suffix: 'K+', label: 'Lines of Code' },
+  { value: 3, suffix: '+', label: 'Years Building', sub: 'Engineering & Research', icon: Clock, stripe: 'stripe-indigo' },
+  { value: 10, suffix: '+', label: 'Systems Shipped', sub: 'Production & Scaled', icon: Layers, stripe: 'stripe-cyan' },
+  { value: 90, suffix: '+', label: 'Live RTSP Feeds', sub: 'Async Edge Ingestion', icon: Video, stripe: 'stripe-emerald' },
+  { value: 50, suffix: 'K+', label: 'Lines of Code', sub: 'Python — C++ — TS', icon: Terminal, stripe: 'stripe-violet' },
 ];
 
 const Counter = ({ value, suffix }) => {
@@ -46,19 +47,28 @@ const StatsRow = () => {
     <div className="stats-row">
       <div className="container">
         <div className="stats-grid">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              className="stat-item"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <Counter value={s.value} suffix={s.suffix} />
-              <span className="stat-label mono-text">{s.label}</span>
-            </motion.div>
-          ))}
+          {stats.map((s, i) => {
+            const IconComp = s.icon;
+            return (
+              <motion.div
+                key={s.label}
+                className={`stat-glass-item liquid-glass ${s.stripe}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <div className="stat-icon-wrapper">
+                  <IconComp size={18} className="stat-icon" />
+                </div>
+                <div className="stat-body">
+                  <Counter value={s.value} suffix={s.suffix} />
+                  <span className="stat-label mono-text">{s.label}</span>
+                  <span className="stat-sub mono-text">{s.sub}</span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>

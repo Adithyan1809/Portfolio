@@ -57,15 +57,21 @@ const Hero = () => {
       <Constellation />
       <div className="container hero-container">
         <div className="hero-content">
-          <div className="hero-badge" onMouseEnter={playHover}>
-            <span className="status-dot"></span> STATUS: OPEN TO WORK</div>
+          <div className="hero-badge-row">
+            <div className="hero-badge liquid-glass stripe-emerald" onMouseEnter={playHover}>
+              <span className="status-dot"></span> STATUS: OPEN TO WORK
+            </div>
+            <div className="hero-sub-pill mono-text">
+              <span>AI Systems — Distributed Pipelines — Edge Vision</span>
+            </div>
+          </div>
           <h1 className="hero-title">
             <span style={{ paddingBottom: '0.2em' }}>
               {typedText}<span className="blinking-cursor">_</span>
             </span>
           </h1>
           <p className="hero-tagline">
-            Bridging the gap between AI concepts and real-world implementation. I'm passionate about designing, building, and scaling resilient architectures that power complex models.
+            Bridging the gap between AI concepts and real-world implementation — designing, building, and scaling resilient architectures that power complex models.
           </p>
           
           <div className="hero-ctas">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Clock, Cpu, Activity, Radio } from 'lucide-react';
 import './LiveDashboard.css';
 
 const LiveDashboard = () => {
@@ -7,17 +8,12 @@ const LiveDashboard = () => {
   const [latency, setLatency] = useState(24);
 
   useEffect(() => {
-    // Clock interval
     const clockTimer = setInterval(() => {
       setTime(new Date());
     }, 1000);
 
-    // Metrics fluctuation interval
     const metricsTimer = setInterval(() => {
-      // Fluctuate CPU between 11% and 19%
       setCpu(Math.floor(Math.random() * (19 - 11 + 1) + 11));
-      
-      // Fluctuate Latency between 21ms and 32ms
       setLatency(Math.floor(Math.random() * (32 - 21 + 1) + 21));
     }, 3500);
 
@@ -45,27 +41,42 @@ const LiveDashboard = () => {
   };
 
   return (
-    <div className="live-dashboard">
-      <div className="dashboard-section clock-section">
-        <div className="clock-display mono-text">{formatTime(time)}</div>
-        <div className="date-display mono-text">{formatDate(time)}</div>
-      </div>
-      
-      <div className="dashboard-section metrics-section">
-        <div className="metric">
-          <span className="metric-label mono-text">CPU USAGE</span>
-          <span className="metric-value mono-text">{cpu}%</span>
+    <div className="live-dashboard-wrapper">
+      <div className="live-dashboard liquid-glass">
+        {/* Clock Section */}
+        <div className="dashboard-section clock-section">
+          <Clock size={15} className="telemetry-icon" />
+          <div className="clock-text-group">
+            <span className="clock-display mono-text">{formatTime(time)}</span>
+            <span className="date-display mono-text">{formatDate(time)}</span>
+          </div>
         </div>
-        <div className="metric">
-          <span className="metric-label mono-text">LATENCY</span>
-          <span className="metric-value mono-text">{latency}ms</span>
-        </div>
-      </div>
 
-      <div className="dashboard-section status-section">
-        <div className="status-indicator">
-          <div className="blinking-light"></div>
-          <span className="mono-text">SYSTEM ONLINE</span>
+        {/* Telemetry Metrics */}
+        <div className="dashboard-section metrics-section">
+          <div className="telemetry-metric">
+            <Cpu size={14} className="metric-icon-cpu" />
+            <div className="metric-info">
+              <span className="metric-label mono-text">CPU LOAD</span>
+              <span className="metric-value mono-text">{cpu}%</span>
+            </div>
+          </div>
+          <div className="telemetry-metric">
+            <Activity size={14} className="metric-icon-latency" />
+            <div className="metric-info">
+              <span className="metric-label mono-text">EDGE LATENCY</span>
+              <span className="metric-value mono-text">{latency}ms</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Status Badge */}
+        <div className="dashboard-section status-section">
+          <div className="status-indicator stripe-emerald">
+            <Radio size={13} className="radio-pulse-icon" />
+            <div className="blinking-light"></div>
+            <span className="status-text mono-text">AI CLUSTER ACTIVE</span>
+          </div>
         </div>
       </div>
     </div>
