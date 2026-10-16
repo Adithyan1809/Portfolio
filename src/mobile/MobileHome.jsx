@@ -4,7 +4,7 @@ import {
   ArrowRight, FileText, Copy, Check, MapPin, ExternalLink, 
   Briefcase, GraduationCap, Users, Award, BookOpen, Send,
   Cpu, Activity, Layers, Code2, Eye, Server, Settings, Zap, 
-  Database, ShieldCheck, Video, GitCommit
+  Database, ShieldCheck, Video, GitCommit, Plane, ArrowUp
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
@@ -14,6 +14,28 @@ export default function MobileHome() {
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
   const [lastPush, setLastPush] = useState(null);
+  const [showFab, setShowFab] = useState(false);
+
+  // ─── Scroll-to-top FAB visibility ───
+  useEffect(() => {
+    const onScroll = () => {
+      setShowFab(window.scrollY > 320);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // ─── Scroll to top — works on all mobile browsers ───
+  const scrollToTop = () => {
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      // Fallback for older browsers
+      window.scrollTo(0, 0);
+    }
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
 
   // Copy email helper
   const handleCopyEmail = (e) => {
@@ -507,7 +529,7 @@ export default function MobileHome() {
           {/* Demand Forecasting */}
           <div className="mobile-project-card" style={{ borderLeft: '4px solid #f59e0b' }}>
             <div className="mobile-project-header">
-              <span className="mobile-project-cat">ML · Supply Chain · S&OP</span>
+              <span className="mobile-project-cat">ML · Supply Chain · S&amp;OP</span>
               <span className="status-tag" style={{ fontSize: '0.62rem', color: '#f59e0b', background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)' }}>R² 0.889 CHAMPION</span>
             </div>
             <h3 className="mobile-project-title">Enterprise Demand Forecasting</h3>
@@ -608,13 +630,23 @@ export default function MobileHome() {
 
       {/* ─── Footer ─── */}
       <footer className="mobile-footer">
-        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="mobile-back-to-top">
-          ↑ Back to Top
+        <button type="button" onClick={scrollToTop} className="mobile-back-to-top">
+          <ArrowUp size={14} /> Back to Top
         </button>
         <p style={{ margin: 0, fontSize: '0.78rem' }}>
           © {new Date().getFullYear()} Adithyan Prakash · Bengaluru, India
         </p>
       </footer>
+
+      {/* ─── Floating Plane FAB (scroll to top) — appears after 320px scroll ─── */}
+      <button
+        type="button"
+        onClick={scrollToTop}
+        className={`mobile-scroll-fab${showFab ? ' mobile-scroll-fab--visible' : ''}`}
+        aria-label="Back to top"
+      >
+        <Plane size={18} style={{ transform: 'rotate(-45deg)' }} />
+      </button>
     </div>
   );
 }

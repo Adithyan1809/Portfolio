@@ -8,8 +8,11 @@
 /* ─── Status Dot Pulse Animation (opacity only — GPU safe) ─── */
 @keyframes mobile-pulse-dot {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.35; }
+  50%       { opacity: 0.3; }
 }
+
+/* ─── Slide-in underline for nav pills (transform only — GPU safe) ─── */
+/* (Used via ::after on .mobile-nav-pill-item) */
 
 /* ─── Root ─── */
 .mobile-app-root {
@@ -55,14 +58,15 @@
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: var(--color-accent);
-  color: var(--color-bg);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 0.85rem;
   font-family: var(--font-display);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
 }
 
 .mobile-brand-name {
@@ -93,14 +97,27 @@
   letter-spacing: 0.04em;
 }
 
-/* Pulsing green dot — opacity animation only (GPU composited) */
+/* Pulsing green dot — opacity + scale animation (GPU composited) */
 .mobile-status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: #10b981;
   display: inline-block;
+  position: relative;
+  flex-shrink: 0;
   animation: mobile-pulse-dot 2s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Glow ring around the status dot — separate pulsing layer */
+.mobile-status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.3);
+  animation: mobile-pulse-dot 2s ease-in-out infinite reverse;
   will-change: opacity;
 }
 
@@ -139,7 +156,10 @@
   display: none;
 }
 
+/* Nav pill with slide-in underline on tap — transform only, GPU safe */
 .mobile-nav-pill-item {
+  position: relative;
+  overflow: hidden;
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.35rem 0.75rem;
@@ -153,12 +173,29 @@
   transition: opacity 0.12s, transform 0.12s;
   will-change: opacity, transform;
 }
+
+/* Slide-in underline — translateX is GPU composited */
+.mobile-nav-pill-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transform: translateX(-100%);
+  transition: transform 0.22s ease;
+  will-change: transform;
+}
 .mobile-nav-pill-item:active {
-  background: var(--color-accent);
-  color: var(--color-bg);
-  border-color: var(--color-accent);
-  opacity: 0.85;
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+  border-color: rgba(99, 102, 241, 0.3);
+  opacity: 0.9;
   transform: scale(0.96);
+}
+.mobile-nav-pill-item:active::after {
+  transform: translateX(0);
 }
 
 /* ─── Container ─── */
@@ -168,26 +205,45 @@
   box-sizing: border-box;
 }
 
-/* ─── Section Spacing ─── */
+/* ─── Section Spacing — gradient divider instead of flat border ─── */
 .mobile-section {
   padding: 2.25rem 0;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+/* Gradient fade divider line (replaces flat border-bottom) */
+.mobile-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.15rem;
+  right: 1.15rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border) 15%,
+    var(--color-border) 85%,
+    transparent 100%
+  );
 }
 
 .mobile-section-header {
   margin-bottom: 1.25rem;
 }
 
-/* Eyebrow — accent color for emphasis */
+/* Eyebrow — accent color with left border accent line */
 .mobile-eyebrow {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: #6366f1;
   text-transform: uppercase;
-  display: block;
+  display: inline-block;
   margin-bottom: 0.3rem;
   font-family: var(--font-mono);
+  padding-left: 0.6rem;
+  border-left: 2px solid #6366f1;
 }
 
 .mobile-title {
@@ -206,10 +262,53 @@
   line-height: 1.5;
 }
 
-/* ─── Hero Section ─── */
+/* ─── Hero Section — with radial gradient glow blob ─── */
 .mobile-hero {
   padding: 1.75rem 0 2rem;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient divider for hero */
+.mobile-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.15rem;
+  right: 1.15rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border) 15%,
+    var(--color-border) 85%,
+    transparent 100%
+  );
+}
+
+/* Radial gradient blob — top-right corner, static, zero perf cost */
+.mobile-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(139, 92, 246, 0.06) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure hero content sits above the gradient blob */
+.mobile-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .mobile-hero-photo-row {
@@ -227,7 +326,7 @@
   overflow: hidden;
   border: 2px solid #6366f1;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
 }
 
 .mobile-hero-img {
@@ -252,7 +351,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Fallback for browsers that don't support background-clip */
+  /* Fallback */
   color: var(--color-text);
 }
 
@@ -308,9 +407,10 @@
 }
 
 .mobile-btn-primary {
-  background: var(--color-accent);
-  color: var(--color-bg);
-  border: 1px solid var(--color-accent);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
 }
 
 .mobile-btn-secondary {
@@ -401,7 +501,7 @@
 }
 
 /* Project accent stripes */
-.mobile-project-indigo { border-left: 4px solid #6366f1; }
+.mobile-project-indigo  { border-left: 4px solid #6366f1; }
 .mobile-project-emerald { border-left: 4px solid #10b981; }
 .mobile-project-violet  { border-left: 4px solid #8b5cf6; }
 
@@ -454,6 +554,7 @@
   line-height: 1.4;
 }
 
+/* ─── Tech Tag Chips — per-project accent tinting ─── */
 .mobile-tech-tags {
   display: flex;
   flex-wrap: wrap;
@@ -470,13 +571,18 @@
   font-family: var(--font-mono);
 }
 
+/* Accent-tinted tech tags per project card color */
+.mobile-project-indigo .mobile-tech-tag  { border-color: rgba(99, 102, 241, 0.25); color: #818cf8; }
+.mobile-project-emerald .mobile-tech-tag { border-color: rgba(16, 185, 129, 0.25); color: #34d399; }
+.mobile-project-violet .mobile-tech-tag  { border-color: rgba(139, 92, 246, 0.25); color: #a78bfa; }
+
 .mobile-card-actions {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.25rem;
 }
 
-/* ─── Technical Skills — colored left border per group ─── */
+/* ─── Technical Skills — colored left border per group + chip accent colors ─── */
 .mobile-skills-stack {
   display: flex;
   flex-direction: column;
@@ -519,13 +625,35 @@
   border-radius: 6px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  color: var(--color-text);
+  color: var(--color-text-muted);
   transition: opacity 0.12s, transform 0.12s;
   will-change: opacity, transform;
 }
 .mobile-chip:active {
   opacity: 0.6;
   transform: scale(0.95);
+}
+
+/* Accent-colored chips per skill group — subtle tint */
+.mobile-skill-group-indigo .mobile-chip  {
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #818cf8;
+  background: rgba(99, 102, 241, 0.04);
+}
+.mobile-skill-group-emerald .mobile-chip {
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.04);
+}
+.mobile-skill-group-cyan .mobile-chip {
+  border-color: rgba(6, 182, 212, 0.3);
+  color: #22d3ee;
+  background: rgba(6, 182, 212, 0.04);
+}
+.mobile-skill-group-violet .mobile-chip {
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #a78bfa;
+  background: rgba(139, 92, 246, 0.04);
 }
 
 /* ─── Experience Timeline — colored dots per role type ─── */
@@ -682,6 +810,7 @@
 .mobile-input:focus, .mobile-textarea:focus {
   outline: none;
   border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
 }
 .mobile-textarea {
   min-height: 100px;
@@ -701,11 +830,14 @@
 }
 
 .mobile-back-to-top {
-  padding: 0.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.5rem;
   font-size: 0.75rem;
   font-weight: 700;
   border-radius: 20px;
-  background: var(--color-bg-secondary);
+  background: rgba(99, 102, 241, 0.08);
   border: 1px solid #6366f1;
   color: #6366f1;
   cursor: pointer;
@@ -716,6 +848,43 @@
 .mobile-back-to-top:active {
   opacity: 0.65;
   transform: scale(0.96);
+}
+
+/* ─── Floating Scroll-To-Top FAB (Plane icon) ─── */
+.mobile-scroll-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.25rem;
+  z-index: 900;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.45);
+  /* Hidden by default — shown via .mobile-scroll-fab--visible */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.85);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  will-change: opacity, transform;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-scroll-fab--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+.mobile-scroll-fab:active {
+  opacity: 0.8;
+  transform: scale(0.9);
 }
 
 /* ─── Mobile Case Study Page ─── */
