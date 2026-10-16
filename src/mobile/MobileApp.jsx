@@ -13,8 +13,10 @@ function MobileHeader() {
   const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    setTheme(currentTheme);
+    // Read saved theme from localStorage first (fixes dark mode not persisting on mobile)
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   const toggleTheme = () => {
@@ -45,7 +47,7 @@ function MobileHeader() {
 
         <div className="mobile-header-actions">
           <span className="mobile-status-pill">
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+            <span className="mobile-status-dot" />
             OPEN
           </span>
 

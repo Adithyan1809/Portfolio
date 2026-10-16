@@ -161,23 +161,23 @@ export default function MobileHome() {
       {/* ─── Impact Numbers (2x2 Grid) ─── */}
       <section className="mobile-section mobile-container">
         <div className="mobile-stats-grid">
-          <div className="mobile-stat-card">
-            <span className="mobile-stat-num">3+</span>
+          <div className="mobile-stat-card mobile-stat-indigo">
+            <span className="mobile-stat-num mobile-stat-num-indigo">3+</span>
             <span className="mobile-stat-label">Years Building</span>
             <span className="mobile-stat-sub">Engineering &amp; Research</span>
           </div>
-          <div className="mobile-stat-card">
-            <span className="mobile-stat-num">10+</span>
+          <div className="mobile-stat-card mobile-stat-emerald">
+            <span className="mobile-stat-num mobile-stat-num-emerald">10+</span>
             <span className="mobile-stat-label">Systems Shipped</span>
             <span className="mobile-stat-sub">Production &amp; Scaled</span>
           </div>
-          <div className="mobile-stat-card">
-            <span className="mobile-stat-num">90+</span>
+          <div className="mobile-stat-card mobile-stat-cyan">
+            <span className="mobile-stat-num mobile-stat-num-cyan">90+</span>
             <span className="mobile-stat-label">Live RTSP Feeds</span>
             <span className="mobile-stat-sub">Async Edge Ingestion</span>
           </div>
-          <div className="mobile-stat-card">
-            <span className="mobile-stat-num">50K+</span>
+          <div className="mobile-stat-card mobile-stat-violet">
+            <span className="mobile-stat-num mobile-stat-num-violet">50K+</span>
             <span className="mobile-stat-label">Lines of Code</span>
             <span className="mobile-stat-sub">Python · C++ · TS</span>
           </div>
@@ -193,8 +193,8 @@ export default function MobileHome() {
         </div>
 
         <div className="mobile-projects-list">
-          {/* Project 1 */}
-          <div className="mobile-project-card">
+          {/* Project 1 — ResumePilot (indigo) */}
+          <div className="mobile-project-card mobile-project-indigo">
             <div className="mobile-project-header">
               <span className="mobile-project-cat">Production AI System</span>
               <span className="status-tag status-tag-indigo" style={{ fontSize: '0.62rem' }}>ACTIVE</span>
@@ -222,8 +222,8 @@ export default function MobileHome() {
             </div>
           </div>
 
-          {/* Project 2 */}
-          <div className="mobile-project-card">
+          {/* Project 2 — IRIS (emerald) */}
+          <div className="mobile-project-card mobile-project-emerald">
             <div className="mobile-project-header">
               <span className="mobile-project-cat">Computer Vision &amp; Edge</span>
               <span className="status-tag status-tag-emerald" style={{ fontSize: '0.62rem' }}>90+ RTSP LIVE</span>
@@ -251,8 +251,8 @@ export default function MobileHome() {
             </div>
           </div>
 
-          {/* Project 3 */}
-          <div className="mobile-project-card">
+          {/* Project 3 — Mustering (violet) */}
+          <div className="mobile-project-card mobile-project-violet">
             <div className="mobile-project-header">
               <span className="mobile-project-cat">Distributed Edge-Cloud</span>
               <span className="status-tag status-tag-violet" style={{ fontSize: '0.62rem' }}>IEEE SUBMITTED</span>
@@ -290,7 +290,7 @@ export default function MobileHome() {
         </div>
 
         <div className="mobile-skills-stack">
-          <div className="mobile-skill-group">
+          <div className="mobile-skill-group mobile-skill-group-indigo">
             <div className="mobile-skill-title">
               <Cpu size={16} style={{ color: '#6366f1' }} /> AI &amp; Machine Learning
             </div>
@@ -304,7 +304,7 @@ export default function MobileHome() {
             </div>
           </div>
 
-          <div className="mobile-skill-group">
+          <div className="mobile-skill-group mobile-skill-group-emerald">
             <div className="mobile-skill-title">
               <Eye size={16} style={{ color: '#10b981' }} /> Computer Vision
             </div>
@@ -318,7 +318,7 @@ export default function MobileHome() {
             </div>
           </div>
 
-          <div className="mobile-skill-group">
+          <div className="mobile-skill-group mobile-skill-group-cyan">
             <div className="mobile-skill-title">
               <Server size={16} style={{ color: '#06b6d4' }} /> Backend &amp; Distributed Systems
             </div>
@@ -333,7 +333,7 @@ export default function MobileHome() {
             </div>
           </div>
 
-          <div className="mobile-skill-group">
+          <div className="mobile-skill-group mobile-skill-group-violet">
             <div className="mobile-skill-title">
               <Code2 size={16} style={{ color: '#8b5cf6' }} /> Languages
             </div>
@@ -355,9 +355,9 @@ export default function MobileHome() {
         </div>
 
         <div className="mobile-timeline">
-          {/* Item 1 */}
+          {/* Item 1 — Work (indigo dot) */}
           <div className="mobile-timeline-item">
-            <div className="mobile-timeline-dot"></div>
+            <div className="mobile-timeline-dot mobile-dot-indigo"></div>
             <span className="mobile-date-tag">Sep 2025 – Nov 2025</span>
             <h3 className="mobile-role-title">Technical Lead Intern</h3>
             <span className="mobile-company-line">SMAP Technologies</span>
@@ -369,9 +369,9 @@ export default function MobileHome() {
             </ul>
           </div>
 
-          {/* Item 2 */}
+          {/* Item 2 — Education (cyan dot) */}
           <div className="mobile-timeline-item">
-            <div className="mobile-timeline-dot"></div>
+            <div className="mobile-timeline-dot mobile-dot-cyan"></div>
             <span className="mobile-date-tag">2023 – 2027</span>
             <h3 className="mobile-role-title">B.E. in AI &amp; Machine Learning</h3>
             <span className="mobile-company-line">Dayananda Sagar Academy (DSATM) · CGPA 8.44</span>
@@ -381,9 +381,9 @@ export default function MobileHome() {
             </ul>
           </div>
 
-          {/* Item 3 */}
+          {/* Item 3 — Club (violet dot) */}
           <div className="mobile-timeline-item">
-            <div className="mobile-timeline-dot"></div>
+            <div className="mobile-timeline-dot mobile-dot-violet"></div>
             <span className="mobile-date-tag">2024 – Present</span>
             <h3 className="mobile-role-title">Technical Lead &amp; Core Member</h3>
             <span className="mobile-company-line">ALMAtron Technical Club</span>
@@ -401,7 +401,7 @@ export default function MobileHome() {
           <h2 className="mobile-title">Published Papers</h2>
         </div>
 
-        <div className="mobile-project-card" style={{ borderLeft: '4px solid #8b5cf6' }}>
+        <div className="mobile-project-card mobile-project-violet">
           <div className="mobile-project-header">
             <span className="status-tag status-tag-violet" style={{ fontSize: '0.62rem' }}>
               <BookOpen size={12} /> IEEE SUBMITTED · 2025
@@ -418,11 +418,11 @@ export default function MobileHome() {
 
       {/* ─── GitHub Live Activity ─── */}
       <section className="mobile-section mobile-container">
-        <div className="mobile-project-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="mobile-project-card mobile-github-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+            <span className="mobile-gh-dot" />
             <div>
-              <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', display: 'block' }}>GITHUB ACTIVITY</span>
+              <span style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', display: 'block', fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>GITHUB ACTIVITY</span>
               <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--color-text)' }}>{lastPush || 'Active Contributor'}</span>
             </div>
           </div>

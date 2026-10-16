@@ -2,8 +2,16 @@
    DEDICATED MOBILE WEBSITE STYLES
    Engineered for iPhone (Safari/Chrome) and Android browsers.
    100% Native 120Hz scrolling, zero scroll-traps, zero layout thrashing.
+   Only GPU-composited animations: opacity + transform only.
    ======================================================== */
 
+/* ─── Status Dot Pulse Animation (opacity only — GPU safe) ─── */
+@keyframes mobile-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+/* ─── Root ─── */
 .mobile-app-root {
   width: 100%;
   min-height: 100vh;
@@ -16,7 +24,6 @@
   padding-bottom: 3rem;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-  /* Hardware-accelerated native smooth scroll */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -29,9 +36,6 @@
   z-index: 999;
   height: 58px;
   background-color: var(--color-bg);
-  background: var(--color-nav-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -73,6 +77,7 @@
   gap: 0.5rem;
 }
 
+/* Status pill */
 .mobile-status-pill {
   display: inline-flex;
   align-items: center;
@@ -88,6 +93,17 @@
   letter-spacing: 0.04em;
 }
 
+/* Pulsing green dot — opacity animation only (GPU composited) */
+.mobile-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+  animation: mobile-pulse-dot 2s ease-in-out infinite;
+  will-change: opacity;
+}
+
 .mobile-header-btn {
   width: 36px;
   height: 36px;
@@ -100,6 +116,10 @@
   justify-content: center;
   cursor: pointer;
   touch-action: manipulation;
+  transition: opacity 0.15s;
+}
+.mobile-header-btn:active {
+  opacity: 0.6;
 }
 
 /* ─── Mobile Quick Nav Jump Pills ─── */
@@ -130,11 +150,15 @@
   text-decoration: none;
   flex-shrink: 0;
   touch-action: manipulation;
+  transition: opacity 0.12s, transform 0.12s;
+  will-change: opacity, transform;
 }
 .mobile-nav-pill-item:active {
   background: var(--color-accent);
   color: var(--color-bg);
   border-color: var(--color-accent);
+  opacity: 0.85;
+  transform: scale(0.96);
 }
 
 /* ─── Container ─── */
@@ -154,11 +178,12 @@
   margin-bottom: 1.25rem;
 }
 
+/* Eyebrow — accent color for emphasis */
 .mobile-eyebrow {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: var(--color-text-muted);
+  color: #6366f1;
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.3rem;
@@ -200,9 +225,9 @@
   height: 82px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--color-accent);
+  border: 2px solid #6366f1;
   flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
 }
 
 .mobile-hero-img {
@@ -217,18 +242,24 @@
   gap: 0.2rem;
 }
 
+/* Gradient hero name — background-clip:text is static, no animation, GPU safe */
 .mobile-hero-name {
   font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--color-text);
   line-height: 1.15;
+  background: linear-gradient(100deg, var(--color-text) 0%, #6366f1 60%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Fallback for browsers that don't support background-clip */
+  color: var(--color-text);
 }
 
 .mobile-hero-role {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: #6366f1;
 }
 
 .mobile-hero-loc {
@@ -253,6 +284,7 @@
   gap: 0.65rem;
 }
 
+/* ─── Buttons ─── */
 .mobile-btn {
   display: flex;
   align-items: center;
@@ -267,6 +299,12 @@
   cursor: pointer;
   touch-action: manipulation;
   box-sizing: border-box;
+  transition: opacity 0.15s, transform 0.15s;
+  will-change: opacity, transform;
+}
+.mobile-btn:active {
+  opacity: 0.75;
+  transform: scale(0.97);
 }
 
 .mobile-btn-primary {
@@ -294,7 +332,7 @@
   font-weight: 600;
 }
 
-/* ─── Impact Stats Grid (2x2) ─── */
+/* ─── Impact Stats Grid (2x2) — colored left-border accents ─── */
 .mobile-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -309,15 +347,28 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
+
+/* Colored left stripe per stat card */
+.mobile-stat-indigo  { border-left: 3px solid #6366f1; }
+.mobile-stat-emerald { border-left: 3px solid #10b981; }
+.mobile-stat-cyan    { border-left: 3px solid #06b6d4; }
+.mobile-stat-violet  { border-left: 3px solid #8b5cf6; }
 
 .mobile-stat-num {
   font-size: 1.65rem;
   font-weight: 800;
-  color: var(--color-text);
   font-family: var(--font-mono);
   line-height: 1;
+  color: var(--color-text);
 }
+
+/* Colored stat numbers */
+.mobile-stat-num-indigo  { color: #6366f1; }
+.mobile-stat-num-emerald { color: #10b981; }
+.mobile-stat-num-cyan    { color: #06b6d4; }
+.mobile-stat-num-violet  { color: #8b5cf6; }
 
 .mobile-stat-label {
   font-size: 0.78rem;
@@ -331,7 +382,7 @@
   color: var(--color-text-muted);
 }
 
-/* ─── Projects Cards ─── */
+/* ─── Projects Cards — colored left border per project ─── */
 .mobile-projects-list {
   display: flex;
   flex-direction: column;
@@ -346,6 +397,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Project accent stripes */
+.mobile-project-indigo { border-left: 4px solid #6366f1; }
+.mobile-project-emerald { border-left: 4px solid #10b981; }
+.mobile-project-violet  { border-left: 4px solid #8b5cf6; }
+
+/* GitHub activity card — subtle emerald left stripe */
+.mobile-github-card {
+  border-left: 4px solid #10b981;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .mobile-project-header {
@@ -411,7 +476,7 @@
   margin-top: 0.25rem;
 }
 
-/* ─── Technical Skills ─── */
+/* ─── Technical Skills — colored left border per group ─── */
 .mobile-skills-stack {
   display: flex;
   flex-direction: column;
@@ -423,7 +488,14 @@
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+
+/* Skill group accent left borders */
+.mobile-skill-group-indigo  { border-left: 3px solid #6366f1; }
+.mobile-skill-group-emerald { border-left: 3px solid #10b981; }
+.mobile-skill-group-cyan    { border-left: 3px solid #06b6d4; }
+.mobile-skill-group-violet  { border-left: 3px solid #8b5cf6; }
 
 .mobile-skill-title {
   font-size: 0.82rem;
@@ -448,9 +520,15 @@
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-text);
+  transition: opacity 0.12s, transform 0.12s;
+  will-change: opacity, transform;
+}
+.mobile-chip:active {
+  opacity: 0.6;
+  transform: scale(0.95);
 }
 
-/* ─── Experience Timeline ─── */
+/* ─── Experience Timeline — colored dots per role type ─── */
 .mobile-timeline {
   display: flex;
   flex-direction: column;
@@ -466,7 +544,8 @@
   bottom: 8px;
   left: 3px;
   width: 2px;
-  background: var(--color-border);
+  background: linear-gradient(to bottom, #6366f1, #06b6d4, #8b5cf6);
+  opacity: 0.4;
 }
 
 .mobile-timeline-item {
@@ -478,6 +557,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-timeline-dot {
@@ -489,7 +569,13 @@
   border-radius: 50%;
   background: var(--color-accent);
   border: 2px solid var(--color-bg);
+  box-shadow: 0 0 0 2px var(--color-border);
 }
+
+/* Colored timeline dots */
+.mobile-dot-indigo { background: #6366f1; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25); }
+.mobile-dot-cyan   { background: #06b6d4; box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.25); }
+.mobile-dot-violet { background: #8b5cf6; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25); }
 
 .mobile-role-title {
   font-size: 1.05rem;
@@ -522,6 +608,18 @@
   margin-bottom: 0.35rem;
 }
 
+/* ─── GitHub Activity Dot (emerald pulse) ─── */
+.mobile-gh-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: mobile-pulse-dot 2s ease-in-out infinite;
+  will-change: opacity;
+}
+
 /* ─── Contact Section ─── */
 .mobile-contact-methods {
   display: flex;
@@ -540,6 +638,12 @@
   border-radius: 10px;
   color: var(--color-text);
   text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.15s;
+  will-change: opacity;
+}
+.mobile-contact-item:active {
+  opacity: 0.7;
 }
 
 .mobile-contact-left {
@@ -561,6 +665,7 @@
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .mobile-input, .mobile-textarea {
@@ -573,6 +678,10 @@
   font-family: var(--font-primary);
   font-size: 0.88rem;
   box-sizing: border-box;
+}
+.mobile-input:focus, .mobile-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
 }
 .mobile-textarea {
   min-height: 100px;
@@ -592,15 +701,21 @@
 }
 
 .mobile-back-to-top {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 20px;
   background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
+  border: 1px solid #6366f1;
+  color: #6366f1;
   cursor: pointer;
   touch-action: manipulation;
+  transition: opacity 0.15s, transform 0.15s;
+  will-change: opacity, transform;
+}
+.mobile-back-to-top:active {
+  opacity: 0.65;
+  transform: scale(0.96);
 }
 
 /* ─── Mobile Case Study Page ─── */
