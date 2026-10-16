@@ -64,9 +64,10 @@ const Hero = () => {
   const imageY = useTransform(scrollY, [0, 600], isMobile ? [0, 0] : [0, -50]);
   
   const phrases = [
-    "Software Engineer.",
-    "Machine Learning Intern.",
-    "Building Scalable Tech."
+    "AI & ML Engineer.",
+    "Production Systems Builder.",
+    "Computer Vision Specialist.",
+    "Distributed Systems Architect."
   ];
 
   const handleCopyEmail = (e) => {
@@ -126,8 +127,12 @@ const Hero = () => {
         <div className="hero-content">
           <div className="hero-badge-row">
             <StatusCapsule playHover={playHover} />
+            <div className="hero-target-pill mono-text">
+              <span className="pulse-dot-emerald" />
+              <span>Seeking AI/ML &amp; SWE Roles · Full-Time / Internships</span>
+            </div>
             <div className="hero-sub-pill mono-text">
-              <span>AI Systems — Distributed Pipelines — Edge Vision</span>
+              <span>90+ RTSP Feeds · Sub-50ms Inference · IEEE Researcher</span>
             </div>
           </div>
           <h1 className="hero-title">
@@ -174,8 +179,15 @@ const Hero = () => {
                 style={{ top: '-46px', left: '16px', right: 'auto' }}
               />
             </div>
-            <a href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" onMouseEnter={playHover} onClick={playSuccess}>
-              <FileText size={16} /> Resume
+            <a 
+              href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-resume" 
+              onMouseEnter={playHover} 
+              onClick={playSuccess}
+            >
+              <FileText size={16} /> Resume (PDF)
             </a>
             <button 
               type="button"

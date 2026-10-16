@@ -46,7 +46,7 @@ const About = () => {
         <div style={{ marginBottom: '1.25rem' }}>
           <span className="status-tag status-tag-emerald" style={{ fontSize: '0.68rem' }}>
             <span className="status-dot" style={{ width: 6, height: 6, marginRight: 6 }} />
-            CURRENTLY: OPEN TO FULL-TIME ROLES · 2027
+            CURRENTLY: OPEN TO AI/ML &amp; SWE ROLES (FULL-TIME &amp; INTERNSHIPS)
           </span>
         </div>
 

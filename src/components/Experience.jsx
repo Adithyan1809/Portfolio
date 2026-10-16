@@ -18,10 +18,10 @@ const timelineData = [
     badgeClass: 'status-tag-emerald',
     icon: Briefcase,
     bullets: [
-      'Architected high-throughput async RTSP/ONVIF ingestion pipeline processing 90+ concurrent camera feeds.',
-      'Integrated ArcFace & FaceNet512 embeddings into in-memory FAISS IndexFlatIP, dropping recognition latency by 20%.',
-      'Engineered resilient FastAPI backend with Redis task queues and PostgreSQL connection pooling.',
-      'Led and mentored a cross-functional squad of 6 engineers across AI inference, backend, and Docker deployment.'
+      'Engineered an async RTSP/ONVIF ingestion pipeline processing 90+ concurrent camera feeds at 24fps with zero dropped frames.',
+      'Slashed facial recognition latency by 20% (<4ms cosine retrieval) by mapping ArcFace & FaceNet512 embeddings into FAISS IndexFlatIP.',
+      'Hardened backend throughput under peak load via FastAPI asynchronous endpoints, Redis pub/sub queues, and PostgreSQL connection pooling.',
+      'Led and unblocked a cross-functional squad of 6 engineers across AI model inference, backend microservices, and Docker edge deployments.'
     ],
     tech: ['FastAPI', 'Redis', 'FAISS', 'ArcFace', 'PostgreSQL', 'Docker', 'RTSP/ONVIF']
   },
@@ -36,9 +36,9 @@ const timelineData = [
     badgeClass: 'status-tag-indigo',
     icon: GraduationCap,
     bullets: [
-      'Core focus: Deep Learning, Computer Vision, Distributed Systems, Data Structures & Algorithm Design.',
-      'Authoring undergraduate research on multi-camera re-identification and edge-cloud accountability systems.',
-      'Active leadership in campus technical organizations and hackathons.'
+      'CGPA: 8.44 / 10 · Core focus: Deep Learning, Computer Vision, Distributed Systems, High-Performance Data Structures & Algorithms.',
+      'Co-authored research on real-time biometric multi-camera re-identification and edge-cloud accountability systems (IEEE Submitted).',
+      'Technical lead & mentor across campus hackathons and collegiate development initiatives.'
     ],
     tech: ['PyTorch', 'TensorFlow', 'Computer Vision', 'Data Structures', 'Linux']
   },

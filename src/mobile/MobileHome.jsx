@@ -123,6 +123,10 @@ export default function MobileHome() {
           <div className="mobile-hero-title-group">
             <h1 className="mobile-hero-name">Adithyan Prakash</h1>
             <span className="mobile-hero-role">AI &amp; ML Engineer</span>
+            <div className="mobile-recruiter-pill">
+              <span className="mobile-status-dot" style={{ width: 6, height: 6 }} />
+              <span>Seeking AI/ML &amp; SWE Roles · Full-Time / Internships</span>
+            </div>
             <span className="mobile-hero-loc">
               <MapPin size={13} /> Bengaluru, India
             </span>
@@ -203,6 +207,33 @@ export default function MobileHome() {
             <span className="mobile-stat-label">Lines of Code</span>
             <span className="mobile-stat-sub">Python · C++ · TS</span>
           </div>
+        </div>
+      </section>
+
+      {/* ─── Recruiter At-A-Glance (Quick-Scan) ─── */}
+      <section className="mobile-section mobile-container" style={{ paddingTop: '1.25rem', paddingBottom: '1.5rem' }}>
+        <div className="mobile-recruiter-card">
+          <div className="mobile-recruiter-header">
+            <span className="mobile-eyebrow" style={{ margin: 0, paddingLeft: 0, borderLeft: 'none' }}>WHY HIRE ADITHYAN</span>
+            <span className="status-tag status-tag-emerald" style={{ fontSize: '0.62rem' }}>RECRUITER TL;DR</span>
+          </div>
+          <ul className="mobile-recruiter-points">
+            <li>
+              <strong>Production Proven:</strong> 90+ concurrent RTSP camera feeds processing ArcFace embeddings at 24fps with zero frame drop.
+            </li>
+            <li>
+              <strong>Sub-50ms Optimization:</strong> Accelerated FAISS vector retrieval to &lt;4ms &amp; tuned CPU inference pipelines.
+            </li>
+            <li>
+              <strong>Full-Stack AI Ownership:</strong> From low-level C++/PyTorch &amp; CV pipelines to FastAPI, Docker containers, &amp; Next.js UIs.
+            </li>
+            <li>
+              <strong>Undergrad Squad Leadership:</strong> Directed and unblocked a 6-engineer squad as Technical Lead at SMAP Technologies.
+            </li>
+            <li>
+              <strong>Peer-Reviewed Research:</strong> Co-authored IEEE-submitted paper on multi-camera biometric re-identification.
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -384,10 +415,10 @@ export default function MobileHome() {
             <h3 className="mobile-role-title">Technical Lead Intern</h3>
             <span className="mobile-company-line">SMAP Technologies</span>
             <ul className="mobile-bullet-list">
-              <li>Architected async RTSP/ONVIF ingestion pipeline handling 90+ concurrent camera feeds.</li>
-              <li>Integrated ArcFace &amp; FaceNet512 into FAISS IndexFlatIP, dropping recognition latency by 20%.</li>
-              <li>Engineered FastAPI backend with Redis task queues and PostgreSQL connection pooling.</li>
-              <li>Led and mentored a cross-functional squad of 6 engineers across inference and Docker deployment.</li>
+              <li>Engineered async RTSP ingestion pipeline processing 90+ concurrent camera feeds at 24fps with zero dropped frames.</li>
+              <li>Slashed face recognition latency by 20% (&lt;4ms retrieval) by mapping ArcFace embeddings into in-memory FAISS IndexFlatIP.</li>
+              <li>Hardened backend throughput via FastAPI asynchronous endpoints, Redis pub/sub queues, and PostgreSQL connection pooling.</li>
+              <li>Led and mentored a cross-functional squad of 6 engineers across AI model inference, backend APIs, and Docker edge deployment.</li>
             </ul>
           </div>
 
@@ -398,8 +429,8 @@ export default function MobileHome() {
             <h3 className="mobile-role-title">B.E. in AI &amp; Machine Learning</h3>
             <span className="mobile-company-line">Dayananda Sagar Academy (DSATM) · CGPA 8.44</span>
             <ul className="mobile-bullet-list">
-              <li>Core coursework: Deep Learning, Computer Vision, Distributed Systems, Data Structures.</li>
-              <li>Authoring research on multi-camera re-identification for emergency muster systems.</li>
+              <li>Core coursework: Deep Learning, Computer Vision, Distributed Systems, Data Structures &amp; High-Performance Algorithms.</li>
+              <li>Co-authoring research on multi-camera biometric re-identification for emergency muster systems (IEEE Submitted).</li>
             </ul>
           </div>
 
