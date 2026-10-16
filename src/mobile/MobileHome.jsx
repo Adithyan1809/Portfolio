@@ -416,7 +416,123 @@ export default function MobileHome() {
         </div>
       </section>
 
-      {/* ─── GitHub Live Activity ─── */}
+      {/* ─── More Projects ─── */}
+      <section id="more-projects" className="mobile-section mobile-container">
+        <div className="mobile-section-header">
+          <span className="mobile-eyebrow">MORE WORK</span>
+          <h2 className="mobile-title">Other Projects</h2>
+          <p className="mobile-desc">Side projects, ML experiments, and data engineering pipelines.</p>
+        </div>
+
+        <div className="mobile-projects-list">
+          {/* VisageAI */}
+          <div className="mobile-project-card mobile-project-emerald">
+            <div className="mobile-project-header">
+              <span className="mobile-project-cat">Computer Vision · Biometrics</span>
+              <span className="status-tag status-tag-emerald" style={{ fontSize: '0.62rem' }}>ENTERPRISE-GRADE</span>
+            </div>
+            <h3 className="mobile-project-title">VisageAI</h3>
+            <p className="mobile-project-desc">
+              Enterprise face recognition &amp; attendance system running on CPU. YuNet → DeepSORT → ArcFace R100 512D → pgvector. Sub-second recognition with JWT auth dashboard in Next.js.
+            </p>
+            <div className="mobile-impact-pill" style={{ background: 'rgba(16, 185, 129, 0.08)', borderColor: 'rgba(16, 185, 129, 0.25)' }}>
+              ⚡ Zero false positives via cosine threshold (0.55+) — no GPU required.
+            </div>
+            <div className="mobile-tech-tags">
+              <span className="mobile-tech-tag">FastAPI</span>
+              <span className="mobile-tech-tag">InsightFace</span>
+              <span className="mobile-tech-tag">pgvector</span>
+              <span className="mobile-tech-tag">Next.js</span>
+            </div>
+            <div className="mobile-card-actions">
+              <a href="https://github.com/Adithyan1809/VisageAI" target="_blank" rel="noreferrer" className="mobile-btn mobile-btn-secondary" style={{ flex: 1, padding: '0.65rem' }}>
+                <FaGithub size={15} /> View on GitHub
+              </a>
+            </div>
+          </div>
+
+          {/* Zomato Data Engineering */}
+          <div className="mobile-project-card mobile-project-indigo">
+            <div className="mobile-project-header">
+              <span className="mobile-project-cat">Data Engineering · LLM</span>
+              <span className="status-tag status-tag-indigo" style={{ fontSize: '0.62rem' }}>MODERN DATA STACK</span>
+            </div>
+            <h3 className="mobile-project-title">Zomato AI Data Engineering</h3>
+            <p className="mobile-project-desc">
+              End-to-end batch pipeline: 2.3 GB food-delivery data (10M+ orders, 300K reviews) through S3 → Snowflake → dbt → Airflow. LLM enrichment + RAG + Text-to-SQL dashboard.
+            </p>
+            <div className="mobile-impact-pill">
+              ⚡ Three AI capabilities: LLM sentiment, RAG chat-with-reviews, NL-to-SQL over Snowflake marts.
+            </div>
+            <div className="mobile-tech-tags">
+              <span className="mobile-tech-tag">Snowflake</span>
+              <span className="mobile-tech-tag">dbt</span>
+              <span className="mobile-tech-tag">Airflow</span>
+              <span className="mobile-tech-tag">OpenAI</span>
+              <span className="mobile-tech-tag">Streamlit</span>
+            </div>
+            <div className="mobile-card-actions">
+              <a href="https://github.com/Adithyan1809/zomato-ai-data-engineering-project" target="_blank" rel="noreferrer" className="mobile-btn mobile-btn-secondary" style={{ flex: 1, padding: '0.65rem' }}>
+                <FaGithub size={15} /> View on GitHub
+              </a>
+            </div>
+          </div>
+
+          {/* CLV & Churn */}
+          <div className="mobile-project-card mobile-project-violet">
+            <div className="mobile-project-header">
+              <span className="mobile-project-cat">ML · Customer Analytics</span>
+              <span className="status-tag status-tag-violet" style={{ fontSize: '0.62rem' }}>PROD-GRADE ANALYTICS</span>
+            </div>
+            <h3 className="mobile-project-title">CLV &amp; Churn Segmentation</h3>
+            <p className="mobile-project-desc">
+              Customer analytics on 300K+ transactions. RFM → K-Means (6 segments) → BG/NBD CLV → XGBoost churn classifier with SHAP → A/B test simulation with power analysis.
+            </p>
+            <div className="mobile-impact-pill" style={{ background: 'rgba(139, 92, 246, 0.08)', borderColor: 'rgba(139, 92, 246, 0.25)' }}>
+              ⚡ 5 statistical tests + Chart.js executive dashboard — no server needed.
+            </div>
+            <div className="mobile-tech-tags">
+              <span className="mobile-tech-tag">XGBoost</span>
+              <span className="mobile-tech-tag">SHAP</span>
+              <span className="mobile-tech-tag">Scikit-learn</span>
+              <span className="mobile-tech-tag">SQLite</span>
+            </div>
+            <div className="mobile-card-actions">
+              <a href="https://github.com/Adithyan1809/customer-lifetime-value-churn-segmentation" target="_blank" rel="noreferrer" className="mobile-btn mobile-btn-secondary" style={{ flex: 1, padding: '0.65rem' }}>
+                <FaGithub size={15} /> View on GitHub
+              </a>
+            </div>
+          </div>
+
+          {/* Demand Forecasting */}
+          <div className="mobile-project-card" style={{ borderLeft: '4px solid #f59e0b' }}>
+            <div className="mobile-project-header">
+              <span className="mobile-project-cat">ML · Supply Chain · S&OP</span>
+              <span className="status-tag" style={{ fontSize: '0.62rem', color: '#f59e0b', background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)' }}>R² 0.889 CHAMPION</span>
+            </div>
+            <h3 className="mobile-project-title">Enterprise Demand Forecasting</h3>
+            <p className="mobile-project-desc">
+              Multi-model ML benchmark for retail demand forecasting. XGBoost champion (R² 0.889) vs Random Forest vs Ridge — strict out-of-time validation on 15K+ orders with zero data leakage.
+            </p>
+            <div className="mobile-impact-pill" style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)' }}>
+              ⚡ $3.98M net benefit — 178K stockout units prevented vs naive reorder.
+            </div>
+            <div className="mobile-tech-tags">
+              <span className="mobile-tech-tag">XGBoost</span>
+              <span className="mobile-tech-tag">Scikit-learn</span>
+              <span className="mobile-tech-tag">Streamlit</span>
+              <span className="mobile-tech-tag">Pandas</span>
+            </div>
+            <div className="mobile-card-actions">
+              <a href="https://github.com/Adithyan1809/Demand-Forecasting" target="_blank" rel="noreferrer" className="mobile-btn mobile-btn-secondary" style={{ flex: 1, padding: '0.65rem' }}>
+                <FaGithub size={15} /> View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <section className="mobile-section mobile-container">
         <div className="mobile-project-card mobile-github-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import WireframeCube from './WireframeCube';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Activity, Cpu, Layers } from 'lucide-react';
+import { ArrowRight, Activity, Cpu, Layers, Eye, Database, BarChart2, TrendingUp } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import MagneticButton from './MagneticButton';
@@ -54,6 +54,93 @@ const projects = [
     github: 'https://github.com/Adithyan1809',
   }
 ];
+
+// ── Additional / Side Projects ──────────────────────────────────────────────
+const moreProjects = [
+  {
+    id: 'visageai',
+    title: 'VisageAI',
+    category: 'Computer Vision · Biometrics',
+    status: 'ENTERPRISE-GRADE',
+    badgeClass: 'status-tag-emerald',
+    icon: Eye,
+    description: 'Enterprise face recognition & attendance system running entirely on CPU. YuNet detection → DeepSORT tracking → ArcFace R100 512D embeddings → pgvector similarity search. Sub-second end-to-end with JWT auth dashboard.',
+    impact: 'Zero false positives via cosine threshold (0.55+). BestFrameSelector picks sharpest crop per track — no GPU required.',
+    tech: ['Python', 'FastAPI', 'InsightFace', 'pgvector', 'Next.js', 'PostgreSQL'],
+    github: 'https://github.com/Adithyan1809/VisageAI',
+  },
+  {
+    id: 'zomato-data',
+    title: 'Zomato AI Data Engineering',
+    category: 'Data Engineering · LLM Analytics',
+    status: 'FULL MODERN DATA STACK',
+    badgeClass: 'status-tag-indigo',
+    icon: Database,
+    description: 'End-to-end batch pipeline transforming 2.3 GB of food-delivery data (10M+ orders, 300K reviews) through S3 → Snowflake (Bronze/Silver/Gold) → dbt → Airflow. LLM review enrichment via OpenAI + RAG + Text-to-SQL analytics dashboard.',
+    impact: 'Three AI capabilities in one pipeline: LLM sentiment enrichment, RAG chat-with-reviews, and natural language SQL over Snowflake marts.',
+    tech: ['Python', 'Snowflake', 'dbt', 'Airflow', 'OpenAI', 'Streamlit', 'Amazon S3'],
+    github: 'https://github.com/Adithyan1809/zomato-ai-data-engineering-project',
+  },
+  {
+    id: 'clv-churn',
+    title: 'CLV & Churn Segmentation',
+    category: 'ML · Customer Analytics',
+    status: 'PRODUCTION-GRADE ANALYTICS',
+    badgeClass: 'status-tag-violet',
+    icon: BarChart2,
+    description: 'Full customer analytics system on 300K+ e-commerce transactions. RFM feature engineering → K-Means (6 segments) → BG/NBD CLV prediction → XGBoost churn classifier with SHAP explainability → A/B test simulation with power analysis.',
+    impact: 'Five statistical tests (t-test, ANOVA, chi-square, Mann-Whitney U, Cohen\'s d). Self-contained Chart.js executive dashboard, no server needed.',
+    tech: ['Python', 'XGBoost', 'Scikit-learn', 'SHAP', 'SQLite', 'Chart.js'],
+    github: 'https://github.com/Adithyan1809/customer-lifetime-value-churn-segmentation',
+  },
+  {
+    id: 'demand-forecast',
+    title: 'Enterprise Demand Forecasting',
+    category: 'ML · Supply Chain · S&OP',
+    status: 'R² 0.889 CHAMPION MODEL',
+    badgeClass: 'status-tag-amber',
+    icon: TrendingUp,
+    description: 'Multi-model ML benchmark for demand forecasting with zero data leakage via strict out-of-time validation (Sep–Jan test horizon, 15K+ orders). XGBoost champion beats Random Forest and Ridge baseline on MAPE, MAE, RMSE.',
+    impact: '$3.98M net financial benefit — 178K stockout units prevented vs naive reorder policy. Dynamic promotion ROI optimizer built in.',
+    tech: ['Python', 'XGBoost', 'Scikit-learn', 'Streamlit', 'Pandas'],
+    github: 'https://github.com/Adithyan1809/Demand-Forecasting',
+  },
+];
+
+const MoreProjectCard = ({ p, playHover, playClick }) => {
+  const IconComponent = p.icon;
+  return (
+    <div
+      className="more-project-card liquid-glass"
+      onMouseEnter={playHover}
+      data-cursor="explore"
+    >
+      <div className="more-card-top">
+        <span className={`status-tag ${p.badgeClass}`}>
+          <IconComponent size={11} className="status-icon" />
+          {p.status}
+        </span>
+        <a
+          href={p.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`View ${p.title} on GitHub`}
+          className="icon-btn"
+          onClick={playClick}
+        >
+          <FaGithub size={16} />
+        </a>
+      </div>
+      <span className="card-category-label mono-text" style={{ fontSize: '0.68rem', marginBottom: '0.3rem', display: 'block' }}>{p.category}</span>
+      <h3 className="more-card-title">{p.title}</h3>
+      <p className="more-card-desc">{p.description}</p>
+      <div className="more-card-impact mono-text">⚡ {p.impact}</div>
+      <div className="card-tech-stack" style={{ marginTop: 'auto', paddingTop: '1rem' }}>
+        {p.tech.map(t => <span key={t} className="tech-pill mono-text">{t}</span>)}
+      </div>
+    </div>
+  );
+};
 
 const ProjectCard = ({ p, playHover, playClick, playPowerUp }) => {
   const cardRef = useRef(null);
@@ -181,6 +268,24 @@ const FeaturedProjects = () => {
               playPowerUp={playPowerUp}
             />
           ))}
+        </div>
+
+        {/* ── More Projects ── */}
+        <div className="more-projects-wrapper">
+          <div className="more-projects-header">
+            <span className="section-eyebrow mono-text">MORE WORK</span>
+            <h3 className="more-projects-title">Other Projects &amp; Experiments</h3>
+          </div>
+          <div className="more-projects-grid">
+            {moreProjects.map(p => (
+              <MoreProjectCard
+                key={p.id}
+                p={p}
+                playHover={playHover}
+                playClick={playClick}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

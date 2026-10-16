@@ -241,3 +241,92 @@
     font-size: 1.2rem;
   }
 }
+
+/* ─── Amber status tag (Demand Forecasting) ─── */
+.status-tag-amber {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* ─── More Projects Section ─── */
+.more-projects-wrapper {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.more-projects-header {
+  margin-bottom: 1.75rem;
+}
+
+.more-projects-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin: 0.25rem 0 0;
+}
+
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1.25rem;
+}
+
+.more-project-card {
+  position: relative;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  min-height: 260px;
+}
+
+.more-project-card:hover {
+  transform: translateY(-4px);
+}
+
+.more-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.more-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+
+.more-card-desc {
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.more-card-impact {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .more-project-card {
+    padding: 1.25rem;
+    min-height: unset;
+  }
+}
