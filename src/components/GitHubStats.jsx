@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
-import { GitCommit, ExternalLink } from 'lucide-react';
+import { GitCommit } from 'lucide-react';
 import ChromaText from './shared/ChromaText';
 import { useSoundEffects } from '../hooks/useSoundEffects';
+
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
 const GitHubStats = () => {
   const [theme, setTheme] = useState('light');
@@ -51,7 +53,6 @@ const GitHubStats = () => {
         }
       })
       .catch(() => {
-        // Fallback gracefully without breaking UI
         setLastPush('Active contributor');
       });
   }, []);
@@ -66,6 +67,11 @@ const GitHubStats = () => {
       }, 500);
     }
   }, []);
+
+  // Use smaller blocks on mobile so the calendar fits better within horizontal scroll
+  const calendarBlockSize = isTouchDevice ? 10 : 14;
+  const calendarBlockMargin = isTouchDevice ? 3 : 4;
+  const calendarFontSize = isTouchDevice ? 11 : 14;
 
   return (
     <section id="github" className="section-padding border-bottom section-rule-lines" style={{ position: 'relative', overflow: 'hidden' }}>
@@ -93,17 +99,18 @@ const GitHubStats = () => {
           className="calendar-container liquid-glass"
           onMouseEnter={playTwinkle}
           style={{ 
-            padding: '2.25rem', 
+            padding: isTouchDevice ? '1.25rem 1rem' : '2.25rem', 
             borderRadius: '16px',
-            overflowX: 'auto'
+            overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
           }}
         >
           <GitHubCalendar 
             username="Adithyan1809" 
             colorScheme={theme}
-            blockSize={14}
-            blockMargin={4}
-            fontSize={14}
+            blockSize={calendarBlockSize}
+            blockMargin={calendarBlockMargin}
+            fontSize={calendarFontSize}
           />
         </div>
       </div>

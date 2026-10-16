@@ -390,3 +390,62 @@
   min-height: 2em;
 }
 
+/* ─── Small phone fixes (≤ 480px) ─── */
+@media (max-width: 480px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + 1rem);
+    padding-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 9vw, 2.5rem);
+    min-height: 3.2em;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-badge-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-sub-pill {
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-ctas .icon-btn {
+    width: auto;
+    align-self: center;
+  }
+
+  /* Hide floating badges on very small screens — they overflow */
+  .hero-floating-badge {
+    display: none;
+  }
+
+  .hero-photo-wrapper {
+    max-width: 200px;
+  }
+
+  .hero-image-wrapper {
+    min-height: 220px;
+  }
+}

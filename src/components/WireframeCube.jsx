@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Skip entirely on touch devices — decorative only, causes continuous repaints
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 const CubeSvg = ({ width, height, strokeWidth }) => (
   <svg width={width} height={height} viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth={strokeWidth}>
     <polygon points="30,30 70,30 70,70 30,70" />
@@ -14,6 +17,8 @@ const CubeSvg = ({ width, height, strokeWidth }) => (
 );
 
 const WireframeCube = () => {
+  if (isTouchDevice) return null;
+
   return (
     <div style={{
       position: 'absolute',

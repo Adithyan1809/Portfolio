@@ -3,6 +3,10 @@ import React, { useEffect, useRef } from 'react';
 const Constellation = () => {
   const canvasRef = useRef(null);
 
+  // Skip on mobile/touch — canvas RAF loop drains battery and causes scroll jank
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+  if (isTouchDevice) return null;
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -11,7 +15,6 @@ const Constellation = () => {
     let particles = [];
     let mouse = { x: null, y: null, radius: 150 };
 
-    // Set canvas to full screen
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -20,14 +23,12 @@ const Constellation = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Track mouse
     const handleMouseMove = (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
     };
     window.addEventListener('mousemove', handleMouseMove);
     
-    // Track when mouse leaves
     const handleMouseOut = () => {
       mouse.x = null;
       mouse.y = null;
@@ -52,21 +53,14 @@ const Constellation = () => {
       }
 
       update() {
-        // Bounce off edges
         if (this.x > canvas.width || this.x < 0) {
           this.directionX = -this.directionX;
         }
         if (this.y > canvas.height || this.y < 0) {
           this.directionY = -this.directionY;
         }
-
-        // Check collision / distance with mouse
-        // We make particles slowly move away from the mouse, or we can just connect them
-        
-        // Move particle
         this.x += this.directionX;
         this.y += this.directionY;
-        
         this.draw();
       }
     }
@@ -74,8 +68,6 @@ const Constellation = () => {
     const init = () => {
       particles = [];
       const numberOfParticles = Math.min(Math.floor((canvas.height * canvas.width) / 18000), 35);
-      
-      // We will grab the accent color from CSS variables, but fallback to a grey
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       const particleColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
 
@@ -85,7 +77,6 @@ const Constellation = () => {
         const y = Math.random() * (canvas.height - size * 2) + size;
         const directionX = (Math.random() * 0.4) - 0.2;
         const directionY = (Math.random() * 0.4) - 0.2;
-
         particles.push(new Particle(x, y, directionX, directionY, size, particleColor));
       }
     };
@@ -125,7 +116,6 @@ const Constellation = () => {
           }
         }
 
-        // Connect to mouse
         if (mouse.x && mouse.y) {
           const distanceToMouse = ((particles[a].x - mouse.x) * (particles[a].x - mouse.x)) +
                                   ((particles[a].y - mouse.y) * (particles[a].y - mouse.y));
@@ -146,7 +136,6 @@ const Constellation = () => {
     init();
     animationFrameId = requestAnimationFrame(animate);
 
-    // Pause animation when hero is off-screen to save CPU / battery
     const io = new IntersectionObserver(([entry]) => {
       isVisible = entry.isIntersecting;
       if (isVisible) {
@@ -158,7 +147,6 @@ const Constellation = () => {
     }, { threshold: 0.05 });
     io.observe(canvas);
 
-    // Re-init on theme change to update colors
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === 'data-theme') {

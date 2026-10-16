@@ -173,3 +173,28 @@
 
 /* We could add an intricate keyboard top view if we wanted, 
 but since it's viewed from the front, a simple solid base is often enough for the scroll effect. */
+
+/* ─── Mobile static fallback ─── */
+.macbook-mobile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  gap: 1.5rem;
+}
+
+.macbook-mobile-preview {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.macbook-mobile-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}

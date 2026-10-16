@@ -22,7 +22,7 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
       <span className="section-watermark-text" aria-hidden="true">BLUEPRINT</span>
 
       {/* Breadcrumb Top Bar */}
-      <div className="container cs-top-bar" style={{ paddingTop: 'calc(var(--nav-height) + 3.5rem)', paddingBottom: '1rem', position: 'relative', zIndex: 2 }}>
+      <div className="container cs-top-bar cs-page-top" style={{ position: 'relative', zIndex: 2 }}>
         <Link to="/" className="back-link mono-text" onMouseEnter={playHover} onClick={playClick}>
           <ArrowLeft size={16}/> Back to Portfolio
         </Link>

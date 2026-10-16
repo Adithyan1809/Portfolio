@@ -6,6 +6,15 @@ const ScrollReveal = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Check immediately if already in view on mount / reload
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 150 && rect.bottom > -150) {
+        setIsVisible(true);
+        return;
+      }
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -14,7 +23,8 @@ const ScrollReveal = ({ children }) => {
         }
       },
       {
-        threshold: 0.15, // Trigger when 15% of the element is visible
+        threshold: 0,
+        rootMargin: '120px 0px 120px 0px',
       }
     );
 

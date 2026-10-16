@@ -4,6 +4,9 @@ import { Icosahedron, Sphere, MeshDistortMaterial, Float } from '@react-three/dr
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './NeuralCore3D.css';
 
+// Skip heavy WebGL on touch/mobile
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 const NeuralCore = ({ isDark }) => {
   const groupRef = useRef();
 
@@ -14,7 +17,6 @@ const NeuralCore = ({ isDark }) => {
     }
   });
 
-  // Default to a highly visible bright color in dark mode, and a solid dark color in light mode
   const wireframeColor = isDark ? '#ffffff' : '#000000';
   const coreColor = isDark ? '#ffffff' : '#111111';
   const glowColor = isDark ? '#ffffff' : '#000000';
@@ -67,7 +69,7 @@ const NeuralCore3D = () => {
         const rgb = bgColor.match(/\d+/g);
         if (rgb && rgb.length >= 3) {
           const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-          isBgDark = brightness < 128; // If brightness is low, it's dark mode
+          isBgDark = brightness < 128;
         }
       } catch (e) {
         // Fallback
@@ -82,9 +84,18 @@ const NeuralCore3D = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Mobile: lightweight CSS animated orb instead of heavy WebGL canvas
+  if (isTouchDevice) {
+    return (
+      <div className="neural-core-container neural-core-mobile">
+        <div className="neural-core-orb" />
+      </div>
+    );
+  }
+
   return (
     <div className="neural-core-container" onMouseDown={playBassDrop}>
-      <Canvas camera={{ position: [0, 0, 7.5], fov: 45 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, 0, 7.5], fov: 45 }} dpr={[1, 1.5]}>
         <ambientLight intensity={isDark ? 1.5 : 1} />
         <directionalLight position={[10, 10, 10]} intensity={isDark ? 2.5 : 2} />
         <directionalLight position={[-10, -10, -10]} intensity={isDark ? 1 : 0.5} />

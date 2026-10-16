@@ -32,3 +32,20 @@
 .edu-item li {
   margin-bottom: 0.5rem;
 }
+
+/* ─── Small phones ─── */
+@media (max-width: 480px) {
+  .edu-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .edu-header h4 {
+    font-size: 1.05rem;
+  }
+
+  .edu-item ul {
+    padding-left: 1.1rem;
+  }
+}

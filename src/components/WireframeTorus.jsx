@@ -1,6 +1,11 @@
 import React from 'react';
 
+// Skip entirely on touch devices — decorative animation causes continuous compositing
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 const WireframeTorus = () => {
+  if (isTouchDevice) return null;
+
   return (
     <div style={{
       position: 'absolute',

@@ -87,6 +87,13 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
+  /* Prevent horizontal overscroll bounce on iOS */
+  overscroll-behavior-x: none;
+}
+
+/* Eliminate 300ms tap delay on mobile for all interactive elements */
+a, button, [role="button"], input, textarea, select, label {
+  touch-action: manipulation;
 }
 
 .app-container {
@@ -493,3 +500,32 @@ p {
   opacity: 0.022;
 }
 
+/* ─── Mobile performance: reduce expensive backdrop-filter ─── */
+@media (max-width: 768px) {
+  .liquid-glass,
+  .card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-bg-secondary);
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* ─── Prefers reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grain-overlay {
+    display: none;
+  }
+}

@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Skip entirely on touch devices — decorative animation causes continuous compositing
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 const PyramidSvg = ({ width, height, strokeWidth }) => (
   <svg width={width} height={height} viewBox="0 0 100 100" fill="none" stroke="var(--color-text)" strokeWidth={strokeWidth}>
     <polygon points="50,20 20,75 80,75" />
@@ -13,6 +16,8 @@ const PyramidSvg = ({ width, height, strokeWidth }) => (
 );
 
 const WireframePyramid = () => {
+  if (isTouchDevice) return null;
+
   return (
     <div style={{
       position: 'absolute',

@@ -71,3 +71,27 @@
   background: var(--color-bg-tertiary);
   color: var(--color-accent);
 }
+
+/* ─── Mobile: drop expensive backdrop-filter, use solid bg ─── */
+@media (max-width: 768px) {
+  .cmdk-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.75);
+    padding-top: 8vh;
+    align-items: flex-start;
+  }
+
+  .cmdk-dialog {
+    width: 95%;
+  }
+
+  [cmdk-input] {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  [cmdk-list] {
+    max-height: 60vh;
+  }
+}

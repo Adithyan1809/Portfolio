@@ -96,3 +96,15 @@
   background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 255, 0.15) 50%, transparent 100%);
   pointer-events: none;
 }
+
+/* ─── Mobile static scanner ─── */
+.parallax-scanner-mobile {
+  padding: 1.5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.scanner-model-static {
+  position: relative;
+  transform: none !important;
+}

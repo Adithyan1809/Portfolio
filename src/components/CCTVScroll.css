@@ -136,3 +136,22 @@
   border-bottom-width: 3px;
   border-right-width: 3px;
 }
+
+/* ─── Mobile static fallback ─── */
+.cctv-mobile-container {
+  padding: 1.5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cctv-mobile-screen {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 16/9;
+  background-color: #000;
+  border: 3px solid var(--color-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  border-radius: 10px;
+  overflow: hidden;
+}

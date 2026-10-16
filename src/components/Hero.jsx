@@ -58,9 +58,10 @@ const Hero = () => {
   
   const { playHover, playClick, playSuccess } = useSoundEffects();
 
-  /* Profile photo parallax */
+  /* Profile photo parallax — disabled on touch devices to prevent jank */
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
   const { scrollY } = useScroll();
-  const imageY = useTransform(scrollY, [0, 600], [0, -50]);
+  const imageY = useTransform(scrollY, [0, 600], isMobile ? [0, 0] : [0, -50]);
   
   const phrases = [
     "Software Engineer.",

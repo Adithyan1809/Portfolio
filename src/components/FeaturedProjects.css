@@ -220,3 +220,24 @@
   border-color: rgba(99, 102, 241, 0.3) !important;
   color: #a5b4fc !important;
 }
+
+/* ─── Mobile: remove expensive backdrop-filter from pills ─── */
+@media (pointer: coarse) {
+  .project-glass-card .tech-pill {
+    backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+  }
+  .tech-pill {
+    backdrop-filter: none !important;
+  }
+}
+
+/* ─── Small phones: tighter card padding ─── */
+@media (max-width: 480px) {
+  .project-card-inner {
+    padding: 1.4rem 1.25rem;
+  }
+  .card-project-title {
+    font-size: 1.2rem;
+  }
+}

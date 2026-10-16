@@ -252,6 +252,36 @@
   }
 }
 
+/* ─── Mobile: freeze the perspective grid — continuous rotateX repaint is brutal on mobile GPUs ─── */
+@media (pointer: coarse) {
+  .contact-section .bg-grid {
+    animation: none;
+    transform: perspective(1000px) rotateX(50deg) translateY(-100px);
+    opacity: 0.4;
+  }
+}
+
+/* ─── Small phones (< 480px) ─── */
+@media (max-width: 480px) {
+  .contact-form-container {
+    padding: 1.25rem 1rem;
+  }
+
+  .contact-method-card {
+    padding: 1rem 1.1rem;
+    gap: 1rem;
+  }
+
+  .contact-val {
+    font-size: 0.85rem;
+  }
+
+  .submit-button {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* ─── Watermark ─── */
 #contact .section-watermark-text {
   position: absolute;

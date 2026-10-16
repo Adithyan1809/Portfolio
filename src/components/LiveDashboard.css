@@ -125,14 +125,7 @@
 }
 
 @media (max-width: 868px) {
-  .live-dashboard {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem;
-    align-items: flex-start;
-  }
-  .metrics-section {
-    width: 100%;
-    justify-content: space-between;
+  .live-dashboard-wrapper {
+    display: none;
   }
 }

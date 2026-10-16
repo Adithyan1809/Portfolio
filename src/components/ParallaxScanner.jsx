@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import "./ParallaxScanner.css";
 
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 export const ParallaxScanner = ({ src }) => {
   const containerRef = useRef(null);
 
@@ -18,6 +20,34 @@ export const ParallaxScanner = ({ src }) => {
   
   // Overall container tilt
   const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [30, 0, -10]);
+
+  // ── Mobile: flat static scanner card instead of scroll-blocking 3D parallax ──
+  if (isTouchDevice) {
+    return (
+      <div className="parallax-scanner-mobile">
+        <div className="scanner-model scanner-model-static">
+          <div className="scanner-viewport">
+            <img 
+              src={src} 
+              alt="Mustering System Track" 
+              className="scanner-bg-image"
+              style={{ position: 'relative', top: 0, height: '100%' }}
+            />
+            <div className="scanner-overlay-ui">
+              <div className="scanner-header mono-text">
+                <span>MUSTERING_SYS v2.4</span>
+                <span className="scanner-live">LIVE TRACKING</span>
+              </div>
+              {/* Static laser line in middle */}
+              <div className="scanner-laser-line" style={{ top: '50%' }}>
+                <div className="laser-glow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="parallax-scanner-container">

@@ -1,14 +1,20 @@
 import React from 'react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 
+// Skip entirely on touch devices — decorative animation causes continuous compositing
+const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
 const WireframeGlobe = () => {
   const { playSonar } = useSoundEffects();
+
+  if (isTouchDevice) return null;
+
   return (
     <div style={{
       position: 'absolute',
       top: 0, left: 0, right: 0, bottom: 0,
-      pointerEvents: 'auto', // changed from none to auto to allow clicks
-      zIndex: 0, // brought up slightly
+      pointerEvents: 'auto',
+      zIndex: 0,
       overflow: 'hidden',
       maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
       WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'

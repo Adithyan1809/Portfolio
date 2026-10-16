@@ -58,3 +58,16 @@
 .marquee-container:hover .marquee-track {
   animation-play-state: paused;
 }
+
+/* ─── Mobile: disable transform rotation to prevent overflow ─── */
+@media (max-width: 768px) {
+  .marquee-container {
+    transform: none;
+    margin-top: -1rem;
+  }
+
+  .marquee-item {
+    font-size: 0.9rem;
+    padding: 0 1.25rem;
+  }
+}
