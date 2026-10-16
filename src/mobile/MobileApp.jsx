@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 import MobileHome from './MobileHome';
 import MobileCaseStudy from './MobileCaseStudy';
+import ChatWidget from '../components/ChatWidget';
 import './Mobile.css';
 
 function MobileHeader() {
@@ -95,6 +96,10 @@ export default function MobileApp() {
             <Route path="*" element={<MobileHome />} />
           </Routes>
         </main>
+
+        {/* AI Career Chatbot — same component as desktop, mobile-sheet layout via CSS */}
+        <ChatWidget />
+
         <Analytics />
       </div>
     </Router>

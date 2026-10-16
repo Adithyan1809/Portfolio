@@ -239,11 +239,13 @@
 
 /* ========== MOBILE FULL SCREEN ========== */
 @media (max-width: 500px) {
+  /* Push chat button above the plane FAB (FAB is at bottom: 1.5rem, 46px tall) */
   .chat-widget-container {
-    bottom: 7rem;
+    bottom: 5.5rem;
     right: 1rem;
   }
 
+  /* Chat window slides up as a bottom sheet */
   .chat-window {
     position: fixed;
     bottom: 0;
@@ -251,8 +253,10 @@
     left: 0;
     top: auto;
     width: 100vw;
-    height: 70vh;
-    border-radius: 12px 12px 0 0;
+    height: 72vh;
+    border-radius: 16px 16px 0 0;
     border-bottom: none;
+    border-left: none;
+    border-right: none;
   }
 }
