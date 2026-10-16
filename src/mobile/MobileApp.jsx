@@ -249,10 +249,7 @@ function MobileHeader({ onOpenSidebar }) {
             aria-label="Open navigation menu"
           >
             <div className="mobile-avatar-initials">AP</div>
-            <div className="mobile-brand-meta">
-              <span className="mobile-brand-name">Adithyan P</span>
-              <span className="mobile-brand-hint">Menu ▾</span>
-            </div>
+            <span className="mobile-brand-name">Adithyan P</span>
           </button>
         </div>
 
