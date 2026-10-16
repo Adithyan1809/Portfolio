@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import {
   Sun, Moon, X, Layers, Cpu, Briefcase, Mail,
-  Code2, FileText, Copy, Check, BookOpen
+  Code2, FileText, Copy, Check, BookOpen, Menu
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Analytics } from '@vercel/analytics/react';
@@ -29,7 +29,11 @@ function MobileSidebar({ isOpen, onClose }) {
     }
     setTimeout(() => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (el) {
+        const yOffset = -118;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }, 280);
   };
 
@@ -159,10 +163,18 @@ function MobileSidebar({ isOpen, onClose }) {
 }
 
 /* ─────────────────────────────────────────
-   TOP HEADER
+   TOP HEADER & NAVIGATION BAR
    ───────────────────────────────────────── */
+const NAV_TABS = [
+  { id: 'projects', label: 'Projects', icon: Layers },
+  { id: 'skills', label: 'Skills', icon: Cpu },
+  { id: 'experience', label: 'Experience', icon: Briefcase },
+  { id: 'contact', label: 'Contact', icon: Mail },
+];
+
 function MobileHeader({ onOpenSidebar }) {
   const [theme, setTheme] = useState('light');
+  const [activeSection, setActiveSection] = useState('projects');
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -179,28 +191,70 @@ function MobileHeader({ onOpenSidebar }) {
     localStorage.setItem('portfolio-theme', nextTheme);
   };
 
+  // Dynamic Scroll Spy: automatically updates active pill as user scrolls
+  useEffect(() => {
+    if (!isHome) return;
+    const sectionIds = ['projects', 'skills', 'experience', 'contact'];
+
+    const onScroll = () => {
+      const scrollPos = window.scrollY + 170;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sectionIds[i]);
+          return;
+        }
+      }
+      setActiveSection('projects');
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHome]);
+
   const scrollTo = (id) => {
+    setActiveSection(id);
     if (!isHome) {
       window.location.href = `/#${id}`;
       return;
     }
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const yOffset = -118; // Offset for sticky header (58px) + pill nav (48px) + breath room
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
     <>
       <header className="mobile-header">
-        {/* AP avatar — tapping opens the sidebar */}
-        <button
-          type="button"
-          className="mobile-brand"
-          onClick={onOpenSidebar}
-          aria-label="Open navigation menu"
-        >
-          <div className="mobile-avatar-initials">AP</div>
-          <span className="mobile-brand-name">Adithyan P</span>
-        </button>
+        <div className="mobile-header-left">
+          {/* Prominent Hamburger Menu Button */}
+          <button
+            type="button"
+            className="mobile-menu-trigger"
+            onClick={onOpenSidebar}
+            aria-label="Open sidebar menu"
+          >
+            <Menu size={19} />
+          </button>
+
+          {/* Profile identity — tapping also opens the sidebar */}
+          <button
+            type="button"
+            className="mobile-brand"
+            onClick={onOpenSidebar}
+            aria-label="Open navigation menu"
+          >
+            <div className="mobile-avatar-initials">AP</div>
+            <div className="mobile-brand-meta">
+              <span className="mobile-brand-name">Adithyan P</span>
+              <span className="mobile-brand-hint">Menu ▾</span>
+            </div>
+          </button>
+        </div>
 
         <div className="mobile-header-actions">
           <span className="mobile-status-pill">
@@ -219,13 +273,24 @@ function MobileHeader({ onOpenSidebar }) {
         </div>
       </header>
 
-      {/* Quick Jump Bar (homepage only) */}
+      {/* Quick Jump Bar (homepage only) — sleek iOS segmented pill look */}
       {isHome && (
         <nav className="mobile-nav-pills" aria-label="Quick jump">
-          <button type="button" onClick={() => scrollTo('projects')} className="mobile-nav-pill-item">Projects</button>
-          <button type="button" onClick={() => scrollTo('skills')} className="mobile-nav-pill-item">Skills</button>
-          <button type="button" onClick={() => scrollTo('experience')} className="mobile-nav-pill-item">Experience</button>
-          <button type="button" onClick={() => scrollTo('contact')} className="mobile-nav-pill-item">Contact</button>
+          {NAV_TABS.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeSection === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => scrollTo(tab.id)}
+                className={`mobile-nav-pill-item${isActive ? ' mobile-nav-pill-item--active' : ''}`}
+              >
+                <Icon size={12} className="mobile-nav-pill-icon" />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
         </nav>
       )}
     </>

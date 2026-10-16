@@ -46,18 +46,52 @@
   padding: 0 1rem;
 }
 
+.mobile-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* ─── Dedicated Hamburger Menu Trigger Button ─── */
+.mobile-menu-trigger {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity 0.15s, transform 0.15s, border-color 0.15s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+.mobile-menu-trigger:active {
+  opacity: 0.7;
+  transform: scale(0.93);
+  border-color: #6366f1;
+}
+
 .mobile-brand {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   text-decoration: none;
   color: var(--color-text);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
 }
 
 .mobile-avatar-initials {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 33px;
+  height: 33px;
+  border-radius: 9px;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: #fff;
   display: flex;
@@ -66,13 +100,31 @@
   font-weight: 800;
   font-size: 0.85rem;
   font-family: var(--font-display);
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+  flex-shrink: 0;
+}
+
+.mobile-brand-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
 }
 
 .mobile-brand-name {
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
   letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.mobile-brand-hint {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #6366f1;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 1px;
 }
 
 .mobile-header-actions {
@@ -139,63 +191,74 @@
   opacity: 0.6;
 }
 
-/* ─── Mobile Quick Nav Jump Pills ─── */
+/* ─── Mobile Quick Nav Bar (iOS Segmented Pill Look) ─── */
 .mobile-nav-pills {
+  position: sticky;
+  top: 58px;
+  z-index: 995;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 0.6rem 1rem;
-  background: var(--color-bg-secondary);
+  justify-content: space-between;
+  gap: 0.35rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.mobile-nav-pills::-webkit-scrollbar {
-  display: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-/* Nav pill with slide-in underline on tap — transform only, GPU safe */
+[data-theme='dark'] .mobile-nav-pills {
+  background: rgba(10, 10, 14, 0.96);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
 .mobile-nav-pill-item {
-  position: relative;
-  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.35rem 0.75rem;
+  padding: 0.42rem 0.3rem;
   border-radius: 20px;
-  background: var(--color-bg);
+  background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
   text-decoration: none;
-  flex-shrink: 0;
+  cursor: pointer;
   touch-action: manipulation;
-  transition: opacity 0.12s, transform 0.12s;
-  will-change: opacity, transform;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  will-change: transform, opacity;
+  white-space: nowrap;
 }
 
-/* Slide-in underline — translateX is GPU composited */
-.mobile-nav-pill-item::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  transform: translateX(-100%);
-  transition: transform 0.22s ease;
-  will-change: transform;
+.mobile-nav-pill-icon {
+  flex-shrink: 0;
+  opacity: 0.75;
 }
+
 .mobile-nav-pill-item:active {
-  background: rgba(99, 102, 241, 0.08);
-  color: #6366f1;
-  border-color: rgba(99, 102, 241, 0.3);
-  opacity: 0.9;
+  opacity: 0.8;
   transform: scale(0.96);
 }
-.mobile-nav-pill-item:active::after {
-  transform: translateX(0);
+
+/* Active Section Highlight — lights up as user scrolls */
+.mobile-nav-pill-item--active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 3px 12px rgba(99, 102, 241, 0.45);
+  font-weight: 700;
+  transform: scale(1.02);
+}
+
+.mobile-nav-pill-item--active .mobile-nav-pill-icon {
+  opacity: 1;
+  color: #ffffff;
 }
 
 /* ─── Container ─── */
