@@ -935,3 +935,289 @@
   color: var(--color-text-muted);
   margin: 0;
 }
+
+
+/* ================================================================
+   LEFT SIDEBAR DRAWER  (msb = mobile sidebar)
+   All motion: transform + opacity only — GPU composited, 60fps
+   ================================================================ */
+
+/* Fix .mobile-brand when used as a button (sidebar trigger) */
+button.mobile-brand {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ── Backdrop ── */
+.msb-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+.msb-backdrop--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Panel ── */
+.msb-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1090;
+  width: min(290px, 85vw);
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(-100%);
+  transition: transform 0.28s cubic-bezier(0.32, 0, 0.15, 1);
+  will-change: transform;
+  scrollbar-width: none;
+}
+.msb-panel::-webkit-scrollbar { display: none; }
+.msb-panel--open {
+  transform: translateX(0);
+  box-shadow: 6px 0 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Profile Header ── */
+.msb-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.35rem 1rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  background: radial-gradient(
+    ellipse 120% 80% at -10% -20%,
+    rgba(99, 102, 241, 0.09) 0%,
+    transparent 65%
+  );
+}
+
+.msb-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.38);
+}
+
+.msb-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.msb-name {
+  font-weight: 800;
+  font-size: 0.97rem;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.msb-role {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #6366f1;
+}
+
+.msb-open-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.63rem;
+  font-weight: 700;
+  color: #10b981;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+.msb-close {
+  position: absolute;
+  top: 1rem;
+  right: 0.75rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+.msb-close:active { opacity: 0.55; }
+
+/* ── Quick Stats ── */
+.msb-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.msb-stat-chip {
+  font-size: 0.63rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 0.22rem 0.55rem;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+  border: 1px solid;
+}
+.msb-stat-indigo  { color: #818cf8; background: rgba(99,102,241,0.08);  border-color: rgba(99,102,241,0.25); }
+.msb-stat-emerald { color: #34d399; background: rgba(16,185,129,0.08);  border-color: rgba(16,185,129,0.25); }
+.msb-stat-cyan    { color: #22d3ee; background: rgba(6,182,212,0.08);   border-color: rgba(6,182,212,0.25); }
+.msb-stat-violet  { color: #a78bfa; background: rgba(139,92,246,0.08);  border-color: rgba(139,92,246,0.25); }
+
+/* ── Section Label ── */
+.msb-nav-label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  padding: 0.85rem 1.15rem 0.35rem;
+  text-transform: uppercase;
+}
+
+/* ── Nav Items ── */
+.msb-nav {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.25rem;
+}
+
+.msb-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.82rem 1.15rem;
+  font-size: 0.91rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  position: relative;
+  transition: background 0.12s, color 0.12s;
+  width: 100%;
+}
+
+/* Left accent bar slides in on tap — scaleY is GPU composited */
+.msb-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 55%;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+  transform: translateY(-50%) scaleY(0);
+  transition: transform 0.15s ease;
+  will-change: transform;
+}
+.msb-nav-item:active {
+  background: rgba(99, 102, 241, 0.07);
+  color: #6366f1;
+}
+.msb-nav-item:active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* ── Divider ── */
+.msb-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border) 25%, var(--color-border) 75%, transparent);
+  margin: 0.25rem 0;
+}
+
+/* ── Action Buttons ── */
+.msb-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+  padding: 0 1rem 0.75rem;
+}
+
+.msb-action {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.68rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity 0.12s, transform 0.12s;
+  will-change: opacity, transform;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+.msb-action:active {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+.msb-action--primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  box-shadow: 0 3px 14px rgba(99, 102, 241, 0.32);
+}
+
+/* ── Footer ── */
+.msb-footer {
+  margin-top: auto;
+  padding: 0.85rem 1.15rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
