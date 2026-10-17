@@ -52,7 +52,7 @@ const CASE_STUDIES = {
     challenges: [
       { title: 'Real-Time Ingestion at Scale', desc: 'Refactored single-threaded capture into asynchronous I/O with GPU batching, maintaining 24fps across 90+ feeds.' },
       { title: 'Database Bottlenecks', desc: 'Introduced Redis debouncing layer for high-frequency detections, cutting database latency by 20%.' },
-      { title: 'Engineering Leadership', desc: 'Mentored a squad of 6 engineers across model optimization, FastAPI backend, and containerization.' }
+      { title: 'Engineering Leadership', desc: 'Mentored a squad of 11 engineers across model optimization, FastAPI backend, and containerization.' }
     ],
     metrics: [
       '90+ Concurrent Camera Feeds',

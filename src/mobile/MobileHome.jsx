@@ -228,7 +228,7 @@ export default function MobileHome() {
               <strong>Full-Stack AI Ownership:</strong> From low-level C++/PyTorch &amp; CV pipelines to FastAPI, Docker containers, &amp; Next.js UIs.
             </li>
             <li>
-              <strong>Undergrad Squad Leadership:</strong> Directed and unblocked a 6-engineer squad as Technical Lead at SMAP Technologies.
+              <strong>Undergrad Squad Leadership:</strong> Directed and unblocked an 11-engineer squad as Technical Lead at SMAP Technologies.
             </li>
             <li>
               <strong>Peer-Reviewed Research:</strong> Co-authored IEEE-submitted paper on multi-camera biometric re-identification.
@@ -418,7 +418,7 @@ export default function MobileHome() {
               <li>Engineered async RTSP ingestion pipeline processing 90+ concurrent camera feeds at 24fps with zero dropped frames.</li>
               <li>Slashed face recognition latency by 20% (&lt;4ms retrieval) by mapping ArcFace embeddings into in-memory FAISS IndexFlatIP.</li>
               <li>Hardened backend throughput via FastAPI asynchronous endpoints, Redis pub/sub queues, and PostgreSQL connection pooling.</li>
-              <li>Led and mentored a cross-functional squad of 6 engineers across AI model inference, backend APIs, and Docker edge deployment.</li>
+              <li>Led and mentored a cross-functional squad of 11 engineers across AI model inference, backend APIs, and Docker edge deployment.</li>
             </ul>
           </div>
 

@@ -21,7 +21,7 @@ const timelineData = [
       'Engineered an async RTSP/ONVIF ingestion pipeline processing 90+ concurrent camera feeds at 24fps with zero dropped frames.',
       'Slashed facial recognition latency by 20% (<4ms cosine retrieval) by mapping ArcFace & FaceNet512 embeddings into FAISS IndexFlatIP.',
       'Hardened backend throughput under peak load via FastAPI asynchronous endpoints, Redis pub/sub queues, and PostgreSQL connection pooling.',
-      'Led and unblocked a cross-functional squad of 6 engineers across AI model inference, backend microservices, and Docker edge deployments.'
+      'Led and unblocked a cross-functional squad of 11 engineers across AI model inference, backend microservices, and Docker edge deployments.'
     ],
     tech: ['FastAPI', 'Redis', 'FAISS', 'ArcFace', 'PostgreSQL', 'Docker', 'RTSP/ONVIF']
   },

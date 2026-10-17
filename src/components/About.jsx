@@ -31,7 +31,7 @@ const recruiterPillars = [
     icon: Users,
     colorClass: 'pillar-cyan',
     title: 'Squad Technical Leadership',
-    metric: '6 engineers led',
+    metric: '11 engineers led',
     desc: 'Unblocked and coordinated a cross-functional engineering team at SMAP Technologies across inference, backends, and Docker.'
   }
 ];
