@@ -1,10 +1,9 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import TechTooltip from './shared/TechTooltip';
 import ChromaText from './shared/ChromaText';
 import TextRotate from './shared/TextRotate';
+import NeuralCore3D from './NeuralCore3D';
 import './About.css';
-
-const NeuralCore3D = lazy(() => import('./NeuralCore3D'));
 
 const LinkedInBadge = () => (
   <div className="li-badge">
@@ -85,9 +84,7 @@ const About = () => {
             <LinkedInBadge />
           </div>
           <div className="about-visual">
-            <Suspense fallback={<div style={{ minHeight: '320px', width: '100%' }} />}>
-              <NeuralCore3D />
-            </Suspense>
+            <NeuralCore3D />
           </div>
         </div>
       </div>

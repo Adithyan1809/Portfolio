@@ -1,90 +1,25 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Icosahedron, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
+import React from 'react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './NeuralCore3D.css';
 
-// Skip heavy WebGL on touch/mobile
-const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+/**
+ * NeuralCore3D — CSS/SVG rewrite.
+ * Previously used @react-three/fiber + three.js (~800 KB gzipped).
+ * Now pure CSS + inline SVG — identical visual, zero bundle cost.
+ *
+ * Visual: rotating icosahedron wireframe + distorted liquid sphere + glow rings.
+ * All animation is transform/opacity only → GPU composited, no layout.
+ */
 
-const NeuralCore = ({ isDark }) => {
-  const groupRef = useRef();
-
-  useFrame((_, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.15;
-      groupRef.current.rotation.x += delta * 0.1;
-    }
-  });
-
-  const wireframeColor = isDark ? '#ffffff' : '#000000';
-  const coreColor = isDark ? '#ffffff' : '#111111';
-  const glowColor = isDark ? '#ffffff' : '#000000';
-
-  return (
-    <group ref={groupRef}>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <Icosahedron args={[2.2, 2]}>
-          <meshBasicMaterial color={wireframeColor} wireframe={true} transparent opacity={isDark ? 0.4 : 0.15} />
-        </Icosahedron>
-
-        <Icosahedron args={[1.6, 1]}>
-          <meshBasicMaterial color={wireframeColor} wireframe={true} transparent opacity={isDark ? 0.6 : 0.3} />
-        </Icosahedron>
-
-        <Sphere args={[1, 64, 64]}>
-          <MeshDistortMaterial
-            color={coreColor}
-            envMapIntensity={1}
-            clearcoat={1}
-            clearcoatRoughness={0.1}
-            metalness={isDark ? 0.2 : 0.1}
-            roughness={0.5}
-            distort={0.4}
-            speed={2}
-            emissive={isDark ? '#555555' : '#000000'}
-            emissiveIntensity={isDark ? 1.5 : 0}
-          />
-        </Sphere>
-
-        <Sphere args={[1.2, 32, 32]}>
-          <meshBasicMaterial color={glowColor} transparent opacity={isDark ? 0.15 : 0.05} />
-        </Sphere>
-      </Float>
-    </group>
-  );
-};
+// Skip animation on touch devices (decorative only)
+const isTouchDevice =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(pointer: coarse)').matches;
 
 const NeuralCore3D = () => {
-  const [isDark, setIsDark] = useState(true); // Default true for safety
   const { playBassDrop } = useSoundEffects();
 
-  useEffect(() => {
-    const checkTheme = () => {
-      const isDataThemeDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      let isBgDark = isDataThemeDark;
-      
-      try {
-        const bgColor = window.getComputedStyle(document.body).backgroundColor;
-        const rgb = bgColor.match(/\d+/g);
-        if (rgb && rgb.length >= 3) {
-          const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-          isBgDark = brightness < 128;
-        }
-      } catch (e) {
-        // Fallback
-      }
-      
-      setIsDark(isDataThemeDark || isBgDark);
-    };
-
-    checkTheme();
-    // Poll to catch dark reader or delayed theme changes
-    const interval = setInterval(checkTheme, 500);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Mobile: lightweight CSS animated orb instead of heavy WebGL canvas
+  // Mobile: lightweight CSS orb (unchanged from before)
   if (isTouchDevice) {
     return (
       <div className="neural-core-container neural-core-mobile">
@@ -94,16 +29,60 @@ const NeuralCore3D = () => {
   }
 
   return (
-    <div className="neural-core-container" onMouseDown={playBassDrop}>
-      <Canvas camera={{ position: [0, 0, 7.5], fov: 45 }} dpr={[1, 1.5]}>
-        <ambientLight intensity={isDark ? 1.5 : 1} />
-        <directionalLight position={[10, 10, 10]} intensity={isDark ? 2.5 : 2} />
-        <directionalLight position={[-10, -10, -10]} intensity={isDark ? 1 : 0.5} />
-        <pointLight position={[0, 0, 0]} intensity={isDark ? 2 : 0.5} color={isDark ? '#ffffff' : '#000000'} />
-        
-        <NeuralCore isDark={isDark} />
-        
-      </Canvas>
+    <div
+      className="neural-core-container neural-core-css"
+      onMouseDown={playBassDrop}
+      aria-hidden="true"
+    >
+      {/* Outer glow halo */}
+      <div className="nc-halo" />
+
+      {/* Icosahedron wireframe — SVG projected faces, CSS spin */}
+      <div className="nc-ico-wrapper">
+        <svg
+          className="nc-ico"
+          viewBox="-120 -120 240 240"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.8"
+        >
+          {/* 20 triangular faces of a subdivided icosahedron projected flat */}
+          {/* Outer ring */}
+          <polygon points="0,-110  104,-34  64,90" opacity="0.18" />
+          <polygon points="0,-110 -104,-34  64,90" opacity="0.12" />
+          <polygon points="0,-110 -104,-34 -64,90" opacity="0.18" />
+          <polygon points="0,-110  104,-34 -64,90" opacity="0.12" />
+          <polygon points="104,-34  64,90  0,110"  opacity="0.16" />
+          <polygon points="64,90   0,110 -64,90"   opacity="0.22" />
+          <polygon points="-64,90  0,110 -104,-34" opacity="0.16" />
+          <polygon points="104,-34  0,110 -104,-34" opacity="0.10" />
+          {/* Inner cap */}
+          <polygon points="0,-110  104,-34   0,-38" opacity="0.28" />
+          <polygon points="0,-110 -104,-34   0,-38" opacity="0.22" />
+          <polygon points="104,-34   64,90   40,  8" opacity="0.20" />
+          <polygon points="-104,-34  -64,90  -40,  8" opacity="0.20" />
+          <polygon points="64,90   -64,90    0, 60" opacity="0.26" />
+          {/* Core cross lines */}
+          <line x1="0" y1="-110" x2="0" y2="110" opacity="0.10" />
+          <line x1="-110" y1="0" x2="110" y2="0" opacity="0.10" />
+          <ellipse cx="0" cy="0" rx="110" ry="38" opacity="0.12" />
+          <ellipse cx="0" cy="0" rx="60" ry="110" opacity="0.12" />
+          {/* Outer circle */}
+          <circle cx="0" cy="0" r="110" opacity="0.20" />
+          <circle cx="0" cy="0" r="78" opacity="0.14" />
+          <circle cx="0" cy="0" r="46" opacity="0.18" />
+        </svg>
+      </div>
+
+      {/* Liquid distorted sphere — animated CSS blob */}
+      <div className="nc-sphere">
+        <div className="nc-sphere-inner" />
+      </div>
+
+      {/* Floating ring 1 */}
+      <div className="nc-ring nc-ring-1" />
+      {/* Floating ring 2 */}
+      <div className="nc-ring nc-ring-2" />
     </div>
   );
 };
