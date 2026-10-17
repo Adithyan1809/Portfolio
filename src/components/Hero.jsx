@@ -28,7 +28,6 @@ const StatusCapsule = ({ playHover }) => {
   return (
     <motion.div
       className="hero-status-capsule liquid-glass"
-      layout
       style={{ '--capsule-glow': current.glow }}
       onMouseEnter={playHover}
     >
@@ -36,12 +35,12 @@ const StatusCapsule = ({ playHover }) => {
       <AnimatePresence mode="wait">
         <motion.span
           key={stateIdx}
-          initial={{ opacity: 0, width: 0, filter: 'blur(4px)' }}
-          animate={{ opacity: 1, width: 'auto', filter: 'blur(0px)' }}
+          initial={{ opacity: 0, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, filter: 'blur(0px)' }}
           exit={{ opacity: 0, filter: 'blur(4px)' }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="capsule-label mono-text"
-          style={{ display: 'inline-block', whiteSpace: 'nowrap', overflow: 'hidden' }}
+          style={{ display: 'inline-block', whiteSpace: 'nowrap', minWidth: '72px', textAlign: 'left' }}
         >
           {current.label}
         </motion.span>
