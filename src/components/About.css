@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.about-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 @media (max-width: 992px) {
   .about-grid {
     grid-template-columns: 1fr;

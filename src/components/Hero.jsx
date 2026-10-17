@@ -35,10 +35,10 @@ const StatusCapsule = ({ playHover }) => {
       <AnimatePresence mode="wait">
         <motion.span
           key={stateIdx}
-          initial={{ opacity: 0, filter: 'blur(4px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, filter: 'blur(4px)' }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 3 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -3 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
           className="capsule-label mono-text"
           style={{ display: 'inline-block', whiteSpace: 'nowrap', minWidth: '72px', textAlign: 'left' }}
         >
@@ -128,10 +128,10 @@ const Hero = () => {
             <StatusCapsule playHover={playHover} />
             <div className="hero-target-pill mono-text">
               <span className="pulse-dot-emerald" />
-              <span>Seeking AI/ML &amp; SWE Roles · Full-Time / Internships</span>
+              <span>Seeking AI/ML &amp; SWE Roles</span>
             </div>
             <div className="hero-sub-pill mono-text">
-              <span>90+ RTSP Feeds · Sub-50ms Inference · IEEE Researcher</span>
+              <span>90+ RTSP Feeds · IEEE Paper</span>
             </div>
           </div>
           <h1 className="hero-title">

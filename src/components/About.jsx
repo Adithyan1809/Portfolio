@@ -2,7 +2,7 @@ import React from 'react';
 import TechTooltip from './shared/TechTooltip';
 import ChromaText from './shared/ChromaText';
 import TextRotate from './shared/TextRotate';
-import NeuralCore3D from './NeuralCore3D';
+import SystemTelemetryCard from './SystemTelemetryCard';
 import './About.css';
 
 const LinkedInBadge = () => (
@@ -84,7 +84,7 @@ const About = () => {
             <LinkedInBadge />
           </div>
           <div className="about-visual">
-            <NeuralCore3D />
+            <SystemTelemetryCard />
           </div>
         </div>
       </div>
