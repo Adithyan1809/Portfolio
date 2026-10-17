@@ -1,0 +1,131 @@
+/* ─── Neural 3D Core Container ─── */
+.neural-3d-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.neural-3d-card {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--glass-border-highlight);
+  background: var(--color-bg-secondary);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme='dark'] .neural-3d-card {
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.7), 0 0 45px -10px rgba(99, 102, 241, 0.25);
+}
+
+.neural-3d-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.neural-3d-card.is-interacting {
+  cursor: grabbing;
+}
+
+/* ─── HUD Top Header ─── */
+.neural-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--color-border);
+  user-select: none;
+}
+
+[data-theme='dark'] .neural-hud-header {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.hud-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  animation: hud-pulse 2s infinite ease-in-out;
+}
+
+@keyframes hud-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hud-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+.hud-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+/* ─── Canvas ─── */
+.neural-3d-canvas {
+  width: 100%;
+  height: 400px;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+.neural-3d-canvas:active {
+  cursor: grabbing;
+}
+
+/* ─── HUD Footer ─── */
+.neural-hud-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.25rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+[data-theme='dark'] .neural-hud-footer {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.hud-hint {
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+.hud-metric {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: #10b981;
+  font-weight: 600;
+}

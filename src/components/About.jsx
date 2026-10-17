@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ChromaText from './shared/ChromaText';
-import { 
-  FileText, Copy, Check, ArrowRight, Video, Zap, 
-  ShieldCheck, Users, GraduationCap, MapPin, Briefcase, 
-  Sparkles, ExternalLink
-} from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Video, Zap, ShieldCheck, Users } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
+import Neural3DCore from './Neural3DCore';
 import './About.css';
-
-const profileImage = '/profile.webp';
 
 const recruiterPillars = [
   {
@@ -43,16 +37,7 @@ const recruiterPillars = [
 ];
 
 export default function About() {
-  const { playHover, playClick, playSuccess } = useSoundEffects();
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyEmail = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText('adithyan18092005@gmail.com');
-    setCopied(true);
-    if (playSuccess) playSuccess();
-    setTimeout(() => setCopied(false), 2200);
-  };
+  const { playHover } = useSoundEffects();
 
   return (
     <section id="about" className="section-padding border-bottom section-rule-lines">
@@ -118,111 +103,9 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right Column: Sleek Recruiter Fast-Facts Spec Sheet */}
+          {/* Right Column: Interactive 3D Neural Core Hologram */}
           <div className="about-visual">
-            <div className="recruiter-spec-sheet liquid-glass">
-              {/* Header with Avatar & Live Status */}
-              <div className="spec-header">
-                <div className="spec-avatar-wrap">
-                  <img src={profileImage} alt="Adithyan Prakash" className="spec-avatar-img" />
-                  <span className="spec-online-indicator" title="Available for immediate hiring" />
-                </div>
-                <div className="spec-header-text">
-                  <div className="spec-name-row">
-                    <h3 className="spec-name">Adithyan Prakash</h3>
-                    <span className="spec-verified-badge" title="Verified Production Engineer">✓ Verified</span>
-                  </div>
-                  <span className="spec-role mono-text">AI &amp; ML Engineer · 21 y/o</span>
-                  <span className="spec-location">
-                    <MapPin size={12} /> Bengaluru, India (Open to Relocate)
-                  </span>
-                </div>
-              </div>
-
-              {/* Spec Rows */}
-              <div className="spec-rows">
-                <div className="spec-row">
-                  <span className="spec-label mono-text">TARGET ROLES</span>
-                  <span className="spec-value spec-value-highlight">AI/ML Engineer · Applied ML · Backend Systems</span>
-                </div>
-
-                <div className="spec-row">
-                  <span className="spec-label mono-text">LATEST ROLE</span>
-                  <span className="spec-value">Technical Lead Intern @ SMAP Technologies</span>
-                </div>
-
-                <div className="spec-row">
-                  <span className="spec-label mono-text">ACADEMIC BACKGROUND</span>
-                  <span className="spec-value">B.E. in AI &amp; ML, DSATM · CGPA 8.44 / 10 (2023–2027)</span>
-                </div>
-
-                <div className="spec-row">
-                  <span className="spec-label mono-text">RESEARCH</span>
-                  <span className="spec-value">Co-Author, Biometric Multi-Camera Tracking (IEEE Submitted)</span>
-                </div>
-
-                <div className="spec-row">
-                  <span className="spec-label mono-text">CORE STACK</span>
-                  <div className="spec-tech-pills mono-text">
-                    <span>Python</span>
-                    <span>PyTorch</span>
-                    <span>FastAPI</span>
-                    <span>Docker</span>
-                    <span>FAISS</span>
-                    <span>YOLOv8</span>
-                    <span>PostgreSQL</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Recruiter Action Buttons */}
-              <div className="spec-actions">
-                <a 
-                  href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary spec-btn-resume"
-                  onMouseEnter={playHover}
-                  onClick={playClick}
-                >
-                  <FileText size={15} />
-                  <span>View Resume (PDF)</span>
-                  <ExternalLink size={13} style={{ opacity: 0.7 }} />
-                </a>
-
-                <div className="spec-secondary-actions">
-                  <button 
-                    type="button" 
-                    className="spec-btn-secondary" 
-                    onClick={handleCopyEmail}
-                    title="Copy direct email"
-                  >
-                    {copied ? <Check size={14} style={{ color: '#10b981' }} /> : <Copy size={14} />}
-                    <span>{copied ? 'Copied Email!' : 'Copy Email'}</span>
-                  </button>
-
-                  <a 
-                    href="https://github.com/Adithyan1809" 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="spec-icon-link" 
-                    title="GitHub Profile"
-                  >
-                    <FaGithub size={16} />
-                  </a>
-
-                  <a 
-                    href="https://in.linkedin.com/in/adithyan-prakash" 
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="spec-icon-link" 
-                    title="LinkedIn Profile"
-                  >
-                    <FaLinkedin size={16} />
-                  </a>
-                </div>
-              </div>
-            </div>
+            <Neural3DCore />
           </div>
         </div>
       </div>
