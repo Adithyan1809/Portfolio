@@ -1,182 +1,400 @@
+/* ─── About Section Layout ─── */
 .about-grid {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 4rem;
-  align-items: center;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
 }
 
-.about-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .about-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
 }
 
-/* LinkedIn Badge — Official card style, light/dark adaptive */
-.li-badge {
-  display: inline-flex;
-  flex-direction: column;
-  width: 330px;
-  max-width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
+/* ─── Bio Statement ─── */
+.about-bio-statement {
+  margin-bottom: 2rem;
+}
+
+.about-lead {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.about-lead strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.about-subtext {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ─── 4 Recruiter Pillars Grid ─── */
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-pillar-card {
+  padding: 1.15rem;
+  border-radius: 12px;
   background: var(--color-bg-secondary);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-  font-family: var(--font-primary);
-  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.li-badge:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+.about-pillar-card:hover {
   transform: translateY(-3px);
+  box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.15);
 }
 
-/* Blue header bar with LinkedIn "in" icon + text */
-.li-badge__header {
-  background: #0a66c2;
-  padding: 10px 14px 8px;
+.pillar-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
 }
 
-.li-badge__wordmark-text {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.01em;
-  font-family: var(--font-primary);
-}
-
-/* Body: avatar + text side by side */
-.li-badge__body {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px 10px;
-}
-
-/* Initials avatar */
-.li-badge__avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+.pillar-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.pillar-metric {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='dark'] .pillar-metric {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Color theme variants */
+.pillar-emerald .pillar-icon-box {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+.pillar-emerald .pillar-metric { color: #10b981; }
+.pillar-emerald:hover { border-color: rgba(16, 185, 129, 0.35); }
+
+.pillar-indigo .pillar-icon-box {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+.pillar-indigo .pillar-metric { color: #6366f1; }
+.pillar-indigo:hover { border-color: rgba(99, 102, 241, 0.35); }
+
+.pillar-violet .pillar-icon-box {
+  background: rgba(139, 92, 246, 0.12);
+  color: #8b5cf6;
+}
+.pillar-violet .pillar-metric { color: #8b5cf6; }
+.pillar-violet:hover { border-color: rgba(139, 92, 246, 0.35); }
+
+.pillar-cyan .pillar-icon-box {
+  background: rgba(6, 182, 212, 0.12);
+  color: #06b6d4;
+}
+.pillar-cyan .pillar-metric { color: #06b6d4; }
+.pillar-cyan:hover { border-color: rgba(6, 182, 212, 0.35); }
+
+.pillar-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.01em;
+}
+
+.pillar-desc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ─── Quote Callout ─── */
+.about-quote-box {
+  position: relative;
+  padding: 1.15rem 1.5rem 1.15rem 1.75rem;
+  border-radius: 12px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.quote-accent-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #10b981 0%, #6366f1 100%);
+}
+
+.quote-text {
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* ─── Right Column: Recruiter Spec Sheet ─── */
+.about-visual {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.recruiter-spec-sheet {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--glass-border-highlight);
+  background: var(--color-bg-secondary);
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme='dark'] .recruiter-spec-sheet {
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px -10px rgba(99, 102, 241, 0.15);
+}
+
+/* Spec Header */
+.spec-header {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  padding: 1.35rem 1.4rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme='dark'] .spec-header {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.spec-avatar-wrap {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
   flex-shrink: 0;
+}
+
+.spec-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
   border: 2px solid var(--color-border);
 }
 
-.li-badge__avatar span {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.04em;
-  font-family: var(--font-display);
+.spec-online-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #10b981;
+  border: 2px solid var(--color-bg-secondary);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
 }
 
-.li-badge__info {
+.spec-header-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding-top: 2px;
+  gap: 0.2rem;
   min-width: 0;
 }
 
-.li-badge__name {
-  font-size: 0.97rem;
+.spec-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spec-name {
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-text);
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
-.li-badge__headline {
-  font-size: 0.75rem;
+.spec-verified-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+.spec-role {
+  font-size: 0.74rem;
   color: var(--color-text-muted);
-  line-height: 1.4;
 }
 
-.li-badge__sub {
+.spec-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   font-size: 0.72rem;
   color: var(--color-text-muted);
-  opacity: 0.75;
-  margin-top: 2px;
+  opacity: 0.85;
 }
 
-/* View Profile button */
-.li-badge__btn {
-  display: block;
-  margin: 2px 16px 14px;
-  padding: 7px 0;
-  text-align: center;
-  border: 1.5px solid #0a66c2;
-  border-radius: 20px;
-  font-size: 0.82rem;
+/* Spec Rows */
+.spec-rows {
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.spec-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.spec-label {
+  font-size: 0.65rem;
   font-weight: 700;
-  color: #0a66c2;
-  text-decoration: none;
-  letter-spacing: 0.01em;
-  transition: background 0.18s ease, color 0.18s ease;
-  font-family: var(--font-primary);
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  opacity: 0.85;
 }
 
-.li-badge__btn:hover {
-  background: #0a66c2;
-  color: #ffffff;
-}
-
-/* Dark mode adjustments */
-[data-theme='dark'] .li-badge {
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme='dark'] .li-badge:hover {
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6);
-}
-
-[data-theme='dark'] .li-badge__btn {
-  color: #4da3ff;
-  border-color: #4da3ff;
-}
-
-[data-theme='dark'] .li-badge__btn:hover {
-  background: #4da3ff;
-  color: #000;
-}
-
-/* ─── Watermark ─── */
-#about {
-  position: relative;
-  overflow: hidden;
-}
-#about .section-watermark-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(5rem, 18vw, 15rem);
-  letter-spacing: -0.06em;
-  line-height: 1;
+.spec-value {
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--color-text);
-  opacity: 0.018;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
-  z-index: 0;
+  line-height: 1.35;
+}
+
+.spec-value-highlight {
+  color: #10b981;
+}
+
+.spec-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.spec-tech-pills span {
+  font-size: 0.68rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+/* Spec Actions Footer */
+.spec-actions {
+  padding: 1.15rem 1.4rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+[data-theme='dark'] .spec-actions {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.spec-btn-resume {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+}
+
+.spec-secondary-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.spec-btn-secondary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.spec-btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.spec-icon-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.spec-icon-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
 }

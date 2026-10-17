@@ -40,18 +40,39 @@ const ScrollToTop = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    playSwoosh();
+  const scrollToTop = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    try {
+      playSwoosh();
+    } catch (err) {}
     setIsLaunching(true);
     
+    // 1. Lenis smooth momentum scroll
     if (window.lenis) {
-      window.lenis.scrollTo(0, { duration: 1.5 });
-    } else {
+      try {
+        window.lenis.scrollTo(0, { duration: 1.2 });
+      } catch (err) {
+        console.warn('Lenis scroll error:', err);
+      }
+    }
+    
+    // 2. Window smooth scroll
+    try {
       window.scrollTo({
         top: 0,
+        left: 0,
         behavior: 'smooth'
       });
+    } catch (err) {
+      window.scrollTo(0, 0);
     }
+
+    // 3. Direct document element reset fallback
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
 
     // Reset launch animation state after it completes
     setTimeout(() => {
