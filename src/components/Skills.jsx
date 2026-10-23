@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import WireframeTorus from './WireframeTorus';
 import ChromaText from './shared/ChromaText';
-import TechTooltip from './shared/TechTooltip';
 import { Code2, Cpu, Eye, Server, Settings, Layout, Zap, Database, ShieldCheck, Video } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Skills.css';
@@ -88,7 +87,7 @@ const skillCategories = [
 ];
 
 /* Stacking scroll card wrapper */
-const StackCard = ({ children, index, total }) => {
+const StackCard = ({ children, index, total: _total }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.93 - index * 0.01]);

@@ -47,7 +47,7 @@ const ScrollToTop = () => {
     }
     try {
       playSwoosh();
-    } catch (err) {}
+    } catch { /* ignore */ }
     setIsLaunching(true);
     
     // 1. Lenis smooth momentum scroll
@@ -66,7 +66,7 @@ const ScrollToTop = () => {
         left: 0,
         behavior: 'smooth'
       });
-    } catch (err) {
+    } catch {
       window.scrollTo(0, 0);
     }
 

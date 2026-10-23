@@ -7,7 +7,6 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 import MagneticButton from './MagneticButton';
 import ChromaText from './shared/ChromaText';
 import HandwrittenAnnotation from './shared/HandwrittenAnnotation';
-import TechTooltip from './shared/TechTooltip';
 import './FeaturedProjects.css';
 
 const projects = [

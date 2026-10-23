@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Robust mobile device detection hook.
@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
  * Listens to resize and orientation changes so DevTools toggle also works seamlessly.
  */
 export const useIsMobile = (breakpoint = 768) => {
-  const checkIsMobile = () => {
+  const checkIsMobile = useCallback(() => {
     if (typeof window === 'undefined') return false;
 
     // 1. User-Agent check for mobile phone browsers (iPhone, Android phones, iPod, etc.)
@@ -21,7 +21,7 @@ export const useIsMobile = (breakpoint = 768) => {
 
     // If it's a mobile User-Agent OR (narrow screen with touch), treat as mobile
     return isMobileUA || (isNarrowScreen && hasTouch) || isNarrowScreen;
-  };
+  }, [breakpoint]);
 
   const [isMobile, setIsMobile] = useState(checkIsMobile);
 
@@ -40,7 +40,7 @@ export const useIsMobile = (breakpoint = 768) => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('orientationchange', handleResize);
     };
-  }, [breakpoint]);
+  }, [checkIsMobile]);
 
   return isMobile;
 };

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, FileText, Copy, Check, MapPin, ExternalLink, 
-  Briefcase, GraduationCap, Users, Award, BookOpen, Send,
-  Cpu, Activity, Layers, Code2, Eye, Server, Settings, Zap, 
-  Database, ShieldCheck, Video, GitCommit, Plane, ArrowUp
+  BookOpen, Send, Cpu, Code2, Eye, Server, Plane, ArrowUp
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
@@ -13,7 +11,9 @@ const profileImage = '/profile.webp';
 export default function MobileHome() {
   const [copied, setCopied] = useState(false);
   const [formStatus, setFormStatus] = useState('idle');
-  const [lastPush, setLastPush] = useState(null);
+  const [lastPush, setLastPush] = useState(() => (
+    typeof window !== 'undefined' ? sessionStorage.getItem('gh_last_push') : null
+  ));
   const [showFab, setShowFab] = useState(false);
 
   // ─── Scroll-to-top FAB visibility ───
@@ -47,11 +47,8 @@ export default function MobileHome() {
 
   // GitHub last push cached fetch
   useEffect(() => {
-    const cached = sessionStorage.getItem('gh_last_push');
-    if (cached) {
-      setLastPush(cached);
-      return;
-    }
+    if (lastPush) return;
+
     fetch('https://api.github.com/users/Adithyan1809/events?per_page=5')
       .then(res => res.ok ? res.json() : null)
       .then(data => {
@@ -62,7 +59,7 @@ export default function MobileHome() {
             const now = new Date();
             const diffHours = Math.round((now - date) / (1000 * 60 * 60));
             const diffDays = Math.round(diffHours / 24);
-            let timeStr = 'recently';
+            let timeStr;
             if (diffHours < 1) timeStr = 'just now';
             else if (diffHours < 24) timeStr = `${diffHours}h ago`;
             else if (diffDays === 1) timeStr = 'yesterday';
@@ -76,7 +73,7 @@ export default function MobileHome() {
         }
       })
       .catch(() => setLastPush('Active on GitHub'));
-  }, []);
+  }, [lastPush]);
 
   // Web3Forms submission
   const handleSubmit = async (e) => {
@@ -211,7 +208,7 @@ export default function MobileHome() {
       </section>
 
       {/* ─── Recruiter At-A-Glance (Quick-Scan) ─── */}
-      <section className="mobile-section mobile-container" style={{ paddingTop: '1.25rem', paddingBottom: '1.5rem' }}>
+      <section id="about" className="mobile-section mobile-container" style={{ paddingTop: '1.25rem', paddingBottom: '1.5rem' }}>
         <div className="mobile-recruiter-card">
           <div className="mobile-recruiter-header">
             <span className="mobile-eyebrow" style={{ margin: 0, paddingLeft: 0, borderLeft: 'none' }}>WHY HIRE ADITHYAN</span>
@@ -448,7 +445,7 @@ export default function MobileHome() {
       </section>
 
       {/* ─── Research ─── */}
-      <section className="mobile-section mobile-container">
+      <section id="research" className="mobile-section mobile-container">
         <div className="mobile-section-header">
           <span className="mobile-eyebrow">RESEARCH</span>
           <h2 className="mobile-title">Published Papers</h2>
@@ -586,7 +583,7 @@ export default function MobileHome() {
       </section>
 
 
-      <section className="mobile-section mobile-container">
+      <section id="github" className="mobile-section mobile-container">
         <div className="mobile-project-card mobile-github-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <span className="mobile-gh-dot" />

@@ -6,9 +6,13 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Navbar.css';
 
 const Navbar = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => (
+    typeof window !== 'undefined' ? localStorage.getItem('portfolio-theme') || 'light' : 'light'
+  ));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(() => (
+    typeof window !== 'undefined' ? localStorage.getItem('portfolio-muted') !== 'false' : true
+  ));
   
   const [isAudioRippling, setIsAudioRippling] = useState(false);
   
@@ -24,18 +28,8 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-    const savedMute = localStorage.getItem('portfolio-muted');
-    if (savedMute !== null) {
-      setIsMuted(savedMute === 'true');
-    } else {
-      setIsMuted(true);
-    }
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const toggleMute = () => {
     const newMuted = !isMuted;

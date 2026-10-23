@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import {
   Sun, Moon, X, Layers, Cpu, Briefcase, Mail,
-  Code2, FileText, Copy, Check, BookOpen, Menu
+  Code2, FileText, Copy, Check, Menu
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Analytics } from '@vercel/analytics/react';
@@ -24,7 +24,7 @@ function MobileSidebar({ isOpen, onClose }) {
   const handleNav = (id) => {
     onClose();
     if (!isHome) {
-      window.location.href = `/#${id}`;
+      window.location.assign(`/#${id}`);
       return;
     }
     setTimeout(() => {
@@ -173,16 +173,16 @@ const NAV_TABS = [
 ];
 
 function MobileHeader({ onOpenSidebar }) {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => (
+    typeof window !== 'undefined' ? localStorage.getItem('portfolio-theme') || 'light' : 'light'
+  ));
   const [activeSection, setActiveSection] = useState('projects');
   const location = useLocation();
   const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
-    setTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -216,7 +216,7 @@ function MobileHeader({ onOpenSidebar }) {
   const scrollTo = (id) => {
     setActiveSection(id);
     if (!isHome) {
-      window.location.href = `/#${id}`;
+      window.location.assign(`/#${id}`);
       return;
     }
     const el = document.getElementById(id);

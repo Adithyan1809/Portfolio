@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, Phone, Copy, Check, ExternalLink, Clock, Globe } from 'lucide-react';
+import { Mail, Send, Phone, Copy, Check, ExternalLink, Clock, Globe } from 'lucide-react';
 import { FaLinkedin } from 'react-icons/fa';
 import ChromaText from './shared/ChromaText';
 import { useSoundEffects } from '../hooks/useSoundEffects';

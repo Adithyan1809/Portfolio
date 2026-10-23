@@ -2,25 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './SplashScreen.css';
 
 const SplashScreen = () => {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const isBotOrAudit = typeof navigator !== 'undefined' && /Lighthouse|Chrome-Lighthouse|Googlebot/i.test(navigator.userAgent);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const seen = sessionStorage.getItem('splashSeen');
+    return !isBotOrAudit && !prefersReducedMotion && !seen;
+  });
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Skip completely for Lighthouse, Googlebot, and prefers-reduced-motion to guarantee instant FCP
-    const isBotOrAudit = typeof navigator !== 'undefined' && /Lighthouse|Chrome-Lighthouse|Googlebot/i.test(navigator.userAgent);
-    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (isBotOrAudit || prefersReducedMotion) {
-      setVisible(false);
-      return;
-    }
-
-    // Only show once per session
-    const seen = sessionStorage.getItem('splashSeen');
-    if (seen) {
-      setVisible(false);
-      return;
-    }
+    if (!visible) return;
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
     const fadeDuration = isMobile ? 800 : 1500;
@@ -36,7 +28,7 @@ const SplashScreen = () => {
       clearTimeout(fadeTimer);
       clearTimeout(hideTimer);
     };
-  }, []);
+  }, [visible]);
 
   if (!visible) return null;
 

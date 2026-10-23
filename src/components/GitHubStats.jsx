@@ -7,8 +7,12 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
 const GitHubStats = () => {
-  const [theme, setTheme] = useState('light');
-  const [lastPush, setLastPush] = useState(null);
+  const [theme, setTheme] = useState(() => (
+    typeof document !== 'undefined' ? document.documentElement.getAttribute('data-theme') || 'light' : 'light'
+  ));
+  const [lastPush, setLastPush] = useState(() => (
+    typeof window !== 'undefined' ? sessionStorage.getItem('gh_last_push') : null
+  ));
   const scrollRef = useRef(null);
   const { playTwinkle } = useSoundEffects();
 
@@ -17,17 +21,12 @@ const GitHubStats = () => {
       setTheme(document.documentElement.getAttribute('data-theme') || 'light');
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    setTheme(document.documentElement.getAttribute('data-theme') || 'light');
     return () => observer.disconnect();
   }, []);
 
   // Fetch real GitHub recent event for live credibility signal (cached in sessionStorage)
   useEffect(() => {
-    const cached = sessionStorage.getItem('gh_last_push');
-    if (cached) {
-      setLastPush(cached);
-      return;
-    }
+    if (lastPush) return;
 
     fetch('https://api.github.com/users/Adithyan1809/events?per_page=5')
       .then(res => res.ok ? res.json() : null)
@@ -39,7 +38,7 @@ const GitHubStats = () => {
             const now = new Date();
             const diffHours = Math.round((now - date) / (1000 * 60 * 60));
             const diffDays = Math.round(diffHours / 24);
-            let timeStr = 'recently';
+            let timeStr;
             if (diffHours < 1) timeStr = 'just now';
             else if (diffHours < 24) timeStr = `${diffHours}h ago`;
             else if (diffDays === 1) timeStr = 'yesterday';
@@ -55,7 +54,7 @@ const GitHubStats = () => {
       .catch(() => {
         setLastPush('Active contributor');
       });
-  }, []);
+  }, [lastPush]);
 
   // Auto-scroll to current month on mobile
   useEffect(() => {

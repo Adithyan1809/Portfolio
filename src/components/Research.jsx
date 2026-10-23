@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, ExternalLink, ShieldCheck } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import WireframePyramid from './WireframePyramid';
 import ChromaText from './shared/ChromaText';
 import TechTooltip from './shared/TechTooltip';

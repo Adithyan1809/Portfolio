@@ -7,7 +7,6 @@ import {
   applyEdgeChanges,
   Handle,
   Position,
-  MiniMap,
   ControlButton
 } from '@xyflow/react';
 import { Maximize, Minimize } from 'lucide-react';

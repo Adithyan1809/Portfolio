@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Clock, ShieldCheck, Cpu, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Clock, Cpu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from './ScrollReveal';
 import MouseGlow from './MouseGlow';

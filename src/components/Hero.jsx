@@ -49,6 +49,13 @@ const StatusCapsule = ({ playHover }) => {
   );
 };
 
+const HERO_PHRASES = [
+  "AI & ML Engineer.",
+  "Production Systems Builder.",
+  "Computer Vision Specialist.",
+  "Distributed Systems Architect."
+];
+
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -62,13 +69,6 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const imageY = useTransform(scrollY, [0, 600], isMobile ? [0, 0] : [0, -50]);
   
-  const phrases = [
-    "AI & ML Engineer.",
-    "Production Systems Builder.",
-    "Computer Vision Specialist.",
-    "Distributed Systems Architect."
-  ];
-
   const handleCopyEmail = (e) => {
     e.preventDefault();
     navigator.clipboard.writeText('adithyan18092005@gmail.com');
@@ -78,7 +78,7 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    const currentPhrase = phrases[phraseIndex];
+    const currentPhrase = HERO_PHRASES[phraseIndex];
     let typingSpeed = isDeleting ? 40 : 80;
 
     if (!isDeleting && typedText === currentPhrase) {
@@ -88,9 +88,10 @@ const Hero = () => {
     }
     
     if (isDeleting && typedText === '') {
-      setIsDeleting(false);
-      setPhraseIndex((prev) => (prev + 1) % phrases.length);
-      const timer = setTimeout(() => {}, 500);
+      const timer = setTimeout(() => {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % HERO_PHRASES.length);
+      }, 500);
       return () => clearTimeout(timer);
     }
 

@@ -5,11 +5,14 @@ const Constellation = () => {
 
   // Skip on mobile/touch — canvas RAF loop drains battery and causes scroll jank
   const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
-  if (isTouchDevice) return null;
 
   useEffect(() => {
+    if (isTouchDevice) return;
+
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
     
     let animationFrameId;
     let particles = [];
@@ -98,7 +101,6 @@ const Constellation = () => {
     };
 
     const connect = (lineColor) => {
-      let opacityValue = 1;
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
@@ -106,8 +108,8 @@ const Constellation = () => {
           const distance = dx * dx + dy * dy;
           
           if (distance < 15000) {
-            opacityValue = 1 - (distance / 15000);
-            ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.15})`;
+            const lineOpacity = 1 - (distance / 15000);
+            ctx.strokeStyle = `rgba(${lineColor}, ${lineOpacity * 0.15})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
@@ -121,8 +123,8 @@ const Constellation = () => {
                                   ((particles[a].y - mouse.y) * (particles[a].y - mouse.y));
           
           if (distanceToMouse < 20000) {
-             opacityValue = 1 - (distanceToMouse / 20000);
-             ctx.strokeStyle = `rgba(${lineColor}, ${opacityValue * 0.4})`;
+             const mouseOpacity = 1 - (distanceToMouse / 20000);
+             ctx.strokeStyle = `rgba(${lineColor}, ${mouseOpacity * 0.4})`;
              ctx.lineWidth = 1;
              ctx.beginPath();
              ctx.moveTo(particles[a].x, particles[a].y);
@@ -164,7 +166,9 @@ const Constellation = () => {
       window.removeEventListener('mouseout', handleMouseOut);
       observer.disconnect();
     };
-  }, []);
+  }, [isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <canvas

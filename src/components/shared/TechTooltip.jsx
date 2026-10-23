@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './TechTooltip.css';
 
 /**
@@ -10,20 +10,13 @@ import './TechTooltip.css';
  */
 const TechTooltip = ({ term, explanation }) => {
   const [visible, setVisible] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const ref = useRef(null);
-
-  const handleMouseEnter = (e) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (rect) {
-      setPosition({ x: rect.left + rect.width / 2, y: rect.top });
-    }
+    
+  const handleMouseEnter = () => {
     setVisible(true);
   };
 
   return (
     <span
-      ref={ref}
       className="tech-tooltip-trigger"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setVisible(false)}
