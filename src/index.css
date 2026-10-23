@@ -40,31 +40,31 @@
 }
 
 [data-theme='dark'] {
-  --color-bg: #000000;
-  --color-bg-secondary: #0a0a0a;
-  --color-bg-tertiary: #111111;
-  --color-border: #222222;
-  --color-border-hover: #333333;
-  --color-text: #ededed;
-  --color-text-muted: #888888;
-  --color-accent: #ffffff;
-  --color-accent-dim: rgba(255, 255, 255, 0.1);
+  --color-bg: #0a0f1e;
+  --color-bg-secondary: #111827;
+  --color-bg-tertiary: #1a2235;
+  --color-border: #1e293b;
+  --color-border-hover: #2d3d55;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-accent: #f59e0b;
+  --color-accent-dim: rgba(245, 158, 11, 0.08);
 
   --shape-opacity-strong: 0.35;
   --shape-opacity-med: 0.25;
   --shape-opacity-light: 0.20;
 
-  --color-grid: rgba(255, 255, 255, 0.04);
-  --color-grid-strong: rgba(255, 255, 255, 0.25);
-  --color-nav-bg: rgba(0, 0, 0, 0.6);
-  --color-cmd-bg: rgba(0, 0, 0, 0.6);
+  --color-grid: rgba(255, 255, 255, 0.03);
+  --color-grid-strong: rgba(255, 255, 255, 0.12);
+  --color-nav-bg: rgba(10, 15, 30, 0.85);
+  --color-cmd-bg: rgba(10, 15, 30, 0.75);
 
-  /* Liquid Glass & Soft Layered Shadows (Dark Mode — Luxury Upgrade) */
-  --glass-bg: rgba(8, 8, 10, 0.92);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-border-highlight: rgba(255, 255, 255, 0.05);
-  --glass-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 8px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
-  --glass-shadow-hover: 0 0 0 1px rgba(255,255,255,0.08), 0 16px 60px rgba(0,0,0,0.85), 0 0 40px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.08);
+  /* Liquid Glass & Soft Layered Shadows (Dark Mode) */
+  --glass-bg: rgba(17, 24, 39, 0.80);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-highlight: rgba(255, 255, 255, 0.04);
+  --glass-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --glass-shadow-hover: 0 12px 40px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
 }
 
 ::selection {
@@ -270,14 +270,14 @@ p {
 }
 
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  border-color: var(--color-accent);
+  background-color: #f59e0b;
+  color: #0a0f1e;
+  border-color: #f59e0b;
 }
 .btn-primary:hover {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  opacity: 0.92;
+  background-color: #d97706;
+  color: #0a0f1e;
+  opacity: 1;
 }
 
 .btn-secondary {
@@ -345,11 +345,9 @@ p {
   background: linear-gradient(
     90deg,
     var(--color-text) 0%,
-    #6366f1 20%,
-    #8b5cf6 35%,
-    #06b6d4 50%,
-    #10b981 65%,
-    #6366f1 80%,
+    #f59e0b 25%,
+    var(--color-text) 50%,
+    #f59e0b 75%,
     var(--color-text) 100%
   );
   background-size: 300% auto;
@@ -420,8 +418,8 @@ p {
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(99, 102, 241, 0.4) 40%,
-    rgba(139, 92, 246, 0.4) 60%,
+    rgba(245, 158, 11, 0.4) 40%,
+    rgba(245, 158, 11, 0.4) 60%,
     transparent 100%
   );
   background-size: 200% auto;
