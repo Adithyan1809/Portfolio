@@ -39,10 +39,24 @@ const NotFound = () => (
 const AnimatedRoutes = () => {
   const location = useLocation();
   
-  // Scroll to top on route change
+  // Scroll to top or to target anchor on route change
   useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.replace('#', '');
+      const el = document.getElementById(targetId);
+      if (el) {
+        const timer = setTimeout(() => {
+          if (window.lenis) {
+            window.lenis.scrollTo(el, { offset: -70, duration: 1.2 });
+          } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 120);
+        return () => clearTimeout(timer);
+      }
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   return (
     <ErrorBoundary>

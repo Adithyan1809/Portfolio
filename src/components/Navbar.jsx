@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Volume2, VolumeX } from 'lucide-react';
+import { Sun, Moon, Volume2, VolumeX, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MagneticButton from './MagneticButton';
 import { useSoundEffects } from '../hooks/useSoundEffects';
@@ -95,12 +95,21 @@ const Navbar = () => {
           <Link to="/" onMouseEnter={playHover} onClick={playAlien}>Adithyan P.</Link>
         </div>
         <div className="nav-links mono-text">
-          <MagneticButton><a href="/#about" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'about')}>About</a></MagneticButton>
-          <MagneticButton><a href="/#projects" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a></MagneticButton>
-          <MagneticButton><a href="/#skills" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a></MagneticButton>
-          <MagneticButton><a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a></MagneticButton>
+          <MagneticButton><Link to="/projects" onMouseEnter={playHover} onClick={playClick}>Projects</Link></MagneticButton>
           <MagneticButton><Link to="/blog" onMouseEnter={playHover} onClick={playClick}>Blog</Link></MagneticButton>
-          <MagneticButton><a href="/#contact" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a></MagneticButton>
+          <MagneticButton><Link to="/lab" onMouseEnter={playHover} onClick={playClick}>Lab</Link></MagneticButton>
+          <MagneticButton><Link to="/about" onMouseEnter={playHover} onClick={playClick}>About</Link></MagneticButton>
+          <MagneticButton><Link to="/contact" onMouseEnter={playHover} onClick={playClick}>Contact</Link></MagneticButton>
+          <div className="nav-dropdown-wrapper">
+            <button type="button" className="nav-dropdown-trigger mono-text" onMouseEnter={playHover}>
+              More <ChevronDown size={13} />
+            </button>
+            <div className="nav-dropdown-menu liquid-glass">
+              <Link to="/now" onMouseEnter={playHover} onClick={playClick}>Now</Link>
+              <Link to="/uses" onMouseEnter={playHover} onClick={playClick}>Uses</Link>
+              <Link to="/garden" onMouseEnter={playHover} onClick={playClick}>Garden</Link>
+            </div>
+          </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <a
@@ -150,12 +159,15 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="mobile-dropdown mono-text">
-          <a href="/#about" onClick={(e) => handleLinkClick(e, 'about', true)}>About</a>
-          <a href="/#projects" onClick={(e) => handleLinkClick(e, 'projects', true)}>Projects</a>
-          <a href="/#skills" onClick={(e) => handleLinkClick(e, 'skills', true)}>Skills</a>
-          <a href="/#experience" onClick={(e) => handleLinkClick(e, 'experience', true)}>Experience</a>
-          <Link to="/blog" onClick={() => setIsMenuOpen(false)}>Blog</Link>
-          <a href="/#contact" onClick={(e) => handleLinkClick(e, 'contact', true)}>Contact</a>
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>Home (/)</Link>
+          <Link to="/projects" onClick={() => setIsMenuOpen(false)}>Projects Directory (/projects)</Link>
+          <Link to="/blog" onClick={() => setIsMenuOpen(false)}>Blog &amp; Articles (/blog)</Link>
+          <Link to="/lab" onClick={() => setIsMenuOpen(false)}>Interactive AI Lab (/lab)</Link>
+          <Link to="/about" onClick={() => setIsMenuOpen(false)}>About &amp; Story (/about)</Link>
+          <Link to="/now" onClick={() => setIsMenuOpen(false)}>Now Focus (/now)</Link>
+          <Link to="/uses" onClick={() => setIsMenuOpen(false)}>Uses &amp; Setup (/uses)</Link>
+          <Link to="/garden" onClick={() => setIsMenuOpen(false)}>Digital Garden (/garden)</Link>
+          <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact (/contact)</Link>
           <a
             href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing"
             target="_blank"

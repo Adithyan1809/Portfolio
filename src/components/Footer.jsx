@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, Terminal, ArrowUpRight, MapPin, Zap } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useSoundEffects } from '../hooks/useSoundEffects';
@@ -19,8 +20,8 @@ const navLinks = [
 const StaggerLink = ({ label, href, onMouseEnter, onClick }) => {
   const [hovered, setHovered] = useState(false);
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="footer-nav-link"
       onMouseEnter={() => { setHovered(true); onMouseEnter(); }}
       onMouseLeave={() => setHovered(false)}
@@ -39,7 +40,7 @@ const StaggerLink = ({ label, href, onMouseEnter, onClick }) => {
           {char}
         </span>
       ))}
-    </a>
+    </Link>
   );
 };
 
@@ -66,14 +67,14 @@ const Footer = () => {
               <p className="footer-cta-label mono-text">Available for opportunities</p>
               <h2 className="footer-cta-heading">Let's build something<br />real together.</h2>
             </div>
-            <a
-              href="#contact"
+            <Link
+              to="/contact"
               className="btn btn-primary footer-cta-btn"
               onMouseEnter={playHover}
               onClick={playClick}
             >
               Initiate Contact <ArrowUpRight size={18} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

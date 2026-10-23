@@ -234,3 +234,70 @@
 .nav-waveform.rippling .bar-1 { height: 13px !important; }
 .nav-waveform.rippling .bar-2 { height: 16px !important; }
 .nav-waveform.rippling .bar-3 { height: 12px !important; }
+
+
+/* ─── Navbar "More" Dropdown ─── */
+.nav-dropdown-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-dropdown-trigger {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.nav-dropdown-trigger:hover,
+.nav-dropdown-wrapper:hover .nav-dropdown-trigger {
+  color: var(--color-text);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.65rem;
+  min-width: 140px;
+  background-color: var(--color-nav-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--color-nav-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+  padding: 0.4rem;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 1001;
+}
+
+.nav-dropdown-wrapper:hover .nav-dropdown-menu,
+.nav-dropdown-wrapper:focus-within .nav-dropdown-menu {
+  display: flex;
+}
+
+.nav-dropdown-menu a {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-dropdown-menu a:hover {
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.08);
+}

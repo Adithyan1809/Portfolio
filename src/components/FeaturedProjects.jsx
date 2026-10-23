@@ -225,7 +225,7 @@ const ProjectCard = ({ p, playHover, playClick, playPowerUp }) => {
         <div className="card-cta-row">
           <MagneticButton style={{ width: '100%' }}>
             <Link
-              to={`/projects/${p.id}`}
+              to={p.id === 'project-iris' ? '/projects/iris' : `/projects/${p.id}`}
               className="btn btn-secondary card-view-btn"
               onClick={playPowerUp}
             >
@@ -285,6 +285,21 @@ const FeaturedProjects = () => {
               />
             ))}
           </div>
+        </div>
+
+        {/* Directory Link */}
+        <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
+          <MagneticButton>
+            <Link
+              to="/projects"
+              className="btn btn-secondary mono-text"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              style={{ padding: '0.85rem 1.75rem', fontSize: '0.9rem' }}
+            >
+              Explore All Systems &amp; Repositories in Directory (/projects) →
+            </Link>
+          </MagneticButton>
         </div>
       </div>
     </section>

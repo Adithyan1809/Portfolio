@@ -23,9 +23,14 @@ const CaseStudyLayout = ({ title, role, overview, problem, architecture, pipelin
 
       {/* Breadcrumb Top Bar */}
       <div className="container cs-top-bar cs-page-top" style={{ position: 'relative', zIndex: 2 }}>
-        <Link to="/" className="back-link mono-text" onMouseEnter={playHover} onClick={playClick}>
-          <ArrowLeft size={16}/> Back to Portfolio
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <Link to="/" className="back-link mono-text" onMouseEnter={playHover} onClick={playClick}>
+            <ArrowLeft size={16}/> Back to Home
+          </Link>
+          <Link to="/projects" className="back-link mono-text" onMouseEnter={playHover} onClick={playClick}>
+            Projects Directory →
+          </Link>
+        </div>
         <div className="cs-meta-badges">
           <span className="status-tag status-tag-emerald mono-text">
             <span className="ping-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: '#10b981' }} />
