@@ -47,20 +47,6 @@ export default function MobileHome() {
 
   // GitHub last push cached fetch
   useEffect(() => {
-    if (window.location.hash) {
-      const id = window.location.hash.replace('#', '');
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          const yOffset = -118;
-          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  }, []);
-
-  useEffect(() => {
     if (lastPush) return;
 
     fetch('https://api.github.com/users/Adithyan1809/events?per_page=5')
@@ -245,11 +231,6 @@ export default function MobileHome() {
               <strong>Peer-Reviewed Research:</strong> Co-authored IEEE-submitted paper on multi-camera biometric re-identification.
             </li>
           </ul>
-          <div style={{ marginTop: '0.85rem' }}>
-            <Link to="/about" className="mobile-btn mobile-btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
-              Read Full Story &amp; Journey (/about) →
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -311,7 +292,7 @@ export default function MobileHome() {
               <span className="mobile-tech-tag">FAISS</span>
             </div>
             <div className="mobile-card-actions">
-              <Link to="/projects/iris" className="mobile-btn mobile-btn-primary" style={{ flex: 1, padding: '0.65rem' }}>
+              <Link to="/projects/project-iris" className="mobile-btn mobile-btn-primary" style={{ flex: 1, padding: '0.65rem' }}>
                 Case Study <ArrowRight size={14} />
               </Link>
               <a href="https://github.com/Adithyan1809" target="_blank" rel="noreferrer" className="mobile-btn mobile-btn-secondary" style={{ width: '44px', padding: 0 }}>
@@ -347,12 +328,6 @@ export default function MobileHome() {
               </a>
             </div>
           </div>
-        </div>
-
-        <div style={{ marginTop: '1.25rem' }}>
-          <Link to="/projects" className="mobile-btn mobile-btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
-            View Full Project Directory (/projects) →
-          </Link>
         </div>
       </section>
 
@@ -679,11 +654,6 @@ export default function MobileHome() {
             </p>
           )}
         </form>
-        <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-          <Link to="/contact" className="mobile-btn mobile-btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
-            Open Dedicated Contact &amp; Collaboration Page (/contact) →
-          </Link>
-        </div>
       </section>
 
       {/* ─── Footer ─── */}

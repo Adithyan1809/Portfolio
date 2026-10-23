@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import {
   Sun, Moon, X, Layers, Cpu, Briefcase, Mail,
   Code2, FileText, Copy, Check, Menu, BookOpen,
@@ -29,7 +29,6 @@ const ContactPage = lazy(() => import('../pages/ContactPage'));
    ───────────────────────────────────────── */
 function MobileSidebar({ isOpen, onClose }) {
   const location = useLocation();
-  const navigate = useNavigate();
   const isHome = location.pathname === '/';
   const [emailCopied, setEmailCopied] = useState(false);
 
@@ -38,13 +37,13 @@ function MobileSidebar({ isOpen, onClose }) {
     onClose();
     if (item.path) {
       setTimeout(() => {
-        navigate(item.path); window.scrollTo(0, 0);
+        window.location.assign(item.path);
       }, 150);
       return;
     }
     const id = item.id;
     if (!isHome) {
-      navigate(`/#${id}`);
+      window.location.assign(`/#${id}`);
       return;
     }
     setTimeout(() => {
@@ -196,7 +195,6 @@ const NAV_TABS = [
 ];
 
 function MobileHeader({ onOpenSidebar }) {
-  const navigate = useNavigate();
   const [theme, setTheme] = useState(() => (
     typeof window !== 'undefined' ? localStorage.getItem('portfolio-theme') || 'light' : 'light'
   ));
@@ -240,7 +238,7 @@ function MobileHeader({ onOpenSidebar }) {
   const scrollTo = (id) => {
     setActiveSection(id);
     if (!isHome) {
-      navigate(`/#${id}`);
+      window.location.assign(`/#${id}`);
       return;
     }
     const el = document.getElementById(id);

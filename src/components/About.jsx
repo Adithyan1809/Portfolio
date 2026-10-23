@@ -1,7 +1,6 @@
 import React from 'react';
 import ChromaText from './shared/ChromaText';
-import { Link } from 'react-router-dom';
-import { Video, Zap, ShieldCheck, Users, ArrowRight } from 'lucide-react';
+import { Video, Zap, ShieldCheck, Users } from 'lucide-react';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import Neural3DCore from './Neural3DCore';
 import './About.css';
@@ -101,12 +100,6 @@ export default function About() {
               <p className="quote-text">
                 "The measure of an AI engineer isn't how well a model runs on curated test splits, but how gracefully it recovers under real-world network drops, noisy feeds, and concurrent traffic."
               </p>
-            </div>
-
-            <div style={{ marginTop: '1.5rem' }}>
-              <Link to="/about" className="btn btn-secondary mono-text" onMouseEnter={playHover} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                Read Full Story &amp; Journey (/about) <ArrowRight size={14} />
-              </Link>
             </div>
           </div>
 

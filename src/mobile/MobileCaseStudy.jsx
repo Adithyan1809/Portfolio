@@ -89,13 +89,9 @@ const CASE_STUDIES = {
   }
 };
 
-// Canonical mapping for '/projects/iris' and '/projects/project-iris'
-CASE_STUDIES['iris'] = CASE_STUDIES['project-iris'];
-
 export default function MobileCaseStudy() {
   const { id } = useParams();
-  const normalizedId = id === 'iris' ? 'project-iris' : id;
-  const study = CASE_STUDIES[id] || CASE_STUDIES[normalizedId] || CASE_STUDIES['resumepilot'];
+  const study = CASE_STUDIES[id] || CASE_STUDIES['resumepilot'];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -177,9 +173,6 @@ export default function MobileCaseStudy() {
         <a href={study.github} target="_blank" rel="noreferrer" className="mobile-btn mobile-btn-primary">
           <FaGithub size={16} /> View Code on GitHub <ExternalLink size={14} />
         </a>
-        <Link to="/projects" className="mobile-btn mobile-btn-secondary">
-          Explore All Systems in Project Directory (/projects) →
-        </Link>
         <Link to="/" className="mobile-btn mobile-btn-secondary">
           <ArrowLeft size={16} /> Return to Home
         </Link>
