@@ -7,6 +7,7 @@ import {
 import { FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { getPostBySlug, getAllPosts } from '../content/blogLoader';
 import MarkdownRenderer from '../components/blog/MarkdownRenderer';
+import GiscusComments from '../components/blog/GiscusComments';
 import './Blog.css';
 
 export default function BlogPost() {
@@ -240,6 +241,9 @@ export default function BlogPost() {
               </Link>
             )}
           </nav>
+
+          {/* GitHub Discussions / Giscus Comments */}
+          <GiscusComments />
         </div>
 
         {/* Sidebar: Table of Contents */}

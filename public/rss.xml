@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Adithyan Prakash — AI &amp; ML Engineering Notes</title>
+    <link>https://adithyanp.me/blog</link>
+    <description>Deep dives on production computer vision, distributed systems, edge inference, and deterministic LLM agents.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Oct 2026 17:04:46 GMT</lastBuildDate>
+    <atom:link href="https://adithyanp.me/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>TIL: Why pin_memory=True in PyTorch Caused Intermittent CUDA Bus Errors</title>
+      <link>https://adithyanp.me/blog/til-pytorch-cuda-pin-memory</link>
+      <guid isPermaLink="true">https://adithyanp.me/blog/til-pytorch-cuda-pin-memory</guid>
+      <pubDate>Thu, 22 Oct 2026 00:00:00 GMT</pubDate>
+      <description>A 2-minute debugging war story on memory locking, Linux /dev/shm exhaustion, and how pin_memory=True can crash multi-worker DataLoaders.</description>
+      <category>PyTorch</category><category>CUDA</category><category>Debugging</category><category>TIL</category>
+    </item>
+    <item>
+      <title>Architecting a Sub-40ms Edge Vision Pipeline for 90+ Live Camera Feeds</title>
+      <link>https://adithyanp.me/blog/real-time-edge-cv-pipeline</link>
+      <guid isPermaLink="true">https://adithyanp.me/blog/real-time-edge-cv-pipeline</guid>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+      <description>How we designed a multi-threaded RTSP ingestion and inference pipeline that processes 90+ concurrent camera streams with zero dropped frames.</description>
+      <category>Computer Vision</category><category>Edge AI</category><category>Distributed Systems</category><category>Python</category>
+    </item>
+    <item>
+      <title>Building Deterministic LLM Pipelines with Zero Hallucinations</title>
+      <link>https://adithyanp.me/blog/zero-hallucination-llm-architecture</link>
+      <guid isPermaLink="true">https://adithyanp.me/blog/zero-hallucination-llm-architecture</guid>
+      <pubDate>Sat, 10 Oct 2026 00:00:00 GMT</pubDate>
+      <description>How we replaced flaky, unconstrained prompt-chains with grammar-guided generation, strict JSON schemas, and deterministic validation loops.</description>
+      <category>LLMs</category><category>AI Agents</category><category>System Design</category><category>Python</category>
+    </item>
+  </channel>
+</rss>

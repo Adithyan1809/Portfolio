@@ -57,6 +57,8 @@ function parseFrontmatter(rawContent, filePath) {
     metadata[key] = value;
   });
 
+  metadata.type = metadata.type || 'Deep Dive';
+
   return metadata;
 }
 
