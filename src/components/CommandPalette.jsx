@@ -58,6 +58,18 @@ const CommandPalette = () => {
               <Command.Item onSelect={() => handleSelect(() => navigate('/#skills'))} onMouseEnter={playHover}>
                 Skills
               </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/blog'))} onMouseEnter={playHover}>
+                Blog &amp; Technical Notes
+              </Command.Item>
+            </Command.Group>
+
+            <Command.Group heading="Technical Notes &amp; Articles">
+              <Command.Item onSelect={() => handleSelect(() => navigate('/blog/real-time-edge-cv-pipeline'))} onMouseEnter={playHover}>
+                Article: Edge Vision Pipeline (90+ RTSP Feeds)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/blog/zero-hallucination-llm-architecture'))} onMouseEnter={playHover}>
+                Article: Deterministic LLM Pipelines
+              </Command.Item>
             </Command.Group>
 
             <Command.Group heading="Case Studies">

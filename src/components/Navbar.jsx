@@ -99,6 +99,7 @@ const Navbar = () => {
           <MagneticButton><a href="/#projects" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a></MagneticButton>
           <MagneticButton><a href="/#skills" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a></MagneticButton>
           <MagneticButton><a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a></MagneticButton>
+          <MagneticButton><Link to="/blog" onMouseEnter={playHover} onClick={playClick}>Blog</Link></MagneticButton>
           <MagneticButton><a href="/#contact" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a></MagneticButton>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -143,6 +144,7 @@ const Navbar = () => {
           <a href="/#projects" onClick={(e) => handleLinkClick(e, 'projects', true)}>Projects</a>
           <a href="/#skills" onClick={(e) => handleLinkClick(e, 'skills', true)}>Skills</a>
           <a href="/#experience" onClick={(e) => handleLinkClick(e, 'experience', true)}>Experience</a>
+          <Link to="/blog" onClick={() => setIsMenuOpen(false)}>Blog</Link>
           <a href="/#contact" onClick={(e) => handleLinkClick(e, 'contact', true)}>Contact</a>
         </div>
       )}

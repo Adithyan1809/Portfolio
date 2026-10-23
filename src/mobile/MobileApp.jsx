@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import {
   Sun, Moon, X, Layers, Cpu, Briefcase, Mail,
-  Code2, FileText, Copy, Check, Menu
+  Code2, FileText, Copy, Check, Menu, BookOpen
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Analytics } from '@vercel/analytics/react';
@@ -12,6 +12,9 @@ import MobileCaseStudy from './MobileCaseStudy';
 import ChatWidget from '../components/ChatWidget';
 import './Mobile.css';
 
+const BlogIndex = lazy(() => import('../pages/BlogIndex'));
+const BlogPost = lazy(() => import('../pages/BlogPost'));
+
 /* ─────────────────────────────────────────
    LEFT SIDEBAR DRAWER
    ───────────────────────────────────────── */
@@ -20,9 +23,16 @@ function MobileSidebar({ isOpen, onClose }) {
   const isHome = location.pathname === '/';
   const [emailCopied, setEmailCopied] = useState(false);
 
-  // Navigate to section — waits for sidebar close animation (280ms)
-  const handleNav = (id) => {
+  // Navigate to section or page — waits for sidebar close animation (280ms)
+  const handleNav = (item) => {
     onClose();
+    if (item.path) {
+      setTimeout(() => {
+        window.location.assign(item.path);
+      }, 150);
+      return;
+    }
+    const id = item.id;
     if (!isHome) {
       window.location.assign(`/#${id}`);
       return;
@@ -47,6 +57,7 @@ function MobileSidebar({ isOpen, onClose }) {
     { id: 'projects',      icon: <Layers size={18} />,   label: 'Projects' },
     { id: 'skills',        icon: <Cpu size={18} />,      label: 'Skills' },
     { id: 'experience',    icon: <Briefcase size={18} />, label: 'Experience' },
+    { id: 'blog',          icon: <BookOpen size={18} />,  label: 'Blog & Notes', path: '/blog' },
     { id: 'more-projects', icon: <Code2 size={18} />,    label: 'More Projects' },
     { id: 'contact',       icon: <Mail size={18} />,     label: 'Contact' },
   ];
@@ -97,15 +108,15 @@ function MobileSidebar({ isOpen, onClose }) {
         {/* Section Navigation */}
         <nav className="msb-nav">
           <span className="msb-nav-label">NAVIGATE</span>
-          {navItems.map(({ id, icon, label }) => (
+          {navItems.map((item) => (
             <button
-              key={id}
+              key={item.id}
               type="button"
               className="msb-nav-item"
-              onClick={() => handleNav(id)}
+              onClick={() => handleNav(item)}
             >
-              {icon}
-              <span>{label}</span>
+              {item.icon}
+              <span>{item.label}</span>
             </button>
           ))}
         </nav>
@@ -315,6 +326,8 @@ export default function MobileApp() {
         <main>
           <Routes>
             <Route path="/" element={<MobileHome />} />
+            <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
+            <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
             <Route path="/projects/:id" element={<MobileCaseStudy />} />
             <Route path="*" element={<MobileHome />} />
           </Routes>

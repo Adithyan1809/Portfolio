@@ -17,6 +17,8 @@ import { Analytics } from '@vercel/analytics/react';
 const ResumePilotPage = lazy(() => import('./pages/ResumePilotPage'));
 const ProjectIrisPage = lazy(() => import('./pages/ProjectIrisPage'));
 const MusteringSystemPage = lazy(() => import('./pages/MusteringSystemPage'));
+const BlogIndex = lazy(() => import('./pages/BlogIndex'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -39,6 +41,8 @@ const AnimatedRoutes = () => {
       <Suspense fallback={null}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
+          <Route path="/blog" element={<PageTransitionWrapper><BlogIndex /></PageTransitionWrapper>} />
+          <Route path="/blog/:slug" element={<PageTransitionWrapper><BlogPost /></PageTransitionWrapper>} />
           <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
           <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
           <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
