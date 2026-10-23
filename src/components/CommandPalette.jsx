@@ -45,21 +45,36 @@ const CommandPalette = () => {
           <Command.List>
             <Command.Empty>No results found.</Command.Empty>
 
-            <Command.Group heading="Navigation">
+            <Command.Group heading="Navigation &amp; Pages">
               <Command.Item onSelect={() => handleSelect(() => navigate('/'))} onMouseEnter={playHover}>
-                Home
+                Home (/)
               </Command.Item>
-              <Command.Item onSelect={() => handleSelect(() => navigate('/#about'))} onMouseEnter={playHover}>
-                About
+              <Command.Item onSelect={() => handleSelect(() => navigate('/projects'))} onMouseEnter={playHover}>
+                Projects Directory (/projects)
               </Command.Item>
-              <Command.Item onSelect={() => handleSelect(() => navigate('/#experience'))} onMouseEnter={playHover}>
-                Experience
-              </Command.Item>
-              <Command.Item onSelect={() => handleSelect(() => navigate('/#skills'))} onMouseEnter={playHover}>
-                Skills
+              <Command.Item onSelect={() => handleSelect(() => navigate('/projects/iris'))} onMouseEnter={playHover}>
+                Case Study: Project IRIS (/projects/iris)
               </Command.Item>
               <Command.Item onSelect={() => handleSelect(() => navigate('/blog'))} onMouseEnter={playHover}>
-                Blog &amp; Technical Notes
+                Blog &amp; Technical Articles (/blog)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/about'))} onMouseEnter={playHover}>
+                Personal Story &amp; About (/about)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/now'))} onMouseEnter={playHover}>
+                Now — Current Focus (/now)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/uses'))} onMouseEnter={playHover}>
+                Uses — Tools &amp; Setup (/uses)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/garden'))} onMouseEnter={playHover}>
+                Digital Garden &amp; Notes (/garden)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/lab'))} onMouseEnter={playHover}>
+                Interactive AI Lab (/lab)
+              </Command.Item>
+              <Command.Item onSelect={() => handleSelect(() => navigate('/contact'))} onMouseEnter={playHover}>
+                Contact &amp; Collaboration (/contact)
               </Command.Item>
             </Command.Group>
 

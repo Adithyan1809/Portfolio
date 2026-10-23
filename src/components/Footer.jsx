@@ -5,11 +5,14 @@ import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Footer.css';
 
 const navLinks = [
-  { label: 'About', href: '/#about' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Skills', href: '/#skills' },
-  { label: 'Experience', href: '/#experience' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '/about' },
+  { label: 'Lab', href: '/lab' },
+  { label: 'Now', href: '/now' },
+  { label: 'Uses', href: '/uses' },
+  { label: 'Garden', href: '/garden' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 /* Letter-stagger nav link */

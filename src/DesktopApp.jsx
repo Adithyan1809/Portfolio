@@ -18,8 +18,15 @@ import { Analytics } from '@vercel/analytics/react';
 const ResumePilotPage = lazy(() => import('./pages/ResumePilotPage'));
 const ProjectIrisPage = lazy(() => import('./pages/ProjectIrisPage'));
 const MusteringSystemPage = lazy(() => import('./pages/MusteringSystemPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const NowPage = lazy(() => import('./pages/NowPage'));
+const UsesPage = lazy(() => import('./pages/UsesPage'));
+const GardenPage = lazy(() => import('./pages/GardenPage'));
+const LabPage = lazy(() => import('./pages/LabPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 const NotFound = () => (
   <div style={{ padding: '12rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
@@ -43,11 +50,19 @@ const AnimatedRoutes = () => {
         <Suspense fallback={null}>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
+            <Route path="/projects" element={<PageTransitionWrapper><ProjectsPage /></PageTransitionWrapper>} />
+            <Route path="/projects/iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
+            <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
+            <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
+            <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
             <Route path="/blog" element={<PageTransitionWrapper><BlogIndex /></PageTransitionWrapper>} />
             <Route path="/blog/:slug" element={<PageTransitionWrapper><BlogPost /></PageTransitionWrapper>} />
-            <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
-            <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
-            <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
+            <Route path="/about" element={<PageTransitionWrapper><AboutPage /></PageTransitionWrapper>} />
+            <Route path="/now" element={<PageTransitionWrapper><NowPage /></PageTransitionWrapper>} />
+            <Route path="/uses" element={<PageTransitionWrapper><UsesPage /></PageTransitionWrapper>} />
+            <Route path="/garden" element={<PageTransitionWrapper><GardenPage /></PageTransitionWrapper>} />
+            <Route path="/lab" element={<PageTransitionWrapper><LabPage /></PageTransitionWrapper>} />
+            <Route path="/contact" element={<PageTransitionWrapper><ContactPage /></PageTransitionWrapper>} />
             <Route path="*" element={<PageTransitionWrapper><NotFound /></PageTransitionWrapper>} />
           </Routes>
         </Suspense>

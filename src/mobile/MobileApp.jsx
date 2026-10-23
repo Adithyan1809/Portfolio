@@ -2,7 +2,8 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import {
   Sun, Moon, X, Layers, Cpu, Briefcase, Mail,
-  Code2, FileText, Copy, Check, Menu, BookOpen
+  Code2, FileText, Copy, Check, Menu, BookOpen,
+  User, Clock, Wrench, Sprout, FlaskConical
 } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Analytics } from '@vercel/analytics/react';
@@ -13,8 +14,15 @@ import ChatWidget from '../components/ChatWidget';
 import ErrorBoundary from '../components/ErrorBoundary';
 import './Mobile.css';
 
+const ProjectsPage = lazy(() => import('../pages/ProjectsPage'));
+const AboutPage = lazy(() => import('../pages/AboutPage'));
 const BlogIndex = lazy(() => import('../pages/BlogIndex'));
 const BlogPost = lazy(() => import('../pages/BlogPost'));
+const NowPage = lazy(() => import('../pages/NowPage'));
+const UsesPage = lazy(() => import('../pages/UsesPage'));
+const GardenPage = lazy(() => import('../pages/GardenPage'));
+const LabPage = lazy(() => import('../pages/LabPage'));
+const ContactPage = lazy(() => import('../pages/ContactPage'));
 
 /* ─────────────────────────────────────────
    LEFT SIDEBAR DRAWER
@@ -55,12 +63,14 @@ function MobileSidebar({ isOpen, onClose }) {
   };
 
   const navItems = [
-    { id: 'projects',      icon: <Layers size={18} />,   label: 'Projects' },
-    { id: 'skills',        icon: <Cpu size={18} />,      label: 'Skills' },
-    { id: 'experience',    icon: <Briefcase size={18} />, label: 'Experience' },
-    { id: 'blog',          icon: <BookOpen size={18} />,  label: 'Blog & Notes', path: '/blog' },
-    { id: 'more-projects', icon: <Code2 size={18} />,    label: 'More Projects' },
-    { id: 'contact',       icon: <Mail size={18} />,     label: 'Contact' },
+    { id: 'projects',      icon: <Layers size={18} />,   label: 'Projects', path: '/projects' },
+    { id: 'blog',          icon: <BookOpen size={18} />,  label: 'Blog', path: '/blog' },
+    { id: 'about',         icon: <User size={18} />,      label: 'About', path: '/about' },
+    { id: 'lab',           icon: <FlaskConical size={18} />, label: 'AI Lab', path: '/lab' },
+    { id: 'now',           icon: <Clock size={18} />,     label: 'Now', path: '/now' },
+    { id: 'uses',          icon: <Wrench size={18} />,    label: 'Uses', path: '/uses' },
+    { id: 'garden',        icon: <Sprout size={18} />,    label: 'Garden', path: '/garden' },
+    { id: 'contact',       icon: <Mail size={18} />,     label: 'Contact', path: '/contact' },
   ];
 
   return (
@@ -328,9 +338,16 @@ export default function MobileApp() {
           <ErrorBoundary>
             <Routes>
               <Route path="/" element={<MobileHome />} />
+              <Route path="/projects" element={<Suspense fallback={null}><ProjectsPage /></Suspense>} />
+              <Route path="/projects/:id" element={<MobileCaseStudy />} />
               <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
               <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
-              <Route path="/projects/:id" element={<MobileCaseStudy />} />
+              <Route path="/about" element={<Suspense fallback={null}><AboutPage /></Suspense>} />
+              <Route path="/now" element={<Suspense fallback={null}><NowPage /></Suspense>} />
+              <Route path="/uses" element={<Suspense fallback={null}><UsesPage /></Suspense>} />
+              <Route path="/garden" element={<Suspense fallback={null}><GardenPage /></Suspense>} />
+              <Route path="/lab" element={<Suspense fallback={null}><LabPage /></Suspense>} />
+              <Route path="/contact" element={<Suspense fallback={null}><ContactPage /></Suspense>} />
               <Route path="*" element={<MobileHome />} />
             </Routes>
           </ErrorBoundary>

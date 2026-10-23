@@ -1,10 +1,10 @@
-.hero {
+﻿.hero {
   position: relative;
   min-height: 100dvh;
   display: flex;
   align-items: center;
   perspective: 1000px;
-  padding-top: calc(var(--nav-height) + 4rem);
+  padding-top: calc(var(--nav-height) + 4.5rem);
   padding-bottom: 4rem;
 }
 
@@ -343,7 +343,7 @@
   50% { opacity: 0; }
 }
 
-/* ─── Volumetric Sunbeam Rays ─── */
+/* â”€â”€â”€ Volumetric Sunbeam Rays â”€â”€â”€ */
 .hero-sunbeams {
   position: absolute;
   top: 0;
@@ -359,7 +359,7 @@
   opacity: 0.7;
 }
 
-/* ─── Spring-Morphing Status Capsule ─── */
+/* â”€â”€â”€ Spring-Morphing Status Capsule â”€â”€â”€ */
 .hero-status-capsule {
   display: inline-flex;
   align-items: center;
@@ -396,7 +396,7 @@
   min-height: 2em;
 }
 
-/* ─── Small phone fixes (≤ 480px) ─── */
+/* â”€â”€â”€ Small phone fixes (â‰¤ 480px) â”€â”€â”€ */
 @media (max-width: 480px) {
   .hero {
     padding-top: calc(var(--nav-height) + 1rem);
@@ -442,7 +442,7 @@
     align-self: center;
   }
 
-  /* Hide floating badges on very small screens — they overflow */
+  /* Hide floating badges on very small screens â€” they overflow */
   .hero-floating-badge {
     display: none;
   }
@@ -456,7 +456,7 @@
   }
 }
 
-/* ─── Recruiter Availability Pill & Resume Highlight ─── */
+/* â”€â”€â”€ Recruiter Availability Pill & Resume Highlight â”€â”€â”€ */
 .hero-target-pill {
   display: inline-flex;
   align-items: center;
