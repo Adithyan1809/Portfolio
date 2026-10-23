@@ -95,12 +95,12 @@ const Navbar = () => {
           <Link to="/" onMouseEnter={playHover} onClick={playAlien}>Adithyan P.</Link>
         </div>
         <div className="nav-links mono-text">
-          <MagneticButton><Link to="/projects" onMouseEnter={playHover} onClick={playClick}>Projects</Link></MagneticButton>
+          <MagneticButton><a href="/#about" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'about')}>About</a></MagneticButton>
+          <MagneticButton><a href="/#projects" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a></MagneticButton>
+          <MagneticButton><a href="/#skills" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a></MagneticButton>
+          <MagneticButton><a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a></MagneticButton>
           <MagneticButton><Link to="/blog" onMouseEnter={playHover} onClick={playClick}>Blog</Link></MagneticButton>
-          <MagneticButton><Link to="/lab" onMouseEnter={playHover} onClick={playClick}>Lab</Link></MagneticButton>
-          <MagneticButton><Link to="/about" onMouseEnter={playHover} onClick={playClick}>About</Link></MagneticButton>
-          <MagneticButton><Link to="/now" onMouseEnter={playHover} onClick={playClick}>Now</Link></MagneticButton>
-          <MagneticButton><Link to="/contact" onMouseEnter={playHover} onClick={playClick}>Contact</Link></MagneticButton>
+          <MagneticButton><a href="/#contact" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a></MagneticButton>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <a
@@ -150,15 +150,21 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="mobile-dropdown mono-text">
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
-          <Link to="/projects" onClick={() => setIsMenuOpen(false)}>Projects</Link>
+          <a href="/#about" onClick={(e) => handleLinkClick(e, 'about', true)}>About</a>
+          <a href="/#projects" onClick={(e) => handleLinkClick(e, 'projects', true)}>Projects</a>
+          <a href="/#skills" onClick={(e) => handleLinkClick(e, 'skills', true)}>Skills</a>
+          <a href="/#experience" onClick={(e) => handleLinkClick(e, 'experience', true)}>Experience</a>
           <Link to="/blog" onClick={() => setIsMenuOpen(false)}>Blog</Link>
-          <Link to="/lab" onClick={() => setIsMenuOpen(false)}>AI Lab</Link>
-          <Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
-          <Link to="/now" onClick={() => setIsMenuOpen(false)}>Now</Link>
-          <Link to="/uses" onClick={() => setIsMenuOpen(false)}>Uses</Link>
-          <Link to="/garden" onClick={() => setIsMenuOpen(false)}>Garden</Link>
-          <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+          <a href="/#contact" onClick={(e) => handleLinkClick(e, 'contact', true)}>Contact</a>
+          <a
+            href="https://drive.google.com/file/d/1Ae3BQqbOK4oB60SYEHfBo5MVp6R4kEnX/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsMenuOpen(false)}
+            style={{ color: 'var(--color-text)', fontWeight: 700 }}
+          >
+            Resume (PDF) ↗
+          </a>
         </div>
       )}
     </nav>
