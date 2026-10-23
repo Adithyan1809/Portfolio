@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import SmoothScroll from './components/SmoothScroll';
 import ScrollProgress from './components/ScrollProgress';
+import ErrorBoundary from './components/ErrorBoundary';
 import { Analytics } from '@vercel/analytics/react';
 
 const ResumePilotPage = lazy(() => import('./pages/ResumePilotPage'));
@@ -37,19 +38,21 @@ const AnimatedRoutes = () => {
   }, [location.pathname]);
 
   return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={null}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
-          <Route path="/blog" element={<PageTransitionWrapper><BlogIndex /></PageTransitionWrapper>} />
-          <Route path="/blog/:slug" element={<PageTransitionWrapper><BlogPost /></PageTransitionWrapper>} />
-          <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
-          <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
-          <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
-          <Route path="*" element={<PageTransitionWrapper><NotFound /></PageTransitionWrapper>} />
-        </Routes>
-      </Suspense>
-    </AnimatePresence>
+    <ErrorBoundary>
+      <AnimatePresence mode="wait">
+        <Suspense fallback={null}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageTransitionWrapper><Home /></PageTransitionWrapper>} />
+            <Route path="/blog" element={<PageTransitionWrapper><BlogIndex /></PageTransitionWrapper>} />
+            <Route path="/blog/:slug" element={<PageTransitionWrapper><BlogPost /></PageTransitionWrapper>} />
+            <Route path="/projects/resumepilot" element={<PageTransitionWrapper><ResumePilotPage /></PageTransitionWrapper>} />
+            <Route path="/projects/project-iris" element={<PageTransitionWrapper><ProjectIrisPage /></PageTransitionWrapper>} />
+            <Route path="/projects/mustering-system" element={<PageTransitionWrapper><MusteringSystemPage /></PageTransitionWrapper>} />
+            <Route path="*" element={<PageTransitionWrapper><NotFound /></PageTransitionWrapper>} />
+          </Routes>
+        </Suspense>
+      </AnimatePresence>
+    </ErrorBoundary>
   );
 };
 

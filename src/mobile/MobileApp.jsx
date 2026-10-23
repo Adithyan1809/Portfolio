@@ -10,6 +10,7 @@ import { Analytics } from '@vercel/analytics/react';
 import MobileHome from './MobileHome';
 import MobileCaseStudy from './MobileCaseStudy';
 import ChatWidget from '../components/ChatWidget';
+import ErrorBoundary from '../components/ErrorBoundary';
 import './Mobile.css';
 
 const BlogIndex = lazy(() => import('../pages/BlogIndex'));
@@ -324,13 +325,15 @@ export default function MobileApp() {
         <MobileSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         <main>
-          <Routes>
-            <Route path="/" element={<MobileHome />} />
-            <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
-            <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
-            <Route path="/projects/:id" element={<MobileCaseStudy />} />
-            <Route path="*" element={<MobileHome />} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<MobileHome />} />
+              <Route path="/blog" element={<Suspense fallback={null}><BlogIndex /></Suspense>} />
+              <Route path="/blog/:slug" element={<Suspense fallback={null}><BlogPost /></Suspense>} />
+              <Route path="/projects/:id" element={<MobileCaseStudy />} />
+              <Route path="*" element={<MobileHome />} />
+            </Routes>
+          </ErrorBoundary>
         </main>
 
         <ChatWidget />

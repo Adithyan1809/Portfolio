@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { marked } from 'marked';
+import { Marked } from 'marked';
 import Prism from 'prismjs';
 
 // Core Prism languages
@@ -72,7 +72,7 @@ ${cleanContent}
 }
 
 // Build a custom marked instance with dedicated code block renderer
-const customMarked = new marked.Marked();
+const customMarked = new Marked();
 
 customMarked.use({
   gfm: true,
