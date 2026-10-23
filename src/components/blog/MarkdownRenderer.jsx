@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 import { Marked } from 'marked';
 import Prism from 'prismjs';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 
 // Core Prism languages
 import 'prismjs/components/prism-python';
@@ -12,7 +14,6 @@ import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-c';
 import 'prismjs/components/prism-cpp';
 import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-diff';
 
 // Interactive Blog Widgets
 import LatencyCalculator from './widgets/LatencyCalculator';
@@ -30,6 +31,44 @@ function escapeHtml(unsafe) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+/**
+ * Preprocesses LaTeX math formulas ($...$ and $$...$$):
+ * Protects code blocks & inline code from being touched.
+ */
+function processMath(markdown) {
+  if (!markdown) return '';
+
+  // 1. Temporarily replace all code fences and inline code with tokens
+  const codeBlocks = [];
+  let text = markdown.replace(/(````[\s\S]*?````|```[\s\S]*?```|`[^`\n]+`)/g, (match) => {
+    codeBlocks.push(match);
+    return `%%MATH_CODE_TOKEN_${codeBlocks.length - 1}%%`;
+  });
+
+  // 2. Block math: $$ ... $$
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
+    try {
+      return katex.renderToString(formula.trim(), { displayMode: true, throwOnError: false });
+    } catch {
+      return match;
+    }
+  });
+
+  // 3. Inline math: $ ... $ (must not be preceded or followed by $)
+  text = text.replace(/(?<!\$)\$(?!\$)([^\$\n]+?)(?<!\$)\$(?!\$)/g, (match, formula) => {
+    try {
+      return katex.renderToString(formula.trim(), { displayMode: false, throwOnError: false });
+    } catch {
+      return match;
+    }
+  });
+
+  // 4. Restore code blocks
+  text = text.replace(/%%MATH_CODE_TOKEN_(\d+)%%/g, (_, idx) => codeBlocks[Number(idx)]);
+
+  return text;
 }
 
 /**
@@ -91,9 +130,23 @@ customMarked.use({
         cleanLang = rawLang.trim().toLowerCase();
       }
 
-      // Syntax highlight via Prism
       let highlighted = '';
-      if (cleanLang !== 'text' && Prism.languages[cleanLang]) {
+
+      // Clean, bulletproof line-by-line diff formatting (no Prism tag splitting leaks)
+      if (cleanLang === 'diff') {
+        const lines = text.split('\n');
+        highlighted = lines
+          .map((line) => {
+            if (line.startsWith('+')) {
+              return `<span class="line-diff line-add"><span class="diff-prefix">+</span>${escapeHtml(line.slice(1))}</span>`;
+            }
+            if (line.startsWith('-')) {
+              return `<span class="line-diff line-del"><span class="diff-prefix">-</span>${escapeHtml(line.slice(1))}</span>`;
+            }
+            return `<span class="line-diff line-context"><span class="diff-prefix"> </span>${escapeHtml(line)}</span>`;
+          })
+          .join('\n');
+      } else if (cleanLang !== 'text' && Prism.languages[cleanLang]) {
         try {
           highlighted = Prism.highlight(text, Prism.languages[cleanLang], cleanLang);
         } catch {
@@ -101,23 +154,6 @@ customMarked.use({
         }
       } else {
         highlighted = escapeHtml(text);
-      }
-
-      // Check for diff lines (+ and -)
-      if (cleanLang === 'diff' || text.includes('\n+') || text.includes('\n-') || text.startsWith('+') || text.startsWith('-')) {
-        const lines = highlighted.split('\n');
-        highlighted = lines
-          .map((line) => {
-            const rawLine = line.replace(/<[^>]*>/g, '');
-            if (rawLine.startsWith('+')) {
-              return `<span class="line-diff line-add">${line}</span>`;
-            }
-            if (rawLine.startsWith('-')) {
-              return `<span class="line-diff line-del">${line}</span>`;
-            }
-            return line;
-          })
-          .join('\n');
       }
 
       const encodedCode = encodeURIComponent(text);
@@ -149,17 +185,18 @@ export default function MarkdownRenderer({ content, onHeadingsExtracted }) {
   const segments = useMemo(() => {
     if (!content) return [];
 
-    const processed = processAdmonitions(content);
+    const withAdmonitions = processAdmonitions(content);
+    const withMath = processMath(withAdmonitions);
     const regex = /:::widget:([a-zA-Z0-9_-]+):::/g;
     const parts = [];
     let lastIndex = 0;
     let match;
 
-    while ((match = regex.exec(processed)) !== null) {
+    while ((match = regex.exec(withMath)) !== null) {
       if (match.index > lastIndex) {
         parts.push({
           type: 'markdown',
-          content: processed.slice(lastIndex, match.index),
+          content: withMath.slice(lastIndex, match.index),
         });
       }
       parts.push({
@@ -169,10 +206,10 @@ export default function MarkdownRenderer({ content, onHeadingsExtracted }) {
       lastIndex = regex.lastIndex;
     }
 
-    if (lastIndex < processed.length) {
+    if (lastIndex < withMath.length) {
       parts.push({
         type: 'markdown',
-        content: processed.slice(lastIndex),
+        content: withMath.slice(lastIndex),
       });
     }
 

@@ -22,12 +22,12 @@ Telling an LLM:
 > *"Return only valid JSON. Do not include markdown formatting or commentary."*
 
 ...will fail. Even frontier models will occasionally output:
-```
+````text
 Here is the JSON you requested:
 ```json
 { ... }
 ```
-```
+````
 
 If your downstream parser expects raw bytes or a strict schema, an unexpected backtick or markdown fence will crash your ingestion queue.
 
