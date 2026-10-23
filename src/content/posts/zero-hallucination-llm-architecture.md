@@ -110,7 +110,7 @@ With standard generation, the model explores the full probability distribution o
 
 $$P(w_t \mid w_{<t}) = \text{softmax}(z_t)$$
 
-With constrained finite-state machine (CFSM) decoders, we apply an dynamic mask $M_t \in \{0, -\infty\}$:
+With constrained finite-state machine (CFSM) decoders, we apply a dynamic mask $M_t \in \{0, -\infty\}$:
 
 $$\tilde{P}(w_t \mid w_{<t}) = \text{softmax}(z_t + M_t)$$
 
