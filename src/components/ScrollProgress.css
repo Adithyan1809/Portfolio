@@ -4,12 +4,12 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #f59e0b;
+  background: var(--color-accent);
   z-index: 999997;
   transform-origin: 0%;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 8px var(--color-accent);
 }
 
 [data-theme="dark"] .scroll-progress-bar {
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 12px rgba(255,255,255,0.6);
 }

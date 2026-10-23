@@ -125,13 +125,6 @@
 .pillar-cyan .pillar-metric { color: #06b6d4; }
 .pillar-cyan:hover { border-color: rgba(6, 182, 212, 0.35); }
 
-.pillar-amber .pillar-icon-box {
-  background: rgba(245, 158, 11, 0.12);
-  color: #f59e0b;
-}
-.pillar-amber .pillar-metric { color: #f59e0b; }
-.pillar-amber:hover { border-color: rgba(245, 158, 11, 0.35); }
-
 .pillar-title {
   font-size: 0.92rem;
   font-weight: 700;

@@ -43,10 +43,6 @@
 .nav-links a:hover {
   color: var(--color-accent);
 }
-.nav-links a.active,
-.nav-links a[aria-current="page"] {
-  color: #f59e0b;
-}
 
 .theme-toggle {
   background: var(--color-bg);

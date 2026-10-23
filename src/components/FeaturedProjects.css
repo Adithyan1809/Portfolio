@@ -4,8 +4,8 @@
   gap: 1.75rem;
 }
 
-:root { --spotlight-color: rgba(245, 158, 11, 0.04); }
-[data-theme="dark"] { --spotlight-color: rgba(245, 158, 11, 0.06); }
+:root { --spotlight-color: rgba(0, 0, 0, 0.04); }
+[data-theme="dark"] { --spotlight-color: rgba(255, 255, 255, 0.06); }
 
 .section-header-row {
   display: flex;
@@ -53,9 +53,7 @@
 }
 
 .project-glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--glass-shadow-hover);
-  border-color: var(--color-border-hover);
+  transform: translateY(-6px);
 }
 
 .card-sheen {
@@ -173,11 +171,6 @@
   font-weight: 600;
 }
 
-.card-view-btn:hover {
-  border-color: #f59e0b;
-  color: #f59e0b;
-}
-
 /* ─── Watermark ─── */
 #projects {
   position: relative;
@@ -218,23 +211,22 @@
 
 /* Tech pill hover in projects */
 .project-glass-card .tech-pill {
-  background: rgba(245, 158, 11, 0.06) !important;
-  border: 1px solid rgba(245, 158, 11, 0.15) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(8px);
-  color: #fbbf24 !important;
   transition: background 0.2s ease, border-color 0.2s ease !important;
 }
 .project-glass-card .tech-pill:hover {
-  background: rgba(245, 158, 11, 0.12) !important;
-  border-color: rgba(245, 158, 11, 0.35) !important;
-  color: #f59e0b !important;
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  color: #a5b4fc !important;
 }
 
 /* ─── Mobile: remove expensive backdrop-filter from pills ─── */
 @media (pointer: coarse) {
   .project-glass-card .tech-pill {
     backdrop-filter: none !important;
-    background: rgba(245, 158, 11, 0.06) !important;
+    background: rgba(255, 255, 255, 0.07) !important;
   }
   .tech-pill {
     backdrop-filter: none !important;

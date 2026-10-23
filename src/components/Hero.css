@@ -8,28 +8,6 @@
   padding-bottom: 4rem;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 30% 80%, rgba(34, 211, 238, 0.07) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-  animation: aurora-drift 25s ease-in-out infinite alternate;
-}
-
-@keyframes aurora-drift {
-  0%   { opacity: 0.6; transform: scale(1) translate(0, 0); }
-  50%  { opacity: 0.8; transform: scale(1.04) translate(-1%, 1%); }
-  100% { opacity: 0.6; transform: scale(1) translate(1%, -1%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero::before { animation: none; opacity: 0.5; }
-}
-
 .hero-container {
   display: flex;
   align-items: center;
@@ -357,7 +335,7 @@
 .blinking-cursor {
   font-weight: 800;
   animation: blink 1s step-end infinite;
-  color: #f59e0b;
+  color: var(--color-accent);
 }
 
 @keyframes blink {
@@ -374,11 +352,11 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.35;
+  opacity: 0.55;
 }
 
 [data-theme='dark'] .hero-sunbeams {
-  opacity: 0.45;
+  opacity: 0.7;
 }
 
 /* ─── Spring-Morphing Status Capsule ─── */
@@ -509,15 +487,15 @@
 .btn-resume {
   background: var(--color-bg-secondary);
   color: var(--color-text);
-  border: 1.5px solid #f59e0b;
-  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.15);
+  border: 1.5px solid #6366f1;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.15);
   font-weight: 700;
 }
 
 .btn-resume:hover {
-  background: rgba(245, 158, 11, 0.08);
-  border-color: #d97706;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  border-color: #8b5cf6;
   color: var(--color-text);
-  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
 }
 
