@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Volume2, VolumeX } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import MagneticButton from './MagneticButton';
 import { useSoundEffects } from '../hooks/useSoundEffects';
 import './Navbar.css';
 
 const Navbar = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const [activeSection, setActiveSection] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const [theme, setTheme] = useState(() => (
     typeof window !== 'undefined' ? localStorage.getItem('portfolio-theme') || 'light' : 'light'
   ));
@@ -17,6 +22,30 @@ const Navbar = () => {
   const [isAudioRippling, setIsAudioRippling] = useState(false);
   
   const { playHover, playClick, playTheme, playAlien } = useSoundEffects();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+
+      if (isHome) {
+        const sectionIds = ['contact', 'experience', 'skills', 'projects', 'about'];
+        const scrollPos = window.scrollY + 220;
+        let found = '';
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollPos) {
+            found = id;
+            break;
+          }
+        }
+        setActiveSection(found);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHome]);
 
   useEffect(() => {
     const handleAudioEvent = () => {
@@ -80,27 +109,28 @@ const Navbar = () => {
       if (el) {
         e.preventDefault();
         if (window.lenis) {
-          window.lenis.scrollTo(el, { offset: -70, duration: 1.5 });
+          window.lenis.scrollTo(el, { offset: -95, duration: 1.5 });
         } else {
-          el.scrollIntoView({ behavior: 'smooth' });
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 95;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }
     }
   };
 
   return (
-    <nav className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
+    <nav className={`navbar ${isMenuOpen ? 'menu-open' : ''} ${isScrolled ? 'is-scrolled' : ''}`}>
       <div className="nav-content">
         <div className="logo mono-text">
           <Link to="/" onMouseEnter={playHover} onClick={playAlien}>Adithyan P.</Link>
         </div>
         <div className="nav-links mono-text">
-          <MagneticButton><a href="/#about" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'about')}>About</a></MagneticButton>
-          <MagneticButton><a href="/#projects" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a></MagneticButton>
-          <MagneticButton><a href="/#skills" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a></MagneticButton>
-          <MagneticButton><a href="/#experience" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a></MagneticButton>
-          <MagneticButton><Link to="/blog" onMouseEnter={playHover} onClick={playClick}>Blog</Link></MagneticButton>
-          <MagneticButton><a href="/#contact" onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a></MagneticButton>
+          <MagneticButton><a href="/#about" className={isHome && activeSection === 'about' ? 'active' : ''} onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'about')}>About</a></MagneticButton>
+          <MagneticButton><a href="/#projects" className={isHome && activeSection === 'projects' ? 'active' : ''} onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'projects')}>Projects</a></MagneticButton>
+          <MagneticButton><a href="/#skills" className={isHome && activeSection === 'skills' ? 'active' : ''} onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'skills')}>Skills</a></MagneticButton>
+          <MagneticButton><a href="/#experience" className={isHome && activeSection === 'experience' ? 'active' : ''} onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'experience')}>Experience</a></MagneticButton>
+          <MagneticButton><Link to="/blog" className={location.pathname.startsWith('/blog') ? 'active' : ''} onMouseEnter={playHover} onClick={playClick}>Blog</Link></MagneticButton>
+          <MagneticButton><a href="/#contact" className={isHome && activeSection === 'contact' ? 'active' : ''} onMouseEnter={playHover} onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a></MagneticButton>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <a
